@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.18" prefHeight="600.0" prefWidth="1000.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+   <items>
+      <AnchorPane maxWidth="182.0" minWidth="182.0" prefWidth="182.0">
+         <children>
+            <Pane id="leftPane" layoutY="7.0" maxWidth="182.0" minWidth="182.0" prefHeight="559.0" prefWidth="182.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="117.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/main/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutY="85.0" onMouseClicked="#fileButton" prefHeight="47.0" prefWidth="182.0">
+                     <children>
+                        <Label layoutX="74.0" layoutY="15.0" text="档案管理" textFill="#5e6378">
+                           <font>
+                              <Font name="Heiti SC Light" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="32.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/main/file.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Pane id="tab" layoutY="132.0" prefHeight="47.0" prefWidth="182.0">
+                     <children>
+                        <Label layoutX="76.0" layoutY="15.0" text="考核管理" textFill="WHITE">
+                           <font>
+                              <Font name="Heiti SC Light" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="33.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/main/test1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Pane layoutY="179.0" prefHeight="47.0" prefWidth="182.0">
+                     <children>
+                        <Label layoutX="74.0" layoutY="15.0" text="学习培训" textFill="#5e6378" />
+                        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="32.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/main/study.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Pane layoutX="1.0" layoutY="226.0" prefHeight="47.0" prefWidth="182.0">
+                     <children>
+                        <Label layoutX="74.0" layoutY="15.0" text="会议管理" textFill="#5e6378" />
+                        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="32.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/main/meeting.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Pane layoutX="1.0" layoutY="273.0" prefHeight="47.0" prefWidth="182.0">
+                     <children>
+                        <Label layoutX="74.0" layoutY="15.0" text="积分统计" textFill="#5e6378" />
+                        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="32.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/main/record.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Pane layoutX="1.0" layoutY="320.0" prefHeight="47.0" prefWidth="182.0">
+                     <children>
+                        <Label layoutX="74.0" layoutY="15.0" text="排班汇总" textFill="#5e6378" />
+                        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="32.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/main/schedule.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Pane layoutX="1.0" layoutY="367.0" prefHeight="47.0" prefWidth="182.0">
+                     <children>
+                        <Label layoutX="74.0" layoutY="15.0" text="不良事件" textFill="#5e6378" />
+                        <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="32.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/main/report.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e6378" height="23.0" layoutX="33.0" layoutY="486.0" stroke="#5e6378" strokeType="INSIDE" width="106.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
+                  <Label layoutX="58.0" layoutY="489.0" prefHeight="14.0" prefWidth="56.0" text="联系我们" textFill="#2e3953" />
+               </children>
+            </Pane>
+         </children></AnchorPane>
+      <BorderPane fx:id="mainPane" prefHeight="536.0" prefWidth="728.0" />
+   </items>
+</SplitPane>

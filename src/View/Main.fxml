@@ -149,17 +149,17 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #393f4f;">
                                  <children>
-                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" style="-fx-alignment: center;" text="全院事件" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" onMouseClicked="#hospitalReportButton" prefHeight="30.0" style="-fx-alignment: center;" text="全院汇总" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Label>
-                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" style="-fx-alignment: center;" text="科室事件" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" onMouseClicked="#departmentReportButton" prefHeight="30.0" style="-fx-alignment: center;" text="科室上报" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Label>
-                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" style="-fx-alignment: center;" text="个人事件" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" onMouseClicked="#personalReportButton" prefHeight="30.0" style="-fx-alignment: center;" text="个人上报" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>

@@ -39,13 +39,13 @@
 
 /*TablPane */
 .tab{
-    -fx-background-color: #393f4f;
+    -fx-background-color: #2b303e;
     -fx-pref-width : 200;
     -fx-pref-height : 40;
     -fx-border-radius: 10 10 0 0, 10 10 0 0;
 }
 .tab-header-background{
-    -fx-background-color: #393f4f;
+    -fx-background-color: #2b303e;
 }
 #tab-background{
 	-fx-background-color: #f8f9fa;
@@ -58,6 +58,21 @@
 #effectPane{
 	-fx-effect:dropshadow(gaussian, #c1c6d3, 10, 0.6, 5, 5) ;
 	-fx-background-color: white;
+}
+#raisedPane-one{
+	-fx-effect:dropshadow(gaussian, #c1c6d3, 10, 0.6, 5, 5) ;
+	-fx-background-image: url(../../Images/blueBG.png);
+	-fx-background-size:cover;
+}
+#raisedPane-two{
+	-fx-effect:dropshadow(gaussian, #c1c6d3, 10, 0.6, 5, 5) ;
+	-fx-background-image: url(../../Images/greenBG.png);
+	-fx-background-size:cover;
+}
+#raisedPane-three{
+	-fx-effect:dropshadow(gaussian, #c1c6d3, 10, 0.6, 5, 5) ;
+	-fx-background-image: url(../../Images/yellowBG.png);
+	-fx-background-size:cover;
 }
 
 

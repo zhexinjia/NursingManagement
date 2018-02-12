@@ -15,7 +15,7 @@ public class MainController implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loadVBox("/View/StudyStatus.fxml");
+		loadVBox("/View/MeetingList.fxml");
 	}
 	
 	//点击左边链接打开不同界面
@@ -61,32 +61,47 @@ public class MainController implements Initializable {
 
     @FXML
     void openMeetingList() {
-
+    		loadVBox("/View/MeetingList.fxml");
     }
 
     @FXML
     void openMettingStats() {
-
+    		loadVBox("/View/MeetingStatus.fxml");
     }
 
     @FXML
     void openRecordList() {
-
+    		loadVBox("/View/RecordList.fxml");
     }
 
     @FXML
     void openRecordStats() {
-
+    		loadVBox("/View/RecordStatus.fxml");
     }
 
     @FXML
     void openScheduleList() {
-
+    		loadVBox("/View/ScheduleList.fxml");
     }
 
     @FXML
     void openScheduleManagement() {
-
+    		loadVBox("/View/ScheduleManagement.fxml");
+    }
+    
+    @FXML
+    void hospitalReportButton() {
+    		loadVBox("/View/HospitalReport.fxml");
+    }
+    
+    @FXML
+    void departmentReportButton() {
+    		loadVBox("/View/DepartmentReport.fxml");
+    }
+    
+    @FXML
+    void personalReportButton() {
+    		loadVBox("/View/PersonReport.fxml");
     }
 	
     //载入split pane的右半边 VBox

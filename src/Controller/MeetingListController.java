@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 
-public class UserlistController implements Initializable {	
+public class MeetingListController implements Initializable {	
 	@FXML TableView<String[]> tableView;
 	@FXML Label countLabel;
 	@FXML VBox box;

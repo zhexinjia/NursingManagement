@@ -3,6 +3,7 @@ package Controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
@@ -22,8 +23,9 @@ import javafx.util.Callback;
 public class DepartmentController implements Initializable {
 	@FXML TableView<String[]> tableView;
 	@FXML Label countLabel;
-	
 	@FXML private CustomTextField searchField;
+	
+	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>(); 
 
     @FXML
     void searchButton() {

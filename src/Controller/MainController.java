@@ -15,7 +15,7 @@ public class MainController implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loadVBox("/View/MeetingList.fxml");
+		loadVBox("/View/Welcome.fxml");
 	}
 	
 	//点击左边链接打开不同界面

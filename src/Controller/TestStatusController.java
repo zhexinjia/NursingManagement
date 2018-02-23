@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +12,11 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.textfield.CustomTextField;
 
 public class TestStatusController implements Initializable {
+	
+	Loader loader = new Loader();
+	
+	@FXML
+	private VBox box;
 
     @FXML
     private CustomTextField searchField;
@@ -37,19 +43,11 @@ public class TestStatusController implements Initializable {
     }
 
     @FXML
-    void newButton() {
-
+    void detailButton() {
+    		loader.loadVBox(box, "/View/TestDetail.fxml");
     }
 
-    @FXML
-    void modifyButton() {
-
-    }
-
-    @FXML
-    void deleteButton() {
-
-    }
+    
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

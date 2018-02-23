@@ -9,8 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 public class TestListController implements Initializable {
+	Loader loader = new Loader();
+	@FXML
+	private VBox box;
 
     @FXML
     private CustomTextField searchField;
@@ -32,8 +36,8 @@ public class TestListController implements Initializable {
     }
 
     @FXML
-    void releaseTestButton() {
-
+    void publishButton() {
+    		loader.loadVBox(box, "/View/TestPublish.fxml");
     }
 
 
@@ -44,7 +48,7 @@ public class TestListController implements Initializable {
 
     @FXML
     void modifyButton() {
-
+    		loader.loadVBox(box, "/View/TestModify.fxml");
     }
 
     @FXML

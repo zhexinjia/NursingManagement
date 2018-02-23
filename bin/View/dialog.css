@@ -1,0 +1,15 @@
+.my-dialog{
+	-fx-background-color:#393f4f
+}
+.label{
+	-fx-text-fill:white;
+	-fx-font-size:18px;
+	-fx-alignment:center;
+	-fx-font-family: "Heiti SC Medium";
+}
+.button{
+	-fx-background-color:#62baf0;
+	-fx-text-fill:white;
+	-fx-font-size:16px;
+}
+

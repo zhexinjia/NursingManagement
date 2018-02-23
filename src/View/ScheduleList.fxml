@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.controlsfx.control.textfield.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserlistController">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ScheduleController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -41,7 +44,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="91.0" text="会议列表" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="66.0" text="排班列表" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -70,19 +73,16 @@
       </HBox>
       <HBox style="-fx-background-color: #2b303e;">
          <children>
-            <CustomTextField id="searchfield" fx:id="searchField" promptText="搜索" style="-fx-background-color: #393f4f;" styleClass="searchField">
-               <left>
-                  <Label styleClass="searchBoxLabel">
-                     <graphic>
-                        <FontAwesomeIconView styleClass="searchBoxLabelIcon" />
-                     </graphic>
-                  </Label>
-               </left>
+            <ChoiceBox id="searchField" prefWidth="158.0" style="-fx-background-color: #393f4f;">
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                </HBox.margin>
-            </CustomTextField>
-            <JFXButton onMouseClicked="#searchButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="搜索" textFill="WHITE">
+            </ChoiceBox>
+            <JFXDatePicker id="searchField" prefWidth="160.0" style="-fx-background-color: #393f4f;">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></JFXDatePicker>
+            <JFXButton onMouseClicked="#searchButton" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="查看排班" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -91,29 +91,6 @@
                </font>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </JFXButton>
-            <JFXButton onMouseClicked="#resetButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="重置" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Light" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </JFXButton>
-            <Pane prefHeight="50.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <JFXButton layoutX="656.0" layoutY="20.0" onMouseClicked="#exportButton" prefHeight="27.0" prefWidth="113.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="选择参与人员" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Light" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="10.0" right="20.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
          </children>
@@ -124,8 +101,13 @@
          </columnResizePolicy>
          <columns>
             <TableColumn prefWidth="75.0" text="姓名" />
-            <TableColumn prefWidth="75.0" text="住址" />
-            <TableColumn prefWidth="75.0" text="科室" />
+            <TableColumn prefWidth="75.0" text="一" />
+            <TableColumn prefWidth="75.0" text="二" />
+            <TableColumn prefWidth="75.0" text="三" />
+            <TableColumn prefWidth="75.0" text="四" />
+            <TableColumn prefWidth="75.0" text="五" />
+            <TableColumn prefWidth="75.0" text="六" />
+            <TableColumn prefWidth="75.0" text="日" />
          </columns>
          <effect>
             <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />

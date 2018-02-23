@@ -15,18 +15,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 
 public class UserlistController implements Initializable {
+	Loader loader = new Loader();
 	@FXML TableView<String[]> tableView;
 	@FXML Label countLabel;
+	@FXML VBox box;
 	
 	@FXML private CustomTextField searchField;
 
     @FXML
     void searchButton() {
-
+    		
     }
 
     @FXML
@@ -48,17 +51,33 @@ public class UserlistController implements Initializable {
 
     @FXML
     void newButton() {
-
+    		loader.loadVBox(box, "/View/UserNew.fxml");
     }
 
     @FXML
     void modifyButton() {
-
+    		loader.loadVBox(box, "/View/UserModify.fxml");
     }
 
     @FXML
     void deleteButton() {
-
+    		
+    	
+    		
+    		PopupWindow window = new PopupWindow();
+    		//window.inputWindow("输入创建名称","enter dfasf");
+    		window.errorWindow();
+    		
+    	
+    	
+    		/*
+    		PopupWindow confirmBox = new PopupWindow();
+    		confirmBox.confirmButton.setOnAction(e->aaa());
+    		confirmBox.confirmWindow("确认要删除吗？", "一旦删除，数据将无法恢复。");
+    		*/
+    }
+    void aaa() {
+    		System.out.println("hello word");
     }
 
 	@Override

@@ -18,6 +18,7 @@ public class Main extends Application {
 			splitPane = (SplitPane)loader.load();
 			Scene scene = new Scene(splitPane);
 			//remove for later
+			primaryStage.setTitle("护理宝");
 			primaryStage.setMaximized(true);
 			primaryStage.setScene(scene);
 			//primaryStage.setFullScreen(true);

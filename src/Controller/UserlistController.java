@@ -7,47 +7,66 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+import Model.DBhelper;
+import Model.Loader;
+import Model.PopupWindow;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.util.Callback;
 
 public class UserlistController implements Initializable {	
-	@FXML TableView<String[]> tableView;
+	@FXML TableView<HashMap<String,String>> tableView;
 	@FXML Label countLabel;
 	@FXML VBox box;
 	@FXML private CustomTextField searchField;
-	
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
+	String[] keys = {"name", "ssn", "department_id", "title", "position", "level"};
+	String[] fields = {"姓名", "工号", "科室", "职称", "职务", "层级"};
+	public static HashMap<String, String> selectedUser;
+	PopupWindow popUP = new PopupWindow();
+	DBhelper dbHelper = new DBhelper();
+	
+	private String hospitalID;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		hospitalID = LoginController.hospitalID;
+		setupTable();
+		getList();
+		reload();
+	}
 
 
     @FXML
     void searchButton() {
-    		
+    		reload();
     }
 
     @FXML
     void resetButton() {
-
+    		searchField.setText("");
+    		reload();
     }
 
     @FXML
     void importButton() {
-
+    		//FIXME: wrong keys and fields, import both primary and sub
+    		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
+    		if(importlist==null) {
+    			dbHelper.insertUserList(importlist, hospitalID);
+    			System.out.println("empty");
+    		}else {
+    			System.out.println(importlist.size());
+    		}
     }
 
     @FXML
     void exportButton() {
-
+    		loader.exportExcel(list, fields, keys);
     }
 
 
@@ -59,66 +78,44 @@ public class UserlistController implements Initializable {
 
     @FXML
     void modifyButton() {
-    		loader.loadVBox(box, "/View/UserModify.fxml");
+    		selectedUser = tableView.getSelectionModel().getSelectedItem();
+    		if(selectedUser == null) {
+    			popUP.alertWindow("没有选中目标","请选择要编辑的用户");
+    		}else {
+    			loader.loadVBox(box, "/View/UserModify.fxml");
+    		}
     }
 
     @FXML
     void deleteButton() {
-    }
-    void aaa() {
-    		System.out.println("hello word");
+    		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		if(selectedUser == null) {
+    			popUP.alertWindow("没有选中目标","请选择要编辑的用户");
+    		}else {
+    			//FIXME:delete all informations from different tables using one SQL statement
+    			//FIXME: delete 3 tables
+    			if (dbHelper.deleteUser(selected, hospitalID)) {
+    				getList();
+    				reload();
+    			}else {
+    				popUP.alertWindow("操作失败", "删除用户失败");
+    			}
+    		}
     }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		setupTable();
-	}
 	
 	private void setupTable() {
-		String[]	fields= {"姓名","住址","科室"};
-		ArrayList<String[]> lists = new ArrayList<String[]>();
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		
-		ObservableList<String[]> data = FXCollections.observableArrayList();
-		data.addAll(lists);
-		
-		//安排好table的显示
-		ArrayList<TableColumn<String[], String>> cols = new ArrayList<TableColumn<String[], String>>();
-		for (int i = 0; i < 3; i++) {
-			TableColumn<String[], String> col = new TableColumn<String[], String>(fields[i]);
-			final int index = i;
-			col.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>(){
-
-				@Override
-				public ObservableValue<String> call(CellDataFeatures<String[], String> param) {
-					SimpleStringProperty ret = new SimpleStringProperty();
-					ret.setValue(param.getValue()[index]);
-					return ret;
-				}
-			});
-			cols.add(col);
-		}
-		tableView.getColumns().setAll(cols);
-		//table设置完毕
-		tableView.setItems(data);
-		
+		loader.setupTable(tableView, keys, fields);
+	}
+	
+	private void getList() {
+		list = dbHelper.getEntireList(hospitalID, "user_primary_info");
+	}
+	
+	private void reload() {
+		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());
+		tableView.setItems(searchList);
+		countLabel.setText("共 " +searchList.size()+ " 条");
 	}
 
 }

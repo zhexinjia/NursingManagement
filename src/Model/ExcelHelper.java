@@ -19,8 +19,11 @@ import java.util.Iterator;
 
 public class ExcelHelper {
 	
-	//read excel file and convert it to list of hash-map
-	public static ArrayList<HashMap<String, String>> readXLSXFile(String path, String[] keylist) throws IOException, EncryptedDocumentException, InvalidFormatException {
+	/*
+	 * read excel file and convert it to list of hash-map
+	 * return null if file is not in correct format
+	 */
+	public static ArrayList<HashMap<String, String>> readXLSXFile(String path, String[] keylist, String[] fields) throws IOException, EncryptedDocumentException, InvalidFormatException {
 		ArrayList<HashMap<String, String>> maplist = new ArrayList<HashMap<String, String>>();
 		
 		InputStream ExcelFileToRead = new FileInputStream(path);
@@ -36,7 +39,14 @@ public class ExcelHelper {
 
         Iterator<Row> rows = sheet.rowIterator();
         //skip the first row
-        rows.next();
+        Row titleRow = (XSSFRow) rows.next();
+        for(int i = 0; i < fields.length; i++) {
+        		Cell titleCell = titleRow.getCell(i);
+        		String title = titleCell.getStringCellValue();
+        		if(!title.equals(fields[i])) {
+        			return null;
+        		}
+        }
         
         while (rows.hasNext())
         {
@@ -45,8 +55,10 @@ public class ExcelHelper {
             for(int i = 0; i< keylist.length;i++) {
             		cell = row.getCell(i);
             		objFormulaEvaluator.evaluate(cell);
+            		//FIXME: date, number value
             		String cellValue = dataFormatter.formatCellValue(cell, objFormulaEvaluator);
-            		map.put(keylist[i], cellValue);            	
+                	map.put(keylist[i], cellValue);    
+            		    	
             }
             maplist.add(map);
         }

@@ -10,6 +10,17 @@
 #loginField{
 	-fx-background-radius: 0 0 0 0;
 }
+#alertMessage{
+	/* 
+	-fx-background-radius:20, 20, 20, 20;
+	-fx-border-radius:20, 20, 20, 20;
+	*/
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+	
+}
+#registerPane{
+	-fx-background-image:url("../../Images/registerBG.jpg");
+}
 .label{
 	-fx-font-family: "Heiti SC Medium";
 	-fx-font-size: 14px;
@@ -136,6 +147,7 @@
 #searchfield{
 	-fx-background-radius:20, 20, 20, 20;
 	-fx-border-radius:20, 20, 20, 20;
+	-fx-text-fill:white;
 }
 .searchBoxLabelIcon {
 	-fx-fill:white;
@@ -239,6 +251,7 @@
 }
 
 /*Date Picker */
+/* 
 .jfx-date-picker .input-line {
     -fx-background-color: transparent;
     -fx-border-width:0;
@@ -250,6 +263,8 @@
 .jfx-date-picker .input-focused-line {
     -fx-background-color: transparent;
 }
+*/
+
 
 /* 
 .date-picker{

@@ -22,5 +22,7 @@
 	<classpathentry kind="lib" path="Jars/apache/poi-scratchpad-3.17.jar"/>
 	<classpathentry kind="lib" path="Jars/apache/curvesapi-1.04.jar"/>
 	<classpathentry kind="lib" path="Jars/apache/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="Jars/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Jars/zxing-3.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

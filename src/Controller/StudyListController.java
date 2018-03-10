@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
+import Model.Loader;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.chart.*?>
-<?import org.controlsfx.control.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TestModifyController">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TestModifyController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -42,7 +45,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label onMouseDragged="#leveloneButton" prefHeight="34.0" prefWidth="56.0" text="试卷列表" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="56.0" text="试卷列表" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -58,7 +61,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label onMouseDragged="#leveltwoButton" prefHeight="34.0" prefWidth="57.0" text="编辑试卷" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="57.0" text="编辑试卷" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -93,19 +96,29 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <JFXButton style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
+                              <Label text="选择分值：" textFill="#5e6378">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="singleChoiceBox" prefWidth="150.0" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <JFXButton onMouseClicked="#importSingle" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出试题" textFill="WHITE">
+                              <JFXButton onMouseClicked="#exportSingle" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出试题" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                                  </HBox.margin>
                               </JFXButton>
                            </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="singleTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                           <columns>
                             <TableColumn prefWidth="75.0" text="题干" />
                           </columns>
@@ -121,13 +134,13 @@
                         </TableView>
                         <HBox>
                            <children>
-                              <Label id="footer" fx:id="countLabel" text="共5条" textFill="#5e6378">
+                              <Label id="footer" fx:id="singleLabel" text="共5条" textFill="#5e6378">
                                  <HBox.margin>
                                     <Insets left="25.0" />
                                  </HBox.margin>
                               </Label>
                               <Pane HBox.hgrow="ALWAYS" />
-                              <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
+                              <JFXButton onMouseClicked="#newSingle" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -138,7 +151,7 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
+                              <JFXButton onMouseClicked="#modifySingle" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -149,7 +162,7 @@
                                     <Insets bottom="20.0" left="10.0" right="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
+                              <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteSingle" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -171,19 +184,29 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <JFXButton style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
+                              <Label text="选择分值：" textFill="#5e6378">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="multiChoiceBox" prefWidth="150.0" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <JFXButton onMouseClicked="#importMulti" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出试题" textFill="WHITE">
+                              <JFXButton onMouseClicked="#exportMulti" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出试题" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                                  </HBox.margin>
                               </JFXButton>
                            </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="multiTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
@@ -199,13 +222,13 @@
                         </TableView>
                         <HBox>
                            <children>
-                              <Label id="footer" fx:id="countLabel1" text="共5条" textFill="#5e6378">
+                              <Label id="footer" fx:id="multiLabel" text="共5条" textFill="#5e6378">
                                  <HBox.margin>
                                     <Insets left="25.0" />
                                  </HBox.margin>
                               </Label>
                               <Pane HBox.hgrow="ALWAYS" />
-                              <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
+                              <JFXButton onMouseClicked="#newMulti" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -216,7 +239,7 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
+                              <JFXButton onMouseClicked="#modifyMulti" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -227,7 +250,7 @@
                                     <Insets bottom="20.0" left="10.0" right="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
+                              <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteMulti" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -250,19 +273,29 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <JFXButton style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
+                              <Label text="选择分值：" textFill="#5e6378">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="tfChoiceBox" prefWidth="150.0" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <JFXButton onMouseClicked="#importTF" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出试题" textFill="WHITE">
+                              <JFXButton onMouseClicked="#exportTF" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出试题" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                                  </HBox.margin>
                               </JFXButton>
                            </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                         </HBox>
-                        <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="tfTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
@@ -278,13 +311,13 @@
                         </TableView>
                         <HBox>
                            <children>
-                              <Label id="footer" fx:id="countLabel11" text="共5条" textFill="#5e6378">
+                              <Label id="footer" fx:id="tfLabel" text="共5条" textFill="#5e6378">
                                  <HBox.margin>
                                     <Insets left="25.0" />
                                  </HBox.margin>
                               </Label>
                               <Pane HBox.hgrow="ALWAYS" />
-                              <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
+                              <JFXButton onMouseClicked="#newTF" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -295,7 +328,7 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
+                              <JFXButton onMouseClicked="#modifyTF" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -306,7 +339,7 @@
                                     <Insets bottom="20.0" left="10.0" right="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
+                              <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteTF" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

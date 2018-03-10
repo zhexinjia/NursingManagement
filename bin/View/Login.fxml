@@ -26,7 +26,7 @@
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e9edf4" height="256.0" layoutX="309.0" layoutY="93.0" stroke="#ced4e0" strokeType="INSIDE" width="310.0" />
       <Line endX="564.0" layoutX="115.0" layoutY="50.0" opacity="0.32" startX="-100.0" stroke="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Label layoutX="567.0" layoutY="20.0" text="联系我们" textFill="WHITE">
+      <Label layoutX="567.0" layoutY="20.0" onMouseClicked="#contactButton" text="联系我们" textFill="WHITE">
          <font>
             <Font name="Heiti SC Medium" size="14.0" />
          </font>
@@ -40,12 +40,12 @@
             <Font name="Heiti SC Medium" size="14.0" />
          </font>
       </Label>
-      <TextField id="loginField" layoutX="373.0" layoutY="164.0" prefHeight="27.0" prefWidth="213.0" promptText=" 请输入用户名">
+      <TextField id="loginField" fx:id="usernameField" layoutX="373.0" layoutY="164.0" prefHeight="27.0" prefWidth="213.0" promptText=" 请输入用户名">
          <font>
             <Font name="Heiti SC Light" size="12.0" />
          </font>
       </TextField>
-      <PasswordField id="loginField" layoutX="373.0" layoutY="208.0" prefHeight="27.0" prefWidth="213.0" promptText=" 请输入密码">
+      <PasswordField id="loginField" fx:id="passwordField" layoutX="373.0" layoutY="208.0" prefHeight="27.0" prefWidth="213.0" promptText=" 请输入密码">
          <font>
             <Font name="Heiti SC Light" size="13.0" />
          </font>
@@ -60,7 +60,7 @@
             <Image url="@../../Images/passwordIcon.png" />
          </image>
       </ImageView>
-      <Button id="loginButton" layoutX="346.0" layoutY="260.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="241.0" style="-fx-background-color: #526182;" text="登    陆" textFill="WHITE">
+      <Button id="loginButton" layoutX="346.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="27.0" prefWidth="241.0" style="-fx-background-color: #526182;" text="登    陆" textFill="WHITE">
          <font>
             <Font name="Heiti SC Medium" size="14.0" />
          </font>
@@ -68,18 +68,18 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="532.0" layoutY="320.0" text="立即注册" textFill="#6e7b8a">
-         <font>
-            <Font name="Heiti SC Light" size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Label>
-      <ImageView fitHeight="17.0" fitWidth="13.0" layoutX="511.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="17.0" fitWidth="13.0" layoutX="511.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/registerIcon.png" />
          </image>
       </ImageView>
+      <Button id="loginButton" layoutX="517.0" layoutY="313.0" mnemonicParsing="false" onMouseClicked="#registerButton" prefHeight="24.0" prefWidth="82.0" style="-fx-background-color: transparent;" text="立即注册" textFill="#6e7b8a">
+         <font>
+            <Font name="Heiti SC Medium" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

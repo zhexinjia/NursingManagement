@@ -12,4 +12,8 @@
 	-fx-text-fill:white;
 	-fx-font-size:16px;
 }
+#confirmButton{
+	-fx-background-image:url("../../Images/window/BlueButton.png");
+	-fx-background-size: cover;
+}
 

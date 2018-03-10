@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Loader;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 

@@ -2,49 +2,58 @@ package Controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
+import Model.DBhelper;
 import Model.Loader;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+import Model.PopupWindow;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.util.Callback;
 
 public class StudyListController implements Initializable {
 	Loader loader = new Loader();
-	@FXML TableView<String[]> tableView;
+	@FXML TableView<HashMap<String, String>> tableView;
 	@FXML Label countLabel;
 	@FXML VBox box;
-	
 	@FXML private CustomTextField searchField;
+	
+	ArrayList<HashMap<String, String>> list;
+	DBhelper dbHelper = new DBhelper();
+	public static HashMap<String, String> selectedStudy;
+	PopupWindow popUP = new PopupWindow();
 
     @FXML
     void searchButton() {
-    		
+    		reload();
     }
 
     @FXML
     void resetButton() {
-
+    		searchField.setText("");
+    		reload();
     }
     
     @FXML
     void publishButton() {
-    		loader.loadVBox(box, "/View/StudyPublish.fxml");
+    		//未发布，已发布，已截止
+		selectedStudy = tableView.getSelectionModel().getSelectedItem();
+		if(selectedStudy==null) {
+			PopupWindow pop = new PopupWindow();
+			pop.alertWindow("发布失败", "请选中需要发布的考试。");
+		}else if (selectedStudy.get("publish_status").equals("未发布")) {
+			loader.loadVBox(box, "/View/StudyPublish.fxml");
+		}else {
+			PopupWindow popUP = new PopupWindow();
+			popUP.alertWindow("发布课件失败", "课件已经发布，无法重复发布。");
+		}
     }
-
-
-
 
     @FXML
     void newButton() {
@@ -53,21 +62,47 @@ public class StudyListController implements Initializable {
 
     @FXML
     void modifyButton() {
+    		//TODO：remove
     		loader.loadVBox(box, "/View/UserModify.fxml");
     }
 
     @FXML
     void deleteButton() {
-
+    		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+		if(selected == null) {
+			popUP.alertWindow("没有选中目标","请选择要编辑的用户");
+		}else {
+			//FIXME:delete all informations from different tables using one SQL statement
+			if (dbHelper.deleteStudy(selected)) {
+				getList();
+				reload();
+			}else {
+				popUP.errorWindow();
+			}
+		}
+    		
     }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setupTable();
+		getList();
+		reload();
 	}
 	
 	private void setupTable() {
-		
+		String[] keys = {"name", "type", "publish_status", "if_count", "point"};
+		String[] fields = {"课件名称","类型", "发布状态", "是否记分", "分值"};
+		loader.setupTable(tableView, keys, fields);
+	}
+	private void getList() {
+		String[] columns = {"name", "type", "publish_status", "if_count", "point"};
+		list = dbHelper.getList("study_list", columns);
+	}
+	private void reload() {
+		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());
+		tableView.setItems(searchList);
+		countLabel.setText("共 " +searchList.size()+ " 条");
 	}
 
 }

@@ -112,7 +112,6 @@ public class UserNewController implements Initializable {
     
     HashMap<String, String> user;
     DBhelper dbHelper;
-    String hospitalID;
     ArrayList<String> departmentList = new ArrayList<String>();
     ArrayList<HashMap<String, String>> departmentHashMaplist;
     
@@ -120,7 +119,6 @@ public class UserNewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		user = new HashMap<String, String>();
 		dbHelper = new DBhelper();
-		hospitalID = LoginController.hospitalID;
 		setupChoiceBox();
 	}
 
@@ -128,7 +126,7 @@ public class UserNewController implements Initializable {
     void addButton() {
     		if(validate()) {
     			HashMap<String, String> map = this.getHashMap();
-    			dbHelper.insertUser(map, hospitalID);
+    			dbHelper.insertUser(map);
     		}else {
     			PopupWindow popUP = new PopupWindow();
     			popUP.alertWindow("出错啦。。。", "姓名和工号不能为空");
@@ -234,9 +232,7 @@ public class UserNewController implements Initializable {
     
     private void getDepartment() {
     		String[] columns = {"id", "departmentName"};
-    		String[] searchColumn = {"hospital_id"};
-    		String[] value = {hospitalID};
-    		departmentHashMaplist = dbHelper.getList(searchColumn, value, "hospital_department", columns);  
+    		departmentHashMaplist = dbHelper.getList("hospital_department", columns);  
     		departmentList.add("无");
     		for(int i = 0; i< departmentHashMaplist.size(); i++) {
     			departmentList.add(departmentHashMaplist.get(i).get("departmentName"));

@@ -35,7 +35,6 @@ public class TestStatusController implements Initializable {
     private Label countLabel;
     
     DBhelper dbHelper;
-    private String hospitalID;
     private ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
     String[] keys = {"examName", "publish_status", "user_count", "if_count"};
     String[] fields = {"考试名称", "发布状态", "参加考试人数","是否记分"};
@@ -44,7 +43,6 @@ public class TestStatusController implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
     		dbHelper = new DBhelper();
-		hospitalID = LoginController.hospitalID;
 		setupTable();
 		getList();
 		reload();
@@ -92,9 +90,7 @@ public class TestStatusController implements Initializable {
 	private void getList() {
 		//TODO: how to count total point??? should we remove it?
 		String[] columns = {"id", "examName", "publish_status", "single_point", "multi_point", "tf_point", "if_count", "totalPoint"};
-		String[] searchColumns = {"hospital_id", "publish_status"};
-		String[] searchValues = {hospitalID, "已发布"};
-		list = dbHelper.getList(searchColumns, searchValues, "exam_list", columns);
+		list = dbHelper.getList("where publish_status = '已发布' or publish_status = '已截止'", "exam_list", columns);
 	}
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());

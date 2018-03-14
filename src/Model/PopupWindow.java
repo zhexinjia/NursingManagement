@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -27,6 +28,7 @@ public class PopupWindow {
 	
 	//used for inputWindow
 	public TextField inputField = new TextField();
+	public TextArea textArea = new TextArea();
 	public CheckBox checkBox;
 	public Stage stage;
 	
@@ -111,6 +113,36 @@ public class PopupWindow {
 		stage.setResizable(true);
 		stage.showAndWait();
 	}
+
+	public void modifyWindow(String title, String prompText1, String prompText2) {
+		stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setWidth(400);
+		stage.setHeight(180);
+		stage.setTitle(title);
+		VBox vbox = new VBox(2);
+		vbox.setAlignment(Pos.CENTER);
+		vbox.setPadding(new Insets(0, 20, 0, 20));
+		inputField.setPromptText(prompText1);
+		textArea.setPromptText(prompText2);
+		//inputField.setPrefWidth(250);
+		//confirmButton.setPrefWidth(250);
+		confirmButton.setStyle("-fx-background-color: #62baf0");
+		
+		
+		VBox.setMargin(inputField, new Insets(20, 20, 20, 20));
+		VBox.setMargin(confirmButton, new Insets(0, 20, 20, 20));
+		VBox.setMargin(textArea, new Insets(0, 20, 20, 20));
+		
+		vbox.getChildren().addAll(inputField, textArea, confirmButton);
+		vbox.setStyle("-fx-background-color: #393f4f");
+		
+		Scene scene = new Scene(vbox);
+		scene.getStylesheets().add("/View/application.css");
+		stage.setScene(scene);
+		stage.setResizable(true);
+		stage.showAndWait();
+	}
 	
 	public void confirmWindow(String header, String info) {
 		stage = new Stage();
@@ -150,6 +182,62 @@ public class PopupWindow {
 		
 		cancelButton.setOnAction(e->stage.close());
 		hbox.getChildren().addAll(confirmButton, cancelButton);
+		
+		
+		vbox.getChildren().addAll(title, separator, body, hbox);
+		vbox.setAlignment(Pos.CENTER_LEFT);
+		
+		
+		vbox.setStyle("-fx-background-color: #393f4f");
+		Scene scene = new Scene(vbox);
+		scene.getStylesheets().add("/View/application.css");
+		
+		stage.setScene(scene);
+		stage.setResizable(true);
+		stage.showAndWait();
+		
+		
+	}
+	
+	public void success(String header, String info) {
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setWidth(400);
+		stage.setHeight(180);
+				
+		VBox vbox = new VBox(10);
+		vbox.setPadding(new Insets(0, 20, 0, 20));
+		Label title = new Label(header);
+		title.setAlignment(Pos.CENTER_LEFT);
+		title.setStyle("-fx-font-size:24;-fx-text-fill:white");
+		Separator separator = new Separator();
+		separator.setStyle("-fx-border-width:1");
+		Label body = new Label(info);
+		body.setAlignment(Pos.CENTER_LEFT);
+		body.setStyle("-fx-font-size:18;-fx-text-fill:white");
+		HBox hbox = new HBox();
+		//JFXButton cancelButton = new JFXButton("取消");
+		JFXButton confirmButton = new JFXButton("确认");
+		//aaa.getStyleClass().add("jfxbutton-circle");
+		//aaa.setStyle("-fx-background-color:black");
+		hbox.setPadding(new Insets(0, 10, 10, 0));
+		hbox.setAlignment(Pos.CENTER_RIGHT);
+		HBox.setMargin(confirmButton, new Insets(10, 10, 10, 10));
+		//HBox.setMargin(cancelButton, new Insets(10, 0, 10, 10));
+		
+		
+		
+		confirmButton.setStyle("-fx-background-color: #62baf0");
+		//cancelButton.setStyle("-fx-background-color:#e4e4e4");
+		confirmButton.setPrefWidth(100);
+		//cancelButton.setPrefWidth(100);
+		
+		
+		
+		
+		confirmButton.setOnAction(e->stage.close());
+		//cancelButton.setOnAction(e->stage.close());
+		hbox.getChildren().addAll(confirmButton);
 		
 		
 		vbox.getChildren().addAll(title, separator, body, hbox);

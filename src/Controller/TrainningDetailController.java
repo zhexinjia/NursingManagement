@@ -7,119 +7,148 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
+import Model.DBhelper;
 import Model.Loader;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+import Model.PopupWindow;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.util.Callback;
 
 public class TrainningDetailController implements Initializable {	
-	@FXML TableView<String[]> tableView;
+	@FXML TableView<HashMap<String, String>> tableView;
 	@FXML Label countLabel;
 	@FXML VBox box;
 	@FXML private CustomTextField searchField;
 	
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
+	DBhelper dbHelper = new DBhelper	();
+	private HashMap<String, String> selectedTraining;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		selectedTraining = TrainningListController.selectedTrainning;
+		setupTable();
+		getList();
+		reload();
+	}
 
 
     @FXML
     void searchButton() {
-    		
+    		reload();
     }
 
     @FXML
     void resetButton() {
-
+    		searchField.setText("");
+    		reload();
     }
 
     @FXML
     void importButton() {
-
+    		//TODO
     }
-
     @FXML
     void exportButton() {
-
+    		//TODO
     }
 
 
 
     @FXML
     void newButton() {
-    		loader.loadVBox(box, "/View/UserNew.fxml");
+    		if(selectedTraining.get("publish_status").equals("未发布")) {
+    			loader.loadVBox(box, "/View/TrainingPublish.fxml");
+    		}else {
+    			PopupWindow pop = new PopupWindow();
+    			pop.alertWindow("操作失败", "本培训已经添加过用户，无法多次添加。");
+    		}
     }
 
     @FXML
     void modifyButton() {
-    		loader.loadVBox(box, "/View/UserModify.fxml");
+    		PopupWindow popUP = new PopupWindow();
+    		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		if(selected==null) {
+    			popUP.alertWindow("操作失败", "请选中一个用户");
+    		}else {
+    			popUP.inputField.setText(selected.get("point"));
+    			popUP.textArea.setText(selected.get("detail"));
+    			popUP.confirmButton.setOnAction(e->{
+    				if(validate(popUP.inputField)) {
+    					HashMap<String, String> map = new HashMap<String, String>();
+    					map.put("point", popUP.inputField.getText());
+    					map.put("detail", popUP.textArea.getText());
+    					map.put("id", selected.get("id"));
+    					if(dbHelper.update(map, "training_history")) {
+    						popUP.stage.close();
+    						getList();
+    						reload();
+    					}else {
+    						popUP.errorWindow();
+    					}
+    				}
+    			});
+    			popUP.modifyWindow("编辑得分", "输入分数", "输入备注");
+    		}
+    		
+    		
     }
 
     @FXML
     void deleteButton() {
-    }
-    void aaa() {
-    		System.out.println("hello word");
+    		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		PopupWindow pop = new PopupWindow();
+    		if(selected == null) {
+    			pop.alertWindow("操作失败", "请选中一个用户");
+    		}else {
+    			pop.confirmButton.setOnAction(e->{
+    				if(!dbHelper.delete(selected, "training_history")) {
+    					pop.errorWindow();
+    				}else {
+    					pop.stage.close();
+    				}
+    			});
+    			pop.confirmWindow("确认要删除用户吗？", "点击确认删除用户记录");
+    		}
     }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		setupTable();
+    private void setupTable() {
+    		String[] keys = {"name", "department", "position", "title", "point", "detail"};
+    		String[] fields = {"姓名", "科室", "职位", "职称", "得分", "备注"}	;
+		loader.setupTable(tableView, keys, fields);
+	}
+
+    private void getList() {
+		String[] searchColumn = {"training_id"};
+		String[] values = {selectedTraining.get("id")};
+		String tableName = "training_history inner join user_primary_info on training_history.ssn = user_primary_info.ssn";
+		String[] columns = {"user_primary_info.name", "user_primary_info.department", "user_primary_info.position", "user_primary_info.title",
+				"training_history.point", "training_history.detail", "training_history.id"};
+		list = dbHelper.getList(searchColumn, values, tableName, columns);
 	}
 	
-	private void setupTable() {
-		String[]	fields= {"姓名","住址","科室"};
-		ArrayList<String[]> lists = new ArrayList<String[]>();
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		
-		ObservableList<String[]> data = FXCollections.observableArrayList();
-		data.addAll(lists);
-		
-		//安排好table的显示
-		ArrayList<TableColumn<String[], String>> cols = new ArrayList<TableColumn<String[], String>>();
-		for (int i = 0; i < 3; i++) {
-			TableColumn<String[], String> col = new TableColumn<String[], String>(fields[i]);
-			final int index = i;
-			col.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>(){
-
-				@Override
-				public ObservableValue<String> call(CellDataFeatures<String[], String> param) {
-					SimpleStringProperty ret = new SimpleStringProperty();
-					ret.setValue(param.getValue()[index]);
-					return ret;
-				}
-			});
-			cols.add(col);
+	private void reload() {
+		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());
+		tableView.setItems(searchList);
+		countLabel.setText("共 " +searchList.size()+ " 条");
+	}
+	boolean validate(TextField inputField){
+		if(inputField.getText().trim().isEmpty()) {
+			return false;
+		}else if(!isNumeric(inputField.getText())) {
+			return false;
 		}
-		tableView.getColumns().setAll(cols);
-		//table设置完毕
-		tableView.setItems(data);
-		
+		return true;
+	}
+	
+	public boolean isNumeric(String str)
+	{
+	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
 	}
 
 }

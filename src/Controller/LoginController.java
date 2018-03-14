@@ -25,9 +25,11 @@ public class LoginController {
     
     String userName;
     String hospitalName;
-    public static String hospitalID;
     PopupWindow popUP = new PopupWindow();
     Loader loader = new Loader();
+    
+    public static String database;
+    public static String url;
     
     @FXML void contactButton(){
     		loader.loadWeb();
@@ -63,16 +65,13 @@ public class LoginController {
 				try {
 					temp = (JSONArray) parser.parse(output);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					//popUP.alertWindow("登陆失败","账号密码错误");
-					//e.printStackTrace();
 					return false;
 				}
 				if (temp.size() != 0)  {
 					JSONObject userInfo = (JSONObject) temp.get(0);
 					userName = usernameField.getText();
-					hospitalName = (String) userInfo.get("hospital");
-					hospitalID = (String) userInfo.get("id");
+					database = (String) userInfo.get("database");
+					url = (String) userInfo.get("url");
 					return true;
 				}
 			}

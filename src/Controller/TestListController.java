@@ -33,7 +33,6 @@ public class TestListController implements Initializable {
     
     Loader loader = new Loader();
     DBhelper dbHelper;
-    private String hospitalID;
     private ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
     String[] keys = {"examName", "publish_status", "user_count", "if_count"};
     String[] fields = {"考试名称", "发布状态", "参加考试人数","是否记分"};
@@ -42,7 +41,6 @@ public class TestListController implements Initializable {
     @Override
  	public void initialize(URL location, ResourceBundle resources) {
     		dbHelper = new DBhelper();
-		hospitalID = LoginController.hospitalID;
 		setupTable();
 		getList();
 		reload();
@@ -87,7 +85,6 @@ public class TestListController implements Initializable {
 				String ifCount = popUP.checkBox.isSelected()? "是":"否";
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("examName", examName);
-				map.put("hospital_id", hospitalID);
 				map.put("if_count", ifCount);
 				if(dbHelper.insert(map, "exam_list")) {
 					//modify Above
@@ -130,9 +127,7 @@ public class TestListController implements Initializable {
 	private void getList() {
 		//TODO: how to count total point??? should we remove it?
 		String[] columns = {"id", "examName", "publish_status", "single_point", "multi_point", "tf_point", "if_count"};
-		String[] searchColumn = {"hospital_id"};
-		String[] value = {hospitalID};
-		list = dbHelper.getList(searchColumn, value, "exam_list", columns);
+		list = dbHelper.getList("exam_list", columns);
 	}
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());
@@ -140,11 +135,12 @@ public class TestListController implements Initializable {
 		countLabel.setText("共 " +searchList.size()+ " 条");
 	}
 	
-	private void deleteFunction(HashMap<String, String> map) {
+	private void deleteFunction(HashMap<String, String> map) {		
 		PopupWindow popUP = new PopupWindow();
 		popUP.confirmButton.setOnAction(e->{
-			if(!dbHelper.deleteExam(map, hospitalID)) {
-				popUP.errorWindow();
+			if(dbHelper.deleteExam(map)) {
+				getList();
+				reload();
 			}
 		});
 		popUP.confirmWindow("确认要删除考卷吗？", "删除考卷将删除所有与本考卷相关信息");

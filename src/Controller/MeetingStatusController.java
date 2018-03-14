@@ -29,13 +29,11 @@ public class MeetingStatusController implements Initializable{
 	
 	ArrayList<HashMap<String, String>> meetingList;
 	ArrayList<HashMap<String, String>> meeting_historyList;
-	private String hospitalID;
 	//public HashMap<String, String> selectedMeeting;
 	public static ArrayList<HashMap<String, String>> passedMeetingHistory;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		hospitalID = LoginController.hospitalID;
 		getList();
 		setupTable();
 		caculatePercents();
@@ -83,7 +81,7 @@ public class MeetingStatusController implements Initializable{
     }
     
     private void setupTable() {
-    		String[] keys = {"description", "percent","if_count"};
+    		String[] keys = {"name", "percent","if_count"};
     		String[] fields = {"会议信息", "出勤率","是否记分"};
     		loader.setupTable(tableView, keys, fields);
     }
@@ -93,19 +91,16 @@ public class MeetingStatusController implements Initializable{
     		getHistoryList();
     }
     private void getMeetingList() {
-    		String[] columns = {"id", "description", "if_count"};
-    		String[] searchColumn = {"hospital_id"};
-    		String[] values = {hospitalID};
+    		String[] columns = {"id", "name", "if_count"};
     		String tableName = "meeting_list";
-    		meetingList = dbHelper.getList(searchColumn, values, tableName, columns);
+    		meetingList = dbHelper.getList(tableName, columns);
     }    
     private void getHistoryList() {
     		String[] columns = {"meeting_history.meeting_id", "meeting_history.checkin", "meeting_history.checkout", 
-    				"user_primary_info.id", "user_primary_info.department_id", "user_primary_info.name", "user_primary_info.position", 
+    				"user_primary_info.ssn", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
     				"user_primary_info.title", "user_primary_info.level"};
-    		String sqlStatement = "meeting_id in (select id from meeting_list where hospital_id = " + hospitalID + ");";
-    		String tableName = "user_primary_info inner join meeting_history on meeting_history.user_id = user_primary_info.ssn";
-    		meeting_historyList = dbHelper.getList(sqlStatement, tableName, columns);
+    		String tableName = "user_primary_info inner join meeting_history on meeting_history.ssn = user_primary_info.ssn";
+    		meeting_historyList = dbHelper.getList(tableName, columns);
     }
     
     //{examID, totalNum, checkinNum, checkoutNum}

@@ -7,38 +7,43 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
+import Model.DBhelper;
 import Model.Loader;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.util.Callback;
 
 public class StudyDetailController implements Initializable {	
-	@FXML TableView<String[]> tableView;
+	@FXML TableView<HashMap<String, String>> tableView;
 	@FXML Label countLabel;
 	@FXML VBox box;
 	@FXML private CustomTextField searchField;
 	
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
-
+	DBhelper dbHelper = new DBhelper	();
+	private HashMap<String, String> selectedStudy;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		selectedStudy = StudyStatusController.selectedStudy;
+		setupTable();
+		getList();
+		reload();
+	}
 
     @FXML
     void searchButton() {
-    		
+    		reload();
     }
 
     @FXML
     void resetButton() {
-
+    		searchField.setText("");
+    		reload();
     }
 
     @FXML
@@ -65,61 +70,44 @@ public class StudyDetailController implements Initializable {
 
     @FXML
     void deleteButton() {
-    }
-    void aaa() {
-    		System.out.println("hello word");
+    		
     }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		setupTable();
-	}
-	
-	private void setupTable() {
-		String[]	fields= {"姓名","住址","科室"};
-		ArrayList<String[]> lists = new ArrayList<String[]>();
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		lists.add(new String[]{"张三", "哈哈哈哈哈", "心脏外科"});
-		lists.add(new String[]{"李四", "自治州", "心脏内科"});
-		lists.add(new String[]{"王五", "阿凡达舒服", "小儿科"});
-		lists.add(new String[]{"欣欣", "哈史蒂芬森哈哈", "放射科"});
-		lists.add(new String[]{"小星星", "哈成都哈哈", "胸外科"});
-		lists.add(new String[]{"笨欣", "哈啊啊啊哈哈", "急诊科"});
-		
-		ObservableList<String[]> data = FXCollections.observableArrayList();
-		data.addAll(lists);
-		
-		//安排好table的显示
-		ArrayList<TableColumn<String[], String>> cols = new ArrayList<TableColumn<String[], String>>();
-		for (int i = 0; i < 3; i++) {
-			TableColumn<String[], String> col = new TableColumn<String[], String>(fields[i]);
-			final int index = i;
-			col.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>(){
+    private void setupTable() {
+		String[] keys = {"name", "department", "position", "title", "finish_status"};
+		String[] fields = {"姓名", "科室", "职位", "职称", "完成情况"}	;
+		loader.setupTable(tableView, keys, fields);
+    }
 
-				@Override
-				public ObservableValue<String> call(CellDataFeatures<String[], String> param) {
-					SimpleStringProperty ret = new SimpleStringProperty();
-					ret.setValue(param.getValue()[index]);
-					return ret;
-				}
-			});
-			cols.add(col);
-		}
-		tableView.getColumns().setAll(cols);
-		//table设置完毕
-		tableView.setItems(data);
-		
-	}
+    private void getList() {
+    		String[] searchColumn = {"study_id"};
+    		String[] values = {selectedStudy.get("id")};
+    		String tableName = "study_history inner join user_primary_info on study_history.ssn = user_primary_info.ssn";
+    		String[] columns = {"user_primary_info.name", "user_primary_info.department", "user_primary_info.position", "user_primary_info.title",
+    				"study_history.finish_status", "study_history.id"};
+    		list = dbHelper.getList(searchColumn, values, tableName, columns);
+    }
+
+    private void reload() {
+    		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());
+    		tableView.setItems(searchList);
+    		countLabel.setText("共 " +searchList.size()+ " 条");
+    }
+    
+    
+    
+    boolean validate(TextField inputField){
+    		if(inputField.getText().trim().isEmpty()) {
+    			return false;
+    		}else if(!isNumeric(inputField.getText())) {
+    			return false;
+    		}
+    		return true;
+    }
+
+    public boolean isNumeric(String str)
+    {
+    		return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
 
 }

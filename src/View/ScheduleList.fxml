@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -73,16 +74,16 @@
       </HBox>
       <HBox style="-fx-background-color: #2b303e;">
          <children>
-            <ChoiceBox id="searchField" prefWidth="158.0" style="-fx-background-color: #393f4f;">
+            <ChoiceBox id="searchField" fx:id="departmentPicker" prefWidth="158.0" style="-fx-background-color: #393f4f;" styleClass="cb" stylesheets="@datepicker.css">
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                </HBox.margin>
             </ChoiceBox>
-            <JFXDatePicker id="searchField" prefWidth="160.0" style="-fx-background-color: #393f4f;" stylesheets="@datepicker.css">
+            <JFXDatePicker id="searchField" fx:id="datePicker" prefWidth="160.0" style="-fx-background-color: #393f4f;" stylesheets="@datepicker.css">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></JFXDatePicker>
-            <JFXButton onMouseClicked="#searchButton" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="查看排班" textFill="WHITE">
+            <JFXButton onMouseClicked="#checkSchedule" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="查看排班" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -119,48 +120,16 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </TableView>
-      <HBox>
-         <children>
-            <Label id="footer" fx:id="countLabel" text="共5条" textFill="#5e6378">
-               <HBox.margin>
-                  <Insets left="25.0" />
-               </HBox.margin>
-            </Label>
-            <Pane HBox.hgrow="ALWAYS" />
-            <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Light" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </JFXButton>
-            <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Light" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="20.0" left="10.0" right="10.0" />
-               </HBox.margin>
-            </JFXButton>
-            <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Light" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="20.0" left="10.0" right="50.0" />
-               </HBox.margin>
-            </JFXButton>
-         </children>
-      </HBox>
+      <JFXTextArea fx:id="commentArea" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="47.0" prefWidth="749.0" promptText="备注" wrapText="true">
+         <VBox.margin>
+            <Insets bottom="30.0" left="20.0" right="20.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextArea>
    </children>
 </VBox>

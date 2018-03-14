@@ -25,15 +25,13 @@ public class MeetingListController implements Initializable {
 	
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
-	String[] keys = {"description", "date", "time", "if_count"};
+	String[] keys = {"name", "date", "time", "if_count"};
 	String[] fields = {"会议信息", "日期", "时间", "是否记分"};
 	DBhelper dbHelper = new DBhelper();
-	private String hospitalID;
 	public static HashMap<String, String> selectedMeeting;
  	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		hospitalID = LoginController.hospitalID;
 		setupTable();
 		getList();
 		reload();
@@ -86,11 +84,9 @@ public class MeetingListController implements Initializable {
 	}
 	
 	private void getList() {
-		String[] searchColumn = {"hospital_id"};
-		String[] values = {hospitalID};
 		String tableName = "meeting_list";
-		String[] columns = {"id", "description", "date", "time", "if_count"};;
-		list = dbHelper.getList(searchColumn, values, tableName, columns);
+		String[] columns = {"id", "name", "date", "time", "if_count"};;
+		list = dbHelper.getList(tableName, columns);
 	}
 	
 	private void reload() {

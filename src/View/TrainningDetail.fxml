@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.controlsfx.control.textfield.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TrainningDetailController">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TrainningDetailController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -41,7 +44,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="56.0" text="用户档案" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="56.0" text="培训列表" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -57,7 +60,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="57.0" text="考核统计" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="57.0" text="培训详情" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -172,7 +175,7 @@
                </HBox.margin>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
-            <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
+            <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="82.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="添加用户" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -183,7 +186,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
+            <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="77.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑得分" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -23,11 +23,8 @@ public class DepartmentController implements Initializable {
 	@FXML private CustomTextField searchField;
 	
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>(); 
-	String[] keys = {"departmentName", "manager"};
-	String[] fields = {"科室名称", "科室管理"};
 	Loader loader = new Loader();
 	DBhelper dbHelper;
-	String hospitalID;
 
     @FXML
     void searchButton() {
@@ -49,11 +46,10 @@ public class DepartmentController implements Initializable {
     				String departmentName = popUP.inputField.getText();
     				HashMap<String, String> map = new HashMap<String, String>();
     				map.put("departmentName", departmentName);
-    				map.put("hospital_id", hospitalID);
     				if(dbHelper.insert(map, "hospital_department")) {
     					popUP.stage.close();
-    				}else {
-    					popUP.errorWindow();
+    					getList();
+        				reload();
     				}
     			}else {
     				popUP.alertWindow("新建科室出错", "科室名称不能为空！");
@@ -64,29 +60,38 @@ public class DepartmentController implements Initializable {
 
     @FXML
     void modifyButton() {
-    		
+    		//TODO
     }
 
     @FXML
     void deleteButton() {
-    		
+    		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		if(loader.selectionCheck(selected)) {
+    			PopupWindow popup = new PopupWindow();
+    			popup.confirmButton.setOnAction(e->{
+    				if(dbHelper.delete(selected, "hospital_department")) {
+    	    				getList();
+    	    				reload();
+    	    			}
+    			});
+    		}
     }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		dbHelper = new DBhelper();
-		hospitalID = LoginController.hospitalID;
 		setupTable();
 		getList();
 		reload();
 	}
 	private void getList() {
-		String[] columns = {"id", "departmentName", "manager"};
-		String[] searchColumn = {"hospitalID"};
-		String[] value = {hospitalID};
-		list = dbHelper.getList(searchColumn, value, "hospital_department", columns);
+		String tableName = "hospital_department left join user_primary_info on hospital_department.manager_ssn = user_primary_info.ssn";
+		String[] columns = {"id", "departmentName", "user_primary_info.name"};
+		list = dbHelper.getList(tableName, columns);
 	}
 	private void setupTable() {
+		String[] keys = {"departmentName", "name"};
+		String[] fields = {"科室名称", "科室管理"};
 		loader.setupTable(tableView, keys, fields);
 	}
 	private void reload() {

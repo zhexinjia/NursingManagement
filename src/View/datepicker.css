@@ -9,3 +9,9 @@
 .jfx-date-picker .input-focused-line {
     -fx-background-color: transparent;
 }
+.cb .label{
+	-fx-text-fill:white;
+}
+.cb .menu-item > .label{
+	-fx-text-fill:black ;
+}

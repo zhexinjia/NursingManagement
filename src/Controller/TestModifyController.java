@@ -53,6 +53,9 @@ public class TestModifyController implements Initializable {
     String[] tfKeys = {"question", "answer"};
     String[] tfFields = {"题干", "答案"};
     
+    String[] searchColumn = {"exam_id"};
+    
+    
     
     public void initialize(URL location, ResourceBundle resources) {
     		selectedTest = TestListController.selectedTest;
@@ -245,13 +248,16 @@ public class TestModifyController implements Initializable {
     		tfTableView.setItems(tfOblist);
     }
     private void getSingleList() {
-    		singleList = dbHelper.getEntireList("exam_id", selectedTest.get("id"), "exam_qa_single");
+    		String[] values = {selectedTest.get("id")};
+    		singleList = dbHelper.getEntireList(searchColumn, values, "exam_qa_single");
     }
     private void getMultiList() {
-    		multiList = dbHelper.getEntireList("exam_id", selectedTest.get("id"), "exam_qa_multi");
+    		String[] values = {selectedTest.get("id")};
+    		multiList = dbHelper.getEntireList(searchColumn, values, "exam_qa_multi");
     }
     private void getTfList() {
-    		tfList = dbHelper.getEntireList("exam_id", selectedTest.get("id"), "exam_qa_tf");
+    	String[] values = {selectedTest.get("id")};
+    		tfList = dbHelper.getEntireList(searchColumn, values, "exam_qa_tf");
     }
     
     private boolean has_selected(TableView<HashMap<String, String>> tableView) {

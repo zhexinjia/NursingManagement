@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import Model.CheckMap;
 import Model.DBhelper;
 import Model.Loader;
+import Model.PopupWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
-public class TestPublishController implements Initializable {	
+public class TrainingPublishController implements Initializable {	
 	@FXML TableView<CheckMap> tableView;
 	@FXML Label countLabel;
 	@FXML VBox box;
@@ -33,20 +34,49 @@ public class TestPublishController implements Initializable {
 	ObservableList<CheckMap> checklist;
 	String[] keys = {"name", "department", "title", "position", "level"};
 	String[] fields = {"姓名", "科室", "职称", "职务", "层级"};
-	private HashMap<String, String> selectedTest;
-
+	private HashMap<String, String> selectedTraining;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		selectedTest = TestListController.selectedTest;
+		selectedTraining = TrainningListController.selectedTrainning;
 		setupTable();
 		setupCheckBox();
 		getList();
 		reload();
 	}
 	
+	@FXML void importButton(){
+		String[] keylist = {"ssn", "point", "detail"};
+		String[] fields = {"工号", "得分", "备注"};
+		ArrayList<HashMap<String, String>> importList = loader.importExcel(keylist, fields);
+		if(importList != null) {
+			String id = selectedTraining.get("id");
+			for (HashMap<String, String> map:importList) {
+				map.put("training_id", id);
+			}
+			PopupWindow pop = new PopupWindow();
+			if(dbHelper.insertList(importList, "training_history")) {
+				pop.confirmWindow("导入完成", "点击确定返回");
+				getList();
+				reload();
+			}else {
+				pop.errorWindow();
+			}
+		}
+	}
+	
+	@FXML void exportButton() {
+		
+	}
+
 	@FXML
 	void publishButton() {
-		dbHelper.publish(getChecked(), selectedTest, "exam_list");
+		//FIXME: add one person twice, back to previous page
+		if(dbHelper.insertList(getChecked(), "training_history")) {
+			loader.loadVBox(box, "/View/TrainningDetail.fxml");
+		}
+		
+		//dbHelper.publishTraining(getChecked(), "training_history");
 	}
 
 
@@ -59,17 +89,6 @@ public class TestPublishController implements Initializable {
     void resetButton() {
     		searchField.setText("");
     		reload();
-    }
-
-
-    @FXML
-    void newButton() {
-    		loader.loadVBox(box, "/View/UserNew.fxml");
-    }
-
-    @FXML
-    void modifyButton() {
-    		loader.loadVBox(box, "/View/UserModify.fxml");
     }
 
     private void setupCheckBox() {
@@ -104,15 +123,20 @@ public class TestPublishController implements Initializable {
 	}
 	
 	private ArrayList<HashMap<String, String>> getChecked(){
+		String id = selectedTraining.get("id");
 		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 		for(CheckMap checkMap:checklist) {
 			if (checkMap.cb.isSelected()) {
-				list.add(checkMap.map);
+				HashMap<String, String> checkedMap = checkMap.map;
+				HashMap<String, String> newMap = new HashMap<String, String>();
+				newMap.put("training_id", id);
+				newMap.put("ssn", checkedMap.get("ssn"));
+				//newMap.put("point", checkedMap.get("point"));
+				//newMap.put("detail", checkedMap.get("detail"));
+				list.add(newMap);
 			}
 		}
 		return list;
 	}
-	
-	
 
 }

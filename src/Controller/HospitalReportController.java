@@ -4,9 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-
 import org.controlsfx.control.textfield.CustomTextField;
-
 import Model.DBhelper;
 import Model.Loader;
 import Model.PopupWindow;
@@ -17,20 +15,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
-public class UserlistController implements Initializable {	
+public class HospitalReportController implements Initializable {	
 	@FXML TableView<HashMap<String,String>> tableView;
 	@FXML Label countLabel;
 	@FXML VBox box;
 	@FXML private CustomTextField searchField;
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
-	String[] keys = {"name", "ssn", "department", "title", "position", "level"};
-	String[] fields = {"姓名", "工号", "科室", "职称", "职务", "层级"};
-	public static HashMap<String, String> selectedUser;
+	String[] keys = {"name", "department", "date", "title","status"};
+	String[] fields = {"上报员工", "所属科室", "上报时间", "上报事件", "处理情况"};
 	PopupWindow popUP = new PopupWindow();
 	DBhelper dbHelper = new DBhelper();
-	
-	private String hospitalID;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -52,37 +47,8 @@ public class UserlistController implements Initializable {
     }
 
     @FXML
-    void importButton() {
-    		//FIXME: wrong keys and fields, import both primary and sub
-    		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
-    		if(importlist!=null) {
-    			dbHelper.insertUserList(importlist, hospitalID);
-    		}else {
-    			//TODO:
-    			System.out.println(importlist.size());
-    		}
-    }
-
-    @FXML
-    void exportButton() {
-    		loader.exportExcel(list, fields, keys);
-    }
-
-
-
-    @FXML
-    void newButton() {
-    		loader.loadVBox(box, "/View/UserNew.fxml");
-    }
-
-    @FXML
     void modifyButton() {
-    		selectedUser = tableView.getSelectionModel().getSelectedItem();
-    		if(selectedUser == null) {
-    			popUP.alertWindow("没有选中目标","请选择要编辑的用户");
-    		}else {
-    			loader.loadVBox(box, "/View/UserModify.fxml");
-    		}
+    		
     }
 
     @FXML
@@ -91,9 +57,7 @@ public class UserlistController implements Initializable {
     		if(selected == null) {
     			popUP.alertWindow("没有选中目标","请选择要编辑的用户");
     		}else {
-    			//FIXME:delete all informations from different tables using one SQL statement
-    			//FIXME: delete 3 tables
-    			if (dbHelper.deleteUser(selected)) {
+    			if (dbHelper.delete(selected, "report_list")) {
     				getList();
     				reload();
     			}else {
@@ -101,14 +65,28 @@ public class UserlistController implements Initializable {
     			}
     		}
     }
-
 	
 	private void setupTable() {
 		loader.setupTable(tableView, keys, fields);
 	}
 	
 	private void getList() {
-		list = dbHelper.getEntireList("user_primary_info");
+		//String[] searchColumn = {};
+		//String[] values;
+		String tableName = "user_primary_info right join report_list on user_primary_info.ssn = report_list.ssn";
+		String[] columns = {"report_list.id","report_list.date", "report_list.title", "report_list.level", "user_primary_info.name", "user_primary_info.department"};
+		list = dbHelper.getList(tableName, columns );
+		for(HashMap<String, String> map:list) {
+			if(map.get("level").equals("1")) {
+				map.put("status", "上报至科室");
+			}
+			if(map.get("level").equals("2")) {
+				map.put("status", "科室已讨论/上报医院");
+			}
+			if(map.get("level").equals("3")) {
+				map.put("status", "医院已处理");
+			}
+		}
 	}
 	
 	private void reload() {

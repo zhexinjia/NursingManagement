@@ -112,7 +112,6 @@ public class UserModifyController implements Initializable {
     HashMap<String, String> userPrimary;
     HashMap<String, String> userSub;
     DBhelper dbHelper;
-    String hospitalID;
     ArrayList<String> departmentList = new ArrayList<String>();
     ArrayList<HashMap<String, String>> departmentHashMaplist;
     String ssn;
@@ -120,11 +119,12 @@ public class UserModifyController implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
     		dbHelper = new DBhelper();
-		hospitalID = LoginController.hospitalID;
 		setupChoiceBox();
 		userPrimary = UserlistController.selectedUser;
 		ssn = userPrimary.get("ssn");
-		userSub = dbHelper.getEntireUserInfo(hospitalID, "user_sub_info", ssn);
+		String[] searchColumn = {"ssn"};
+		String[] values = {ssn};
+		userSub = dbHelper.getEntireList(searchColumn, values, "user_sub_info").get(0);
 		loadPage();
 		
 	}
@@ -134,7 +134,7 @@ public class UserModifyController implements Initializable {
     void addButton() {
     		if(validate()) {
     			HashMap<String, String> map = getHashMap();
-    			dbHelper.updateUser(map, hospitalID);
+    			dbHelper.updateUser(map);
     		}else {
     			PopupWindow popUP = new PopupWindow();
     			popUP.alertWindow("出错啦。。。", "姓名和工号不能为空");
@@ -243,9 +243,7 @@ public class UserModifyController implements Initializable {
     //get list of department
     private void getDepartment() {
     		String[] columns = {"id", "departmentName"};
-    		String[] searchColumn = {"hospital_id"};
-    		String[] value = {hospitalID};
-    		departmentHashMaplist = dbHelper.getList(searchColumn, value, "hospital_department", columns);  
+    		departmentHashMaplist = dbHelper.getList("hospital_department", columns);  
     		departmentList.add("无");
     		for(int i = 0; i< departmentHashMaplist.size(); i++) {
     			departmentList.add(departmentHashMaplist.get(i).get("departmentName"));

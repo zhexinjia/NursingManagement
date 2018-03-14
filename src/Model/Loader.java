@@ -68,6 +68,14 @@ public class Loader {
 		return false;
 	}
 	
+	public File openFileChooser() {
+		Stage stage = new Stage();
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("选择文件");
+		File file = fileChooser.showOpenDialog(stage);
+		return file;
+	}
+	
 	//import excel
 	public ArrayList<HashMap<String, String>> importExcel(String[] keylist, String[] fields) {
 		ArrayList<HashMap<String, String>> list = null;
@@ -236,6 +244,14 @@ public class Loader {
 		    }
 		});
 	}
-	
+	public boolean selectionCheck(HashMap<String, String> map) {
+		if(map==null) {
+			PopupWindow pop = new PopupWindow();
+			pop.alertWindow("操作失败", "请选中一个目标。");
+			return false;
+		}else {
+			return true;
+		}
+	}
 
 }

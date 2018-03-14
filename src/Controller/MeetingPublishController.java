@@ -31,15 +31,13 @@ public class MeetingPublishController implements Initializable {
 	DBhelper dbHelper = new DBhelper();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 	ObservableList<CheckMap> checklist;
-	String[] keys = {"name", "department_id", "title", "position", "level"};
+	String[] keys = {"name", "department", "title", "position", "level"};
 	String[] fields = {"姓名", "科室", "职称", "职务", "层级"};
-	String hospitalID;
 	private HashMap<String, String> selectedMeeting;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		selectedMeeting = MeetingListController.selectedMeeting;
-		hospitalID = LoginController.hospitalID;
 		setupTable();
 		setupCheckBox();
 		getList();
@@ -50,7 +48,8 @@ public class MeetingPublishController implements Initializable {
 	void publishButton() {
 		//FIXME:insert list?
 		//FIXME: change getChecked() function to return insert map list
-		//dbHelper.publish(getChecked(), selectedMeeting, "exam_list");
+		ArrayList<HashMap<String, String>> userList = getChecked();
+		dbHelper.publish(userList, selectedMeeting, "meeting_list");
 	}
 
 
@@ -91,7 +90,7 @@ public class MeetingPublishController implements Initializable {
     }
 
 	private void getList() {
-		list = dbHelper.getEntireList(hospitalID, "user_primary_info");
+		list = dbHelper.getEntireList("user_primary_info");
 	}
 	
 	private void setupTable() {

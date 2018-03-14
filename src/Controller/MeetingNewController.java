@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 
@@ -31,14 +32,12 @@ public class MeetingNewController implements Initializable{
     
     private Random random = new Random();
     Loader loader = new Loader();
-    private String hospitalID = null;
     private String loginCode;
     private String logoutCode;
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-    		hospitalID = LoginController.hospitalID;
     		setupChoiceBox();
     		setupDatePicker();
 	}
@@ -73,8 +72,7 @@ public class MeetingNewController implements Initializable{
     		PopupWindow pop = new PopupWindow();
     		if(validate()) {
     			HashMap<String, String> map = new HashMap<String, String>();
-    			map.put("hospital_id", hospitalID);
-    			map.put("description", nameField.getText());
+    			map.put("name", nameField.getText());
     			map.put("date", datePicker.getValue().format(dateFormat));
     			map.put("time", timePicker.getValue().format(timeFormat));
     			map.put("checkinCode", loginCode);
@@ -120,7 +118,6 @@ public class MeetingNewController implements Initializable{
     		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		LocalDateTime now = LocalDateTime.now();
 		String code = dtf.format(now);
-		code += hospitalID;
 		int randomInt = random.nextInt(100);
 		code += Integer.toString(randomInt);
 		return code;

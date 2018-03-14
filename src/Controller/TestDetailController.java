@@ -33,7 +33,7 @@ public class TestDetailController implements Initializable{
 	ArrayList<HashMap<String, String>> list;
 	public static HashMap<String, String> selectedUser;
 	
-	String[] keys = {"name", "department_id", "position", "title", "level", "finish", "score"};
+	String[] keys = {"name", "department", "position", "title", "level", "finish", "score"};
     String[] fields = {"姓名", "科室", "职位","职称","层级", "完成", "成绩"};
 
 	@Override
@@ -72,12 +72,12 @@ public class TestDetailController implements Initializable{
 	}
 	private void getList() {
 		//TODO: how to count total point??? should we remove it?
-		String[] columns = {"exam_history.exam_id", "exam_history.id as id", "user_primary_info.department_id", "user_primary_info.name", "user_primary_info.position", 
+		String[] columns = {"exam_history.exam_id", "exam_history.id as id", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
 				"user_primary_info.title", "user_primary_info.level", "exam_history.finish as finish", "exam_history.score as score"};
 		String[] searchColumns = {"exam_history.exam_id"};
 		String[] searchValues = {examID};
 		
-		list = dbHelper.getList(searchColumns, searchValues, "exam_history inner join user_primary_info on exam_history.user_id = user_primary_info.ssn", columns);
+		list = dbHelper.getList(searchColumns, searchValues, "exam_history inner join user_primary_info on exam_history.ssn = user_primary_info.ssn", columns);
 	}
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, "");

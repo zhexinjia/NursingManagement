@@ -78,7 +78,7 @@ public class RecordListController implements Initializable {
 	private void getList() {
 		String tableName = "user_primary_info inner join user_score on user_primary_info.ssn = user_score.ssn";
 		String[] columns = {"user_primary_info.department", "user_primary_info.name", "user_primary_info.position", "user_primary_info.title", 
-				"user_primary_info.level", "user_score.totalScore	", "user_score.currentScore", "user_primary_info.ssn"};
+				"user_primary_info.level", "user_score.totalScore	", "user_score.currentScore", "user_primary_info.ssn", "user_score.comment"};
 		list = dbHelper.getList(tableName, columns);
 		for(HashMap<String, String> map:list) {
 			String current = map.get("currentScore");

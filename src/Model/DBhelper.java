@@ -33,6 +33,7 @@ import Controller.LoginController;
 
 public class DBhelper {
 	String urlGet = "http://zhexinj.cn/API/getdb.php";
+	String testGet = "http://zhexinj.cn/API/getdb2.php";
 	String urlSend = "http://zhexinj.cn/API/sendPost.php";
 	JSONParser parser = new JSONParser();
 	String database;
@@ -297,6 +298,11 @@ public class DBhelper {
 	
 	
 
+	public String insertUserSQL(HashMap<String, String> map) {
+		String ssn = map.get("ssn");
+		//TODO
+		return null;
+	}
 
 	/*
 	 * Used in UserNewController, given one HashMap insert into three tables, nurse primary, sub, nurse score
@@ -490,6 +496,54 @@ public class DBhelper {
 		
 	}
 	
+	
+	//given ssn, return list of test score histoys, list of study score history, list of training, list of meeting
+	/*
+	public ArrayList<ArrayList<HashMap<String, String>>> getRecordLists(String ssn){
+		String sql = "sql=";
+		sql+="select exam_list.examName, exam_history.score, exam_history.totalScore from "
+				+ "exam_history inner join exam_list on exam_history.exam_id = exam_list.id where "
+				+ "exam_history.ssn = " + ssn + ";";
+		sql+="select study_list.name, study_history.finish_status from "
+				+ "study_history inner join study_list on study_history.study_id = study_list.id where "
+				+ "study_history.ssn = " + ssn + ";";
+		sql+="select training_list.name, training_history.point, training_list.point from "
+				+ "training_list inner join training_history on training_list.id = training_history.training_id where "
+				+ "training_history.ssn = " + ssn + ";";
+		sql+="select meeting_list.name, meeting_history.checkin, meeting_history.checkout from "
+				+ "meeting_history inner join meeting_list on meeting_list.id = meeting_history.meeting_id where "
+				+ "meeting_history.ssn = " + ssn + ";";
+		String output = sendGet(testGet, sql);
+		System.out.println(sql);
+		System.out.println(output);
+		return toList(output);
+	}
+	
+	private ArrayList<ArrayList<HashMap<String, String>>> toList(String json){
+		ArrayList<ArrayList<HashMap<String, String>>> ret = new ArrayList<ArrayList<HashMap<String, String>>>();
+		JSONArray objectArray = new JSONArray();
+		try {
+			objectArray = (JSONArray) parser.parse(json);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Iterator<?> arrayIterator = objectArray.iterator();
+		while (arrayIterator.hasNext()) {
+			JSONArray object = (JSONArray) arrayIterator.next();
+			ArrayList<HashMap<String, String>> output = new ArrayList<HashMap<String, String>>();
+			Iterator<?> secondIterator = object.iterator();
+			while(secondIterator.hasNext()) {
+				Object obj = secondIterator.next();
+				@SuppressWarnings("unchecked")
+				HashMap<String, String> map = (HashMap<String, String>)obj;
+				output.add(map);
+			}
+			ret.add(output);
+		}
+		return ret;
+	}	
+	*/
 	
 
 	

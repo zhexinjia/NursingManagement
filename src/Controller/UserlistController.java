@@ -58,8 +58,8 @@ public class UserlistController implements Initializable {
     		if(importlist!=null) {
     			dbHelper.insertUserList(importlist, hospitalID);
     		}else {
-    			//TODO:
-    			System.out.println(importlist.size());
+    			PopupWindow pop = new PopupWindow();
+    			pop.errorWindow();
     		}
     }
 

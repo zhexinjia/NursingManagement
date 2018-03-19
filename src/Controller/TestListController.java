@@ -89,6 +89,8 @@ public class TestListController implements Initializable {
 				if(dbHelper.insert(map, "exam_list")) {
 					//modify Above
 					popUP.stage.close();
+					getList();
+					reload();
 				}else {
 					popUP.errorWindow();
 				}

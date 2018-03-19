@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXTabPane;
 
 import Model.DBhelper;
+import Model.Loader;
 import Model.PopupWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
 public class UserNewController implements Initializable {
 	
@@ -114,6 +116,7 @@ public class UserNewController implements Initializable {
     DBhelper dbHelper;
     ArrayList<String> departmentList = new ArrayList<String>();
     ArrayList<HashMap<String, String>> departmentHashMaplist;
+    Loader loader = new Loader();
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -135,7 +138,7 @@ public class UserNewController implements Initializable {
 
     @FXML
     void contactButton() {
-    		
+    		loader.loadWeb();
     }
 
     @FXML

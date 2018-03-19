@@ -93,7 +93,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="200.0" layoutY="23.0" prefHeight="399.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
                            <children>
-                              <TableView fx:id="tableView1111" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="sumTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
                                  <effect>
                                     <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />
                                  </effect>
@@ -133,7 +133,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="200.0" layoutY="23.0" prefHeight="399.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
                            <children>
-                              <TableView fx:id="tableView" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="testTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
                                  <effect>
                                     <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />
                                  </effect>
@@ -160,7 +160,7 @@
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
+                                    <JFXButton onMouseClicked="#testDetail" prefHeight="27.0" prefWidth="84.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看考卷" textFill="WHITE">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -185,7 +185,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="200.0" layoutY="23.0" prefHeight="399.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
                            <children>
-                              <TableView fx:id="tableView1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="studyTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
                                  <effect>
                                     <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />
                                  </effect>
@@ -237,7 +237,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="200.0" layoutY="23.0" prefHeight="399.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
                            <children>
-                              <TableView fx:id="tableView11" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="trainingTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
                                  <effect>
                                     <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />
                                  </effect>
@@ -289,7 +289,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="200.0" layoutY="23.0" prefHeight="399.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
                            <children>
-                              <TableView fx:id="tableView111" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="meetingTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
                                  <effect>
                                     <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />
                                  </effect>

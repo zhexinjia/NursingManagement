@@ -33,7 +33,7 @@ import Controller.LoginController;
 
 public class DBhelper {
 	String urlGet = "http://zhexinj.cn/API/getdb.php";
-	String testGet = "http://zhexinj.cn/API/getdb2.php";
+	//String testGet = "http://zhexinj.cn/API/getdb2.php";
 	String urlSend = "http://zhexinj.cn/API/sendPost.php";
 	JSONParser parser = new JSONParser();
 	String database;
@@ -307,12 +307,14 @@ public class DBhelper {
 	/*
 	 * Used in UserNewController, given one HashMap insert into three tables, nurse primary, sub, nurse score
 	 */
-	public void insertUser(HashMap<String, String> map) {
+	public boolean insertUser(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
+		return false;
 	}	
 	
 	//used in UserModifyController, one HashMap as @Param, update two tables: primary, sub
 	public void updateUser(HashMap<String, String> map) {
+		
 		// TODO finish
 	}
 	

@@ -70,7 +70,7 @@ public class LoginController {
 				if (temp.size() != 0)  {
 					JSONObject userInfo = (JSONObject) temp.get(0);
 					userName = usernameField.getText();
-					database = (String) userInfo.get("database");
+					database = (String) userInfo.get("data_base");
 					url = (String) userInfo.get("url");
 					return true;
 				}

@@ -332,7 +332,7 @@ public class DBhelper {
 		finalPrimSql = finalPrimSql.substring(0, finalPrimSql.length()) + ");";
 		finalSubSql = finalSubSql.substring(0, finalSubSql.length()-2) + ");";
 		
-		String res = finalPrimSql+ " " + finalSubSql;
+		String res = finalPrimSql + finalSubSql;
 		
 		return res;
 	}

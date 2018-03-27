@@ -15,24 +15,17 @@ class Test {
 	void test() {
 		HashMap<String, String> map = new HashMap<String, String>();
 	
+		//每个test case都要写这句话
+		dbHelper.database = "medic";
 		
-		
-		map.put("ssn", "888");
+		map.put("ssn", "8818");
 		map.put("name", "hahahahaa");
 		map.put("department", "Oral");
-		String output = dbHelper.insertUserHelper(map);
-		//String outttput = dbHelper.mapInsert(map, "user_sub_info");
-		
 		
 		//test
 		boolean aaa  = dbHelper.insertUser(map);
-		//boolean bbb  = dbHelper.insert(map, "user_sub_info");
-		System.out.println(output);
-		//System.out.println(outttput);
 		System.out.println(aaa);
-		//System.out.println(bbb);
-		
-		
+	
 		assertEquals("aa", "aa");
 	}
 	

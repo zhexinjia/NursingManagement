@@ -210,6 +210,7 @@ public class DBhelper {
 		}
 		return statement;
 	}
+	
 	public String getStatement(String tableName, String[] columns) {
 		String statement = "";
 		for (int i = 0; i<columns.length; i++) {
@@ -252,6 +253,7 @@ public class DBhelper {
 		return jsonToList(output);
 	}
 	*/
+	
 	//same function as above
 	public ArrayList<HashMap<String, String>> getList(String tableName, String[] columns){
 		String sql = "sql=select ";
@@ -298,17 +300,51 @@ public class DBhelper {
 	
 	
 
-	public String insertUserSQL(HashMap<String, String> map) {
-		String ssn = map.get("ssn");
-		//TODO
-		return null;
+	public String insertUserHelper(HashMap<String, String> map) {
+		String sqlPrim = "insert into user_primary_info" + " (";
+		String sqlSub= "insert into user_sub_info" + " (";
+		
+		Set<String> keys = map.keySet();
+		ArrayList<String> keyset = new ArrayList<String>(keys);
+		
+		for(int i = 0; i < keyset.size();i++) {
+			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
+					keyset.get(i) == "position" || keyset.get(i) == "title") {
+				sqlPrim+= keyset.get(i) + ", ";
+			}else {
+				sqlSub+= keyset.get(i) + ", ";
+			}		
+		}
+		sqlPrim += "ssn";
+		
+		String finalPrimSql = sqlPrim.substring(0, sqlPrim.length()) + ") VALUES (";
+		String finalSubSql = sqlSub.substring(0, sqlSub.length()-2) + ") VALUES (";
+		
+		for(int i = 0; i < keyset.size();i++) {
+			if (keyset.get(i) == "name" || keyset.get(i) == "department" ||
+					keyset.get(i) == "position" || keyset.get(i) == "title") {
+				finalPrimSql+= "'" + map.get(keyset.get(i)) + "', ";
+			}else {
+				finalSubSql+= "'" + map.get(keyset.get(i)) + "', ";
+			}		
+		}
+		finalPrimSql += "'" + map.get("ssn") + "'";
+		finalPrimSql = finalPrimSql.substring(0, finalPrimSql.length()) + ");";
+		finalSubSql = finalSubSql.substring(0, finalSubSql.length()-2) + ");";
+		
+		String res = finalPrimSql+ " " + finalSubSql;
+		
+		return res;
 	}
 
 	/*
 	 * Used in UserNewController, given one HashMap insert into three tables, nurse primary, sub, nurse score
 	 */
 	public boolean insertUser(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
+		String sql = "sql=" + insertUserHelper(map);
+		if(sendPost(urlSend, sql)) {
+			return true;
+		}
 		return false;
 	}	
 	
@@ -409,6 +445,7 @@ public class DBhelper {
 	 */
 	public void insertUserList(ArrayList<HashMap<String, String>> maplist, String hospitalID) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 

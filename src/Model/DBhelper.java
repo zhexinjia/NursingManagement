@@ -355,8 +355,8 @@ public class DBhelper {
 	
 	public String updateUserHelper(HashMap<String, String> map) {
 		
-		String sqlPrim = "update user_primary_info set " ;
-		String sqlSub= "update user_sub_info set ";
+		String sqlPrim = "UPDATE user_primary_info set " ;
+		String sqlSub= "UPDATE user_sub_info set ";
 		
 		Set<String> keys = map.keySet();
 		ArrayList<String> keyset = new ArrayList<String>(keys);	
@@ -372,10 +372,10 @@ public class DBhelper {
 		}
 		
 		sqlPrim = sqlPrim.substring(0, sqlPrim.length()-2);
-		sqlPrim += " where ssn=" + "'" + map.get("ssn") + "';";
+		sqlPrim += " WHERE ssn=" + "'" + map.get("ssn") + "';";
 		
 		sqlSub = sqlSub.substring(0, sqlSub.length()-2);
-		sqlSub += " where ssn=" + "'" + map.get("ssn") + "';";
+		sqlSub += " WHERE ssn=" + "'" + map.get("ssn") + "';";
 		
 		String res = sqlPrim + sqlSub;
 		
@@ -561,8 +561,8 @@ public class DBhelper {
 	//delete meeting and all meeting history related to this meeting
 	public boolean deleteMeeting(HashMap<String, String> selectedMeeting) {
 		String id = selectedMeeting.get("id");
-		String historySql = "delete from meeting_history where meeting_id=" + "'" + id + "';";
-		String listSql = "delete from meeting_list where id=" + "'" + id + "';";
+		String historySql = "DELETE FROM meeting_history WHERE meeting_id=" + "'" + id + "';";
+		String listSql = "DELETE FROM meeting_list WHERE id=" + "'" + id + "';";
 		String sql = "sql=" + historySql + listSql;
 		if (sendPost(urlSend, sql)) {
 			//success();
@@ -575,8 +575,8 @@ public class DBhelper {
 	//delete study and all study history related to this study
 	public boolean deleteStudy(HashMap<String, String> selectedStudy) {
 		String id = selectedStudy.get("id");
-		String historySql = "delete from study_history where study_id=" + "'" + id + "';";
-		String listSql = "delete from study_list where id=" + "'" + id + "';";
+		String historySql = "DELETE FROM study_history WHERE study_id=" + "'" + id + "';";
+		String listSql = "DELETE FROM study_list WHERE id=" + "'" + id + "';";
 		String sql = "sql=" + historySql + listSql;
 		if (sendPost(urlSend, sql)) {
 			//success();
@@ -586,12 +586,25 @@ public class DBhelper {
 		return false;	
 	}
 	
-	//delete training and all training history realted to this training
+	//delete training and all training history related to this training
 	public boolean deleteTrainning(HashMap<String, String> selectedTraining) {
 		String id = selectedTraining.get("id");
-		String historySql = "delete from training_history where training_id=" + "'" + id + "';";
-		String listSql = "delete from training_list where id=" + "'" + id + "';";
+		String historySql = "DELETE FROM training_history WHERE training_id=" + "'" + id + "';";
+		String listSql = "DELETE FROM training_list WHERE id=" + "'" + id + "';";
 		String sql = "sql=" + historySql + listSql;
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
+		return false;
+	}
+	
+	public boolean emptyScore() {
+		String totalScoreSql = "UPDATE user_score SET totalScore = 0;";
+		String currentScoreSql = "UPDATE user_score SET currentScore = 0;";
+		String commentSql = "UPDATE user_score SET comment = NULL;";
+		String sql = "sql=" + totalScoreSql + currentScoreSql + commentSql;
 		if (sendPost(urlSend, sql)) {
 			//success();
 			return true;

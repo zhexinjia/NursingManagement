@@ -134,6 +134,7 @@ class Test {
 	}
 	*/
 	
+	/*
 	void deleteMeetingTest() {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -144,5 +145,12 @@ class Test {
 		boolean output = dbHelper.deleteMeeting(map);
 		System.out.println(output);
 	}
-
+	 */
+	
+	void emptyScoreTest() {
+		dbHelper.database = "medic";
+		boolean output = dbHelper.emptyScore();
+		System.out.println(output);
+	}
+	
 }

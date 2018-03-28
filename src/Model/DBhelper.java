@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -7,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -192,7 +194,6 @@ public class DBhelper {
 	
 	
 	
-	
 	/*
 	 * Below are all the method used in controller to insert, update, delete
 	 * 
@@ -303,36 +304,40 @@ public class DBhelper {
 	public String insertUserHelper(HashMap<String, String> map) {
 		String sqlPrim = "insert into user_primary_info" + " (";
 		String sqlSub= "insert into user_sub_info" + " (";
-		
+		String sqlScore = "insert into user_score" + " (ssn) VALUES (";
 		Set<String> keys = map.keySet();
 		ArrayList<String> keyset = new ArrayList<String>(keys);
 		
+		
 		for(int i = 0; i < keyset.size();i++) {
 			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
-					keyset.get(i) == "position" || keyset.get(i) == "title") {
+					keyset.get(i) == "position" || keyset.get(i) == "title" ||
+					keyset.get(i) == "level" || keyset.get(i) == "password") {
 				sqlPrim+= keyset.get(i) + ", ";
 			}else {
 				sqlSub+= keyset.get(i) + ", ";
 			}		
 		}
-		sqlPrim += "ssn";
+		sqlPrim += "ssn) VALUES (";
+	
+		sqlSub = sqlSub.substring(0, sqlSub.length()-2) + ") VALUES (";
 		
-		String finalPrimSql = sqlPrim.substring(0, sqlPrim.length()) + ") VALUES (";
-		String finalSubSql = sqlSub.substring(0, sqlSub.length()-2) + ") VALUES (";
+		sqlScore += "'" + map.get("ssn") + "');";
 		
 		for(int i = 0; i < keyset.size();i++) {
 			if (keyset.get(i) == "name" || keyset.get(i) == "department" ||
-					keyset.get(i) == "position" || keyset.get(i) == "title") {
-				finalPrimSql+= "'" + map.get(keyset.get(i)) + "', ";
+					keyset.get(i) == "position" || keyset.get(i) == "title" ||
+					keyset.get(i) == "level" || keyset.get(i) == "password") {
+				sqlPrim += "'" + map.get(keyset.get(i)) + "', ";
 			}else {
-				finalSubSql+= "'" + map.get(keyset.get(i)) + "', ";
+				sqlSub+= "'" + map.get(keyset.get(i)) + "', ";
 			}		
 		}
-		finalPrimSql += "'" + map.get("ssn") + "'";
-		finalPrimSql = finalPrimSql.substring(0, finalPrimSql.length()) + ");";
-		finalSubSql = finalSubSql.substring(0, finalSubSql.length()-2) + ");";
+		sqlPrim += "'" + map.get("ssn") + "'";
+		sqlPrim += ");";
+		sqlSub = sqlSub.substring(0, sqlSub.length()-2) + ");";
 		
-		String res = finalPrimSql + finalSubSql;
+		String res = sqlPrim + " " +sqlSub + " " + sqlScore;
 		
 		return res;
 	}
@@ -348,15 +353,67 @@ public class DBhelper {
 		return false;
 	}	
 	
-	//used in UserModifyController, one HashMap as @Param, update two tables: primary, sub
-	public void updateUser(HashMap<String, String> map) {
+	public String updateUserHelper(HashMap<String, String> map) {
 		
-		// TODO finish
+		String sqlPrim = "update user_primary_info set " ;
+		String sqlSub= "update user_sub_info set ";
+		
+		Set<String> keys = map.keySet();
+		ArrayList<String> keyset = new ArrayList<String>(keys);	
+		
+		for(int i = 0; i < keyset.size();i++) {
+			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
+					keyset.get(i) == "position" || keyset.get(i) == "title" ||
+					keyset.get(i) == "level" || keyset.get(i) == "password") {
+				sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}else {
+				sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}		
+		}
+		
+		sqlPrim = sqlPrim.substring(0, sqlPrim.length()-2);
+		sqlPrim += " where ssn=" + "'" + map.get("ssn") + "';";
+		
+		sqlSub = sqlSub.substring(0, sqlSub.length()-2);
+		sqlSub += " where ssn=" + "'" + map.get("ssn") + "';";
+		
+		String res = sqlPrim + sqlSub;
+		
+		return res;
+		
 	}
 	
-	//used in UserListController, delete user info from 3 tables, maybe including all-user history
+	//used in UserModifyController, one HashMap as @Param, update two tables: primary, sub
+	public boolean updateUser(HashMap<String, String> map) {
+		String sql = "sql=" + updateUserHelper(map);
+		if(sendPost(urlSend, sql)) {
+			return true;
+		}
+		return false;
+	}
+	
+	//used in UserListController, delete user info from the 3-user tables and all other history tables
 	public boolean deleteUser(HashMap<String, String> selectedUser) {
-		// TODO Auto-generated method stub
+
+		String ssn = selectedUser.get("ssn");
+		//Delete user from the 3-user tables
+		String primSql = "delete from user_primary_info where ssn = " + ssn + ";";
+		String subSql = "delete from user_sub_info where ssn = " + ssn + ";";
+		String scoreSql = "delete from user_score_info where ssn = " + ssn + ";";
+		
+		//Delete user from all history tables
+		String examSql = "delete from exam_history where ssn=" + "'" + ssn + "';";
+		String meetingSql = "delete from meeting_history where ssn=" + "'" + ssn + "';";
+		String reportSql = "delete from report_list where ssn=" + "'" + ssn + "';";
+		String studySql = "delete from study_history where ssn=" + "'" + ssn + "';";
+		String trainingSql = "delete from training_history where ssn=" + "'" + ssn + "';";
+		
+		String sql = "sql=" + primSql + subSql + scoreSql + examSql + meetingSql + reportSql + studySql + trainingSql ;
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
 		return false;
 	}
 	
@@ -380,6 +437,7 @@ public class DBhelper {
 		}
 		return sql;
 	}
+	
 	//simple insert, insert map's value into table
 	public boolean insert(HashMap<String, String> map, String tableName) {
 		String sql = "sql=" + mapInsert(map, tableName);
@@ -420,11 +478,23 @@ public class DBhelper {
 		return false;
 	}
 
-	//delete all information about this test, given test id
+	//delete all information about this test, given exam id
 	public boolean deleteExam(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
+		String id = map.get("exam_id");
+		String historySql = "delete from exam_history where exam_id=" + "'" + id + "';";
+		String listSql = "delete from exam_list where id=" + "'" + id + "';";
+		String mulSql = "delete from exam_qa_multiple where exam_id=" + "'" + id + "';";
+		String singleSql = "delete from exam_qa_single where exam_id=" + "'" + id + "';";
+		String tfSql = "delete from exam_qa_tf where exam_id=" + "'" + id + "';";
+		String sql = "sql=" + historySql + listSql + mulSql + singleSql + tfSql;
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
 		return false;
 	}
+	
 	
 	//simply insert entire HashMap List into table
 
@@ -443,31 +513,90 @@ public class DBhelper {
 	/*
 	 * hard insert function, insert list of user info into 3 tables
 	 */
-	public void insertUserList(ArrayList<HashMap<String, String>> maplist, String hospitalID) {
-		// TODO Auto-generated method stub
-		
-		
+	public boolean insertUserList(ArrayList<HashMap<String, String>> maplist) {
+		boolean res;
+		for (HashMap user : maplist){
+			res = insertUser(user);
+			if (res == false) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	//publishing item, test/meeting/study
-	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> publishingItem,
-			String tableName) {
-		// TODO Auto-generated method stub
+	//publishing Exam/Study/Training
+	public boolean publishExam(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
+		String temp;
+		
+		//id -> exam_id, study_id, training_id
+		String id = item.get("id");
+		
+		for (HashMap<String, String> user:userList) {
+			String ssn = user.get("ssn");
+			
+			if (table == "exam_list") {
+				temp = "sql=insert into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
+				sendPost(urlSend, temp);
+				return true;
+			}
+			else if (table == "study_list") {
+				temp = "sql=insert into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
+				sendPost(urlSend, temp);
+				return true;
+			}
+			else if (table == "training_list") {
+				temp = "sql=insert into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp += "update training_list set publish_status = '已发布' where id= '" + id + "';";
+				sendPost(urlSend, temp);
+				return true;
+			}
+		}
+		
 		return false;
 	}
+	
 
-	//delete meeting and all meeting history relate to this meeting
+	//delete meeting and all meeting history related to this meeting
 	public boolean deleteMeeting(HashMap<String, String> selectedMeeting) {
-		// TODO Auto-generated method stub
-		return false;
+		String id = selectedMeeting.get("id");
+		String historySql = "delete from meeting_history where meeting_id=" + "'" + id + "';";
+		String listSql = "delete from meeting_list where id=" + "'" + id + "';";
+		String sql = "sql=" + historySql + listSql;
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
+		return false;	
 	}
-
+	
+	//delete study and all study history related to this study
 	public boolean deleteStudy(HashMap<String, String> selectedStudy) {
-		// TODO Auto-generated method stub
-		return false;
+		String id = selectedStudy.get("id");
+		String historySql = "delete from study_history where study_id=" + "'" + id + "';";
+		String listSql = "delete from study_list where id=" + "'" + id + "';";
+		String sql = "sql=" + historySql + listSql;
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
+		return false;	
 	}
-	public boolean deleteTrainning(HashMap<String, String> selected) {
-		// TODO Auto-generated method stub
+	
+	//delete training and all training history realted to this training
+	public boolean deleteTrainning(HashMap<String, String> selectedTraining) {
+		String id = selectedTraining.get("id");
+		String historySql = "delete from training_history where training_id=" + "'" + id + "';";
+		String listSql = "delete from training_list where id=" + "'" + id + "';";
+		String sql = "sql=" + historySql + listSql;
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
 		return false;
 	}
 
@@ -531,7 +660,6 @@ public class DBhelper {
 			return true;
 		}
 		return false;
-		
 		
 	}
 	

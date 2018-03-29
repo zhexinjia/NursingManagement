@@ -129,7 +129,9 @@ public class UserNewController implements Initializable {
     void addButton() {
     		if(validate()) {
     			HashMap<String, String> map = this.getHashMap();
-    			dbHelper.insertUser(map);
+    			if(dbHelper.insertUser(map)) {
+    				loader.loadVBox(box, "/View/UserList.fxml");
+    			}
     		}else {
     			PopupWindow popUP = new PopupWindow();
     			popUP.alertWindow("出错啦。。。", "姓名和工号不能为空");
@@ -174,17 +176,33 @@ public class UserNewController implements Initializable {
     		HashMap<String, String> output = new HashMap<String, String>();
     		output.put("ssn", ssnField.getText());
     		output.put("name", nameField.getText());
-    		//FIXME: if not using deaprtment_id in future, change it
-    		output.put("department_id", departmentChoiceBox.getSelectionModel().getSelectedItem());
-    		
-    		output.put("position", positionChoiceBox.getSelectionModel().getSelectedItem());
-    		output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
-    		output.put("level", levelChoiceBox.getSelectionModel().getSelectedItem());
+    		if(departmentChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+    			output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
+    		}
+    		//output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
+    		if(positionChoiceBox.getSelectionModel().getSelectedItem() != null) {
+    			output.put("position", positionChoiceBox.getSelectionModel().getSelectedItem());
+    		}
+    		//output.put("position", positionChoiceBox.getSelectionModel().getSelectedItem());
+    		if(titleChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+    			output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
+    		}
+    		//output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
+    		if(levelChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+    			output.put("level", levelChoiceBox.getSelectionModel().getSelectedItem());
+    		}
+    		//output.put("level", levelChoiceBox.getSelectionModel().getSelectedItem());
     		if(birthPicker.getValue()!=null) {
     			output.put("birth", birthPicker.getValue().toString());
     		}    		
-    		output.put("sex", sexChoiceBox.getSelectionModel().getSelectedItem());
-    		output.put("region", regionField.getText());
+    		if(sexChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+    			output.put("sex", sexChoiceBox.getSelectionModel().getSelectedItem());
+    		}
+    		//output.put("sex", sexChoiceBox.getSelectionModel().getSelectedItem());
+    		if(regionField.getText() != null) {
+    			output.put("region", regionField.getText());
+    		}
+    		//output.put("region", regionField.getText());
     		if(dateJoinPartyPicker.getValue()!=null) {
         		output.put("dateJoinParty", dateJoinPartyPicker.getValue().toString());
     		}    		
@@ -194,7 +212,10 @@ public class UserNewController implements Initializable {
     		if(certifactionDatePicker.getValue()!=null) {
         		output.put("certifactionDate", certifactionDatePicker.getValue().toString());
     		}
-    		output.put("certifactionNum", certifactionNumField.getText());
+    		if(certifactionNumField.getText()!=null) {
+    			output.put("certifactionNum", certifactionNumField.getText());
+    		}
+    		//output.put("certifactionNum", certifactionNumField.getText());
     		output.put("technicalPosition", technicalPositionField.getText());
     		if(dateReceivedTPPicker.getValue()!=null) {
         		output.put("dateReceivedTP", dateReceivedTPPicker.getValue().toString());

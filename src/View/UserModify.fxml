@@ -528,7 +528,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <JFXButton buttonType="RAISED" onMouseClicked="#addButton" prefHeight="31.0" prefWidth="169.0" style="-fx-background-color: #526182; -fx-font-size: 18;" text="点击添加新用户" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+                        <JFXButton buttonType="RAISED" onMouseClicked="#addButton" prefHeight="31.0" prefWidth="169.0" style="-fx-background-color: #526182; -fx-font-size: 18;" text="更新用户信息" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
                            <effect>
                               <DropShadow blurType="ONE_PASS_BOX" color="#c1c6d3" offsetX="5.0" offsetY="5.0" spread="0.6" />
                            </effect>

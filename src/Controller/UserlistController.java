@@ -56,7 +56,7 @@ public class UserlistController implements Initializable {
     		//FIXME: wrong keys and fields, import both primary and sub
     		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
     		if(importlist!=null) {
-    			dbHelper.insertUserList(importlist, hospitalID);
+    			dbHelper.insertUserList(importlist);
     		}else {
     			PopupWindow pop = new PopupWindow();
     			pop.errorWindow();

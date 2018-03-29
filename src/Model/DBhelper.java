@@ -347,6 +347,7 @@ public class DBhelper {
 	 */
 	public boolean insertUser(HashMap<String, String> map) {
 		String sql = "sql=" + insertUserHelper(map);
+		System.out.println(sql);
 		if(sendPost(urlSend, sql)) {
 			return true;
 		}
@@ -365,9 +366,16 @@ public class DBhelper {
 			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
 					keyset.get(i) == "position" || keyset.get(i) == "title" ||
 					keyset.get(i) == "level" || keyset.get(i) == "password") {
-				sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+				
+				if(map.get(keyset.get(i))!=null) {
+					sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+				}
+				//sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
 			}else {
-				sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+				if(map.get(keyset.get(i))!=null) {
+					sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+				}
+				//sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
 			}		
 		}
 		
@@ -386,6 +394,7 @@ public class DBhelper {
 	//used in UserModifyController, one HashMap as @Param, update two tables: primary, sub
 	public boolean updateUser(HashMap<String, String> map) {
 		String sql = "sql=" + updateUserHelper(map);
+		System.out.println(sql);
 		if(sendPost(urlSend, sql)) {
 			return true;
 		}

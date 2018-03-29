@@ -177,12 +177,13 @@ public class UserModifyController implements Initializable {
     }
     
     //modify the HashMap, return modified HashMap
+    /*
     private HashMap<String, String> getHashMap() {
     		HashMap<String, String> output = new HashMap<String, String>();
     		output.put("ssn", ssnField.getText());
     		output.put("name", nameField.getText());
     		//FIXME: if not using deaprtment_id in future, change it
-    		output.put("department_id", departmentChoiceBox.getSelectionModel().getSelectedItem());
+    		output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
     		
     		output.put("position", positionChoiceBox.getSelectionModel().getSelectedItem());
     		output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
@@ -239,7 +240,88 @@ public class UserModifyController implements Initializable {
     		output.put("highestEdSchool", highestEdSchoolField.getText());
     		return output;
     }
-    
+    */
+    private HashMap<String, String> getHashMap() {
+		HashMap<String, String> output = new HashMap<String, String>();
+		output.put("ssn", ssnField.getText());
+		output.put("name", nameField.getText());
+		if(departmentChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+			output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
+		}
+		//output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
+		if(positionChoiceBox.getSelectionModel().getSelectedItem() != null) {
+			output.put("position", positionChoiceBox.getSelectionModel().getSelectedItem());
+		}
+		//output.put("position", positionChoiceBox.getSelectionModel().getSelectedItem());
+		if(titleChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+			output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
+		}
+		//output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
+		if(levelChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+			output.put("level", levelChoiceBox.getSelectionModel().getSelectedItem());
+		}
+		//output.put("level", levelChoiceBox.getSelectionModel().getSelectedItem());
+		if(birthPicker.getValue()!=null) {
+			output.put("birth", birthPicker.getValue().toString());
+		}    		
+		if(sexChoiceBox.getSelectionModel().getSelectedItem()!=null) {
+			output.put("sex", sexChoiceBox.getSelectionModel().getSelectedItem());
+		}
+		//output.put("sex", sexChoiceBox.getSelectionModel().getSelectedItem());
+		if(regionField.getText() != null) {
+			output.put("region", regionField.getText());
+		}
+		//output.put("region", regionField.getText());
+		if(dateJoinPartyPicker.getValue()!=null) {
+    		output.put("dateJoinParty", dateJoinPartyPicker.getValue().toString());
+		}    		
+		if(timeStartWorkPicker.getValue()!=null) {
+    		output.put("timeStartWork", timeStartWorkPicker.getValue().toString());
+		}
+		if(certifactionDatePicker.getValue()!=null) {
+    		output.put("certifactionDate", certifactionDatePicker.getValue().toString());
+		}
+		if(certifactionNumField.getText()!=null) {
+			output.put("certifactionNum", certifactionNumField.getText());
+		}
+		//output.put("certifactionNum", certifactionNumField.getText());
+		output.put("technicalPosition", technicalPositionField.getText());
+		if(dateReceivedTPPicker.getValue()!=null) {
+    		output.put("dateReceivedTP", dateReceivedTPPicker.getValue().toString());
+		}
+		if(hireDatePicker.getValue()!=null) {
+			output.put("hireDate", hireDatePicker.getValue().toString());
+		}
+		if(N0Picker.getValue()!=null) {
+			output.put("N0", N0Picker.getValue().toString());
+		}
+		if(N1Picker.getValue()!=null) {
+			output.put("N1", N1Picker.getValue().toString());
+		}
+		if(N2Picker.getValue()!=null) {
+			output.put("N2", N2Picker.getValue().toString());
+		}
+		if(N3Picker.getValue()!=null) {
+			output.put("N3", N3Picker.getValue().toString());
+		}
+		if(N4Picker.getValue()!=null) {
+			output.put("N4", N4Picker.getValue().toString());
+		}
+		if(N5Picker.getValue()!=null) {
+			output.put("N5", N5Picker.getValue().toString());
+		}
+		output.put("primaryEd", primaryEdField.getText());
+		if(primaryEdTimePicker.getValue()!=null) {
+    		output.put("primaryEdTime", primaryEdTimePicker.getValue().toString());
+		}
+		output.put("primaryEdSchool", primaryEdSchoolField.getText());
+		output.put("highestEd", highestEdField.getText());
+		if(highestEdTimePicker.getValue()!=null) {
+			output.put("highestEdTime", highestEdTimePicker.getValue().toString());
+		}
+		output.put("highestEdSchool", highestEdSchoolField.getText());
+		return output;
+}
     //get list of department
     private void getDepartment() {
     		String[] columns = {"id", "departmentName"};
@@ -263,12 +345,11 @@ public class UserModifyController implements Initializable {
     		//primary
     		nameField.setText(userPrimary.get("name"));
     		ssnField.setText(userPrimary.get("ssn"));
-    		//FIXME: change after changing department id to department name
-    		departmentChoiceBox.getSelectionModel().select(userPrimary.get("department_id"));
+    		departmentChoiceBox.getSelectionModel().select(userPrimary.get("department"));
     		
     		titleChoiceBox.getSelectionModel().select(userPrimary.get("title"));
     		positionChoiceBox.getSelectionModel().select(userPrimary.get("position"));
-    		levelChoiceBox.getSelectionModel().select(userPrimary.get("title"));
+    		levelChoiceBox.getSelectionModel().select(userPrimary.get("level"));
     		
     		//sub
     		sexChoiceBox.getSelectionModel().select(userSub.get("sex"));
@@ -296,7 +377,7 @@ public class UserModifyController implements Initializable {
     }
     private LocalDate date(String dateString) {
     		if (dateString!=null) {
-    			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         		LocalDate localDate = LocalDate.parse(dateString, formatter);
         		return localDate;
     		}

@@ -39,6 +39,7 @@ public class ScheduleController implements Initializable {
 	Loader loader = new Loader();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		loader.setupDatePicker(datePicker);
 		setupTable();
 		setupChoiceBox();
 	}	
@@ -144,7 +145,7 @@ public class ScheduleController implements Initializable {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		return formatter.format(c.getTime());
 	}
 	

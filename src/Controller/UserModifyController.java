@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXTabPane;
 
 import Model.DBhelper;
+import Model.Loader;
 import Model.PopupWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -115,6 +116,7 @@ public class UserModifyController implements Initializable {
     ArrayList<String> departmentList = new ArrayList<String>();
     ArrayList<HashMap<String, String>> departmentHashMaplist;
     String ssn;
+    Loader loader = new Loader();
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -126,8 +128,26 @@ public class UserModifyController implements Initializable {
 		String[] values = {ssn};
 		userSub = dbHelper.getEntireList(searchColumn, values, "user_sub_info").get(0);
 		loadPage();
+		setupDatePicker();
 		
 	}
+    
+    private void setupDatePicker() {
+		loader.setupDatePicker(birthPicker);
+		loader.setupDatePicker(dateJoinPartyPicker);
+		loader.setupDatePicker(timeStartWorkPicker);
+		loader.setupDatePicker(certifactionDatePicker);
+		loader.setupDatePicker(hireDatePicker);
+		loader.setupDatePicker(dateReceivedTPPicker);
+		loader.setupDatePicker(N0Picker);
+		loader.setupDatePicker(N1Picker);
+		loader.setupDatePicker(N2Picker);
+		loader.setupDatePicker(N3Picker);
+		loader.setupDatePicker(N4Picker);
+		loader.setupDatePicker(N5Picker);
+		loader.setupDatePicker(primaryEdTimePicker);
+		loader.setupDatePicker(highestEdTimePicker);
+}
 
     //update modified user
     @FXML

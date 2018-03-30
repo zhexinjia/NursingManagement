@@ -49,7 +49,7 @@ public class MeetingNewController implements Initializable{
 
     @FXML
     void generateLogin() {
-    		String login = generateCode();
+    		String login = generateCode("in");
     		if(loader.printBarCode(login)) {
     			loginCode = login;
     		}else {
@@ -59,7 +59,7 @@ public class MeetingNewController implements Initializable{
 
     @FXML
     void generateLogout() {
-    		String logout = generateCode();
+    		String logout = generateCode("ou");
     		if(loader.printBarCode(logout)) {
     			logoutCode = logout;
     		}else {
@@ -114,10 +114,10 @@ public class MeetingNewController implements Initializable{
     		loader.setupDatePicker(datePicker);
     }
     
-    private String generateCode() {
+    private String generateCode(String prefix) {
     		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		LocalDateTime now = LocalDateTime.now();
-		String code = dtf.format(now);
+		String code = prefix + dtf.format(now);
 		int randomInt = random.nextInt(100);
 		code += Integer.toString(randomInt);
 		return code;

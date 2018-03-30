@@ -462,15 +462,16 @@ public class DBhelper {
 		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
 		for(int i = 0; i < keyset.size(); i++) {
 			if(i == keyset.size()-1) {
-				sql+= keyset.get(i) + " = " + map.get(keyset.get(i));
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
 			}else {
-				sql+= keyset.get(i) + " = " + map.get(keyset.get(i)) + ", ";
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
 			}
 		}
 		sql += " where id = " + map.get("id") + ";";
 		if(sendPost(urlSend, sql)) {
 			return true;
 		}
+		System.out.println(sql);
 		return false;
 	}
 	
@@ -524,7 +525,7 @@ public class DBhelper {
 	 */
 	public boolean insertUserList(ArrayList<HashMap<String, String>> maplist) {
 		boolean res;
-		for (HashMap user : maplist){
+		for (HashMap<String, String> user : maplist){
 			res = insertUser(user);
 			if (res == false) {
 				return false;
@@ -534,8 +535,8 @@ public class DBhelper {
 	}
 
 	//publishing Exam/Study/Training
-	public boolean publishExam(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
-		String temp;
+	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
+		String temp = null;
 		
 		//id -> exam_id, study_id, training_id
 		String id = item.get("id");
@@ -546,23 +547,30 @@ public class DBhelper {
 			if (table == "exam_list") {
 				temp = "sql=insert into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
 				temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
-				sendPost(urlSend, temp);
-				return true;
+				//sendPost(urlSend, temp);
+				//return true;
 			}
 			else if (table == "study_list") {
 				temp = "sql=insert into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
-				sendPost(urlSend, temp);
-				return true;
+				//sendPost(urlSend, temp);
+				//return true;
 			}
 			else if (table == "training_list") {
 				temp = "sql=insert into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				temp += "update training_list set publish_status = '已发布' where id= '" + id + "';";
-				sendPost(urlSend, temp);
-				return true;
+				//sendPost(urlSend, temp);
+				//return true;
 			}
 		}
 		
+		if(temp!=null) {
+			if(sendPost(urlSend, temp)) {
+				//TODO:add POPUP
+				return true;
+			}
+		}
+		//TODO:addPOPUP
 		return false;
 	}
 	
@@ -683,6 +691,18 @@ public class DBhelper {
 		}
 		return false;
 		
+	}
+
+	public boolean setManager(HashMap<String, String> selected, String departmentName) {
+		// TODO Auto-generated method stub
+		String sql = "sql=UPDATE hospital_department set manager_ssn = '" + selected.get("ssn")+ "'";
+		boolean output = sendPost(urlSend, sql);
+		if(output) {
+			return true;
+		}else {
+			//TODO: popup fail
+			return false;
+		}
 	}
 	
 	

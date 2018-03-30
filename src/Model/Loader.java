@@ -224,13 +224,15 @@ public class Loader {
 		});
 	}
 	public void setupDatePicker(DatePicker datePicker) {
+		String pattern = "yyyy-MM-dd";
 		datePicker.setConverter(new StringConverter<LocalDate>() {
-			private DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			private DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern(pattern);
 		    @Override
 		    public String toString(LocalDate localDate)
 		    {
-		        if(localDate==null)
-		            return "";
+		        if(localDate==null) {
+		        		return "";
+		        }
 		        return dateTimeFormatter.format(localDate);
 		    }
 		    @Override
@@ -243,6 +245,8 @@ public class Loader {
 		        return LocalDate.parse(dateString,dateTimeFormatter);
 		    }
 		});
+		datePicker.setPromptText(pattern.toLowerCase());
+		datePicker.requestFocus();
 	}
 	public boolean selectionCheck(HashMap<String, String> map) {
 		if(map==null) {

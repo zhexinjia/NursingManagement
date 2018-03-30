@@ -16,15 +16,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 public class DepartmentController implements Initializable {
 	@FXML TableView<HashMap<String, String>> tableView;
 	@FXML Label countLabel;
 	@FXML private CustomTextField searchField;
+	@FXML VBox box;
 	
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>(); 
 	Loader loader = new Loader();
 	DBhelper dbHelper;
+	public static HashMap<String, String> selectedDepartment;
 
     @FXML
     void searchButton() {
@@ -60,7 +63,10 @@ public class DepartmentController implements Initializable {
 
     @FXML
     void modifyButton() {
-    		//TODO
+    		selectedDepartment = tableView.getSelectionModel().getSelectedItem();
+    		if(loader.selectionCheck(selectedDepartment)) {
+    			loader.loadVBox(box, "/View/DepartmentUsers.fxml");
+    		}
     }
 
     @FXML
@@ -86,7 +92,7 @@ public class DepartmentController implements Initializable {
 	}
 	private void getList() {
 		String tableName = "hospital_department left join user_primary_info on hospital_department.manager_ssn = user_primary_info.ssn";
-		String[] columns = {"id", "departmentName", "user_primary_info.name"};
+		String[] columns = {"id", "departmentName", "user_primary_info.name", "manager_ssn"};
 		list = dbHelper.getList(tableName, columns);
 	}
 	private void setupTable() {

@@ -123,7 +123,25 @@ public class UserNewController implements Initializable {
 		user = new HashMap<String, String>();
 		dbHelper = new DBhelper();
 		setupChoiceBox();
+		setupDatePicker();
 	}
+    
+    private void setupDatePicker() {
+    		loader.setupDatePicker(birthPicker);
+    		loader.setupDatePicker(dateJoinPartyPicker);
+    		loader.setupDatePicker(timeStartWorkPicker);
+    		loader.setupDatePicker(certifactionDatePicker);
+    		loader.setupDatePicker(hireDatePicker);
+    		loader.setupDatePicker(dateReceivedTPPicker);
+    		loader.setupDatePicker(N0Picker);
+    		loader.setupDatePicker(N1Picker);
+    		loader.setupDatePicker(N2Picker);
+    		loader.setupDatePicker(N3Picker);
+    		loader.setupDatePicker(N4Picker);
+    		loader.setupDatePicker(N5Picker);
+    		loader.setupDatePicker(primaryEdTimePicker);
+    		loader.setupDatePicker(highestEdTimePicker);
+    }
 
     @FXML
     void addButton() {

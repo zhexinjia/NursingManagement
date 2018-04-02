@@ -109,36 +109,39 @@ class Test {
 
 		dbHelper.database = "medic";
 		
-		map.put("ssn", "000001");
+		map.put("ssn", "1010");
 		map.put("name", "yyyyy");
 		map.put("department", "@_@");
 		map.put("sex", "male");
 		map.put("address", "kinsrow ave.");
+		map.put("totalScore", "100");
 		
-		map2.put("ssn", "00002");
+		map2.put("ssn", "1111");
 		map2.put("name", "xxxxx");
 		map2.put("department", "X_X");
 		map2.put("sex", "female");
 		map2.put("address", "marine dr.");
+		map2.put("totalScore", "200");
 		
 		item.put("id", "2");
+		item.put("totalPoint", "10");
 		//item.put("examName", "hello world");
 		
 		ArrayList<HashMap <String, String>> userMaplist = new ArrayList<HashMap<String, String>>();
 		userMaplist.add(map);
 		userMaplist.add(map2);
 		
-		boolean output = dbHelper.publishExam(userMaplist, item, "study_list");
+		boolean output = dbHelper.publish(userMaplist, item, "exam_list");
 		System.out.println(output);
 		
 	}
 	*/
 	
+	
 	/*
 	void deleteMeetingTest() {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
-		//每个test case都要写这句话
 		dbHelper.database = "medic";
 		
 		map.put("id", "2");
@@ -147,10 +150,29 @@ class Test {
 	}
 	 */
 	
+	/*
+	void deleteStudyTest() {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		//每个test case都要写这句话
+		dbHelper.database = "medic";
+		
+		map.put("id", "2");
+		boolean output = dbHelper.deleteStudy(map);
+		System.out.println(output);
+	}
+	 
+	*/
+	
+	/*
 	void emptyScoreTest() {
 		dbHelper.database = "medic";
 		boolean output = dbHelper.emptyScore();
 		System.out.println(output);
 	}
+	*/
 	
+	void test() {
+		
+	}
 }

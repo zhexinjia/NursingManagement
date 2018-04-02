@@ -51,6 +51,10 @@ public class MeetingPublishController implements Initializable {
 		ArrayList<HashMap<String, String>> userList = getChecked();
 		dbHelper.publish(userList, selectedMeeting, "meeting_list");
 	}
+	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
 
 
     @FXML

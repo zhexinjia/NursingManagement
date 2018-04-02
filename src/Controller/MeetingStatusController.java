@@ -53,7 +53,7 @@ public class MeetingStatusController implements Initializable{
 	
     @FXML
     void contactButton() {
-
+    		loader.loadWeb();
     }
     
     @FXML
@@ -149,9 +149,9 @@ public class MeetingStatusController implements Initializable{
     			}
     		}
     		double totalP = 0.5*((double)checkinTotal + (double)checkoutTotal)/(double) meeting_historyList.size();
-    		highestPercentLabel.setText(Double.toString(highest*100)+"%");
-    		lowestPercentLabel.setText(Double.toString(lowest*100)+"%");
-    		percentLabel.setText(Double.toString(totalP*100)+"%");
+    		highestPercentLabel.setText(Double.toString(Math.round(highest*100))+"%");
+    		lowestPercentLabel.setText(Double.toString(Math.round(lowest*100))+"%");
+    		percentLabel.setText(Double.toString(Math.round(totalP*100))+"%");
     }
     
 

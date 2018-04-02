@@ -43,7 +43,7 @@ public class MeetingDetailController implements Initializable {
 	
     @FXML
     void contactButton() {
-
+    		loader.loadWeb();
     }
     private void setupTable() {
     		String[] keys = {"name", "department_id", "position", "title", "level", "checkin", "checkout"};

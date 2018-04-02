@@ -28,6 +28,10 @@ public class DepartmentController implements Initializable {
 	Loader loader = new Loader();
 	DBhelper dbHelper;
 	public static HashMap<String, String> selectedDepartment;
+	
+	@FXML void contact() {
+		loader.loadWeb();
+	}
 
     @FXML
     void searchButton() {

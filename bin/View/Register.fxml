@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,7 +31,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <VBox id="effectPane" alignment="TOP_CENTER" layoutX="348.0" layoutY="88.0" prefWidth="258.0" style="-fx-background-color: #ced4e0;">
+      <VBox alignment="TOP_CENTER" layoutX="348.0" layoutY="88.0" prefWidth="258.0" style="-fx-background-color: #ced4e0;">
          <children>
             <Label prefHeight="17.0" prefWidth="188.0" text="欢迎注册护理宝后台管理系统" textFill="#6e7b8a">
                <font>
@@ -179,6 +180,9 @@
                </children>
             </HBox>
          </children>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#d7bcbc" />
+         </effect>
       </VBox>
    </children>
 </AnchorPane>

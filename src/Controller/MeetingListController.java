@@ -36,6 +36,10 @@ public class MeetingListController implements Initializable {
 		getList();
 		reload();
 	}
+	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
 
 
     @FXML

@@ -44,7 +44,7 @@ public class StudyStatusController implements Initializable {
 
     @FXML
     void contactButton() {
-
+    		loader.loadWeb();
     }
     @FXML
     void studyDetailButton() {
@@ -148,9 +148,9 @@ public class StudyStatusController implements Initializable {
 			}
 		}
 		double totalP = (double)totalCount/(double) studyHistory.size();
-		studyHighestPercent.setText(Double.toString(highest*100)+"%");
-		studyLowestPercent.setText(Double.toString(lowest*100)+"%");
-		studyPercent.setText(Double.toString(totalP*100)+"%");
+		studyHighestPercent.setText(Double.toString(Math.round(highest*100))+"%");
+		studyLowestPercent.setText(Double.toString(Math.round(lowest*100))+"%");
+		studyPercent.setText(Double.toString(Math.round(totalP*100))+"%");
     }
     
     private void caculateTrainingPercent() {
@@ -192,9 +192,9 @@ public class StudyStatusController implements Initializable {
 			}
 		}
 		double totalP = (double)totalCount/(double) trainingHistory.size();
-		trainingHighestPercent.setText(Double.toString(highest*100)+"%");
-		trainingLowestPercent.setText(Double.toString(lowest*100)+"%");
-		trainingPercent.setText(Double.toString(totalP*100)+"%");
+		trainingHighestPercent.setText(Double.toString(Math.round(highest*100))+"%");
+		trainingLowestPercent.setText(Double.toString(Math.round(lowest*100))+"%");
+		trainingPercent.setText(Double.toString(Math.round(totalP*100))+"%");
     }
 	
 

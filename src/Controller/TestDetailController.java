@@ -50,7 +50,7 @@ public class TestDetailController implements Initializable{
 
     @FXML
     void contactButton() {
-
+    		loader.loadWeb();
     }
     
     @FXML void detailButton() {

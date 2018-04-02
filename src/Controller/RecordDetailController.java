@@ -43,6 +43,10 @@ public class RecordDetailController implements Initializable {
 		getList();
 		setupSumTable();
 	}
+	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
 
 
 	@FXML

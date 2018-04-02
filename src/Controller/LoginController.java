@@ -55,7 +55,7 @@ public class LoginController {
 		}else {
 			DBhelper request = new DBhelper();
 			String param = "username="+usernameField.getText() + "&password=" + passwordField.getText();
-			String output = request.sendGet("http://zhexinj.cn/API/login.php", param);
+			String output = request.sendHospitalGet("http://zhexinj.cn/API/login.php", param);
 			if(output.equals("no input")) {
 				System.out.println("no input");
 				return false;

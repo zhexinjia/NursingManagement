@@ -41,6 +41,10 @@ public class DepartmentUsers implements Initializable {
 		getList();
 		reload();
 	}
+	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
 
 
     @FXML

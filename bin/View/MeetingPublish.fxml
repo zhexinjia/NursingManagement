@@ -77,7 +77,7 @@
                   <Image url="@../../Images/contactIcon.png" />
                </image>
             </ImageView>
-            <Label text="联系我们" textFill="WHITE">
+            <Label onMouseClicked="#contact" text="联系我们" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="10.0" left="5.0" right="25.0" top="10.0" />
                </HBox.margin>

@@ -45,6 +45,10 @@ public class TrainingPublishController implements Initializable {
 		reload();
 	}
 	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
+	
 	@FXML void importButton(){
 		String[] keylist = {"ssn", "point", "detail"};
 		String[] fields = {"工号", "得分", "备注"};

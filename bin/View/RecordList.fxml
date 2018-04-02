@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -14,8 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-
 
 <VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RecordListController">
    <children>
@@ -62,7 +61,7 @@
                   <Image url="@../../Images/contactIcon.png" />
                </image>
             </ImageView>
-            <Label text="联系我们" textFill="WHITE">
+            <Label onMouseClicked="#contact" text="联系我们" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="10.0" left="5.0" right="25.0" top="10.0" />
                </HBox.margin>

@@ -60,6 +60,10 @@ public class ScheduleController implements Initializable {
 		}
 		
 	}
+	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
 
 
 

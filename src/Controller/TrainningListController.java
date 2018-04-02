@@ -40,6 +40,10 @@ public class TrainningListController implements Initializable {
     		reload();
     }
     
+    @FXML void contact(){
+		loader.loadWeb();
+	}
+    
     @FXML
     void importButton() {
     		//remove this button

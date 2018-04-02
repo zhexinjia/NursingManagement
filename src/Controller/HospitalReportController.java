@@ -39,6 +39,10 @@ public class HospitalReportController implements Initializable {
 		getList();
 		reload("");
 	}
+	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
 
 
     @FXML

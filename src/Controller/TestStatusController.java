@@ -48,6 +48,10 @@ public class TestStatusController implements Initializable {
 		reload();
 	}
 
+    @FXML void contact(){
+		loader.loadWeb();
+	}
+    
     @FXML
     void searchButton() {
     		reload();

@@ -38,6 +38,10 @@ public class UserlistController implements Initializable {
 		getList();
 		reload();
 	}
+	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
 
 
     @FXML

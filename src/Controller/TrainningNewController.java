@@ -23,6 +23,7 @@ public class TrainningNewController implements Initializable {
 	@FXML ChoiceBox<Integer> pointPicker;
 	@FXML JFXTextArea commentArea;
 	@FXML VBox box;
+	Loader loader = new Loader();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -31,7 +32,7 @@ public class TrainningNewController implements Initializable {
 	
     @FXML
     void contactButton() {
-
+    		loader.loadWeb();
     }
 
     @FXML void newButton() {

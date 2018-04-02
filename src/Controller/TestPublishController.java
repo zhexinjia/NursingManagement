@@ -44,6 +44,10 @@ public class TestPublishController implements Initializable {
 		reload();
 	}
 	
+	@FXML void contact(){
+		loader.loadWeb();
+	}
+	
 	@FXML
 	void publishButton() {
 		dbHelper.publish(getChecked(), selectedTest, "exam_list");

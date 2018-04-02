@@ -70,7 +70,7 @@ public class TestModifyController implements Initializable {
 
     @FXML
     void contactButton() {
-    		//TODO
+    		loader.loadWeb();
     }
 
     @FXML
@@ -253,10 +253,10 @@ public class TestModifyController implements Initializable {
     }
     private void getMultiList() {
     		String[] values = {selectedTest.get("id")};
-    		multiList = dbHelper.getEntireList(searchColumn, values, "exam_qa_multi");
+    		multiList = dbHelper.getEntireList(searchColumn, values, "exam_qa_multiple");
     }
     private void getTfList() {
-    	String[] values = {selectedTest.get("id")};
+    		String[] values = {selectedTest.get("id")};
     		tfList = dbHelper.getEntireList(searchColumn, values, "exam_qa_tf");
     }
     
@@ -338,14 +338,18 @@ public class TestModifyController implements Initializable {
 				map.put("option4", box.option4.getText());
 				map.put("option5", box.option5.getText());
 				map.put("answer", getMultiAnswer(box.op1, box.op2, box.op3, box.op4, box.op5));
-				dbHelper.insert(map, "exam_qa_single");
+				//dbHelper.insert(map, "exam_qa_single");
+				boolean output = false;
 				if(is_empty) {
-					dbHelper.insert(map, "exam_qa_multiple");
+					output = dbHelper.insert(map, "exam_qa_multiple");
 				}else {
-					dbHelper.update(map, "exam_qa_multiple");
+					output = dbHelper.update(map, "exam_qa_multiple");
 				}
-				this.getMultiList();
-				this.reload();
+				if(output) {
+					this.getMultiList();
+					this.reload();
+					box.stage.close();
+				}
 			}else {
 				PopupWindow popUP = new PopupWindow();
 				popUP.alertWindow("选项不能为空", "所有选项不能为空");

@@ -164,7 +164,7 @@ public class UserModifyController implements Initializable {
     //navigate to website
     @FXML
     void contactButton() {
-    		
+    		loader.loadWeb();
     }
 
     //navigate to next tabPane page

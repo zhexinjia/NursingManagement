@@ -46,7 +46,7 @@ public class RecordStatusController implements Initializable {
 	
 	@FXML
     void contactButton() {
-
+		loader.loadWeb();
     }
 	
 	void getList(){
@@ -67,6 +67,27 @@ public class RecordStatusController implements Initializable {
 			double percent;
 			if(totalScore != 0) {
 				percent = currentScore/totalScore;
+				score.put("percent", Double.toString(percent));
+				sum += percent;
+				if(percent > highest) {
+					highest = percent;
+				}
+				if(percent < lowest) {
+					lowest = percent;
+				}
+				if (percent < 0.6) {
+					countArray[0]++;
+				}else if(percent < 0.7) {
+					countArray[1]++;
+				}else if(percent < 0.8) {
+					countArray[2]++;
+				}else if(percent < 0.9) {
+					countArray[3]++;
+				}else if (percent <= 1){
+					countArray[4]++;
+				}
+			}else {
+				percent = 1.0;
 				score.put("percent", Double.toString(percent));
 				sum += percent;
 				if(percent > highest) {
@@ -128,10 +149,11 @@ public class RecordStatusController implements Initializable {
 		}
 	}
 	private void caculateDepartment(ArrayList<HashMap<String, String>> list) {
-		Double total = (double) 0	;
+		Double total = (double) 0;
 		Double low = (double) 1;
 		Double high = (double) 0;
 		for(HashMap<String, String> map:list) {
+			//Double current = map.get("percent").equals("NaN")?100:Double.parseDouble(map.get("percent"));
 			Double current = Double.parseDouble(map.get("percent"));
 			total+=current;
 			if(current>high) {

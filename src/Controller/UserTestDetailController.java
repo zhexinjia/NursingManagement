@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 
 import Model.DBhelper;
+import Model.Loader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -61,6 +62,7 @@ public class UserTestDetailController implements Initializable {
 	String[] tfAnswers;
 	
 	DBhelper dbHelper = new DBhelper();
+	Loader loader = new Loader();
 	
 	int singleCount;
 	int multiCount;
@@ -85,7 +87,7 @@ public class UserTestDetailController implements Initializable {
 	
 	@FXML
     void contactButton() {
-
+		loader.loadWeb();
     }
 	
 	@FXML void singleBack(){

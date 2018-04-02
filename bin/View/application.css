@@ -19,7 +19,8 @@
 	
 }
 #registerPane{
-	-fx-background-image:url("../../Images/registerBG.jpg");
+	/*-fx-background-image:url("../../Images/registerBG.jpg");*/
+	-fx-background-image:url("../../Images/loginBG.png");
 }
 .label{
 	-fx-font-family: "Heiti SC Medium";

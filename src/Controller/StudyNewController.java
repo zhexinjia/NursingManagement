@@ -25,7 +25,7 @@ public class StudyNewController implements Initializable {
 	
 	@FXML JFXTextField nameField;
 	@FXML JFXTextField pathField;
-	@FXML JFXTextField urlField;
+	//@FXML JFXTextField urlField;
 	@FXML JFXComboBox<String> if_countPicker;
 	@FXML JFXComboBox<Integer> pointPicker;
 	@FXML JFXComboBox<String> typePicker;
@@ -54,7 +54,7 @@ public class StudyNewController implements Initializable {
 
     @FXML
     void contactButton() {
-
+    		loader.loadWeb();
     }
     
     @FXML void createButton() {
@@ -113,8 +113,9 @@ public class StudyNewController implements Initializable {
     }
     
     private void setupChoiceBox() {
-    		String[] type = {"网址","文件"};
+    		String[] type = {"文档","视频"};
     		typePicker.getItems().setAll(type);
+    		/*
     		typePicker.setOnAction(e->{
     			if(typePicker.getSelectionModel().getSelectedItem().equals("网址")) {
     				smallButton.setDisable(true);
@@ -129,13 +130,14 @@ public class StudyNewController implements Initializable {
     				fileType = true;
     			}
     		});
+    		*/
     		String[] tfList = {"是", "否"};
     		if_countPicker.getItems().setAll(tfList);
     		if_countPicker.setOnAction(e->{
     			if(if_countPicker.getSelectionModel().getSelectedItem().equals("是")) {
     				pointPicker.setDisable(false);
     			}else if(if_countPicker.getSelectionModel().getSelectedItem().equals("否")){
-    				pointPicker.setValue(null);
+    				pointPicker.setValue(0);
     				pointPicker.setDisable(true);
     				pointPicker.setValue(null);
     			}
@@ -151,10 +153,6 @@ public class StudyNewController implements Initializable {
     		}
     		if(typePicker.getValue()==null) {
     			return false;
-    		}else if(!fileType) {
-    			if(urlField.getText().trim().isEmpty()) {
-    				return false;
-    			}
     		}else {
     			if(file == null) {
         			return false;
@@ -178,11 +176,14 @@ public class StudyNewController implements Initializable {
     		map.put("publish_status", "未发布");
     		String type = typePicker.getValue().toString();
     		map.put("type", type);
+    		map.put("url", url+file.getName());
+    		/*
     		if(fileType) {
     			map.put("url", url+file.getName());
     		}else {
     			map.put("url", urlField.getText());
     		}
+    		*/
     		map.put("if_count", if_countPicker.getValue().toString());
     		if(if_countPicker.getValue().toString().equals("是")) {
     			map.put("point", pointPicker.getValue().toString());

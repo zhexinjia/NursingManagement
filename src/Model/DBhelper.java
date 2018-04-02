@@ -34,6 +34,7 @@ import Controller.LoginController;
 
 
 public class DBhelper {
+	String registerURL = "http://zhexinj.cn/API/register.php";
 	String urlGet = "http://zhexinj.cn/API/getdb.php";
 	//String testGet = "http://zhexinj.cn/API/getdb2.php";
 	String urlSend = "http://zhexinj.cn/API/sendPost.php";
@@ -130,6 +131,62 @@ public class DBhelper {
         return false;
 	}
 	
+	public String sendHospitalPost(String url, String param) {
+		String result = "";
+        BufferedReader in = null;
+        String final_param = "database=medic"+"&"+param;
+        byte[] postData = final_param.getBytes(StandardCharsets.UTF_8);
+        int postDataLength = postData.length;
+        try {
+            URL realUrl = new URL(url);
+            //打开和URL之间的连接            
+            HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
+            connection.setDoOutput( true );
+            connection.setInstanceFollowRedirects( false );
+            connection.setRequestMethod( "POST" );
+            connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+            connection.setRequestProperty( "charset", "utf-8");
+            connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            connection.setUseCaches( false );
+            connection.connect();
+            
+            try( DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+            	   wr.write( postData );
+            	}
+            
+            in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+            
+            String line;
+            
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+        } catch (Exception e) {
+        		//FIXME: add POPUP
+            System.out.println("发送GET请求出现异常！" + e);
+            e.printStackTrace();
+        }
+        
+        //使用finally块来关闭输入流
+        finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        
+        /*
+        if (result.equals("success")) {
+        		return true;
+        }
+        return false;
+        */
+        return result;
+	}
 	/*
 	 * @param: sql statement
 	 * @return: JSON formated string from executing SQL statement
@@ -186,6 +243,57 @@ public class DBhelper {
         return result;
     }
 
+	public String sendHospitalGet(String url, String param) {
+		String result = "";
+        BufferedReader in = null;
+        String final_param = "database=medic"+"&"+param;
+        byte[] postData = final_param.getBytes(StandardCharsets.UTF_8);
+        int postDataLength = postData.length;
+        try {
+            URL realUrl = new URL(url);
+            //打开和URL之间的连接            
+            HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
+            connection.setDoOutput( true );
+            connection.setInstanceFollowRedirects( false );
+            connection.setRequestMethod( "POST" );
+            connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+            connection.setRequestProperty( "charset", "utf-8");
+            connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            connection.setUseCaches( false );
+            connection.connect();
+            
+            try( DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+            	   wr.write( postData );
+            	}
+            
+            in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+            
+            String line;
+            
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+            
+            //result = in.readLine();
+        } catch (Exception e) {
+        		//FIXME: add POPUP
+            System.out.println("发送GET请求出现异常！" + e);
+            e.printStackTrace();
+        }
+        
+        //使用finally块来关闭输入流
+        finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return result;
+    }
 	
 	
 	
@@ -450,6 +558,7 @@ public class DBhelper {
 	//simple insert, insert map's value into table
 	public boolean insert(HashMap<String, String> map, String tableName) {
 		String sql = "sql=" + mapInsert(map, tableName);
+		System.out.println(sql);
 		if(sendPost(urlSend, sql)) {
 			return true;
 		}
@@ -536,49 +645,49 @@ public class DBhelper {
 
 	//publishing Exam/Study/Training
 	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
-		String temp = null;
-		boolean res = false;
-		//id -> exam_id, study_id, training_id
-		String id = item.get("id");
-		int totalPoint = Integer.parseInt(item.get("totalPoint"));
-		
-		for (HashMap<String, String> user:userList) {
-			String ssn = user.get("ssn");
-			int userTotalPoint = Integer.parseInt(user.get("totalScore"));
-			userTotalPoint += totalPoint;
+			String temp = null;
+			boolean res = false;
+			//id -> exam_id, study_id, training_id
+			String id = item.get("id");
+			int totalPoint = Integer.parseInt(item.get("totalPoint"));
 			
-			if (table == "exam_list") {
-				temp = "sql=insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
-				temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
+			for (HashMap<String, String> user:userList) {
+				String ssn = user.get("ssn");
+				int userTotalPoint = Integer.parseInt(user.get("totalScore"));
+				userTotalPoint += totalPoint;
 				
+				if (table == "exam_list") {
+					temp = "sql=insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
+					temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
+					temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+					sendPost(urlSend, temp);
+					res = true;
+					
+				}
+				else if (table == "study_list") {
+					temp = "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+					temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
+					temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+					sendPost(urlSend, temp);
+					res = true;
+					
+				}
+				else if (table == "training_list") {
+					temp = "sql=insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+					temp += "update training_list set publish_status = '已发布' where id= '" + id + "';";
+					temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+					sendPost(urlSend, temp);
+					res = true;
+				}
 			}
-			else if (table == "study_list") {
-				temp = "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
-				temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
-				
+			
+			if(res) {
+				return true;
 			}
-			else if (table == "training_list") {
-				temp = "sql=insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
-				temp += "update training_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
-			}
+			//TODO:addPOPUP
+			return false;
 		}
 		
-		if(res) {
-			return true;
-		}
-		//TODO:addPOPUP
-		return false;
-	}
-	
 
 	//delete meeting and all meeting history related to this meeting
 	public boolean deleteMeeting(HashMap<String, String> selectedMeeting) {
@@ -708,6 +817,38 @@ public class DBhelper {
 			//TODO: popup fail
 			return false;
 		}
+	}
+
+	public boolean register(String userName, String passWord, String hospitalName, String code) {
+		String param = "userName=" + userName + "&password=" + passWord + "&hospitalName="+hospitalName+"&code="+code;
+		String result = sendHospitalPost("http://localhost/API/test.php", param);
+		if(result.equals("注册成功")) {
+			//TODO: double check
+			success();
+			return true;
+		}else {
+			PopupWindow pop = new PopupWindow();
+			pop.alertWindow("注册失败", result);
+			return false;
+		}
+	}
+
+	public boolean updateScore(HashMap<String, String> map, String tableName) {
+		String sql = "sql=update " + tableName + " set ";
+		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
+		for(int i = 0; i < keyset.size(); i++) {
+			if(i == keyset.size()-1) {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
+			}else {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}
+		}
+		sql += " where ssn = " + map.get("ssn") + ";";
+		if(sendPost(urlSend, sql)) {
+			return true;
+		}
+		System.out.println(sql);
+		return false;
 	}
 	
 	

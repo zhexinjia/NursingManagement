@@ -645,31 +645,31 @@ public class DBhelper {
 
 	//publishing Exam/Study/Training
 	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
-			String temp = null;
-			boolean res = false;
-			//id -> exam_id, study_id, training_id
-			String id = item.get("id");
-			int totalPoint = Integer.parseInt(item.get("totalPoint"));
+		String temp = null;
+		boolean res = false;
+		//id -> exam_id, study_id, training_id
+		String id = item.get("id");
+		int totalPoint = Integer.parseInt(item.get("totalPoint"));
 			
-			for (HashMap<String, String> user:userList) {
-				String ssn = user.get("ssn");
-				int userTotalPoint = Integer.parseInt(user.get("totalScore"));
-				userTotalPoint += totalPoint;
+		for (HashMap<String, String> user:userList) {
+			String ssn = user.get("ssn");
+			int userTotalPoint = Integer.parseInt(user.get("totalScore"));
+			userTotalPoint += totalPoint;
 				
-				if (table == "exam_list") {
-					temp = "sql=insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
-					temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
-					temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-					sendPost(urlSend, temp);
-					res = true;
+			if (table == "exam_list") {
+				temp = "sql=insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
+				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+				sendPost(urlSend, temp);
+				res = true;
 					
-				}
-				else if (table == "study_list") {
-					temp = "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
-					temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
-					temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-					sendPost(urlSend, temp);
-					res = true;
+			}
+			else if (table == "study_list") {
+				temp = "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
+				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+				sendPost(urlSend, temp);
+				res = true;
 					
 				}
 				else if (table == "training_list") {

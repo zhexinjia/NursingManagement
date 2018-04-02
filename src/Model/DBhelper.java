@@ -709,6 +709,24 @@ public class DBhelper {
 			return false;
 		}
 	}
+
+	public boolean updateScore(HashMap<String, String> map, String tableName) {
+		String sql = "sql=update " + tableName + " set ";
+		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
+		for(int i = 0; i < keyset.size(); i++) {
+			if(i == keyset.size()-1) {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
+			}else {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}
+		}
+		sql += " where ssn = " + map.get("ssn") + ";";
+		if(sendPost(urlSend, sql)) {
+			return true;
+		}
+		System.out.println(sql);
+		return false;
+	}
 	
 	
 	//given ssn, return list of test score histoys, list of study score history, list of training, list of meeting

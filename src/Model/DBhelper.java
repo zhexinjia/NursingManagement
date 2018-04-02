@@ -646,48 +646,43 @@ public class DBhelper {
 	//publishing Exam/Study/Training
 	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
 		String temp = null;
-		boolean res = false;
+		
 		//id -> exam_id, study_id, training_id
 		String id = item.get("id");
-		int totalPoint = Integer.parseInt(item.get("totalPoint"));
-			
+		
 		for (HashMap<String, String> user:userList) {
 			String ssn = user.get("ssn");
-			int userTotalPoint = Integer.parseInt(user.get("totalScore"));
-			userTotalPoint += totalPoint;
-				
+			
 			if (table == "exam_list") {
-				temp = "sql=insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp = "sql=insert into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
 				temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
-					
+				//sendPost(urlSend, temp);
+				//return true;
 			}
 			else if (table == "study_list") {
-				temp = "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp = "sql=insert into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
-					
-				}
-				else if (table == "training_list") {
-					temp = "sql=insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
-					temp += "update training_list set publish_status = '已发布' where id= '" + id + "';";
-					temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-					sendPost(urlSend, temp);
-					res = true;
-				}
+				//sendPost(urlSend, temp);
+				//return true;
 			}
-			
-			if(res) {
-				return true;
+			else if (table == "training_list") {
+				temp = "sql=insert into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				temp += "update training_list set publish_status = '已发布' where id= '" + id + "';";
+				//sendPost(urlSend, temp);
+				//return true;
 			}
-			//TODO:addPOPUP
-			return false;
 		}
 		
+		if(temp!=null) {
+			if(sendPost(urlSend, temp)) {
+				//TODO:add POPUP
+				return true;
+			}
+		}
+		//TODO:addPOPUP
+		return false;
+	}
+	
 
 	//delete meeting and all meeting history related to this meeting
 	public boolean deleteMeeting(HashMap<String, String> selectedMeeting) {
@@ -819,8 +814,6 @@ public class DBhelper {
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	public boolean register(String userName, String passWord, String hospitalName, String code) {
 		String param = "userName=" + userName + "&password=" + passWord + "&hospitalName="+hospitalName+"&code="+code;
 		String result = sendHospitalPost("http://localhost/API/test.php", param);
@@ -835,7 +828,23 @@ public class DBhelper {
 		}
 	}
 
-
+	public boolean updateScore(HashMap<String, String> map, String tableName) {
+		String sql = "sql=update " + tableName + " set ";
+		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
+		for(int i = 0; i < keyset.size(); i++) {
+			if(i == keyset.size()-1) {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
+			}else {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}
+		}
+		sql += " where ssn = " + map.get("ssn") + ";";
+		if(sendPost(urlSend, sql)) {
+			return true;
+		}
+		System.out.println(sql);
+		return false;
+	}
 	
 	
 	//given ssn, return list of test score histoys, list of study score history, list of training, list of meeting

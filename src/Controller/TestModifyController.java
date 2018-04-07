@@ -68,8 +68,9 @@ public class TestModifyController implements Initializable {
     			if_count = true;
     		}
     		setupTable();
-    		setupChoiceBox();
     		setupCheckBox();
+    		setupChoiceBox();
+    		
     		setupList();
     		reload();
     }
@@ -279,18 +280,23 @@ public class TestModifyController implements Initializable {
     		//TODO: action for submit changing of point, setup init points and times
     		//记分
     		ArrayList<String> times = new ArrayList<String>();
-    		for(int i = 1; i < 121; i++) {
+    		for(int i = 0; i < 121; i++) {
     			times.add(Integer.toString(i));
     		}
     		timeChoiceBox.getItems().addAll(times);
     		timeChoiceBox.getSelectionModel().select(selectedTest.get("time"));
-    		String[] scores = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    		String[] scores = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     		singleChoiceBox.getItems().addAll(scores);
     		singleChoiceBox.getSelectionModel().select(selectedTest.get("single_point"));
     		multiChoiceBox.getItems().addAll(scores);
     		multiChoiceBox.getSelectionModel().select(selectedTest.get("multi_point"));
     		tfChoiceBox.getItems().addAll(scores);
     		tfChoiceBox.getSelectionModel().select(selectedTest.get("tf_point"));
+    		if(!checkBox.isSelected()) {
+    			singleChoiceBox.setDisable(true);
+    			multiChoiceBox.setDisable(true);
+    			tfChoiceBox.setDisable(true);
+    		}
     		/*
     		if (if_count) {
     			String[] scores = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};

@@ -88,7 +88,13 @@
             </Label>
          </children>
       </HBox>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="90.0" prefWidth="789.0" style="-fx-background-color: #2b303e; -fx-font-size: 18;" text="新建课件" textFill="WHITE" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="1500.0" style="-fx-background-color: #2b303e; -fx-font-size: 18;" text="新建课件" textFill="WHITE">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding></Label>
       <VBox id="effectPane" alignment="CENTER" prefHeight="399.0" prefWidth="374.0">
          <children>
             <Label style="-fx-font-size: 24;" text="课件基本设置" textFill="#5a6378">

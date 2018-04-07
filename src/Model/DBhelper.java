@@ -1,6 +1,5 @@
 package Model;
 
-import java.awt.List;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -8,7 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -126,7 +124,10 @@ public class DBhelper {
             }
         }
         if (result.equals("success")) {
+        		success();
         		return true;
+        }else {
+        		fail();
         }
         return false;
 	}
@@ -590,10 +591,10 @@ public class DBhelper {
 		String id = map.get("id");
 		String sql = "sql=delete from " + tableName + " where id = " + id + ";";
 		if(sendPost(urlSend, sql)) {
-			success();
+			//success();
 			return true;
 		}
-		fail();
+		//fail();
 		return false;
 	}
 
@@ -801,22 +802,19 @@ public class DBhelper {
 		}
 		System.out.println(sql);
 		if(sendPost(urlSend, sql)) {
+			//success();
 			return true;
 		}
+		fail();
 		return false;
 		
 	}
 
 	public boolean setManager(HashMap<String, String> selected, String departmentName) {
 		// TODO Auto-generated method stub
-		String sql = "sql=UPDATE hospital_department set manager_ssn = '" + selected.get("ssn")+ "'";
+		String sql = "sql=UPDATE hospital_department set manager_ssn = '" + selected.get("ssn")+ "' Where departmentName= '" + departmentName + "';" ;
 		boolean output = sendPost(urlSend, sql);
-		if(output) {
-			return true;
-		}else {
-			//TODO: popup fail
-			return false;
-		}
+		return output;
 	}
 
 	public boolean register(String userName, String passWord, String hospitalName, String code) {
@@ -845,9 +843,11 @@ public class DBhelper {
 		}
 		sql += " where ssn = " + map.get("ssn") + ";";
 		if(sendPost(urlSend, sql)) {
+			//success();
 			return true;
 		}
 		System.out.println(sql);
+		//fail();
 		return false;
 	}
 	

@@ -42,7 +42,7 @@ public class StudyNewController implements Initializable {
 	Loader loader = new Loader();
 	File file;
 	String url = "http://zhexinj.cn/files/" + path + "/";
-	boolean fileType = false;
+	boolean fileType = true;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -175,7 +175,7 @@ public class StudyNewController implements Initializable {
     private void insertDB() {
     		PopupWindow pop = new PopupWindow();
     		HashMap<String, String> map = new HashMap<String, String>();
-    		map.put("description", nameField.getText());
+    		map.put("name", nameField.getText());
     		map.put("publish_status", "未发布");
     		String type = typePicker.getValue().toString();
     		map.put("type", type);
@@ -192,6 +192,8 @@ public class StudyNewController implements Initializable {
     			map.put("point", pointPicker.getValue().toString());
     		}
     		DBhelper dbHelper = new DBhelper();
+    		dbHelper.insert(map, "study_list");
+    		/*
     		if(dbHelper.insert(map, "study_list")) {
     			//TODO: modify confirmButton
     			pop.confirmButton.setOnAction(e->{
@@ -202,6 +204,7 @@ public class StudyNewController implements Initializable {
     		}else {
     			pop.errorWindow();
     		}
+    		*/
     }
     
     

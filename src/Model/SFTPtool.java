@@ -26,8 +26,9 @@ public class SFTPtool extends Task<Void>{
 		percentage = new SimpleStringProperty();
 	}
 		
+	//执行SFTP上传
 	public void sshSftp(File file, String path, String fileName) throws Exception{
-		System.out.println("in fun");
+		System.out.println("in sftp connection");
 		String ip = "101.200.39.52";
 		String user = "uploader";
 		String psw = "uploader";

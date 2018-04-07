@@ -29,6 +29,10 @@ public class DepartmentController implements Initializable {
 	DBhelper dbHelper;
 	public static HashMap<String, String> selectedDepartment;
 	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+	
 	@FXML void contact() {
 		loader.loadWeb();
 	}

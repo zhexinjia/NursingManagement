@@ -50,6 +50,10 @@ public class RecordListController implements Initializable {
 		reload();
 	}
 	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+	
 	@FXML void contact(){
 		loader.loadWeb();
 	}
@@ -90,6 +94,15 @@ public class RecordListController implements Initializable {
     			PopupWindow pop = new PopupWindow();
     			pop.alertWindow("操作失败", "请选中一个用户。");
     		}
+    }
+    @FXML
+    void clearButton() {
+    		PopupWindow pop = new PopupWindow();
+    		pop.confirmButton.setOnAction(e->{
+    			dbHelper.emptyScore();
+    		});
+    		pop.confirmWindow("是否确认要清空积分？", "清空积分将保留用户历史记录，但将所有用户积分设置为0，是否继续？");
+    		
     }
 	
 	private void setupTable() {

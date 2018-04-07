@@ -44,6 +44,10 @@ public class TestPublishController implements Initializable {
 		reload();
 	}
 	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+	
 	@FXML void contact(){
 		loader.loadWeb();
 	}

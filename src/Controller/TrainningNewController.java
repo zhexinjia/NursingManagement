@@ -30,6 +30,10 @@ public class TrainningNewController implements Initializable {
 		setupChoiceBox();		
 	}
 	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+	
     @FXML
     void contactButton() {
     		loader.loadWeb();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -12,6 +13,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -29,7 +31,7 @@
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label onMouseClicked="#homeButton" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
+            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -101,7 +103,6 @@
                                     <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <ChoiceBox fx:id="singleChoiceBox" prefWidth="150.0" />
                               <Pane HBox.hgrow="ALWAYS" />
                               <JFXButton onMouseClicked="#importSingle" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
                                  <HBox.margin>
@@ -189,7 +190,6 @@
                                     <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <ChoiceBox fx:id="multiChoiceBox" prefWidth="150.0" />
                               <Pane HBox.hgrow="ALWAYS" />
                               <JFXButton onMouseClicked="#importMulti" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
                                  <HBox.margin>
@@ -278,7 +278,6 @@
                                     <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <ChoiceBox fx:id="tfChoiceBox" prefWidth="150.0" />
                               <Pane HBox.hgrow="ALWAYS" />
                               <JFXButton onMouseClicked="#importTF" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入试题" textFill="WHITE">
                                  <HBox.margin>
@@ -354,6 +353,76 @@
                         </HBox>
                      </children>
                   </VBox>
+               </content>
+            </Tab>
+            <Tab text="基本设置">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox id="effectPane" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <Label style="-fx-font-size: 30;" text="基本设置">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <JFXCheckBox fx:id="checkBox" alignment="CENTER" contentDisplay="CENTER" text="是否记分">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </HBox.margin>
+                                    </JFXCheckBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="197.0">
+                                 <children>
+                                    <Label prefHeight="28.0" prefWidth="131.0" text="单选题分值： ">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ChoiceBox fx:id="singleChoiceBox" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="255.0">
+                                 <children>
+                                    <Label prefHeight="28.0" prefWidth="131.0" text="多选题分值： ">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ChoiceBox fx:id="multiChoiceBox" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="305.0">
+                                 <children>
+                                    <Label prefHeight="28.0" prefWidth="131.0" text="判断题分值： ">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ChoiceBox fx:id="tfChoiceBox" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="286.0">
+                                 <children>
+                                    <Label prefHeight="28.0" prefWidth="131.0" text="考试时间（分）： ">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ChoiceBox fx:id="timeChoiceBox" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <JFXButton onMouseClicked="#saveSetting" prefHeight="33.0" prefWidth="199.0" style="-fx-background-color: #5a6378;" styleClass="jfx-button" text="保存设置" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" right="10.0" top="30.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                </content>
             </Tab>
          </tabs>

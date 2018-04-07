@@ -44,6 +44,10 @@ public class RecordDetailController implements Initializable {
 		setupSumTable();
 	}
 	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+	
 	@FXML void contact(){
 		loader.loadWeb();
 	}

@@ -21,6 +21,7 @@ public class MainController implements Initializable {
 		loadVBox("/View/Welcome.fxml");
 	}
 	
+	
 	//点击左边链接打开不同界面
 	@FXML
     void openUserFile() {

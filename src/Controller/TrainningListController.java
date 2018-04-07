@@ -33,6 +33,10 @@ public class TrainningListController implements Initializable {
     void searchButton() {
     		reload();
     }
+    
+    @FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 
     @FXML
     void resetButton() {

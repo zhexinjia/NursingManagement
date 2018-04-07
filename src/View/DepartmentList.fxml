@@ -28,7 +28,7 @@
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
+            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -45,22 +45,6 @@
                </image>
             </ImageView>
             <Label prefHeight="34.0" prefWidth="56.0" text="科室档案" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Medium" size="16.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </HBox.margin>
-            </Label>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Images/rightArrow.png" />
-               </image>
-            </ImageView>
-            <Label prefHeight="34.0" prefWidth="57.0" text="考核统计" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

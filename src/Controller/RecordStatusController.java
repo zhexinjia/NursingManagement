@@ -18,9 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 public class RecordStatusController implements Initializable {
 
+	@FXML VBox box;
 	@FXML PieChart pieChart;
 	@FXML Label averageField;
 	@FXML Label highestField;
@@ -42,6 +44,10 @@ public class RecordStatusController implements Initializable {
 		getList();
 		caculatePercent();
 		setupPicker();
+	}
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
 	
 	@FXML

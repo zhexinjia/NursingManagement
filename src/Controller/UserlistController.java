@@ -29,14 +29,16 @@ public class UserlistController implements Initializable {
 	public static HashMap<String, String> selectedUser;
 	PopupWindow popUP = new PopupWindow();
 	DBhelper dbHelper = new DBhelper();
-	
-	private String hospitalID;
-	
+		
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setupTable();
 		getList();
 		reload();
+	}
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
 	
 	@FXML void contact(){

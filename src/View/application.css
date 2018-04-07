@@ -251,6 +251,14 @@
 	-fx-background-color:white;
 }
 
+.hyperlink{
+	-fx-text-fill:white;
+}
+.myLink{
+   -fx-text-fill: white;
+}
+
+
 /*Date Picker */
 /* 
 .jfx-date-picker .input-line {

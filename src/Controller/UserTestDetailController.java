@@ -16,9 +16,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class UserTestDetailController implements Initializable {
+	@FXML VBox box;
 	@FXML Label singleQuestion;
 	@FXML Label multiQuestion;
 	@FXML Label tfQuestion;
@@ -83,6 +85,10 @@ public class UserTestDetailController implements Initializable {
 		loadSingle();
 		loadMulti();
 		loadTf();
+	}
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
 	
 	@FXML

@@ -30,7 +30,7 @@
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
+            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

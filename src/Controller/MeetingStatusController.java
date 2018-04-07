@@ -40,6 +40,10 @@ public class MeetingStatusController implements Initializable{
 		reload();
 	}
 	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+	
 	@FXML
 	void searchButton() {
 		reload();

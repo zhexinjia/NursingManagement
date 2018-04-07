@@ -41,6 +41,10 @@ public class StudyStatusController implements Initializable {
 		caculateTrainingPercent();
 		reload();
 	}
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 
     @FXML
     void contactButton() {

@@ -12,12 +12,14 @@ import Model.PopupWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class ReportModifyController implements Initializable{
 	@FXML Label title;
 	@FXML JFXTextArea personArea;
 	@FXML JFXTextArea departmentArea;
 	@FXML JFXTextArea hospitalArea;
+	@FXML VBox box;
 	
 	private HashMap<String, String> report;
 	Loader loader = new Loader();
@@ -27,6 +29,10 @@ public class ReportModifyController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		report = HospitalReportController.selectedReport;
 		setupPage();
+	}
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
 	
 	@FXML void uploadButton() {

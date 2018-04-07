@@ -51,6 +51,9 @@ public class StudyNewController implements Initializable {
 		stackPane.setVisible(false);
 	}
 	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 
     @FXML
     void contactButton() {

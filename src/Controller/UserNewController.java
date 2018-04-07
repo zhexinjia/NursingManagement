@@ -126,6 +126,10 @@ public class UserNewController implements Initializable {
 		setupDatePicker();
 	}
     
+    @FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+    
     private void setupDatePicker() {
     		loader.setupDatePicker(birthPicker);
     		loader.setupDatePicker(dateJoinPartyPicker);

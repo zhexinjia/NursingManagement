@@ -28,7 +28,7 @@
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
+            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -61,7 +61,7 @@
                   <Image url="@../../Images/contactIcon.png" />
                </image>
             </ImageView>
-            <Label text="联系我们" textFill="WHITE">
+            <Label onMouseClicked="#contact" text="联系我们" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="10.0" left="5.0" right="25.0" top="10.0" />
                </HBox.margin>

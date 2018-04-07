@@ -41,6 +41,10 @@ public class MeetingNewController implements Initializable{
     		setupChoiceBox();
     		setupDatePicker();
 	}
+    
+    @FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 
     @FXML
     void contactButton() {

@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 public class ScheduleController implements Initializable {
 	@FXML TableView<HashMap<String, String>> tableView;
@@ -34,6 +35,7 @@ public class ScheduleController implements Initializable {
 	@FXML JFXDatePicker datePicker;
 	@FXML CustomTextField searchField;
 	@FXML JFXTextArea commentArea;
+	@FXML VBox box;
 	
 	DBhelper dbHelper = new DBhelper();
 	Loader loader = new Loader();
@@ -43,6 +45,10 @@ public class ScheduleController implements Initializable {
 		setupTable();
 		setupChoiceBox();
 	}	
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 	
 	@FXML void checkSchedule() {
 		PopupWindow popup  = new PopupWindow();

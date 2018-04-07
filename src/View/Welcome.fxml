@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.controlsfx.control.textfield.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -52,6 +51,78 @@
             </Label>
          </children>
       </HBox>
-      <Label alignment="CENTER" prefHeight="147.0" prefWidth="241.0" text="重做欢迎界面" />
+      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox prefHeight="539.0" prefWidth="669.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="454.0" fitWidth="598.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow color="#906a6a" />
+                     </effect>
+                     <image>
+                        <Image url="@../../Images/greenBG.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="40.0" left="20.0" right="20.0" top="40.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="638.0">
+                     <children>
+                        <Label text="&lt;&lt;&lt;" textFill="#5e6378">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label layoutX="602.0" layoutY="10.0" text="第1页" textFill="#5e6378" />
+                        <Label layoutX="566.0" layoutY="10.0" text="&gt;&gt;&gt;" textFill="#5e6378">
+                           <HBox.margin>
+                              <Insets left="10.0" right="40.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="539.0" prefWidth="200.0" style="-fx-background-color: #2b303e;">
+               <children>
+                  <Label style="-fx-font-size: 18;" text="EXCEL模版下载" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="40.0" top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Hyperlink text="添加用户模版">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Hyperlink layoutX="41.0" layoutY="71.0" text="单选题模版">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Hyperlink layoutX="41.0" layoutY="176.0" text="多选题模版">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Hyperlink layoutX="41.0" layoutY="221.0" text="判断题模版">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Hyperlink layoutX="41.0" layoutY="246.0" text="培训导入模版">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Hyperlink layoutX="41.0" layoutY="271.0" text="其他">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </VBox>

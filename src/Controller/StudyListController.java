@@ -33,6 +33,14 @@ public class StudyListController implements Initializable {
     void searchButton() {
     		reload();
     }
+    
+    @FXML void contact() {
+		loader.loadWeb();
+	}
+    
+    @FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 
     @FXML
     void resetButton() {
@@ -57,7 +65,13 @@ public class StudyListController implements Initializable {
 
     @FXML
     void newButton() {
-    		loader.loadVBox(box, "/View/StudyNew.fxml");
+    		if(list.size() < 10) {
+    			loader.loadVBox(box, "/View/StudyNew.fxml");
+    		}else {
+    			PopupWindow pop = new PopupWindow();
+    			pop.alertWindow("操作失败", "课件最大数量为10，请删除不使用的课件后再新建课件");
+    		}
+    		
     }
 
     @FXML

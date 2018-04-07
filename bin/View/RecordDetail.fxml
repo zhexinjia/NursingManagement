@@ -29,7 +29,7 @@
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
+            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -61,7 +61,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="142.0" text="用户姓名" textFill="WHITE">
+            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="142.0" text="用户详情" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

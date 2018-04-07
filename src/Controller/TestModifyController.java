@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXCheckBox;
+
 import Model.DBhelper;
 import Model.ExcelHelper;
 import Model.Loader;
@@ -26,6 +29,8 @@ import javafx.scene.layout.VBox;
 public class TestModifyController implements Initializable {
 
     @FXML private VBox box;
+    @FXML private JFXCheckBox checkBox;
+    @FXML private ChoiceBox<String> timeChoiceBox;
     @FXML private ChoiceBox<String> singleChoiceBox;
     @FXML private Label singleLabel;
     @FXML private ChoiceBox<String> multiChoiceBox;
@@ -64,8 +69,51 @@ public class TestModifyController implements Initializable {
     		}
     		setupTable();
     		setupChoiceBox();
+    		setupCheckBox();
     		setupList();
     		reload();
+    }
+    
+    @FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
+    
+    boolean entryCheck() {
+    		if(if_count) {
+    			if(singleChoiceBox.getSelectionModel().isEmpty() || multiChoiceBox.getSelectionModel().isEmpty() ||
+    					tfChoiceBox.getSelectionModel().isEmpty()) {
+    				return false;
+    			}
+    		}	
+    		if(timeChoiceBox.getSelectionModel().isEmpty()) {
+    			return false;
+    		}
+    		return true;	
+    }
+    
+    @FXML
+    void saveSetting() {
+    		if(entryCheck()) {
+    			HashMap<String, String> map = new HashMap<String, String>();
+        		map.put("id", selectedTest.get("id"));
+        		map.put("time", timeChoiceBox.getSelectionModel().getSelectedItem());
+        		if(if_count) {
+        			map.put("if_count", "是");
+        			map.put("single_point", singleChoiceBox.getSelectionModel().getSelectedItem());
+        			map.put("multi_point", multiChoiceBox.getSelectionModel().getSelectedItem());
+        			map.put("tf_point", tfChoiceBox.getSelectionModel().getSelectedItem());
+        		}else {
+        			map.put("if_count", "否");
+        			map.put("single_point","0");
+        			map.put("multi_point", "0");
+        			map.put("tf_point", "0");
+        		}
+        		dbHelper.update(map, "exam_list");
+    		}else {
+    			PopupWindow pop = new PopupWindow();
+    			pop.alertWindow("设置选项不能为空", "请补充完整基本设置选项");
+    		}
+    		
     }
 
     @FXML
@@ -210,10 +258,40 @@ public class TestModifyController implements Initializable {
     		loader.setupTable(tfTableView, keys, fields);
     }
     
+    private void setupCheckBox() {
+    		checkBox.setOnAction(e->{
+    			if(checkBox.isSelected()) {
+        			if_count = true;
+        			singleChoiceBox.setDisable(false);
+        			multiChoiceBox.setDisable(false);
+        			tfChoiceBox.setDisable(false);
+        		}else {
+        			if_count=false;
+        			singleChoiceBox.setDisable(true);
+        			multiChoiceBox.setDisable(true);
+        			tfChoiceBox.setDisable(true);
+        		}
+    		});
+    		checkBox.setSelected(if_count);
+    		//setupChoiceBox();
+    }
     private void setupChoiceBox() {
-    		//TODO: action for submit changing of point
-    	
+    		//TODO: action for submit changing of point, setup init points and times
     		//记分
+    		ArrayList<String> times = new ArrayList<String>();
+    		for(int i = 1; i < 121; i++) {
+    			times.add(Integer.toString(i));
+    		}
+    		timeChoiceBox.getItems().addAll(times);
+    		timeChoiceBox.getSelectionModel().select(selectedTest.get("time"));
+    		String[] scores = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    		singleChoiceBox.getItems().addAll(scores);
+    		singleChoiceBox.getSelectionModel().select(selectedTest.get("single_point"));
+    		multiChoiceBox.getItems().addAll(scores);
+    		multiChoiceBox.getSelectionModel().select(selectedTest.get("multi_point"));
+    		tfChoiceBox.getItems().addAll(scores);
+    		tfChoiceBox.getSelectionModel().select(selectedTest.get("tf_point"));
+    		/*
     		if (if_count) {
     			String[] scores = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         		singleChoiceBox.getItems().addAll(scores);
@@ -227,7 +305,7 @@ public class TestModifyController implements Initializable {
     			multiChoiceBox.setDisable(true);
     			tfChoiceBox.setDisable(true);
     		}
-    		
+    		*/
     }
     
     private void setupList() {

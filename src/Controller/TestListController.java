@@ -34,8 +34,8 @@ public class TestListController implements Initializable {
     Loader loader = new Loader();
     DBhelper dbHelper;
     private ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-    String[] keys = {"examName", "publish_status", "user_count", "if_count"};
-    String[] fields = {"考试名称", "发布状态", "参加考试人数","是否记分"};
+    String[] keys = {"examName", "publish_status", "time", "if_count"};
+    String[] fields = {"考试名称", "发布状态", "考试时间","是否记分"};
     public static HashMap<String, String> selectedTest;
     
     @Override
@@ -44,6 +44,10 @@ public class TestListController implements Initializable {
 		setupTable();
 		getList();
 		reload();
+	}
+    
+    @FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
     
     @FXML void contact(){
@@ -132,7 +136,7 @@ public class TestListController implements Initializable {
 	}
 	private void getList() {
 		//TODO: how to count total point??? should we remove it?
-		String[] columns = {"id", "examName", "publish_status", "single_point", "multi_point", "tf_point", "if_count"};
+		String[] columns = {"id", "examName", "publish_status", "single_point", "multi_point", "tf_point", "if_count", "time"};
 		list = dbHelper.getList("exam_list", columns);
 	}
 	private void reload() {

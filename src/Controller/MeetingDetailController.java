@@ -29,6 +29,10 @@ public class MeetingDetailController implements Initializable {
 		setupTable();
 		reload();
 	}
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 
 	@FXML
 	void searchButton() {

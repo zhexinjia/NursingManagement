@@ -34,6 +34,10 @@ public class StudyDetailController implements Initializable {
 		getList();
 		reload();
 	}
+	
+	@FXML void loadHome() {
+		loader.loadVBox(box, "/View/Welcome.fxml");
+	}
 
     @FXML
     void searchButton() {

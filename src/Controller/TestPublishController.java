@@ -95,7 +95,13 @@ public class TestPublishController implements Initializable {
     }
 
 	private void getList() {
-		list = dbHelper.getEntireList("user_primary_info");
+		//list = dbHelper.getEntireList("user_primary_info");
+		//TODO: get totalScore, uncomment above when finish
+		String sqlStatement = "";
+		String tableName = "user_primary_info inner join user_score on user_primary_info.ssn = user_score.ssn";
+		String[] columns = new String[]{"user_primary_info.*", "user_score.totalScore"};
+		list = dbHelper.getList(sqlStatement, tableName, columns);
+		
 	}
 	
 	private void setupTable() {

@@ -60,6 +60,8 @@ public class UserlistController implements Initializable {
     @FXML
     void importButton() {
     		//FIXME: wrong keys and fields, import both primary and sub
+    		String[] keys = new String[] {"name", "ssn", "department", "title", "position", "level"};
+    		String[] fields = new String[] {"姓名", "工号", "科室", "职称", "职务", "层级"};
     		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
     		if(importlist!=null) {
     			dbHelper.insertUserList(importlist);
@@ -71,6 +73,7 @@ public class UserlistController implements Initializable {
 
     @FXML
     void exportButton() {
+    		//TODO: export both sub and primary????
     		loader.exportExcel(list, fields, keys);
     }
 

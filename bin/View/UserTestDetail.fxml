@@ -94,14 +94,14 @@
                               <Insets bottom="20.0" left="20.0" right="40.0" top="20.0" />
                            </VBox.margin>
                            <children>
-                              <Label fx:id="singleQuestion" alignment="TOP_CENTER" prefHeight="60.0" prefWidth="709.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs" underline="true" wrapText="true">
+                              <Label fx:id="singleQuestion" alignment="TOP_CENTER" prefHeight="60.0" prefWidth="709.0" text="单选问题" underline="true" wrapText="true">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="20.0" right="20.0" />
                                  </VBox.margin>
                               </Label>
                               <HBox layoutX="10.0" layoutY="44.0" prefHeight="64.0" prefWidth="749.0">
                                  <children>
-                                    <RadioButton fx:id="singleRB1" mnemonicParsing="false" text="asffsdf" wrapText="true">
+                                    <RadioButton fx:id="singleRB1" mnemonicParsing="false" text="答案1" wrapText="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" />
                                        </HBox.margin>
@@ -113,7 +113,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="221.0" prefHeight="64.0" prefWidth="749.0">
                                  <children>
-                                    <RadioButton fx:id="singleRB2" mnemonicParsing="false" text="saff" wrapText="true">
+                                    <RadioButton fx:id="singleRB2" mnemonicParsing="false" text="答案2" wrapText="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" />
                                        </HBox.margin>
@@ -122,7 +122,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="189.0" prefHeight="64.0" prefWidth="749.0">
                                  <children>
-                                    <RadioButton fx:id="singleRB3" mnemonicParsing="false" text="asff" wrapText="true">
+                                    <RadioButton fx:id="singleRB3" mnemonicParsing="false" text="答案3" wrapText="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" />
                                        </HBox.margin>
@@ -131,7 +131,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="221.0" prefHeight="64.0" prefWidth="749.0">
                                  <children>
-                                    <RadioButton fx:id="singleRB4" mnemonicParsing="false" text="asfsfsfs" wrapText="true">
+                                    <RadioButton fx:id="singleRB4" mnemonicParsing="false" text="答案4" wrapText="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" />
                                        </HBox.margin>
@@ -140,7 +140,7 @@
                               </HBox>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="314.0" prefHeight="64.0" prefWidth="749.0">
                                  <children>
-                                    <Label fx:id="singleCorrect" layoutX="210.0" layoutY="10.0" prefHeight="41.0" prefWidth="75.0" text="回答错误" textFill="#ff0c0c" />
+                                    <Label fx:id="singleCorrect" layoutX="210.0" layoutY="10.0" prefHeight="41.0" prefWidth="75.0" text="回答对错" textFill="#ff0c0c" />
                                  </children>
                               </HBox>
                            </children>
@@ -172,14 +172,14 @@
                               <Insets bottom="20.0" left="20.0" right="40.0" top="20.0" />
                            </VBox.margin>
                            <children>
-                              <Label fx:id="multiQuestion" alignment="TOP_CENTER" prefHeight="60.0" prefWidth="709.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs什么？sdffsdfs" underline="true" wrapText="true">
+                              <Label fx:id="multiQuestion" alignment="TOP_CENTER" prefHeight="60.0" prefWidth="709.0" text="多选问题" underline="true" wrapText="true">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
                                  </VBox.margin>
                               </Label>
                               <HBox layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB1" mnemonicParsing="false" prefWidth="649.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs问1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs题是什么？sdffsdfs" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB1" mnemonicParsing="false" prefWidth="649.0" text="答案1" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -188,7 +188,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="44.0" prefHeight="60.0" prefWidth="749.0" VBox.vgrow="SOMETIMES">
                                  <children>
-                                    <CheckBox fx:id="multiCB2" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什" wrapText="true">
+                                    <CheckBox fx:id="multiCB2" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案2" wrapText="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -197,7 +197,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB3" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs问1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs题是什么？sdffsdfs" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB3" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案3" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -206,7 +206,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB4" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs问1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs题是什么？sdffsdfs" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB4" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案4" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -215,7 +215,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="355.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB5" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs问1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs题是什么？sdffsdfs" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB5" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案5" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -224,7 +224,7 @@
                               </HBox>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="314.0" prefHeight="45.0" prefWidth="729.0">
                                  <children>
-                                    <Label fx:id="multiCorrect" layoutX="210.0" layoutY="10.0" prefHeight="41.0" prefWidth="75.0" text="回答错误" textFill="#ff0c0c" />
+                                    <Label fx:id="multiCorrect" layoutX="210.0" layoutY="10.0" prefHeight="41.0" prefWidth="75.0" text="回答对错" textFill="#ff0c0c" />
                                  </children>
                               </HBox>
                            </children>
@@ -256,14 +256,14 @@
                               <Insets bottom="20.0" left="20.0" right="40.0" top="20.0" />
                            </VBox.margin>
                            <children>
-                              <Label fx:id="tfQuestion" alignment="TOP_CENTER" prefHeight="60.0" prefWidth="700.0" text="1.sdfsfdfsdf这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？这一题的问题是什么？sdffsdfs" underline="true" wrapText="true">
+                              <Label fx:id="tfQuestion" alignment="TOP_CENTER" prefHeight="60.0" prefWidth="700.0" text="判断问题" underline="true" wrapText="true">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
                                  </VBox.margin>
                               </Label>
                               <HBox layoutX="10.0" layoutY="44.0" prefHeight="64.0" prefWidth="749.0">
                                  <children>
-                                    <RadioButton fx:id="tfRB1" mnemonicParsing="false" text="对" textFill="#1ea422" wrapText="true">
+                                    <RadioButton fx:id="tfRB1" mnemonicParsing="false" text="对" wrapText="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" />
                                        </HBox.margin>
@@ -284,7 +284,7 @@
                               </HBox>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="314.0" prefHeight="64.0" prefWidth="749.0">
                                  <children>
-                                    <Label fx:id="tfCorrect" layoutX="210.0" layoutY="10.0" prefHeight="41.0" prefWidth="75.0" text="回答错误" textFill="#ff0c0c" />
+                                    <Label fx:id="tfCorrect" layoutX="210.0" layoutY="10.0" prefHeight="41.0" prefWidth="75.0" text="回答对错" textFill="#ff0c0c" />
                                  </children>
                               </HBox>
                            </children>

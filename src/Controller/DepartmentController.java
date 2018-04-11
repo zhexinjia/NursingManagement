@@ -86,8 +86,10 @@ public class DepartmentController implements Initializable {
     				if(dbHelper.delete(selected, "hospital_department")) {
     	    				getList();
     	    				reload();
+    	    				popup.stage.close();
     	    			}
     			});
+    			popup.confirmWindow("确认要删除吗", "删除科室并不会删除相关科室的工作人员");
     		}
     }
 
@@ -108,6 +110,7 @@ public class DepartmentController implements Initializable {
 		String[] fields = {"科室名称", "科室管理"};
 		loader.setupTable(tableView, keys, fields);
 	}
+	
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());
 		tableView.setItems(searchList);

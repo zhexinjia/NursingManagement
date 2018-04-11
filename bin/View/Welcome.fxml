@@ -4,7 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.WelcomeController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -53,34 +53,44 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox prefHeight="539.0" prefWidth="669.0" HBox.hgrow="ALWAYS">
+            <VBox id="effectPane" alignment="TOP_CENTER" prefHeight="539.0" prefWidth="669.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
                <children>
-                  <ImageView fitHeight="454.0" fitWidth="598.0" pickOnBounds="true" preserveRatio="true">
-                     <effect>
-                        <DropShadow color="#906a6a" />
-                     </effect>
-                     <image>
-                        <Image url="@../../Images/greenBG.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="40.0" left="20.0" right="20.0" top="40.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="638.0">
+                  <HBox alignment="TOP_RIGHT">
                      <children>
-                        <Label text="&lt;&lt;&lt;" textFill="#5e6378">
+                        <ImageView fitHeight="53.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/loginLogo.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="星月科技">
                            <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label layoutX="602.0" layoutY="10.0" text="第1页" textFill="#5e6378" />
-                        <Label layoutX="566.0" layoutY="10.0" text="&gt;&gt;&gt;" textFill="#5e6378">
-                           <HBox.margin>
-                              <Insets left="10.0" right="40.0" />
+                              <Insets right="30.0" top="10.0" />
                            </HBox.margin>
                         </Label>
                      </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
                   </HBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label style="-fx-font-size: 35;" text="欢迎使用护理宝" textFill="#5a6378" />
+                        <Hyperlink onMouseClicked="#downloadUserGuide" style="-fx-text-fill: #5a6378;" text="点此下载使用说明">
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                           <effect>
+                              <Bloom threshold="0.42" />
+                           </effect>
+                        </Hyperlink>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="70.0" />
+                     </VBox.margin>
+                  </VBox>
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="539.0" prefWidth="200.0" style="-fx-background-color: #2b303e;">
@@ -90,27 +100,27 @@
                         <Insets bottom="40.0" top="40.0" />
                      </VBox.margin>
                   </Label>
-                  <Hyperlink text="添加用户模版">
+                  <Hyperlink onMouseClicked="#downloadUserTemplate" text="添加用户模版">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Hyperlink>
-                  <Hyperlink layoutX="41.0" layoutY="71.0" text="单选题模版">
+                  <Hyperlink layoutX="41.0" layoutY="71.0" onMouseClicked="#downloadSingleTemplate" text="单选题模版">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Hyperlink>
-                  <Hyperlink layoutX="41.0" layoutY="176.0" text="多选题模版">
+                  <Hyperlink layoutX="41.0" layoutY="176.0" onMouseClicked="#downloadMultiTemplate" text="多选题模版">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Hyperlink>
-                  <Hyperlink layoutX="41.0" layoutY="221.0" text="判断题模版">
+                  <Hyperlink layoutX="41.0" layoutY="221.0" onMouseClicked="#downloadTfTemplate" text="判断题模版">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Hyperlink>
-                  <Hyperlink layoutX="41.0" layoutY="246.0" text="培训导入模版">
+                  <Hyperlink layoutX="41.0" layoutY="246.0" onMouseClicked="#downloadTrainingTemplate" text="培训导入模版">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>

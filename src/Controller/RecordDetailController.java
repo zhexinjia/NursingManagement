@@ -113,7 +113,8 @@ public class RecordDetailController implements Initializable {
 				String[] info = comment.split(":");
 				HashMap<String, String> temp = new HashMap<String, String>();
 				temp.put("date", info[0]);
-				temp.put("detail", info[1]);
+				//use info.length to check if info[1] is null, shouldn't be null if added info correct
+				temp.put("detail", info.length==1?"":info[1]);
 				sumList.add(temp);
 			}
 			sumTable.getItems().setAll(sumList);

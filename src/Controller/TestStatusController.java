@@ -72,9 +72,11 @@ public class TestStatusController implements Initializable {
     		HashMap<String, String> selectedTest = tableView.getSelectionModel().getSelectedItem();
     		if(selectedTest!=null) {
     			selectedTest.put("publish_status", "已截止");
-    			dbHelper.update(selectedTest, "exam_list");
-    			this.getList();
-    			this.reload();
+    			if(dbHelper.update(selectedTest, "exam_list")) {
+    				//TODO: getList() and reload() executed before update!
+    				this.getList();
+        			this.reload();
+    			}
     		}else {
     			PopupWindow popup = new PopupWindow();
     			popup.alertWindow("操作失败", "请选中一个考试");

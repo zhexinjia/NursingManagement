@@ -88,12 +88,13 @@ public class Loader {
 			String path = file.getAbsolutePath();
 			try {
 				list = ExcelHelper.readXLSXFile(path, keylist, fields);
+				return list;
 			} catch (EncryptedDocumentException | InvalidFormatException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return null;
 	}
 	
 	//export excel
@@ -103,7 +104,7 @@ public class Loader {
 		fileChooser.setTitle("export");
 		File file = fileChooser.showSaveDialog(stage);
 		if(file != null) {
-			String path = file.getAbsolutePath();
+			String path = file.getAbsolutePath() + ".xlsx";
 			ExcelHelper.writeXLSXFile(maplist, fieldlist, keylist, path);
 		}else {
 			PopupWindow popUP = new PopupWindow();

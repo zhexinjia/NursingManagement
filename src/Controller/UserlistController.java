@@ -65,10 +65,14 @@ public class UserlistController implements Initializable {
     		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
     		if(importlist!=null) {
     			dbHelper.insertUserList(importlist);
-    		}else {
+    		}
+    		//TODO: check if error happens after removing else
+    		/*
+    		else {
     			PopupWindow pop = new PopupWindow();
     			pop.errorWindow();
     		}
+    		*/
     }
 
     @FXML

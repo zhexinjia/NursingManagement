@@ -54,7 +54,11 @@ public class TestPublishController implements Initializable {
 	
 	@FXML
 	void publishButton() {
-		dbHelper.publish(getChecked(), selectedTest, "exam_list");
+		boolean output = dbHelper.publish(getChecked(), selectedTest, "exam_list");
+		if(output) {
+			//TOOD: either back or change to un-publish able
+		}
+		
 	}
 
 

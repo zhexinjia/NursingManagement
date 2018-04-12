@@ -149,6 +149,7 @@ public class TestListController implements Initializable {
 		PopupWindow popUP = new PopupWindow();
 		popUP.confirmButton.setOnAction(e->{
 			if(dbHelper.deleteExam(map)) {
+				popUP.stage.close();
 				getList();
 				reload();
 			}

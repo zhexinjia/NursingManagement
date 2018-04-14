@@ -746,22 +746,27 @@ public class DBhelper {
 		return false;
 	}
 
-	
+	/*
 	private boolean popSelection() {
 		PopupWindow pop = new PopupWindow();
 		pop.alertWindow("操作失败", "没有选中目标。");
 		return false;
 	}
+	*/
 	private void success() {
+		/*
 		PopupWindow pop = new PopupWindow();
 		pop.confirmButton.setOnAction(e->{
 			pop.stage.close();
 		});
 		pop.confirmWindow("操作成功", "点击确定返回");
+		*/
 	}
 	private void fail() {
+		/*
 		PopupWindow pop = new PopupWindow();
 		pop.errorWindow();
+		*/
 	}
 	
 	 /* 
@@ -804,6 +809,7 @@ public class DBhelper {
 		System.out.println(sql);
 		if(sendPost(urlSend, sql)) {
 			//success();
+			
 			return true;
 		}
 		fail();
@@ -852,6 +858,26 @@ public class DBhelper {
 		return false;
 	}
 	
+	public String totalPoint(String examId) {
+		//String 
+		String sql = "sql=select count(*) as mulCount into @a from exam_qa_multiple where exam_id ='" + examId 
+				+ "'; select count(*) as singleCount into @b from exam_qa_single where exam_id = '" + examId 
+				+ "'; select count(*) as tfCount into @c from exam_qa_tf where exam_id = '" + examId 
+				+ "'; select multi_point into @aa from exam_list where id = '" + examId
+				+ "'; select single_point into @bb from exam_list where id = '" + examId
+				+ "'; select tf_point into @cc from exam_list where id = '" + examId
+				+ "'; set @total = @a * @aa + @b * @bb; update exam_list set totalPoint = @total where id = '" + examId + "';";
+		
+		
+		if(sendPost(urlSend, sql)) {
+			//success();
+			//System.out.println(sql);
+			return sql;
+		}
+		//fail();
+		return sql;
+	
+	}
 	
 	//given ssn, return list of test score histoys, list of study score history, list of training, list of meeting
 	/*

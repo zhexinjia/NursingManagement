@@ -172,7 +172,10 @@ class Test {
 	}
 	*/
 	
-	void test() {
-		
+	void updatePoint() {
+		dbHelper.database = "medic";
+		String output = dbHelper.totalPoint("3");
+		System.out.println(output);
 	}
+	
 }

@@ -867,7 +867,8 @@ public class DBhelper {
 				+ "'; select single_point into @bb from exam_list where id = '" + examId
 				+ "'; select tf_point into @cc from exam_list where id = '" + examId
 				+ "'; set @total = @a * @aa + @b * @bb; update exam_list set totalPoint = @total where id = '" + examId + "';";
-		
+		//不会报错，但是更新不到数据。
+		//如果改成 set @total = @a * @aa 就可以更新到数据，好奇怪。
 		
 		if(sendPost(urlSend, sql)) {
 			//success();

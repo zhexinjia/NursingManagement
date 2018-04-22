@@ -858,25 +858,24 @@ public class DBhelper {
 		return false;
 	}
 	
-	public String totalPoint(String examId) {
-		//String 
-		String sql = "sql=select count(*) as mulCount into @a from exam_qa_multiple where exam_id ='" + examId 
-				+ "'; select count(*) as singleCount into @b from exam_qa_single where exam_id = '" + examId 
-				+ "'; select count(*) as tfCount into @c from exam_qa_tf where exam_id = '" + examId 
-				+ "'; select multi_point into @aa from exam_list where id = '" + examId
-				+ "'; select single_point into @bb from exam_list where id = '" + examId
-				+ "'; select tf_point into @cc from exam_list where id = '" + examId
-				+ "'; set @total = @a * @aa + @b * @bb; update exam_list set totalPoint = @total where id = '" + examId + "';";
-		//不会报错，但是更新不到数据。
-		//如果改成 set @total = @a * @aa 就可以更新到数据，好奇怪。
+	public boolean inserExam(ArrayList<HashMap <String, String>> map) {
+		//Default each question worth 10-point
 		
-		if(sendPost(urlSend, sql)) {
-			//success();
-			//System.out.println(sql);
-			return sql;
+		String examId = null;
+		String sql = "sql=";
+		for (HashMap<String, String> exam:map) {
+			sql += mapInsert(exam, "exam_qa");
+			examId = exam.get("exam_id");
 		}
-		//fail();
-		return sql;
+		
+		sql += "select count(*) into @num from exam_qa where exam_id ='" + examId 
+				+ "'; update exam_list set totalPoint = (@num*10) where id = '" + examId + "';";
+		if (sendPost(urlSend, sql)) {
+			//System.out.println(sql);
+			return true;
+		}
+		//System.out.println(sql);
+		return false;
 	
 	}
 	

@@ -172,9 +172,38 @@ class Test {
 	}
 	*/
 	
-	void updatePoint() {
+	void insertExamTest() {
 		dbHelper.database = "medic";
-		String output = dbHelper.totalPoint("3");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, String> map2 = new HashMap<String, String>();
+		
+		map.put("exam_id", "1");
+		map.put("question", "护理队伍素质的高低决定了 优劣");
+		map.put("answer", "A");
+		map.put("option1", "护理质量");
+		map.put("option2", "道德修养");
+		map.put("option3", "医学道德");
+		map.put("option4", "护理技术");
+		map.put("option5", "");
+		map.put("type", "S");
+		
+		map2.put("exam_id", "1");
+		map2.put("question", "防病治病、 是社会主义医疗卫生工作的核心任务和基本内容。");
+		map2.put("answer", "ABC");
+		map2.put("option1", "身心健康");
+		map2.put("option2", "精神文明");
+		map2.put("option3", "救死扶伤");
+		map2.put("option4", "人道主义");
+		map2.put("option5", "人道主义人道主义");
+		map2.put("type", "M");
+		
+		ArrayList<HashMap <String, String>> maplist = new ArrayList<HashMap<String, String>>();
+		maplist.add(map);
+		maplist.add(map2);
+		System.out.println(maplist);
+		
+		boolean output = dbHelper.inserExam(maplist);
 		System.out.println(output);
 	}
 	

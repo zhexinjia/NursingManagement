@@ -869,7 +869,9 @@ public class DBhelper {
 		}
 		
 		sql += "select count(*) into @num from exam_qa where exam_id ='" + examId 
-				+ "'; update exam_list set totalPoint = (@num*10) where id = '" + examId + "';";
+				+ "'; select single_point into @point from exam_list where id ='" + examId + 
+				"'; update exam_list set totalPoint = (@num*@point) where id = '" + examId + "';";
+		
 		if (sendPost(urlSend, sql)) {
 			//System.out.println(sql);
 			return true;

@@ -421,7 +421,7 @@ public class DBhelper {
 		for(int i = 0; i < keyset.size();i++) {
 			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
 					keyset.get(i) == "position" || keyset.get(i) == "title" ||
-					keyset.get(i) == "level" || keyset.get(i) == "password") {
+					keyset.get(i) == "level" || keyset.get(i) == "password" || keyset.get(i) == "specialities") {
 				sqlPrim+= keyset.get(i) + ", ";
 			}else {
 				sqlSub+= keyset.get(i) + ", ";
@@ -436,7 +436,7 @@ public class DBhelper {
 		for(int i = 0; i < keyset.size();i++) {
 			if (keyset.get(i) == "name" || keyset.get(i) == "department" ||
 					keyset.get(i) == "position" || keyset.get(i) == "title" ||
-					keyset.get(i) == "level" || keyset.get(i) == "password") {
+					keyset.get(i) == "level" || keyset.get(i) == "password" || keyset.get(i) == "specialities") {
 				sqlPrim += "'" + map.get(keyset.get(i)) + "', ";
 			}else {
 				sqlSub+= "'" + map.get(keyset.get(i)) + "', ";

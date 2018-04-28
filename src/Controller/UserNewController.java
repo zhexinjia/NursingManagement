@@ -16,7 +16,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Popup;
 
 public class UserNewController implements Initializable {
 	
@@ -39,6 +38,9 @@ public class UserNewController implements Initializable {
 
     @FXML
     private ChoiceBox<String> titleChoiceBox;
+    
+    @FXML
+    private ChoiceBox<String> specialitiesBox;
 
     @FXML
     private ChoiceBox<String> positionChoiceBox;
@@ -67,8 +69,9 @@ public class UserNewController implements Initializable {
     @FXML
     private TextField certifactionNumField;
 
-    @FXML
-    private TextField technicalPositionField;
+    //TODO: remove related
+    //@FXML
+    //private TextField technicalPositionField;
 
     @FXML
     private DatePicker dateReceivedTPPicker;
@@ -190,6 +193,9 @@ public class UserNewController implements Initializable {
     		//setup Sex ChoiceBox
     		String[] sexList = {"男", "女", "其他"};
     		sexChoiceBox.getItems().addAll(sexList);
+    		
+    		String[] specialities = {"医疗","护理","医技","药学","其他"};
+    		specialitiesBox.getItems().addAll(specialities);
     }
     
     //convert user input into HashMap
@@ -200,6 +206,9 @@ public class UserNewController implements Initializable {
     		output.put("name", nameField.getText());
     		if(departmentChoiceBox.getSelectionModel().getSelectedItem()!=null) {
     			output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
+    		}
+    		if(specialitiesBox.getSelectionModel().getSelectedItem()!=null) {
+    			output.put("specialities", specialitiesBox.getSelectionModel().getSelectedItem());
     		}
     		//output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
     		if(positionChoiceBox.getSelectionModel().getSelectedItem() != null) {
@@ -238,7 +247,7 @@ public class UserNewController implements Initializable {
     			output.put("certifactionNum", certifactionNumField.getText());
     		}
     		//output.put("certifactionNum", certifactionNumField.getText());
-    		output.put("technicalPosition", technicalPositionField.getText());
+    		//output.put("technicalPosition", technicalPositionField.getText());
     		if(dateReceivedTPPicker.getValue()!=null) {
         		output.put("dateReceivedTP", dateReceivedTPPicker.getValue().toString());
     		}

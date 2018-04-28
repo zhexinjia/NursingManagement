@@ -34,6 +34,9 @@ public class UserModifyController implements Initializable {
 
     @FXML
     private ChoiceBox<String> departmentChoiceBox;
+    
+    @FXML
+    private ChoiceBox<String> specialitiesBox;
 
     @FXML
     private ChoiceBox<String> titleChoiceBox;
@@ -65,8 +68,8 @@ public class UserModifyController implements Initializable {
     @FXML
     private TextField certifactionNumField;
 
-    @FXML
-    private TextField technicalPositionField;
+    //@FXML
+    //private TextField technicalPositionField;
 
     @FXML
     private DatePicker dateReceivedTPPicker;
@@ -198,6 +201,9 @@ public class UserModifyController implements Initializable {
     		//setup Sex ChoiceBox
     		String[] sexList = {"男", "女", "其他"};
     		sexChoiceBox.getItems().addAll(sexList);
+    		
+    		String[] specialities = {"医疗","护理","医技","药学","其他"};
+    		specialitiesBox.getItems().addAll(specialities);
     }
     
     //modify the HashMap, return modified HashMap
@@ -280,6 +286,9 @@ public class UserModifyController implements Initializable {
 		if(titleChoiceBox.getSelectionModel().getSelectedItem()!=null) {
 			output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
 		}
+		if(specialitiesBox.getSelectionModel().getSelectedItem()!=null) {
+			output.put("specialities", specialitiesBox.getSelectionModel().getSelectedItem());
+		}
 		//output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
 		if(levelChoiceBox.getSelectionModel().getSelectedItem()!=null) {
 			output.put("level", levelChoiceBox.getSelectionModel().getSelectedItem());
@@ -309,7 +318,7 @@ public class UserModifyController implements Initializable {
 			output.put("certifactionNum", certifactionNumField.getText());
 		}
 		//output.put("certifactionNum", certifactionNumField.getText());
-		output.put("technicalPosition", technicalPositionField.getText());
+		//output.put("technicalPosition", technicalPositionField.getText());
 		if(dateReceivedTPPicker.getValue()!=null) {
     		output.put("dateReceivedTP", dateReceivedTPPicker.getValue().toString());
 		}
@@ -374,6 +383,7 @@ public class UserModifyController implements Initializable {
     		titleChoiceBox.getSelectionModel().select(userPrimary.get("title"));
     		positionChoiceBox.getSelectionModel().select(userPrimary.get("position"));
     		levelChoiceBox.getSelectionModel().select(userPrimary.get("level"));
+    		specialitiesBox.getSelectionModel().select(userPrimary.get("specialities"));
     		
     		//sub
     		sexChoiceBox.getSelectionModel().select(userSub.get("sex"));
@@ -383,7 +393,7 @@ public class UserModifyController implements Initializable {
     		timeStartWorkPicker.setValue(date(userSub.get("timeStartWork")));
     		certifactionDatePicker.setValue(date(userSub.get("certifactionDate")));
     		certifactionNumField.setText(userSub.get("certifactionNum"));
-    		technicalPositionField.setText(userSub.get("technicalPosition"));
+    		//technicalPositionField.setText(userSub.get("technicalPosition"));
     		dateReceivedTPPicker.setValue(date(userSub.get("dateReceivedTP")));
     		hireDatePicker.setValue(this.date(userSub.get("dateReceivedTP")));
     		N0Picker.setValue(date(userSub.get("N0")));

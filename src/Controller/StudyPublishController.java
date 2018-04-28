@@ -36,7 +36,7 @@ public class StudyPublishController implements Initializable {
 	DBhelper dbHelper = new DBhelper();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 	ObservableList<CheckMap> checklist;
-	String[] keys = {"name", "department_id", "title", "position", "level"};
+	String[] keys = {"name", "department", "title", "position", "level"};
 	String[] fields = {"姓名", "科室", "职称", "职务", "层级"};
 	private HashMap<String, String> selectedStudy;
 	

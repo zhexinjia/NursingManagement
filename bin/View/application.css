@@ -258,6 +258,23 @@
    -fx-text-fill: white;
 }
 
+.topBorder{
+	-fx-border-color:black black transparent black;
+}
+.bottomBorder{
+	-fx-border-color:black black black black;
+}
+.rightBorder{
+	-fx-border-color:transparent black transparent transparent;
+}
+.bothSideBorder{
+	-fx-border-color:transparent black transparent black;
+}
+.noBorderTextField{
+  	-jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+}
+
 
 /*Date Picker */
 /* 

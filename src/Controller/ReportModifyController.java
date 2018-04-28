@@ -28,7 +28,7 @@ public class ReportModifyController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		report = HospitalReportController.selectedReport;
-		setupPage();
+		//setupPage();
 	}
 	
 	@FXML void loadHome() {
@@ -36,6 +36,7 @@ public class ReportModifyController implements Initializable{
 	}
 	
 	@FXML void uploadButton() {
+		System.out.println(report.get("level"));
 		if(!report.get("level").equals("1")) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", report.get("id"));

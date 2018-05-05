@@ -8,7 +8,6 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -124,12 +123,12 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <CheckBox mnemonicParsing="false" text="男">
+                        <JFXCheckBox layoutX="344.0" layoutY="22.0" text="男">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
-                        </CheckBox>
-                        <CheckBox layoutX="344.0" layoutY="22.0" mnemonicParsing="false" text="女" />
+                        </JFXCheckBox>
+                        <JFXCheckBox text="女" />
                         <Label text="年龄：">
                            <HBox.margin>
                               <Insets left="20.0" />

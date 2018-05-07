@@ -50,12 +50,12 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #393f4f;">
                                  <children>
-                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" onMouseClicked="#openTestList" prefHeight="30.0" style="-fx-alignment: center;" text="试卷列表" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label id="label-s" maxHeight="30.0" minHeight="30.0" onMouseClicked="#openTestList" prefHeight="30.0" style="-fx-alignment: center;" text="题库列表" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Label>
-                                    <Label id="label-s" layoutX="20.0" layoutY="50.0" maxHeight="30.0" minHeight="30.0" onMouseClicked="#openTestStats" prefHeight="30.0" style="-fx-alignment: center;" text="分数统计" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                    <Label id="label-s" layoutX="20.0" layoutY="50.0" maxHeight="30.0" minHeight="30.0" onMouseClicked="#openTestStats" prefHeight="30.0" style="-fx-alignment: center;" text="试卷列表" textFill="#5e6378" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>

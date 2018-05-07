@@ -24,8 +24,13 @@ public class UserlistController implements Initializable {
 	@FXML private CustomTextField searchField;
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
-	String[] keys = {"name", "ssn", "department", "title", "position", "level"};
-	String[] fields = {"姓名", "工号", "科室", "职称", "职务", "层级"};
+	String[] keys = {"name", "ssn", "department", "title", "branch", "position", "sex", "birth", "region", "dateJoinParty", "timeStartWork", 
+			"certifactionDate", "certifactionNum", "dateReceivedTP", "hireDate", "level", "N0", 
+			"N1", "N2", "N3", "N4", "primaryEd", "primaryEdTime", "primaryEdSchool", "highestEd", "highestEdTime", "highestEdSchool"};
+	String[] fields = {"姓名", "工号", "科室", "职称", "专业", "专业技术职务", "性别", "出生日期", "籍贯", "入党（入团）日期", "参加工作时间", 
+			"取得执业资格时间", "执业资格证号码", "技术职务资格取得时间", "聘任时间", "护士分层等级", "晋级N0时间", 
+			"晋级N1时间", "晋级N2时间", "晋级N3时间", "晋级N4时间", "第一学历", "第一学历取得时间", "第一学历取得学校", "最高学历", "最高学历取得时间", 
+			"最高学历取得学校"};
 	public static HashMap<String, String> selectedUser;
 	PopupWindow popUP = new PopupWindow();
 	DBhelper dbHelper = new DBhelper();
@@ -59,25 +64,15 @@ public class UserlistController implements Initializable {
 
     @FXML
     void importButton() {
-    		//FIXME: wrong keys and fields, import both primary and sub
-    		String[] keys = new String[] {"name", "ssn", "department", "title", "position", "level"};
-    		String[] fields = new String[] {"姓名", "工号", "科室", "职称", "职务", "层级"};
     		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
     		if(importlist!=null) {
     			dbHelper.insertUserList(importlist);
     		}
-    		//TODO: check if error happens after removing else
-    		/*
-    		else {
-    			PopupWindow pop = new PopupWindow();
-    			pop.errorWindow();
-    		}
-    		*/
+    		
     }
 
     @FXML
     void exportButton() {
-    		//TODO: export both sub and primary????
     		loader.exportExcel(list, fields, keys);
     }
 
@@ -104,19 +99,17 @@ public class UserlistController implements Initializable {
     		if(selected == null) {
     			popUP.alertWindow("没有选中目标","请选择要编辑的用户");
     		}else {
-    			//FIXME:delete all informations from different tables using one SQL statement
-    			//FIXME: delete 3 tables
     			if (dbHelper.deleteUser(selected)) {
     				getList();
     				reload();
-    			}else {
-    				popUP.alertWindow("操作失败", "删除用户失败");
     			}
     		}
     }
 
 	
 	private void setupTable() {
+		String[] keys = {"name", "ssn", "department", "title", "position", "level"};
+		String[] fields = {"姓名", "工号", "科室", "职称", "职务", "层级"};
 		loader.setupTable(tableView, keys, fields);
 	}
 	

@@ -63,7 +63,7 @@ public class TestModifyController implements Initializable {
     
     
     public void initialize(URL location, ResourceBundle resources) {
-    		selectedTest = TestListController.selectedTest;
+    		selectedTest = BankListController.selectedTest;
     		if(selectedTest.get("if_count").equals("是")){
     			if_count = true;
     		}

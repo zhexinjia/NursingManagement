@@ -37,7 +37,7 @@ public class TestPublishController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		selectedTest = TestListController.selectedTest;
+		selectedTest = BankListController.selectedTest;
 		setupTable();
 		setupCheckBox();
 		getList();

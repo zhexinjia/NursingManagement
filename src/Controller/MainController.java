@@ -39,7 +39,7 @@ public class MainController implements Initializable {
 
     @FXML
     void openTestList() {
-    		loadVBox("/View/TestList.fxml");
+    		loadVBox("/View/BankList.fxml");
     }
 
     @FXML

@@ -208,7 +208,7 @@ public class UserNewController implements Initializable {
     			output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
     		}
     		if(specialitiesBox.getSelectionModel().getSelectedItem()!=null) {
-    			output.put("specialities", specialitiesBox.getSelectionModel().getSelectedItem());
+    			output.put("branch", specialitiesBox.getSelectionModel().getSelectedItem());
     		}
     		//output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
     		if(positionChoiceBox.getSelectionModel().getSelectedItem() != null) {

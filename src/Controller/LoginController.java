@@ -30,6 +30,7 @@ public class LoginController {
     
     public static String database;
     public static String url;
+    public static String branch;
     
     @FXML void contactButton(){
     		loader.loadWeb();
@@ -72,6 +73,7 @@ public class LoginController {
 					userName = usernameField.getText();
 					database = (String) userInfo.get("data_base");
 					url = (String) userInfo.get("url");
+					branch = (String)userInfo.get("branch");
 					return true;
 				}
 			}

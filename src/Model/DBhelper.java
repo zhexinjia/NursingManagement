@@ -37,9 +37,12 @@ public class DBhelper {
 	//String testGet = "http://zhexinj.cn/API/getdb2.php";
 	String urlSend = "http://zhexinj.cn/API/sendPost.php";
 	JSONParser parser = new JSONParser();
+	
 	String database;
+	String branch;
 	public DBhelper() {
 		database = LoginController.database;
+		branch = LoginController.branch;
 	}
 	
 	/*
@@ -347,27 +350,23 @@ public class DBhelper {
 		String output = sendGet(urlGet, sql);
 		return jsonToList(output);
 	}
-	
-	//get selected user column's info
-	/*
-	public ArrayList<HashMap<String, String>> getList(String hospitalID, String tableName, String[] columns){
-		String sql = "sql=select ";
-		for (int i = 0; i<columns.length; i++) {
-			if (i == columns.length-1) {
-				sql += columns[i] + " from " + tableName + " where hospital_id = " + hospitalID + ";";
-			}else {
-				sql += columns[i] + ", ";
-			}
-		}
-		String output = sendGet(urlGet, sql);
-		return jsonToList(output);
-	}
-	*/
+
 	
 	//same function as above
 	public ArrayList<HashMap<String, String>> getList(String tableName, String[] columns){
 		String sql = "sql=select ";
 		sql+=getStatement(tableName, columns);
+		String output = sendGet(urlGet, sql);
+		System.out.println(sql);
+		return jsonToList(output);
+	}
+	
+	public ArrayList<HashMap<String, String>> getBranchList(String tableName, String[] columns){
+		String sql = "sql=select ";
+		sql+=getStatement(tableName, columns);
+		if(!branch.equals("0")) {
+			sql+="Where branch = '" + branch + "'";
+		}
 		String output = sendGet(urlGet, sql);
 		System.out.println(sql);
 		return jsonToList(output);
@@ -474,7 +473,7 @@ public class DBhelper {
 		for(int i = 0; i < keyset.size();i++) {
 			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
 					keyset.get(i) == "position" || keyset.get(i) == "title" ||
-					keyset.get(i) == "level" || keyset.get(i) == "password") {
+					keyset.get(i) == "level" || keyset.get(i) == "password" || keyset.get(i) == "branch") {
 				
 				if(map.get(keyset.get(i))!=null) {
 					sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
@@ -512,7 +511,6 @@ public class DBhelper {
 	
 	//used in UserListController, delete user info from the 3-user tables and all other history tables
 	public boolean deleteUser(HashMap<String, String> selectedUser) {
-
 		String ssn = selectedUser.get("ssn");
 		//Delete user from the 3-user tables
 		String primSql = "delete from user_primary_info where ssn = " + ssn + ";";

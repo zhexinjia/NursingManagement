@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -179,16 +179,21 @@ public class Loader {
 	}
 	//search function, return list of hash-map contains search item
 	public ObservableList<HashMap<String, String>> searchCallBack(ArrayList<HashMap<String, String>> list, String[] searchList) {
-		Collection<String> searchCollection = Arrays.asList(searchList);
+		List<String> searchCollection = Arrays.asList(searchList);
 		ObservableList<HashMap<String, String>> output = FXCollections.observableArrayList();
 		for(HashMap<String, String> map:list) {
 			//remove id from collection so it won't search for id
 			String id = map.get("id");
 			Collection<String> values = map.values();
 			values.remove(id);
+			if(values.containsAll(searchCollection)) {
+				output.add(map);
+			}
+			/*
 			if (!Collections.disjoint(values, searchCollection)) {
 				output.add(map);
 			}
+			*/
 		}
 		return output;
 	}

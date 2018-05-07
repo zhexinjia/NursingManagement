@@ -113,26 +113,29 @@ public class UserModifyController implements Initializable {
     @FXML
     private TextField highestEdSchoolField;
     
-    HashMap<String, String> userPrimary;
-    HashMap<String, String> userSub;
+    //HashMap<String, String> userPrimary;
+    //HashMap<String, String> userSub;
+    HashMap<String, String>selectedUser;
     DBhelper dbHelper;
     ArrayList<String> departmentList = new ArrayList<String>();
     ArrayList<HashMap<String, String>> departmentHashMaplist;
-    String ssn;
+    //String ssn;
     Loader loader = new Loader();
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+    		ssnField.setDisable(true);
     		dbHelper = new DBhelper();
 		setupChoiceBox();
-		userPrimary = UserlistController.selectedUser;
-		ssn = userPrimary.get("ssn");
-		String[] searchColumn = {"ssn"};
-		String[] values = {ssn};
-		userSub = dbHelper.getEntireList(searchColumn, values, "user_sub_info").get(0);
+		//userPrimary = UserlistController.selectedUser;
+		selectedUser = UserlistController.selectedUser;
+		//ssn = userPrimary.get("ssn");
+		//ssn = selectedUser.get("ssn");
+		//String[] searchColumn = {"ssn"};
+		//String[] values = {ssn};
+		//userSub = dbHelper.getEntireList(searchColumn, values, "user_sub_info").get(0);
 		loadPage();
-		setupDatePicker();
-		
+		setupDatePicker();	
 	}
     
     @FXML void loadHome() {
@@ -199,7 +202,7 @@ public class UserModifyController implements Initializable {
     		levelChoiceBox.getItems().addAll(levelList);
     		
     		//setup Sex ChoiceBox
-    		String[] sexList = {"男", "女", "其他"};
+    		String[] sexList = {"男", "女"};
     		sexChoiceBox.getItems().addAll(sexList);
     		
     		String[] specialities = {"医疗","护理","医技","药学","其他"};
@@ -287,7 +290,7 @@ public class UserModifyController implements Initializable {
 			output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
 		}
 		if(specialitiesBox.getSelectionModel().getSelectedItem()!=null) {
-			output.put("specialities", specialitiesBox.getSelectionModel().getSelectedItem());
+			output.put("branch", specialitiesBox.getSelectionModel().getSelectedItem());
 		}
 		//output.put("title", titleChoiceBox.getSelectionModel().getSelectedItem());
 		if(levelChoiceBox.getSelectionModel().getSelectedItem()!=null) {
@@ -375,39 +378,40 @@ public class UserModifyController implements Initializable {
     
     //write message from HashMap to fields
     private void loadPage() {
+    		//FIXME: using selected user
     		//primary
-    		nameField.setText(userPrimary.get("name"));
-    		ssnField.setText(userPrimary.get("ssn"));
-    		departmentChoiceBox.getSelectionModel().select(userPrimary.get("department"));
+    		nameField.setText(selectedUser.get("name"));
+    		ssnField.setText(selectedUser.get("ssn"));
+    		departmentChoiceBox.getSelectionModel().select(selectedUser.get("department"));
     		
-    		titleChoiceBox.getSelectionModel().select(userPrimary.get("title"));
-    		positionChoiceBox.getSelectionModel().select(userPrimary.get("position"));
-    		levelChoiceBox.getSelectionModel().select(userPrimary.get("level"));
-    		specialitiesBox.getSelectionModel().select(userPrimary.get("specialities"));
+    		titleChoiceBox.getSelectionModel().select(selectedUser.get("title"));
+    		positionChoiceBox.getSelectionModel().select(selectedUser.get("position"));
+    		levelChoiceBox.getSelectionModel().select(selectedUser.get("level"));
+    		specialitiesBox.getSelectionModel().select(selectedUser.get("branch"));
     		
     		//sub
-    		sexChoiceBox.getSelectionModel().select(userSub.get("sex"));
-    		birthPicker.setValue(date(userSub.get("birth")));
-    		regionField.setText(userSub.get("region"));
-    		dateJoinPartyPicker.setValue(date(userSub.get("dateJoinParty")));
-    		timeStartWorkPicker.setValue(date(userSub.get("timeStartWork")));
-    		certifactionDatePicker.setValue(date(userSub.get("certifactionDate")));
-    		certifactionNumField.setText(userSub.get("certifactionNum"));
-    		//technicalPositionField.setText(userSub.get("technicalPosition"));
-    		dateReceivedTPPicker.setValue(date(userSub.get("dateReceivedTP")));
-    		hireDatePicker.setValue(this.date(userSub.get("dateReceivedTP")));
-    		N0Picker.setValue(date(userSub.get("N0")));
-    		N1Picker.setValue(date(userSub.get("N1")));
-    		N2Picker.setValue(date(userSub.get("N2")));
-    		N3Picker.setValue(date(userSub.get("N3")));
-    		N4Picker.setValue(date(userSub.get("N4")));
-    		N5Picker.setValue(date(userSub.get("N5")));
-    		primaryEdField.setText(userSub.get("primaryEd"));
-    		primaryEdTimePicker.setValue(date(userSub.get("primaryEdTime")));
-    		primaryEdSchoolField.setText(userSub.get("primaryEdSchool"));
-    		highestEdField.setText(userSub.get("highestEd"));
-    		highestEdTimePicker.setValue(date(userSub.get("highestEdTime")));
-    		highestEdSchoolField.setText(userSub.get("highestEdSchool"));
+    		sexChoiceBox.getSelectionModel().select(selectedUser.get("sex"));
+    		birthPicker.setValue(date(selectedUser.get("birth")));
+    		regionField.setText(selectedUser.get("region"));
+    		dateJoinPartyPicker.setValue(date(selectedUser.get("dateJoinParty")));
+    		timeStartWorkPicker.setValue(date(selectedUser.get("timeStartWork")));
+    		certifactionDatePicker.setValue(date(selectedUser.get("certifactionDate")));
+    		certifactionNumField.setText(selectedUser.get("certifactionNum"));
+    		//technicalPositionField.setText(selectedUser.get("technicalPosition"));
+    		dateReceivedTPPicker.setValue(date(selectedUser.get("dateReceivedTP")));
+    		hireDatePicker.setValue(this.date(selectedUser.get("dateReceivedTP")));
+    		N0Picker.setValue(date(selectedUser.get("N0")));
+    		N1Picker.setValue(date(selectedUser.get("N1")));
+    		N2Picker.setValue(date(selectedUser.get("N2")));
+    		N3Picker.setValue(date(selectedUser.get("N3")));
+    		N4Picker.setValue(date(selectedUser.get("N4")));
+    		N5Picker.setValue(date(selectedUser.get("N5")));
+    		primaryEdField.setText(selectedUser.get("primaryEd"));
+    		primaryEdTimePicker.setValue(date(selectedUser.get("primaryEdTime")));
+    		primaryEdSchoolField.setText(selectedUser.get("primaryEdSchool"));
+    		highestEdField.setText(selectedUser.get("highestEd"));
+    		highestEdTimePicker.setValue(date(selectedUser.get("highestEdTime")));
+    		highestEdSchoolField.setText(selectedUser.get("highestEdSchool"));
     }
     private LocalDate date(String dateString) {
     		if (dateString!=null) {

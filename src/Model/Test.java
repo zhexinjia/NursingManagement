@@ -12,6 +12,26 @@ class Test {
 	DBhelper dbHelper = new DBhelper();
 	@org.junit.jupiter.api.Test
 	
+	
+	void test() {
+		/*
+		String tableName = "user_primary_info inner join user_sub_info on user_primary_info.ssn = user_sub_info.ssn";
+		String[] columns = new String[] {"user_primary_info.*, user_sub_info.*"};
+		dbHelper.database = "medic";
+		ArrayList<HashMap<String, String>> list = dbHelper.getList(tableName, columns);
+		System.out.println(list.get(0));
+		*/
+		
+		String tableName = "user_primary_info";
+		String[] columns = new String[] {"distinct branch"};
+		dbHelper.database = "medic";
+		ArrayList<HashMap<String, String>> list = dbHelper.getList(tableName, columns);
+		for(HashMap<String, String> map:list) {
+			System.out.println(map.get("branch"));
+		}
+		//System.out.println(list.get(0));
+	}
+	
 	/*
 	void inserUsertest() {
 		HashMap<String, String> map = new HashMap<String, String>();

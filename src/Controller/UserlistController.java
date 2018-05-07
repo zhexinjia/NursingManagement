@@ -121,7 +121,10 @@ public class UserlistController implements Initializable {
 	}
 	
 	private void getList() {
-		list = dbHelper.getEntireList("user_primary_info");
+		String[] columns = new String[] {"user_primary_info.*", "user_sub_info.*"};
+		String tableName = "user_primary_info inner join user_sub_info on user_primary_info.ssn = user_sub_info.ssn";
+		list = dbHelper.getBranchList(tableName, columns);
+		//list = dbHelper.getEntireList("user_primary_info");
 	}
 	
 	private void reload() {

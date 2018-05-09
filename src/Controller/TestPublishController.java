@@ -34,10 +34,12 @@ public class TestPublishController implements Initializable {
 	String[] keys = {"name", "department", "title", "position", "level"};
 	String[] fields = {"姓名", "科室", "职称", "职务", "层级"};
 	private HashMap<String, String> selectedTest;
+	String branch;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		selectedTest = BankListController.selectedTest;
+		selectedTest = TestListController.selectedTest;
+		branch = LoginController.branch;
 		setupTable();
 		setupCheckBox();
 		getList();
@@ -73,7 +75,7 @@ public class TestPublishController implements Initializable {
     		reload();
     }
 
-
+    /*
     @FXML
     void newButton() {
     		loader.loadVBox(box, "/View/UserNew.fxml");
@@ -83,6 +85,7 @@ public class TestPublishController implements Initializable {
     void modifyButton() {
     		loader.loadVBox(box, "/View/UserModify.fxml");
     }
+    */
 
     private void setupCheckBox() {
     		checkAll.setOnAction(e->{
@@ -99,12 +102,14 @@ public class TestPublishController implements Initializable {
     }
 
 	private void getList() {
-		//list = dbHelper.getEntireList("user_primary_info");
+		list = dbHelper.getEntireList("user_primary_info WHERE branch = '" + branch + "'");
 		//TODO: get totalScore, uncomment above when finish
+		/*
 		String sqlStatement = "";
 		String tableName = "user_primary_info inner join user_score on user_primary_info.ssn = user_score.ssn";
 		String[] columns = new String[]{"user_primary_info.*", "user_score.totalScore"};
 		list = dbHelper.getList(sqlStatement, tableName, columns);
+		*/
 		
 	}
 	

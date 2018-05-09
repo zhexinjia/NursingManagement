@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BankListController">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TestListController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -44,7 +44,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="61.0" text="题库列表" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="61.0" text="线上考核" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -119,6 +119,17 @@
                   <Insets bottom="10.0" right="20.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
+            <JFXButton layoutX="696.0" layoutY="20.0" onMouseClicked="#endButton" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: red;" styleClass="jfxbutton-circle" text="试卷截止" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Heiti SC Light" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
          </children>
       </HBox>
       <TableView fx:id="tableView" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
@@ -148,7 +159,7 @@
                </HBox.margin>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
-            <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
+            <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="添加考核" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -159,7 +170,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
+            <JFXButton layoutX="657.0" layoutY="10.0" onMouseClicked="#detailButton" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="得分详情" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -167,10 +178,10 @@
                   <Font name="Heiti SC Light" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets bottom="20.0" left="10.0" right="10.0" />
+                  <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
+            <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteButton" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除考核" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

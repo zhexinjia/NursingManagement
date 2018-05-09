@@ -39,7 +39,7 @@ public class TestDetailController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//FXIME: get total score of the test??????????? selected count of single, multi and tf, then add?
-		selectedTest = TestStatusController.selectedTest;
+		selectedTest = TestListController.selectedTest;
 		examID = selectedTest.get("id");
 		setupTable();
 		getList();

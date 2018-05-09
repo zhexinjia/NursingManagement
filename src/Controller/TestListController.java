@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
-public class BankListController implements Initializable {
+public class TestListController implements Initializable {
 	
 	@FXML
 	private VBox box;
@@ -34,8 +34,8 @@ public class BankListController implements Initializable {
     Loader loader = new Loader();
     DBhelper dbHelper;
     private ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-    String[] keys = {"name", "singleCount", "multipleCount", "tfCount"};
-    String[] fields = {"题库名称", "单选题数", "多选题数", "判断题数"};
+    String[] keys = {"examName", "totalPoint", "publishStatus", "time"};
+    String[] fields = {"试卷名称", "试卷积分", "当前状态", "考试时间"};
     public static HashMap<String, String> selectedTest;
     private String branch;
     
@@ -73,51 +73,55 @@ public class BankListController implements Initializable {
     		selectedTest = tableView.getSelectionModel().getSelectedItem();
     		if(selectedTest==null) {
     			PopupWindow pop = new PopupWindow();
-    			pop.alertWindow("发布失败", "请选中需要发布的考试。");
-    		}else if (selectedTest.get("publish_status").equals("未发布")) {
+    			pop.alertWindow("操作失败", "请选中需要操作的考试。");
+    		}else if (selectedTest.get("publish_status").equals("0")) {
     			loader.loadVBox(box, "/View/TestPublish.fxml");
     		}else {
     			PopupWindow popUP = new PopupWindow();
-    			popUP.alertWindow("发布试卷失败", "试卷已经发布，无法重复发布。");
+    			popUP.alertWindow("操作失败", "试卷已经截止，无法添加考试人员。");
+    		}
+    }
+    
+    @FXML void endButton() {
+    		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		if(loader.selectionCheck(selected)) {
+    			if(selected.get("publish_status").equals("0")) {
+    				HashMap<String, String> map = new HashMap<String, String>();
+    				map.put("id", selected.get("id"));
+    				map.put("publish_status", "1");
+    				if(dbHelper.update(map, "exam_list")) {
+    					this.getList();
+    					this.reload();
+    				}
+    			}else {
+        			PopupWindow pop = new PopupWindow();
+        			pop.alertWindow("操作失败", "选中试卷已经截止");
+        		}
     		}
     }
 
 
     @FXML
     void newButton() {
-    		//TODO: modify the box including a check box "记分"
-    		PopupWindow popUP = new PopupWindow();
-		popUP.confirmButton.setText("创建题库");
-		popUP.confirmButton.setOnAction(e->{
-			if (!popUP.inputField.getText().trim().isEmpty()) {
-				//modify Below
-				String name = popUP.inputField.getText();
-				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("name", name);
-				map.put("branch", branch);
-				if(dbHelper.insert(map, "question_bank")) {
-					//modify Above
-					popUP.stage.close();
-					getList();
-					reload();
-				}else {
-					popUP.errorWindow();
-				}
-			}else {
-				popUP.alertWindow("新建题库出错", "题库名称不能为空！");
-			}
-		});
-		popUP.inputWindow("输入题库名称", "输入题库名称", false);
+    		loader.loadVBox(box, "/View/TestNew.fxml");
     }
 
+    /*
     @FXML
     void modifyButton() {
     		selectedTest = tableView.getSelectionModel().getSelectedItem();
-    		if(selectedTest!=null) {
-    			loader.loadVBox(box, "/View/BankModify.fxml");
+    		if(selectedTest!=null && selectedTest.get("type").equals("0")) {
+    			loader.loadVBox(box, "/View/TestModify.fxml");
     		}else {
     			PopupWindow pop = new PopupWindow();
-    			pop.alertWindow("编辑失败", "请选中需要编辑的题库。");
+    			pop.alertWindow("操作失败", "请选择固定题目的考试。");
+    		}
+    }
+    */
+    @FXML void detailButton() {
+    		selectedTest = tableView.getSelectionModel().getSelectedItem();
+    		if(loader.selectionCheck(selectedTest)) {
+    			loader.loadVBox(box, "/View/TestDetail.fxml");
     		}
     }
 
@@ -135,16 +139,17 @@ public class BankListController implements Initializable {
 	private void setupTable() {
 		loader.setupTable(tableView, keys, fields);
 	}
+	
 	private void getList() {
-		//String[] searchColumn = new String[]	{"branch"};
-		//String[] values = new String[] {branch};
-		String tableName = "question_bank left join exam_qa_single on question_bank.id = exam_qa_single.bank_id left join exam_qa_multiple on question_bank.id "
-				+ "= exam_qa_multiple.bank_id left join exam_qa_tf on question_bank.id = exam_qa_tf.bank_id";
-		String[] columns = new String[] {"question_bank.id","question_bank.name", "COUNT(exam_qa_single.id) as singleCount", "COUNT(exam_qa_multiple.id) as multipleCount", "COUNT(exam_qa_tf.id) as tfCount"};
-		//list = dbHelper.getList(searchColumn, values, tableName, columns);
-		String sqlStatement = "where branch = '" + branch + "' group by question_bank.name";
-		list = dbHelper.getList(sqlStatement, tableName, columns);
+		String[] searchColumn = {"branch"};
+		String[] values = {branch};
+		String tableName = "exam_list";
+		list = dbHelper.getEntireList(searchColumn, values, tableName);
+		for(HashMap<String, String> item:list) {
+			item.put("publishStatus", item.get("publish_status").equals("0")?"进行中":"已截止");
+		}
 	}
+	
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());
 		tableView.setItems(searchList);
@@ -154,6 +159,7 @@ public class BankListController implements Initializable {
 	private void deleteFunction(HashMap<String, String> map) {		
 		PopupWindow popUP = new PopupWindow();
 		popUP.confirmButton.setOnAction(e->{
+			//TODO: fix me, delete exam also delete exam-question relation table
 			if(dbHelper.deleteExam(map)) {
 				popUP.stage.close();
 				getList();

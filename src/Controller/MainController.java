@@ -42,14 +42,19 @@ public class MainController implements Initializable {
     		loadVBox("/View/BankList.fxml");
     }
 
-    @FXML
-    void openNewTest() {
-    		loadVBox("/View/UserNew.fxml");
-    }
+    //@FXML
+    //void openNewTest() {
+    	//	loadVBox("/View/UserNew.fxml");
+    //}
 
     @FXML
     void openTestStats() {
-    		loadVBox("/View/TestStatus.fxml");
+    		loadVBox("/View/TestList.fxml");
+    }
+    
+    @FXML
+    void openOfflineTest() {
+    		loadVBox("/View/TestOffline.fxml");
     }
 
     @FXML

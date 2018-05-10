@@ -108,7 +108,7 @@
                </HBox.margin>
             </JFXButton>
             <Pane prefHeight="50.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <JFXButton onMouseClicked="#importButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入" textFill="WHITE">
+            <JFXButton onMouseClicked="#publishButton" prefHeight="27.0" prefWidth="118.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="选择参加人员" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

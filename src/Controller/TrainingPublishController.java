@@ -114,7 +114,8 @@ public class TrainingPublishController implements Initializable {
     }
 
 	private void getList() {
-		list = dbHelper.getEntireList("user_primary_info");
+		list = dbHelper.getEntireList(new String[] {"branch"}, new String[] {LoginController.branch}, "user_primary_info");
+		//list = dbHelper.getEntireList("user_primary_info");
 	}
 	
 	private void setupTable() {

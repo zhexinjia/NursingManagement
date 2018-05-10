@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 public class TrainningNewController implements Initializable {
 
 	@FXML TextField nameField;
-	@FXML ChoiceBox<String> if_countPicker;
+	//@FXML ChoiceBox<String> if_countPicker;
 	@FXML ChoiceBox<Integer> pointPicker;
 	@FXML JFXTextArea commentArea;
 	@FXML VBox box;
@@ -49,6 +49,7 @@ public class TrainningNewController implements Initializable {
 		if(nameField.getText().trim().isEmpty()) {
 			return false;
 		}
+		/*
 		if(if_countPicker.getValue()==null) {
 			return false;
 		}else if(if_countPicker.getValue().toString().equals("是")) {
@@ -56,10 +57,15 @@ public class TrainningNewController implements Initializable {
 				return false;
 			}
 		}
+		*/
+		if(pointPicker.getValue() == null) {
+			return false;
+		}
 		return true;
 	}
 	
 	private void setupChoiceBox() {
+		/*
 		String[] tfList = {"是", "否"};
 		if_countPicker.getItems().setAll(tfList);
 		if_countPicker.setOnAction(e->{
@@ -71,8 +77,9 @@ public class TrainningNewController implements Initializable {
 				pointPicker.setValue(null);
 			}
 		});
-		Integer[] array = new Integer[100];
-		Arrays.setAll(array, i -> i + 1);
+		*/
+		Integer[] array = new Integer[101];
+		Arrays.setAll(array, i -> i);
 		pointPicker.getItems().setAll(array);
 	}
 	
@@ -81,11 +88,12 @@ public class TrainningNewController implements Initializable {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("name", nameField.getText());
 		map.put("comment", commentArea.getText());
-		map.put("if_count", if_countPicker.getValue().toString());
-		map.put("publish_status", "未发布");
-		if(if_countPicker.getValue().toString().equals("是")) {
-			map.put("point", pointPicker.getValue().toString());
-		}
+		//map.put("if_count", if_countPicker.getValue().toString());
+		//map.put("publish_status", "未发布");
+		//if(if_countPicker.getValue().toString().equals("是")) {
+		map.put("totalPoint", pointPicker.getValue().toString());
+		map.put("branch", LoginController.branch);
+		//}
 		DBhelper dbHelper = new DBhelper();
 		if(dbHelper.insert(map, "training_list")) {
 			Loader loader = new Loader();

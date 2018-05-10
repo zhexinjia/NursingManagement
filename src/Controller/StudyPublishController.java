@@ -39,9 +39,11 @@ public class StudyPublishController implements Initializable {
 	String[] keys = {"name", "department", "title", "position", "level"};
 	String[] fields = {"姓名", "科室", "职称", "职务", "层级"};
 	private HashMap<String, String> selectedStudy;
+	private String branch;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		branch = LoginController.branch;
 		selectedStudy = StudyListController.selectedStudy;
 		setupTable();
 		setupCheckBox();
@@ -75,7 +77,6 @@ public class StudyPublishController implements Initializable {
     		reload();
     }
 
-
     @FXML
     void newButton() {
     		loader.loadVBox(box, "/View/UserNew.fxml");
@@ -101,7 +102,8 @@ public class StudyPublishController implements Initializable {
     }
 
 	private void getList() {
-		list = dbHelper.getEntireList("user_primary_info");
+		list = dbHelper.getEntireList(new String[] {"branch"}, new String[] {branch}, "user_primary_info");
+		//list = dbHelper.getEntireList("user_primary_info");
 	}
 	
 	private void setupTable() {

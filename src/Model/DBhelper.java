@@ -709,6 +709,7 @@ public class DBhelper {
 		String historySql = "DELETE FROM study_history WHERE study_id=" + "'" + id + "';";
 		String listSql = "DELETE FROM study_list WHERE id=" + "'" + id + "';";
 		String sql = "sql=" + historySql + listSql;
+		System.out.println(sql);
 		if (sendPost(urlSend, sql)) {
 			//success();
 			return true;
@@ -752,13 +753,11 @@ public class DBhelper {
 	}
 	*/
 	private void success() {
-		/*
 		PopupWindow pop = new PopupWindow();
 		pop.confirmButton.setOnAction(e->{
 			pop.stage.close();
 		});
 		pop.confirmWindow("操作成功", "点击确定返回");
-		*/
 	}
 	private void fail() {
 		/*

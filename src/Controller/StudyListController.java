@@ -28,6 +28,7 @@ public class StudyListController implements Initializable {
 	DBhelper dbHelper = new DBhelper();
 	public static HashMap<String, String> selectedStudy;
 	PopupWindow popUP = new PopupWindow();
+	String branch;
 
     @FXML
     void searchButton() {
@@ -82,6 +83,7 @@ public class StudyListController implements Initializable {
 
     @FXML
     void deleteButton() {
+    		System.out.println("del");
     		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
 		if(selected == null) {
 			popUP.alertWindow("没有选中目标","请选择要编辑的用户");
@@ -90,8 +92,6 @@ public class StudyListController implements Initializable {
 			if (dbHelper.deleteStudy(selected)) {
 				getList();
 				reload();
-			}else {
-				popUP.errorWindow();
 			}
 		}
     		
@@ -99,6 +99,7 @@ public class StudyListController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		branch = LoginController.branch;
 		setupTable();
 		getList();
 		reload();
@@ -110,8 +111,9 @@ public class StudyListController implements Initializable {
 		loader.setupTable(tableView, keys, fields);
 	}
 	private void getList() {
-		String[] columns = {"name", "type", "publish_status", "if_count", "point"};
-		list = dbHelper.getList("study_list", columns);
+		String[] columns = {"id", "name", "type", "publish_status", "if_count", "point"};
+		list = dbHelper.getList(new String[] {"branch"}, new String[] {branch}, "study_list", columns);
+		//list = dbHelper.getList("study_list", columns);
 	}
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());

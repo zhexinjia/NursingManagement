@@ -48,6 +48,13 @@ public class TrainningListController implements Initializable {
 		loader.loadWeb();
 	}
     
+    @FXML void publishButton() {
+    		selectedTrainning = tableView.getSelectionModel().getSelectedItem();
+    		if(loader.selectionCheck(selectedTrainning)) {
+    			loader.loadVBox(box, "/View/TrainingPublish.fxml");
+    		}
+    }
+    
     @FXML
     void importButton() {
     		//remove this button
@@ -95,12 +102,13 @@ public class TrainningListController implements Initializable {
 	}
 	
 	private void setupTable() {
-		String[] keys = {"name", "if_count", "point", "comment"};
-		String[] fields = {"培训名称","是否记分", "分值", "备注"};
+		String[] keys = {"name", "totalPoint", "comment"};
+		String[] fields = {"培训名称", "积分", "备注"};
 		loader.setupTable(tableView, keys, fields);
 	}
 	private void getList() {
-		list = dbHelper.getEntireList("training_list");
+		list = dbHelper.getEntireList(new String[] {"branch"}, new String[] {LoginController.branch}, "training_list");
+		//list = dbHelper.getEntireList("training_list");
 	}
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());

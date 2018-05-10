@@ -26,7 +26,7 @@ public class StudyNewController implements Initializable {
 	@FXML JFXTextField nameField;
 	@FXML JFXTextField pathField;
 	//@FXML JFXTextField urlField;
-	@FXML JFXComboBox<String> if_countPicker;
+	//@FXML JFXComboBox<String> if_countPicker;
 	@FXML JFXComboBox<Integer> pointPicker;
 	@FXML JFXComboBox<String> typePicker;
 	@FXML JFXButton smallButton;
@@ -38,14 +38,18 @@ public class StudyNewController implements Initializable {
 	
 	
 	//FIXME: path should store this information in database
-	String path = "testHospital";
+	String path;
 	Loader loader = new Loader();
 	File file;
-	String url = "http://zhexinj.cn/files/" + path + "/";
+	String url;
+	String branch;
 	boolean fileType = true;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		url = LoginController.url;
+		path = LoginController.path;
+		branch = LoginController.branch;
 		//progressBar.setVisible(false);
 		setupChoiceBox();
 		stackPane.setVisible(false);
@@ -78,12 +82,6 @@ public class StudyNewController implements Initializable {
     			}else {
     				this.insertDB();
     			}
-    			
-    			
-    			
-    			
-    			
-    			
     			/*
     			if(typePicker.getValue().toString().equals("网址")) {
     				this.insertDB();
@@ -134,6 +132,8 @@ public class StudyNewController implements Initializable {
     			}
     		});
     		*/
+    		
+    		/*
     		String[] tfList = {"是", "否"};
     		if_countPicker.getItems().setAll(tfList);
     		if_countPicker.setOnAction(e->{
@@ -145,8 +145,9 @@ public class StudyNewController implements Initializable {
     				pointPicker.setValue(null);
     			}
     		});
-    		Integer[] array = new Integer[100];
-    		Arrays.setAll(array, i -> i + 1);
+    		*/
+    		Integer[] array = new Integer[101];
+    		Arrays.setAll(array, i -> i);
     		pointPicker.getItems().setAll(array);
     }
     
@@ -161,6 +162,7 @@ public class StudyNewController implements Initializable {
         			return false;
         		}
     		}
+    		/*
     		if(if_countPicker.getValue()==null) {
     			return false;
     		}else if(if_countPicker.getValue().toString().equals("是")) {
@@ -168,18 +170,23 @@ public class StudyNewController implements Initializable {
     				return false;
     			}
     		}
+    		*/
+    		if(pointPicker.getValue() == null) {
+			return false;
+		}
     		return true;
     }
     
     
     private void insertDB() {
-    		PopupWindow pop = new PopupWindow();
+    		//PopupWindow pop = new PopupWindow();
     		HashMap<String, String> map = new HashMap<String, String>();
     		map.put("name", nameField.getText());
-    		map.put("publish_status", "未发布");
+    		//map.put("publish_status", "未发布");
     		String type = typePicker.getValue().toString();
     		map.put("type", type);
     		map.put("url", url+file.getName());
+    		map.put("branch", branch);
     		/*
     		if(fileType) {
     			map.put("url", url+file.getName());
@@ -187,10 +194,10 @@ public class StudyNewController implements Initializable {
     			map.put("url", urlField.getText());
     		}
     		*/
-    		map.put("if_count", if_countPicker.getValue().toString());
-    		if(if_countPicker.getValue().toString().equals("是")) {
-    			map.put("point", pointPicker.getValue().toString());
-    		}
+    		//map.put("if_count", if_countPicker.getValue().toString());
+    		//if(if_countPicker.getValue().toString().equals("是")) {
+    		map.put("point", pointPicker.getValue().toString());
+    		//}
     		DBhelper dbHelper = new DBhelper();
     		dbHelper.insert(map, "study_list");
     		/*

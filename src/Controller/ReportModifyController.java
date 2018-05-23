@@ -1,14 +1,21 @@
 package Controller;
 
 import java.net.URL;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 
 import Model.DBhelper;
 import Model.Loader;
 import Model.PopupWindow;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,18 +28,247 @@ public class ReportModifyController implements Initializable{
 	@FXML JFXTextArea hospitalArea;
 	@FXML VBox box;
 	
+	@FXML JFXTextField reportDepartment;
+	@FXML JFXDatePicker eventDate;
+	@FXML JFXDatePicker reportDate;
+	
+	@FXML JFXTextField patientName;
+	ArrayList<JFXCheckBox> patientSex = new ArrayList<JFXCheckBox>();
+	@FXML JFXCheckBox male;
+	@FXML JFXCheckBox female;
+	@FXML JFXTextField patientAge;
+	@FXML JFXTextField bedNum;
+	@FXML JFXTextField hospitalNum;
+	@FXML JFXTextField typeSickness;
+	
+	//Event Location
+	
+	ArrayList<JFXCheckBox> eventLocationList = new ArrayList<JFXCheckBox>();
+	
+	@FXML JFXCheckBox eventLocation1;
+	@FXML JFXCheckBox eventLocation2;
+	@FXML JFXCheckBox eventLocation3;
+	@FXML JFXCheckBox eventLocation4;
+	@FXML JFXCheckBox eventLocation5;
+	@FXML JFXCheckBox eventLocation6;
+	@FXML JFXTextField eventLocation6_text;
+	
+	
+	@FXML JFXTextField eventDepartment;
+	@FXML JFXTextField rpName;
+	@FXML JFXTextField rpAge;
+	@FXML JFXTextField rpLengthOfWork;
+	@FXML JFXTextField rpTitle;
+	@FXML JFXTextField rpEducation;
+	
+	ArrayList<JFXCheckBox> reporterTitleList = new ArrayList<JFXCheckBox>();
+	@FXML JFXTextField reporterName;
+	@FXML JFXCheckBox reporterTitle1;
+	@FXML JFXCheckBox reporterTitle2;
+	@FXML JFXCheckBox reporterTitle3;
+	@FXML JFXCheckBox reporterTitle4;
+	@FXML JFXCheckBox reporterTitle5;
+	@FXML JFXTextField reporterPhoneNum;
+	
+	@FXML JFXTextArea eventProcess;
+	
+	ArrayList<JFXCheckBox> eventTypeList = new ArrayList<JFXCheckBox>();
+	@FXML JFXCheckBox eventType1;
+	@FXML JFXCheckBox eventType2;
+	@FXML JFXCheckBox eventType3;
+	@FXML JFXCheckBox eventType4;
+	@FXML JFXCheckBox eventType5;
+	@FXML JFXCheckBox eventType6;
+	@FXML JFXCheckBox eventType7;
+	@FXML JFXCheckBox eventType8;
+	@FXML JFXCheckBox eventType9;
+	
+	ArrayList<JFXCheckBox> reportTypeList = new ArrayList<JFXCheckBox>();
+	@FXML JFXCheckBox reportType1;
+	@FXML JFXCheckBox reportType2;
+	@FXML JFXCheckBox reportType3;
+	@FXML JFXCheckBox reportType4;
+	@FXML JFXCheckBox reportType5;
+	@FXML JFXCheckBox reportType6;
+	@FXML JFXCheckBox reportType7;
+	@FXML JFXCheckBox reportType8;
+	@FXML JFXCheckBox reportType9;
+	@FXML JFXCheckBox reportType10;
+	@FXML JFXCheckBox reportType11;
+	@FXML JFXCheckBox reportType12;
+	@FXML JFXCheckBox reportType13;
+	@FXML JFXCheckBox reportType14;
+	@FXML JFXCheckBox reportType15;
+	@FXML JFXCheckBox reportType16;
+	@FXML JFXCheckBox reportType17;
+	@FXML JFXCheckBox reportType18;
+	@FXML JFXCheckBox reportType19;
+	@FXML JFXCheckBox reportType20;
+	@FXML JFXCheckBox reportType21;
+	@FXML JFXCheckBox reportType22;
+	@FXML JFXCheckBox reportType23;
+	@FXML JFXCheckBox reportType24;
+	@FXML JFXCheckBox reportType25;
+	@FXML JFXCheckBox reportType26;
+	@FXML JFXCheckBox reportType27;
+	@FXML JFXCheckBox reportType28;
+	@FXML JFXCheckBox reportType29;
+	@FXML JFXCheckBox reportType30;
+	//.... total 30 
+	
+	ArrayList<JFXCheckBox> CauseReasonList = new ArrayList<JFXCheckBox>();
+	@FXML JFXCheckBox CauseReason1;
+	@FXML JFXCheckBox CauseReason2;
+	
+	ArrayList<JFXCheckBox> eventLevelList = new ArrayList<JFXCheckBox>();
+	@FXML JFXCheckBox eventLevel1;
+	@FXML JFXCheckBox eventLevel2;
+	
+	@FXML JFXTextArea treatmentMeasure;
+	@FXML JFXTextArea discussion;
+	@FXML JFXTextArea followUpEvaluation;
+	
+	@FXML JFXTextField signature1;
+	@FXML JFXTextField signature2;
+	@FXML JFXDatePicker signatureDate1;
+	@FXML JFXDatePicker signatureDate2;
+	
+	private ObservableList<JFXCheckBox> selected_patientSex = FXCollections.observableArrayList();
+    private ObservableList<JFXCheckBox> unselected_patientSex = FXCollections.observableArrayList();
+    
+	private ObservableList<JFXCheckBox> selected_eventLocation = FXCollections.observableArrayList();
+    private ObservableList<JFXCheckBox> unselected_eventLocation = FXCollections.observableArrayList();
+    
+    private ObservableList<JFXCheckBox> selected_reporterTitle = FXCollections.observableArrayList();
+    private ObservableList<JFXCheckBox> unselected_reporterTitle = FXCollections.observableArrayList();
+    
+    private ObservableList<JFXCheckBox> selected_eventType = FXCollections.observableArrayList();
+    private ObservableList<JFXCheckBox> unselected_eventType = FXCollections.observableArrayList();
+   
+    private ObservableList<JFXCheckBox> selected_reportType = FXCollections.observableArrayList();
+    private ObservableList<JFXCheckBox> unselected_reportType = FXCollections.observableArrayList();
+    
+    private ObservableList<JFXCheckBox> selected_CauseReason = FXCollections.observableArrayList();
+    private ObservableList<JFXCheckBox> unselected_CauseReason = FXCollections.observableArrayList();
+    
+    private ObservableList<JFXCheckBox> selected_eventLevel = FXCollections.observableArrayList();
+    private ObservableList<JFXCheckBox> unselected_eventLevel = FXCollections.observableArrayList();
+    
+    
 	private HashMap<String, String> report;
 	Loader loader = new Loader();
 	DBhelper dbHelper = new DBhelper();
 	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		report = HospitalReportController.selectedReport;
-		//setupPage();
+		//System.out.println(report);
+		
+		configureCheckBox(male, selected_patientSex, unselected_patientSex, patientSex);
+		configureCheckBox(female, selected_patientSex, unselected_patientSex, patientSex);
+		
+		configureCheckBox(eventLocation1, selected_eventLocation, unselected_eventLocation, eventLocationList);
+		configureCheckBox(eventLocation2, selected_eventLocation, unselected_eventLocation, eventLocationList);
+		configureCheckBox(eventLocation3, selected_eventLocation, unselected_eventLocation, eventLocationList);
+		configureCheckBox(eventLocation4, selected_eventLocation, unselected_eventLocation, eventLocationList);
+		configureCheckBox(eventLocation5, selected_eventLocation, unselected_eventLocation, eventLocationList);
+		configureCheckBox(eventLocation6, selected_eventLocation, unselected_eventLocation, eventLocationList);
+		
+		configureCheckBox(reporterTitle1, selected_reporterTitle, unselected_reporterTitle, reporterTitleList);
+		configureCheckBox(reporterTitle2, selected_reporterTitle, unselected_reporterTitle, reporterTitleList);
+		configureCheckBox(reporterTitle3, selected_reporterTitle, unselected_reporterTitle, reporterTitleList);
+		configureCheckBox(reporterTitle4, selected_reporterTitle, unselected_reporterTitle, reporterTitleList);
+		configureCheckBox(reporterTitle5, selected_reporterTitle, unselected_reporterTitle, reporterTitleList);
+		
+		configureCheckBox(eventType1, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType2, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType3, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType4, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType5, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType6, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType7, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType8, selected_eventType, unselected_eventType, eventTypeList);
+		configureCheckBox(eventType9, selected_eventType, unselected_eventType, eventTypeList);
+
+		
+		configureCheckBox(reportType1, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType2, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType3, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType4, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType5, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType6, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType7, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType8, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType9, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType10, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType11, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType12, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType13, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType14, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType15, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType16, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType17, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType18, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType19, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType20, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType21, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType22, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType23, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType24, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType25, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType26, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType27, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType28, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType29, selected_reportType, unselected_reportType, reportTypeList);
+		configureCheckBox(reportType30, selected_reportType, unselected_reportType, reportTypeList);
+		
+		configureCheckBox(CauseReason1, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason2, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		
+		configureCheckBox(eventLevel1, selected_eventLevel, unselected_eventLevel, eventLevelList);
+		configureCheckBox(eventLevel2, selected_eventLevel, unselected_eventLevel, eventLevelList);
+
+		
+		setupPage();
 	}
 	
+	 private void configureCheckBox(JFXCheckBox checkBox, ObservableList<JFXCheckBox> selectedCheckBoxes,
+			 ObservableList<JFXCheckBox> unselectedCheckBoxes, ArrayList<JFXCheckBox> List) {
+		 
+		 	List.add(checkBox);
+		 	
+	        if (checkBox.isSelected()) {
+	            selectedCheckBoxes.add(checkBox);
+	        } else {
+	            unselectedCheckBoxes.add(checkBox);
+	        }
+
+	 
+	        checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+	            if (isNowSelected) {
+	            		if (selectedCheckBoxes.isEmpty()) {
+	            			 unselectedCheckBoxes.remove(checkBox);
+	     	              selectedCheckBoxes.add(checkBox);
+	            		}else {
+	            			 unselectedCheckBoxes.add(selectedCheckBoxes.get(0));
+	            			 unselectedCheckBoxes.remove(checkBox);
+	            			 selectedCheckBoxes.clear();
+		     	         selectedCheckBoxes.add(checkBox);
+	            		}
+	            	unselectedCheckBoxes.forEach(cb -> cb.setSelected(false));
+	            }else {
+	            		if (selectedCheckBoxes.contains(checkBox)) {
+	            			selectedCheckBoxes.remove(checkBox);
+	            		}
+	            }       
+	        });
+
+	    }
+	
 	@FXML void loadHome() {
-		loader.loadVBox(box, "/View/Welcome.fxml");
+		loader.loadVBox(box, "/View/Welcome.fxml"); 
 	}
 	
 	@FXML void uploadButton() {
@@ -40,8 +276,155 @@ public class ReportModifyController implements Initializable{
 		if(!report.get("level").equals("1")) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", report.get("id"));
-			map.put("comment2", hospitalArea.getText());
+			//map.put("comment2", hospitalArea.getText());
 			map.put("level", "3");
+			
+	
+			map.put("reportDepartment", reportDepartment.getText());
+			
+			map.put("eventDate", eventDate.getValue().toString());
+			map.put("reportDate", reportDate.getValue().toString());
+			
+			map.put("patientName", patientName.getText());
+			map.put("patientAge", patientAge.getText());
+			map.put("bedNum", bedNum.getText());
+			map.put("hospitalNum", hospitalNum.getText());
+			map.put("typeSickness", typeSickness.getText());
+			
+			//第一行 - 患者性别 - 2
+			
+			if (!selected_patientSex.isEmpty()) {
+				for (int i = 0; i <2; i++) {
+					if (patientSex.get(i).isSelected()) {
+						String temp = Integer.toString(i);
+						map.put("patientSex", temp);
+						break;
+					}
+				}
+			}else {
+				PopupWindow pop = new PopupWindow();
+				pop.alertWindow("无法上传", "缺少患者性别选项");
+				return;
+			}
+			
+			
+			//第二行 - 发生场所 - 6
+			if (!selected_eventLocation.isEmpty()) {
+				for (int i = 0; i <6; i++) {
+					if (eventLocationList.get(i).isSelected()) {
+						String temp = Integer.toString(i);
+						map.put("eventLocation", temp);
+						break;
+					}
+				}
+			}else {
+				PopupWindow pop = new PopupWindow();
+				pop.alertWindow("无法上传", "缺少发生场所选项");
+				return;
+			}
+			
+			map.put("eventLocation6_text", eventLocation6_text.getText());
+			
+			//第三行 - 发生科室
+			map.put("eventDepartment", eventDepartment.getText());
+			map.put("rpName", rpName.getText());
+			map.put("rpLengthOfWork", rpLengthOfWork.getText());
+			map.put("rpAge", rpAge.getText());
+			map.put("rpTitle", rpTitle.getText());
+			map.put("rpEducation", rpEducation.getText());
+			
+			//第四行 - 报告人
+			map.put("reporterName", reporterName.getText());
+			if (!selected_reporterTitle.isEmpty()) {
+				for (int i = 0; i <5; i++) {
+					if (reporterTitleList.get(i).isSelected()) {
+						String temp = Integer.toString(i);
+						map.put("reporterPosition", temp);
+						break;
+					}
+				}
+			}else {
+				PopupWindow pop = new PopupWindow();
+				pop.alertWindow("无法上传", "缺少报告人选项");
+				return;
+			}
+			
+			map.put("reporterPhoneNum", reporterPhoneNum.getText());
+			
+			//第五行 - 事件主要过程
+			map.put("eventProcess", eventProcess.getText());
+			
+			//第六行 - 事件类型
+			if (!selected_eventType.isEmpty()) {
+				for (int i = 0; i <9; i++) {
+					if (eventTypeList.get(i).isSelected()) {
+						String temp = Integer.toString(i);
+						map.put("eventType", temp);
+						break;
+					}
+				}
+			}else {
+				PopupWindow pop = new PopupWindow();
+				pop.alertWindow("无法上传", "缺少事件类型选项");
+				return;
+			}
+			
+			//不良事件类别
+			if (!selected_reportType.isEmpty()) {
+				for (int i = 0; i <30; i++) {
+					if (reportTypeList.get(i).isSelected()) {
+						String temp = Integer.toString(i);
+						map.put("reportType", temp);
+						break;
+					}
+				}
+			}else {
+				PopupWindow pop = new PopupWindow();
+				pop.alertWindow("无法上传", "缺少不良事件类别选项");
+				return;
+			}
+			
+			//导致事件原因
+			if (!selected_CauseReason.isEmpty()) {
+				for (int i = 0; i <2; i++) {
+					if (CauseReasonList.get(i).isSelected()) {
+						String temp = Integer.toString(i);
+						map.put("CauseReason", temp);
+						break;
+					}
+				}
+			}else {
+				PopupWindow pop = new PopupWindow();
+				pop.alertWindow("无法上传", "缺少导致事件原因选项");
+				return;
+			}
+			
+			//事件级别
+			if (!selected_eventLevel.isEmpty()) {
+				for (int i = 0; i <2; i++) {
+					if (eventLevelList.get(i).isSelected()) {
+						String temp = Integer.toString(i);
+						map.put("eventLevel", temp);
+						break;
+					}
+				}
+			}else {
+				PopupWindow pop = new PopupWindow();
+				pop.alertWindow("无法上传", "缺少事件级别选项");                   
+				return;
+			}
+			
+			// 事件处理措施：：
+			map.put("treatmentMeasure", treatmentMeasure.getText());
+			map.put("discussion", discussion.getText());
+			map.put("followUpEvaluation", followUpEvaluation.getText());
+			map.put("signature1", signature1.getText());
+			map.put("signature2", signature2.getText());
+			map.put("signatureDate1", signatureDate1.getValue().toString());
+			map.put("signatureDate2", signatureDate2.getValue().toString());
+			
+			
+			
 			if(dbHelper.update(map, "report_list")) {
 				//TODO:???
 			}
@@ -51,15 +434,103 @@ public class ReportModifyController implements Initializable{
 		}
 		
 	}
+	
+	
 	@FXML void contactButton() {
 		loader.loadWeb();
 	}
 	
+	
 	private void setupPage() {
-		title.setText(report.get("title"));
-		personArea.setText(report.get("detail"));
-		departmentArea.setText(report.get("comment1"));
-		hospitalArea.setText(report.get("comment2"));
+		reportDepartment.setText(report.get("reportDepartment"));
+		eventDate.setPromptText(report.get("eventDate"));
+		reportDate.setPromptText(report.get("reportDate"));
+		
+		patientName.setText(report.get("patientName"));
+		patientAge.setText(report.get("patientAge"));
+		bedNum.setText(report.get("bedNum"));
+		hospitalNum.setText(report.get("hospitalNum"));
+		typeSickness.setText(report.get("typeSickness"));
+		
+		//don't know why it can't use String, might be type different
+		if (Integer.parseInt(report.get("patientSex")) == 0) {
+			male.setSelected(true);
+		}else {
+			female.setSelected(true);
+		}
+		
+		//eventLocation
+		int eventLocationNum = Integer.parseInt(report.get("eventLocation"));
+		if (eventLocationNum == 5) {
+			eventLocationList.get(5).setSelected(true);
+			eventLocation6_text.setText(report.get("eventLocation6_text"));
+		}else {
+			for (int i =0; i < 5; i++) {	
+				if (eventLocationNum == i) {
+					eventLocationList.get(i).setSelected(true);
+				}
+			}	
+		}
+		
+		eventDepartment.setText(report.get("eventDepartment"));
+		rpName.setText(report.get("rpName"));
+		rpLengthOfWork.setText(report.get("rpLengthOfWork"));
+		rpAge.setText(report.get("rpAge"));
+		rpTitle.setText(report.get("rpTitle"));
+		rpEducation.setText(report.get("rpEducation"));
+		
+		reporterName.setText(report.get("reporterName"));
+		
+		int reporterTitleNum = Integer.parseInt(report.get("reporterPosition"));
+		for (int i= 0; i < 5; i++) {
+			if (reporterTitleNum == i) {
+				reporterTitleList.get(i).setSelected(true);
+			}
+		}
+		
+		reporterPhoneNum.setText(report.get("reporterPhoneNum"));
+		
+		eventProcess.setText(report.get("eventProcess"));
+		
+		
+		int eventTypeNum = Integer.parseInt(report.get("eventType"));
+		for (int i=0; i < 9; i++) {
+			if (eventTypeNum == i) {
+				eventTypeList.get(i).setSelected(true);
+			}
+		}
+		
+		int reportTypeNum = Integer.parseInt(report.get("reportType"));
+		for (int i=0; i < 30; i++) {
+			if (reportTypeNum == i) {
+				reportTypeList.get(i).setSelected(true);
+			}
+		}
+		
+
+		if (Integer.parseInt(report.get("CauseReason")) == 0) {
+			CauseReason1.setSelected(true);
+		}else {
+			CauseReason2.setSelected(true);
+		}
+		
+		
+		if (Integer.parseInt(report.get("eventLevel")) == 0) {
+			eventLevel1.setSelected(true);
+		}else {
+			eventLevel2.setSelected(true);
+		}
+		
+
+		treatmentMeasure.setText(report.get("treatmentMeasure"));
+		discussion.setText(report.get("discussion"));
+		followUpEvaluation.setText(report.get("followUpEvaluation"));
+		
+		signature1.setText(report.get("signature1"));
+		signature2.setText(report.get("signature2"));
+		signatureDate1.setPromptText(report.get("signatureDate1"));
+		signatureDate2.setPromptText(report.get("signatureDate2"));
+		
 	}
 
 

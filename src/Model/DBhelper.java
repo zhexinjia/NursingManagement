@@ -410,8 +410,9 @@ public class DBhelper {
 	
 
 	public String insertUserHelper(HashMap<String, String> map) {
-		String sqlPrim = "insert into user_primary_info" + " (";
-		String sqlSub= "insert into user_sub_info" + " (";
+		//insert ignore into exam_history (ssn, exam_id) VALUES
+		String sqlPrim = "insert ignore into user_primary_info" + " (";
+		String sqlSub= "insert ignore into user_sub_info" + " (";
 		String sqlScore = "insert into user_score" + " (ssn) VALUES (";
 		Set<String> keys = map.keySet();
 		ArrayList<String> keyset = new ArrayList<String>(keys);
@@ -461,6 +462,23 @@ public class DBhelper {
 		}
 		return false;
 	}	
+	
+	/*
+	 * hard insert function, insert list of user info into 3 tables
+	 */
+	public boolean insertUserList(ArrayList<HashMap<String, String>> maplist) {
+		//boolean res;
+		String sql = "sql=";
+		for (HashMap<String, String> user : maplist){
+			sql += insertUserHelper(user);
+			
+		}
+		System.out.println(sql);
+		if (sendPost(urlSend, sql)) {
+			return true;
+		}
+		return false;
+	}
 	
 	public String updateUserHelper(HashMap<String, String> map) {
 		
@@ -629,19 +647,6 @@ public class DBhelper {
 		return false;
 	}
 
-	/*
-	 * hard insert function, insert list of user info into 3 tables
-	 */
-	public boolean insertUserList(ArrayList<HashMap<String, String>> maplist) {
-		boolean res;
-		for (HashMap<String, String> user : maplist){
-			res = insertUser(user);
-			if (res == false) {
-				return false;
-			}
-		}
-		return true;
-	}
 
 	//publishing Exam/Study/Training
 	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
@@ -649,42 +654,37 @@ public class DBhelper {
 		boolean res = false;
 		//id -> exam_id, study_id, training_id
 		String id = item.get("id");
-		int totalPoint = Integer.parseInt(item.get("totalPoint"));
+		//int totalPoint = Integer.parseInt(item.get("totalPoint"));
+		String sql = "sql=";
 		
 		for (HashMap<String, String> user:userList) {
 			String ssn = user.get("ssn");
-			int userTotalPoint = Integer.parseInt(user.get("totalScore"));
-			userTotalPoint += totalPoint;
+		//	int userTotalPoint = Integer.parseInt(user.get("totalScore"));
+		//	userTotalPoint += totalPoint;
 			
 			if (table == "exam_list") {
-				temp = "sql=insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
-				temp += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
-				
+				sql += "insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
+				sql += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
+			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+								
 			}
 			else if (table == "study_list") {
-				temp = "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
-				temp += "update study_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
+				sql += "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				sql += "update study_list set publish_status = '已发布' where id= '" + id + "';";
+			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
 				
 			}
 			else if (table == "training_list") {
-				temp = "sql=insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
-				temp += "update training_list set publish_status = '已发布' where id= '" + id + "';";
-				temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
-				sendPost(urlSend, temp);
-				res = true;
+				sql = "sql=insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				sql += "update training_list set publish_status = '已发布' where id= '" + id + "';";
+			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+		
 			}
 		}
-		
-		if(res) {
+		System.out.println(sql);
+		if (sendPost(urlSend, sql)) {
 			return true;
 		}
-		//TODO:addPOPUP
 		return false;
 	}
 	

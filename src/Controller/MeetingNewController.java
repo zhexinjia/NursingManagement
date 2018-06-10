@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 
@@ -25,7 +24,7 @@ public class MeetingNewController implements Initializable{
 
     @FXML private VBox box;
     @FXML private JFXTextField nameField;
-    @FXML private JFXComboBox<String> if_countPicker;
+    //@FXML private JFXComboBox<String> if_countPicker;
     @FXML private JFXComboBox<Integer> pointPicker;
     @FXML private JFXDatePicker datePicker;
     @FXML private JFXTimePicker timePicker;
@@ -81,27 +80,34 @@ public class MeetingNewController implements Initializable{
     			map.put("time", timePicker.getValue().format(timeFormat));
     			map.put("checkinCode", loginCode);
     			map.put("checkOutCode", logoutCode);
-    			map.put("if_count", if_countPicker.getValue().toString());
-    			if(if_countPicker.getValue().toString().equals("是")) {
-    				map.put("point", pointPicker.getValue().toString());
-    			}
+    			map.put("branch", LoginController.branch);
+    			//map.put("if_count", if_countPicker.getValue().toString());
+    			
+    			//if(if_countPicker.getValue().toString().equals("是")) {
+    				map.put("totalPoint", pointPicker.getValue().toString());
+    			//}
+    			
     			DBhelper dbHelper = new DBhelper();
     			if (dbHelper.insert(map, "meeting_list")) {
-    				pop.confirmWindow("新建成功", "会议创建成功！");
-    				pop.confirmButton.setOnAction(e->{
+    				//pop.confirmWindow("新建成功", "会议创建成功！");
+    				//pop.confirmButton.setOnAction(e->{
     					loader.loadVBox(box, "/View/MeetingList.fxml");
-    				});
-    			}else {
+    				//});
+    			}
+    			/*
+    			else {
     				pop.errorWindow();
     			}
+    			*/
     		}else {
     			pop.alertWindow("保存失败", "选项不能为空。");
     		}
     }
     
     private void setupChoiceBox() {
-    		String[] list = {"是","否"};
-    		if_countPicker.getItems().setAll(list);
+    		//String[] list = {"是","否"};
+    		//if_countPicker.getItems().setAll(list);
+    		/*
     		if_countPicker.setOnAction(e->{
     			if(if_countPicker.getSelectionModel().getSelectedItem().equals("是")) {
     				pointPicker.setDisable(false);
@@ -110,6 +116,7 @@ public class MeetingNewController implements Initializable{
     				pointPicker.setDisable(true);
     			}
     		});
+    		*/
     		Integer[] array = new Integer[100];
     		Arrays.setAll(array, i -> i + 1);
     		pointPicker.getItems().setAll(array);
@@ -131,6 +138,7 @@ public class MeetingNewController implements Initializable{
     		if (nameField.getText().trim().isEmpty()) {
     			return false;
     		}
+    		/*
     		if(if_countPicker.getSelectionModel().getSelectedItem() == null) {
     			return false;
     		}else if(if_countPicker.getSelectionModel().getSelectedItem().equals("是")) {
@@ -138,6 +146,10 @@ public class MeetingNewController implements Initializable{
     				return false;
     			}
     		}
+    		*/
+    		if(pointPicker.getSelectionModel().getSelectedItem()==null) {
+				return false;
+			}
     		if(datePicker.getValue()==null) {
     			return false;
     		}

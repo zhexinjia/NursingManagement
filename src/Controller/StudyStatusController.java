@@ -92,7 +92,10 @@ public class StudyStatusController implements Initializable {
     private void getStudyList() {
 		String[] columns = {"id", "name", "if_count"};
 		String tableName = "study_list";
-		studyList = dbHelper.getList(tableName, columns);
+		//studyList = dbHelper.getList(tableName, columns);
+		String[] searchColumn = {"branch"};
+		String[] values = {LoginController.branch};
+		studyList = dbHelper.getList(searchColumn, values, tableName, columns);
     }    
     private void getStudyHistoryList() {
 		String[] columns = {"study_history.study_id", "study_history.finish_status",
@@ -104,7 +107,10 @@ public class StudyStatusController implements Initializable {
     private void getTrainingList() {
 		String[] columns = {"id", "name", "if_count"};
 		String tableName = "training_list";
-		trainingList = dbHelper.getList(tableName, columns);
+		//trainingList = dbHelper.getList(tableName, columns);
+		String[] searchColumn = {"branch"};
+		String[] values = {LoginController.branch};
+		trainingList = dbHelper.getList(searchColumn, values, tableName, columns);
     }    
     private void getTrainingHistoryList() {
 		String[] columns = {"training_history.training_id", "training_history.finish_status", 

@@ -669,13 +669,13 @@ public class DBhelper {
 								
 			}
 			else if (table == "study_list") {
-				sql += "sql=insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				sql += "insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update study_list set publish_status = '已发布' where id= '" + id + "';";
 			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
 				
 			}
 			else if (table == "training_list") {
-				sql = "sql=insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				sql = "insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update training_list set publish_status = '已发布' where id= '" + id + "';";
 			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
 		

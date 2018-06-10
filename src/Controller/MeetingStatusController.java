@@ -97,14 +97,18 @@ public class MeetingStatusController implements Initializable{
     private void getMeetingList() {
     		String[] columns = {"id", "name", "if_count"};
     		String tableName = "meeting_list";
-    		meetingList = dbHelper.getList(tableName, columns);
+    		//meetingList = dbHelper.getList(tableName, columns);
+    		meetingList = dbHelper.getList(new String[] {"branch"}, new String[] {LoginController.branch}, tableName, columns);
     }    
     private void getHistoryList() {
     		String[] columns = {"meeting_history.meeting_id", "meeting_history.checkin", "meeting_history.checkout", 
     				"user_primary_info.ssn", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
     				"user_primary_info.title", "user_primary_info.level"};
-    		String tableName = "user_primary_info inner join meeting_history on meeting_history.ssn = user_primary_info.ssn";
+    		//String tableName = "user_primary_info inner join meeting_history on meeting_history.ssn = user_primary_info.ssn";
+    		String tableName = "user_primary_info inner join meeting_history on meeting_history.ssn = user_primary_info.ssn "
+    				+ "inner join meeting_list on meeting_history.meeting_id = meeting_list.id where meeting_list.branch = '" + LoginController.branch + "'";
     		meeting_historyList = dbHelper.getList(tableName, columns);
+    		System.out.println(meeting_historyList.size());
     }
     
     //{examID, totalNum, checkinNum, checkoutNum}

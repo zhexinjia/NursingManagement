@@ -25,8 +25,8 @@ public class MeetingListController implements Initializable {
 	
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
-	String[] keys = {"name", "date", "time", "if_count"};
-	String[] fields = {"会议信息", "日期", "时间", "是否记分"};
+	String[] keys = {"name", "date", "time", "totalPoint"};
+	String[] fields = {"会议信息", "日期", "时间", "分值"};
 	DBhelper dbHelper = new DBhelper();
 	public static HashMap<String, String> selectedMeeting;
  	
@@ -93,8 +93,9 @@ public class MeetingListController implements Initializable {
 	
 	private void getList() {
 		String tableName = "meeting_list";
-		String[] columns = {"id", "name", "date", "time", "if_count"};;
-		list = dbHelper.getList(tableName, columns);
+		String[] columns = {"id", "name", "date", "time", "totalPoint"};;
+		//list = dbHelper.getList(tableName, columns);
+		list = dbHelper.getList(new String[] {"branch"}, new String[] {LoginController.branch}, tableName, columns);
 	}
 	
 	private void reload() {

@@ -99,9 +99,11 @@ public class ScheduleController implements Initializable {
 		departmentPicker.getItems().setAll(choiceList);
 	}
 	private ArrayList<HashMap<String, String>> getScheduleList(String departmentName, String date) {
-		String[] searchColumn = {"departmentName", "date"};
-		String[] values = {departmentName, date};
-		ArrayList<HashMap<String, String>> scheduleList = dbHelper.getEntireList(searchColumn, values, "hospital_schedule");
+		String[] searchColumn = {"departmentName", "date", "branch"};
+		String[] values = {departmentName, date, LoginController.branch};
+		//String tableName = "hospital_schedule where hospital_schedule.branch = '" + LoginController.branch + "'";
+		String tableName = "hospital_schedule";
+		ArrayList<HashMap<String, String>> scheduleList = dbHelper.getEntireList(searchColumn, values, tableName);
 		return scheduleList;
 	}
 	private void setupTable() {

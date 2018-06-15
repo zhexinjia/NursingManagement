@@ -101,7 +101,9 @@ public class StudyStatusController implements Initializable {
 		String[] columns = {"study_history.study_id", "study_history.finish_status",
 				"user_primary_info.ssn", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
 				"user_primary_info.title", "user_primary_info.level"};
-		String tableName = "user_primary_info inner join study_history on study_history.ssn = user_primary_info.ssn";
+		String tableName = "user_primary_info inner join study_history on study_history.ssn = user_primary_info.ssn "
+				+ "inner join study_list on study_list.id = study_history.study_id WHERE study_list.branch = '" + 
+				LoginController.branch + "'";
 		studyHistory = dbHelper.getList(tableName, columns);
     }
     private void getTrainingList() {
@@ -116,7 +118,9 @@ public class StudyStatusController implements Initializable {
 		String[] columns = {"training_history.training_id", "training_history.finish_status", 
 				"user_primary_info.ssn", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
 				"user_primary_info.title", "user_primary_info.level"};
-		String tableName = "user_primary_info inner join training_history on training_history.ssn = user_primary_info.ssn";
+		String tableName = "user_primary_info inner join training_history on training_history.ssn = user_primary_info.ssn "
+				+ "inner join training_list on training_list.id = training_history.training_id WHERE training_list.branch = '" + 
+				LoginController.branch + "'";
 		trainingHistory = dbHelper.getList(tableName, columns);
     }
     

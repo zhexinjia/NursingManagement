@@ -110,7 +110,8 @@ public class RecordListController implements Initializable {
 	}
 	
 	private void getList() {
-		String tableName = "user_primary_info inner join user_score on user_primary_info.ssn = user_score.ssn";
+		String tableName = "user_primary_info inner join user_score on user_primary_info.ssn = user_score.ssn where user_primary_info.branch = '" 
+				+ LoginController.branch + "'";
 		String[] columns = {"user_primary_info.department", "user_primary_info.name", "user_primary_info.position", "user_primary_info.title", 
 				"user_primary_info.level", "user_score.totalScore	", "user_score.currentScore", "user_primary_info.ssn", "user_score.comment"};
 		list = dbHelper.getList(tableName, columns);
@@ -124,7 +125,7 @@ public class RecordListController implements Initializable {
 				map.put("percent", Double.toString(percentScore)+"%");
 			}
 		}
-}
+	}
 	
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText());

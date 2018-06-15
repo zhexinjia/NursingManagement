@@ -56,7 +56,8 @@ public class RecordStatusController implements Initializable {
     }
 	
 	void getList(){
-		String tableName = "user_score inner join user_primary_info on user_primary_info.ssn = user_score.ssn";
+		String tableName = "user_score inner join user_primary_info on user_primary_info.ssn = user_score.ssn "
+				+ "where user_primary_info.branch = '" + LoginController.branch + "'";
 		String[] columns = {"user_score.totalScore", "user_score.currentScore", "user_primary_info.name",
 				"user_primary_info.department", "user_primary_info.level", "user_primary_info.position"};
 		scoreList = dbHelper.getList(tableName, columns);

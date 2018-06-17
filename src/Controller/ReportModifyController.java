@@ -292,7 +292,6 @@ public class ReportModifyController implements Initializable{
 			map.put("typeSickness", typeSickness.getText());
 			
 			//第一行 - 患者性别 - 2
-			
 			if (!selected_patientSex.isEmpty()) {
 				for (int i = 0; i <2; i++) {
 					if (patientSex.get(i).isSelected()) {
@@ -453,24 +452,41 @@ public class ReportModifyController implements Initializable{
 		typeSickness.setText(report.get("typeSickness"));
 		
 		//don't know why it can't use String, might be type different
-		if (Integer.parseInt(report.get("patientSex")) == 0) {
-			male.setSelected(true);
+		int patientSex = -1;
+		if (!report.get("patientSex").isEmpty()) {
+			patientSex = Integer.parseInt(report.get("patientSex"));
+		}
+		if ( patientSex == -1) {
+			System.out.print("ERROR: patientSex is NULL");
 		}else {
-			female.setSelected(true);
+			if (patientSex == 0) {
+				male.setSelected(true);
+			}else if (patientSex == 1) {
+				female.setSelected(true);
+			}else {
+				System.out.println("ERROR: patientSex is out of range");
+			}
 		}
 		
+		
 		//eventLocation
-		int eventLocationNum = Integer.parseInt(report.get("eventLocation"));
-		if (eventLocationNum == 5) {
-			eventLocationList.get(5).setSelected(true);
-			eventLocation6_text.setText(report.get("eventLocation6_text"));
+		int eventLocationNum = -1;
+		if (report.get("eventLocation") == null) {
+			System.out.print("ERROR: eventLocation is NULL");
 		}else {
-			for (int i =0; i < 5; i++) {	
-				if (eventLocationNum == i) {
-					eventLocationList.get(i).setSelected(true);
-				}
-			}	
+			eventLocationNum = Integer.parseInt(report.get("eventLocation"));
+			if (eventLocationNum == 5) {
+				eventLocationList.get(5).setSelected(true);
+				eventLocation6_text.setText(report.get("eventLocation6_text"));
+			}else {
+				for (int i =0; i < 5; i++) {	
+					if (eventLocationNum == i) {
+						eventLocationList.get(i).setSelected(true);
+					}
+				}	
+			}
 		}
+
 		
 		eventDepartment.setText(report.get("eventDepartment"));
 		rpName.setText(report.get("rpName"));
@@ -481,44 +497,86 @@ public class ReportModifyController implements Initializable{
 		
 		reporterName.setText(report.get("reporterName"));
 		
-		int reporterTitleNum = Integer.parseInt(report.get("reporterPosition"));
-		for (int i= 0; i < 5; i++) {
-			if (reporterTitleNum == i) {
-				reporterTitleList.get(i).setSelected(true);
+		
+		int reporterTitleNum = -1;
+		if (report.get("reporterPosition") != null) {
+			reporterTitleNum = Integer.parseInt(report.get("reporterPosition"));
+		}
+		if (reporterTitleNum == -1) {
+			System.out.print("ERROR: reporterPosition is NULL");
+		}else {
+			for (int i= 0; i < 5; i++) {
+				if (reporterTitleNum == i) {
+					reporterTitleList.get(i).setSelected(true);
+				}
 			}
 		}
+
 		
 		reporterPhoneNum.setText(report.get("reporterPhoneNum"));
 		
 		eventProcess.setText(report.get("eventProcess"));
 		
 		
-		int eventTypeNum = Integer.parseInt(report.get("eventType"));
-		for (int i=0; i < 9; i++) {
-			if (eventTypeNum == i) {
-				eventTypeList.get(i).setSelected(true);
+		int eventTypeNum = -1;
+		if (report.get("eventType") != null) {
+			eventTypeNum = Integer.parseInt(report.get("eventType"));
+		}
+		if ( eventTypeNum == -1) {
+			System.out.print("ERROR: eventType is NULL");
+		}else {
+			for (int i=0; i < 9; i++) {
+				if (eventTypeNum == i) {
+					eventTypeList.get(i).setSelected(true);
+				}
 			}
 		}
-		
-		int reportTypeNum = Integer.parseInt(report.get("reportType"));
-		for (int i=0; i < 30; i++) {
-			if (reportTypeNum == i) {
-				reportTypeList.get(i).setSelected(true);
-			}
-		}
-		
 
-		if (Integer.parseInt(report.get("CauseReason")) == 0) {
-			CauseReason1.setSelected(true);
+		
+		int reportTypeNum = -1;
+		if (report.get("reportType") != null) {
+			 reportTypeNum = Integer.parseInt(report.get("reportType"));
+		}
+		if (reportTypeNum == -1) {
+			System.out.print("ERROR: reportType is NULL");
 		}else {
-			CauseReason2.setSelected(true);
+			for (int i=0; i < 30; i++) {
+				if (reportTypeNum == i) {
+					reportTypeList.get(i).setSelected(true);
+				}
+			}
+		}
+
+		int CauseReason = -1;
+		if (report.get("CauseReason") != null) {
+			CauseReason = Integer.parseInt(report.get("CauseReason"));
+		}
+		if (CauseReason == -1) {
+			System.out.println("ERROR: Cause Reason is NULL");
+		}else{
+			if (CauseReason == 0) {
+				CauseReason1.setSelected(true);
+			}else if (CauseReason == 1){
+				CauseReason2.setSelected(true);
+			}else {
+				System.out.println("ERROR: CauseReason is out of range");
+			}
 		}
 		
-		
-		if (Integer.parseInt(report.get("eventLevel")) == 0) {
-			eventLevel1.setSelected(true);
-		}else {
-			eventLevel2.setSelected(true);
+		int eventLevel = -1;
+		if (report.get("eventLevel") != null) {
+			eventLevel = Integer.parseInt(report.get("CauseReason"));
+		}
+		if (eventLevel == -1) {
+			System.out.println("ERROR: eventLevel is NULL");
+		}else{
+			if (eventLevel == 0) {
+				eventLevel1.setSelected(true);
+			}else if (eventLevel == 1){
+				eventLevel2.setSelected(true);
+			}else {
+				System.out.println("ERROR: eventLevel is out of range");
+			}
 		}
 		
 

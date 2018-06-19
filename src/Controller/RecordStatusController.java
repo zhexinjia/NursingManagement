@@ -31,19 +31,28 @@ public class RecordStatusController implements Initializable {
 	@FXML Label departmentLowest;
 	@FXML Label departmentAverage;
 	@FXML JFXComboBox<String> departmentPicker;
-	@FXML TableView<HashMap<String, String>> tableView;
+	@FXML TableView<HashMap<String, String>> departmentTableView;
+	
+	@FXML Label levelAvg;
+	@FXML Label levelHighest;
+	@FXML Label levelLowest;
+	@FXML JFXComboBox<String> levelPicker;
+	@FXML TableView<HashMap<String, String>> levelTableView;
 	
 	ArrayList<HashMap<String, String>> scoreList;
 	HashMap<String, ArrayList<HashMap<String, String>>> departmentList = new HashMap<String, ArrayList<HashMap<String, String>>>();
+	HashMap<String, ArrayList<HashMap<String, String>>> levelList = new HashMap<String, ArrayList<HashMap<String, String>>>();
 	DBhelper dbHelper = new DBhelper();
 	Loader loader = new Loader();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {		
-		setupTable();
+		setupDepartmentTable();
+		setupLevelTable();
 		getList();
 		caculatePercent();
-		setupPicker();
+		setupDepartmentPicker();
+		setupLevelPicker();
 	}
 	
 	@FXML void loadHome() {
@@ -126,6 +135,19 @@ public class RecordStatusController implements Initializable {
 				list.add(score);
 				departmentList.put(department, list);
 			}
+			//TESTING
+			String level = score.get("level");
+			if(level!=null) {
+				ArrayList<HashMap<String, String>> list;
+				if(levelList.get(level)==null) {
+					list = new ArrayList<HashMap<String, String>>();
+				}else {
+					list = levelList.get(level);
+				}
+				list.add(score);
+				levelList.put(level, list);
+			}
+			//END TESTING
 		}
 		Double ave = sum/scoreList.size();
 		DecimalFormat df = new DecimalFormat("#.##");
@@ -135,26 +157,50 @@ public class RecordStatusController implements Initializable {
 		setupChart(countArray);
 	}
 	
-	void setupPicker() {
+	void setupDepartmentPicker() {
 		Set<String> keyset = departmentList.keySet();
+		System.out.println("Department keyset: " + keyset);
 		departmentPicker.getItems().setAll(keyset);
 		departmentPicker.setOnAction(e->{
-			loadTable(departmentPicker.getSelectionModel().getSelectedItem());
+			loadDepartmentTable(departmentPicker.getSelectionModel().getSelectedItem());
 		});
 		String firstDepartment = keyset.iterator().next();
 		//init default display
 		departmentPicker.setValue(firstDepartment);
-		loadTable(firstDepartment);
+		loadDepartmentTable(firstDepartment);
 		
 	}
-	private void loadTable(String department) {
+	void setupLevelPicker() {
+		Set<String> keyset = levelList.keySet();
+		System.out.println("Level keyset: " + keyset);
+		levelPicker.getItems().setAll(keyset);
+		levelPicker.setOnAction(e->{
+			loadLevelTable(levelPicker.getSelectionModel().getSelectedItem());
+		});
+		String firstLevel = keyset.iterator().next();
+		//init default display
+		levelPicker.setValue(firstLevel);
+		loadLevelTable(firstLevel);
+	}
+	
+	private void loadDepartmentTable(String department) {
 		if(department != null) {
 			ArrayList<HashMap<String, String>> list = departmentList.get(department);
 			ObservableList<HashMap<String, String>> searchList = loader.search(list, "");
-			tableView.setItems(searchList);
+			departmentTableView.setItems(searchList);
 			caculateDepartment(list);
 		}
 	}
+	
+	private void loadLevelTable(String level) {
+		if (level != null) {
+			ArrayList<HashMap<String, String>> list = levelList.get(level);
+			ObservableList<HashMap<String, String>> searchList = loader.search(list, "");
+			levelTableView.setItems(searchList);
+			calculateLevel(list);
+		}
+	}
+	
 	private void caculateDepartment(ArrayList<HashMap<String, String>> list) {
 		Double total = (double) 0;
 		Double low = (double) 1;
@@ -172,15 +218,47 @@ public class RecordStatusController implements Initializable {
 		}
 		Double average = total/list.size();
 		DecimalFormat df = new DecimalFormat("#.##");
-		departmentAverage.setText(df.format(average*100));
-		departmentHighest.setText(df.format(high*100));
-		departmentLowest.setText(df.format(low*100));
+		departmentAverage.setText(df.format(average*100) + "%");
+		departmentHighest.setText(df.format(high*100) + "%");
+		departmentLowest.setText(df.format(low*100) + "%");
 	}
-	private void setupTable() {
+	private void calculateLevel(ArrayList<HashMap<String, String>> list) {
+		System.out.println("list is : "+list);
+		Double total = (double) 0;
+		Double low = (double) 1;
+		Double high = (double) 0;
+		for(HashMap<String, String> map:list) {
+			//Double current = map.get("percent").equals("NaN")?100:Double.parseDouble(map.get("percent"));
+			Double current = Double.parseDouble(map.get("percent"));
+			total+=current;
+			if(current>high) {
+				high =current;
+			}
+			if(current<low) {
+				low=current;
+			}
+		}
+		Double average = total/list.size();
+		DecimalFormat df = new DecimalFormat("#.##");
+		levelAvg.setText(df.format(average*100) + "%");
+		levelHighest.setText(df.format(high*100) + "%");
+		levelLowest.setText(df.format(low*100) + "%");
+	}
+	
+	private void setupDepartmentTable() {
 		String[] keys = {"name", "position", "level", "currentScore", "totalScore"};
 		String[] fields = {"姓名", "职位", "层级", "得分", "总分"};
-		loader.setupTable(tableView, keys, fields);
+		//System.out.println("dTV: "+ departmentTableView);
+		loader.setupTable(departmentTableView, keys, fields);
+
 	}
+	
+	private void setupLevelTable() {
+		String[] keys = {"name", "department", "position", "currentScore", "totalScore"};
+		String[] fields = {"姓名", "科室", "职位", "得分", "总分"};
+		loader.setupTable(levelTableView, keys, fields);
+	}
+	
 	private void setupChart(int[] countArray) {
 		String[] infoArray = {"低于60", "60-69", "70-79", "80-89", "90-100"};
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();

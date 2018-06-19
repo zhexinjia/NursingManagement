@@ -21,6 +21,7 @@ public class RecordDetailController implements Initializable {
 	@FXML TableView<HashMap<String, String>> studyTable;
 	@FXML TableView<HashMap<String, String>> trainingTable;
 	@FXML TableView<HashMap<String, String>> meetingTable;
+	@FXML TableView<HashMap<String, String>> offLineExamTable;
 	@FXML Label countLabel;
 	@FXML VBox box;
 	@FXML private CustomTextField searchField;
@@ -31,6 +32,7 @@ public class RecordDetailController implements Initializable {
 	ArrayList<HashMap<String, String>> studyList;
 	ArrayList<HashMap<String, String>> trainingList;
 	ArrayList<HashMap<String, String>> meetingList;
+	ArrayList<HashMap<String, String>> offLineExamList;
 	private HashMap<String, String> selectedUser;
 	DBhelper dbHelper = new DBhelper();
 	String ssn;
@@ -104,7 +106,9 @@ public class RecordDetailController implements Initializable {
 		loader.setupTable(studyTable, new String[] {"name", "finish_status"}, new String[] {"课件名称","是否完成"});
 		loader.setupTable(trainingTable, new String[] {"name", "point"}, new String[] {"培训名称", "得分"});
 		loader.setupTable(meetingTable, new String[] {"name", "checkin", "checkout"}, new String[] {"会议", "签到", "签出"});
+		loader.setupTable(offLineExamTable, new String[] {"exam_name", "total_score"}, new String[] {"考核","得分"});
 	}
+	
 	private void setupSumTable() {
 		if(selectedUser.get("comment")!=null) {
 			String[] comments = selectedUser.get("comment").split(",|，");
@@ -121,15 +125,18 @@ public class RecordDetailController implements Initializable {
 		}
 		
 	}
+	
 	private void getList() {
 		getExamList();
 		getStudyList();
 		getTrainingList();
 		getMeetingList();
+		getOffLineExamList();
 		studyTable.getItems().setAll(studyList);
 		testTable.getItems().setAll(examList);
 		trainingTable.getItems().setAll(trainingList);
 		meetingTable.getItems().setAll(meetingList);
+		offLineExamTable.getItems().setAll(offLineExamList);
 	}
 	
 	private void getExamList() {
@@ -175,6 +182,14 @@ public class RecordDetailController implements Initializable {
 		String[] columns = {"meeting_list.name", "meeting_history.checkin", "meeting_history.checkout"};
 		meetingList =dbHelper.getList(searchColumn, values, tableName, columns);
 	
+	}
+	
+	private void getOffLineExamList() {
+		String[] searchColumn = {"offlineexam_history.ssn"};
+		String[] values = {ssn};
+		String tableName = "offlineexam_history inner join offlineexam_list on offlineexam_history.offlineexam_id = offlineexam_list.id";
+		String[] columns = {"offlineexam_history.offlineexam_id", "offlineexam_history.id", "offlineexam_list.exam_name", "offlineexam_history.total_score"};
+		offLineExamList =dbHelper.getList(searchColumn, values, tableName, columns);
 	}
 
 }

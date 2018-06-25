@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TestOfflineController">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TestOfflineListController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -44,7 +44,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="117.0" text="线下实际操作考核" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="61.0" text="线上考核" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -108,7 +108,7 @@
                </HBox.margin>
             </JFXButton>
             <Pane prefHeight="50.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <JFXButton onMouseClicked="#publishButton" prefHeight="29.0" prefWidth="79.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="发布考核" textFill="WHITE">
+            <JFXButton layoutX="656.0" layoutY="20.0" onMouseClicked="#publishButton" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="发布试卷" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -116,10 +116,10 @@
                   <Font name="Heiti SC Light" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton onMouseClicked="#endButton" prefHeight="29.0" prefWidth="79.0" style="-fx-background-color: red;" styleClass="jfxbutton-circle" text="截止考核" textAlignment="JUSTIFY" textFill="WHITE">
+            <JFXButton layoutX="696.0" layoutY="20.0" onMouseClicked="#endButton" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: red;" styleClass="jfxbutton-circle" text="试卷截止" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -127,7 +127,7 @@
                   <Font name="Heiti SC Light" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
          </children>

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -50,7 +51,7 @@ public class LoginController {
     @FXML void registerButton() {
     		openRegister("/View/Register.fxml");
     }
-    
+  
 	private boolean login() {
 		if (usernameField.getText().trim().isEmpty() && passwordField.getText().trim().isEmpty()) {
 			return false;

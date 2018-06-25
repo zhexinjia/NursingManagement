@@ -577,8 +577,10 @@ public class DBhelper {
 		String sql = "sql=" + mapInsert(map, tableName);
 		System.out.println(sql);
 		if(sendPost(urlSend, sql)) {
+			System.out.println(sql);
 			return true;
 		}
+		System.out.println("Fail to insert");
 		return false;
 	}
 	
@@ -632,6 +634,21 @@ public class DBhelper {
 		return false;
 	}
 	
+	public boolean deleteOfflineExam(HashMap<String, String> map) {
+		String id = map.get("id");
+		String exam = "delete from offlineexam_list where id=" + "'" + id + "';";
+		String history = "delete from offlineexam_history where offlineexam_id=" + "'" + id + "';";
+		String sql = "sql=" + exam + history;
+		System.out.println(sql);
+		if (sendPost(urlSend, sql)) {
+			System.out.println("Delete Offline Exam Success");
+			//success();
+			return true;
+		}
+		//fail();
+		System.out.println("Fail to Delete Offline Exam");
+		return false;
+	}
 	
 	//simply insert entire HashMap List into table
 
@@ -688,6 +705,24 @@ public class DBhelper {
 		return false;
 	}
 	
+	public boolean publishOfflineExam(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item) {
+		String id = item.get("id");
+		String sql = "sql=";
+		for (HashMap<String, String> user:userList) {
+			String ssn = user.get("ssn");
+			sql += "insert ignore into offlineexam_history (ssn, offlineexam_id) VALUES ('" + ssn + "', '" + id + "');";
+			sql += "update offlineexam_list set publishStatus = '已发布' where id= '" + id + "';";
+		}
+		
+		System.out.println(sql);
+		
+		if (sendPost(urlSend, sql)) {
+			System.out.println("Publish Offline Exam Success");
+			return true;
+		}
+		System.out.println("Fail to publish Offline Exam");
+		return false;
+	}
 
 	//delete meeting and all meeting history related to this meeting
 	public boolean deleteMeeting(HashMap<String, String> selectedMeeting) {

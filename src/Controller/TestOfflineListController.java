@@ -1,4 +1,4 @@
- package Controller;
+package Controller;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
-public class TestOfflineController implements Initializable {
+public class TestOfflineListController implements Initializable {
 	
 	@FXML
 	private VBox box;
@@ -74,8 +74,8 @@ public class TestOfflineController implements Initializable {
     		if(selectedTest==null) {
     			PopupWindow pop = new PopupWindow();
     			pop.alertWindow("操作失败", "请选中需要操作的考试。");
-    		}else if (selectedTest.get("publishStatus").equals("未发布")) {
-    			loader.loadVBox(box, "/View/TestOfflinePublish.fxml");
+    		}else if (selectedTest.get("publish_status").equals("0")) {
+    			loader.loadVBox(box, "/View/TestPublish.fxml");
     		}else {
     			PopupWindow popUP = new PopupWindow();
     			popUP.alertWindow("操作失败", "试卷已经截止，无法添加考试人员。");
@@ -85,10 +85,10 @@ public class TestOfflineController implements Initializable {
     @FXML void endButton() {
     		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
     		if(loader.selectionCheck(selected)) {
-    			if(selected.get("publishStatus").equals("已发布")) {
+    			if(selected.get("publish_status").equals("0")) {
     				HashMap<String, String> map = new HashMap<String, String>();
     				map.put("id", selected.get("id"));
-    				map.put("publishStatus", "已截止");
+    				map.put("publish_status", "1");
     				if(dbHelper.update(map, "offlineexam_list")) {
     					this.getList();
     					this.reload();
@@ -103,7 +103,7 @@ public class TestOfflineController implements Initializable {
 
     @FXML
     void newButton() {
-    		loader.loadVBox(box, "/View/TestOfflineNew.fxml");
+    		loader.loadVBox(box, "/View/TestNew.fxml");
     }
 
     /*
@@ -121,7 +121,7 @@ public class TestOfflineController implements Initializable {
     @FXML void detailButton() {
     		selectedTest = tableView.getSelectionModel().getSelectedItem();
     		if(loader.selectionCheck(selectedTest)) {
-    			loader.loadVBox(box, "/View/TestOfflineDetail.fxml");
+    			loader.loadVBox(box, "/View/TestDetail.fxml");
     		}
     }
 
@@ -138,7 +138,7 @@ public class TestOfflineController implements Initializable {
 
 	private void setupTable() {
 		loader.setupTable(tableView, keys, fields);
-
+		System.out.println("tableView is " + tableView);
 	}
 	
 	private void getList() {
@@ -161,7 +161,7 @@ public class TestOfflineController implements Initializable {
 		PopupWindow popUP = new PopupWindow();
 		popUP.confirmButton.setOnAction(e->{
 			//TODO: fix me, delete exam also delete exam-question relation table
-			if(dbHelper.deleteOfflineExam(map)) {
+			if(dbHelper.deleteExam(map)) {
 				popUP.stage.close();
 				getList();
 				reload();

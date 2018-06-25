@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
-public class TestDetailController implements Initializable{
+public class TestOfflineDetailController implements Initializable{
 	@FXML VBox box;
 	@FXML TableView<HashMap<String, String>> tableView;
 	@FXML PieChart pieChart;
@@ -39,7 +39,8 @@ public class TestDetailController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//FXIME: get total score of the test??????????? selected count of single, multi and tf, then add?
-		selectedTest = TestListController.selectedTest;
+		selectedTest = TestOfflineController.selectedTest;
+		//System.out.println("selectedTest: "+selectedTest);
 		examID = selectedTest.get("id");
 		setupTable();
 		getList();
@@ -85,12 +86,13 @@ public class TestDetailController implements Initializable{
     
 	private void getList() {
 		//TODO: how to count total point??? should we remove it?
-		String[] columns = {"exam_history.exam_id", "exam_history.id as id", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
-				"user_primary_info.title", "user_primary_info.level", "exam_history.finish as finish", "exam_history.score as score"};
-		String[] searchColumns = {"exam_history.exam_id"};
+		String[] columns = {"offlineexam_history.offlineexam_id", "offlineexam_history.id as id", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
+				"user_primary_info.title", "user_primary_info.level", "offlineexam_history.finish_status as finish", "offlineexam_history.total_score as score"};
+		String[] searchColumns = {"offlineexam_history.offlineexam_id"};
 		String[] searchValues = {examID};
 		
-		list = dbHelper.getList(searchColumns, searchValues, "exam_history inner join user_primary_info on exam_history.ssn = user_primary_info.ssn", columns);
+		list = dbHelper.getList(searchColumns, searchValues, "offlineexam_history inner join user_primary_info on offlineexam_history.ssn = user_primary_info.ssn", columns);
+		System.out.println("list:" +list);
 	}
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, "");

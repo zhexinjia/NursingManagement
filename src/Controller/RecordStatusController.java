@@ -42,6 +42,8 @@ public class RecordStatusController implements Initializable {
 	ArrayList<HashMap<String, String>> scoreList;
 	HashMap<String, ArrayList<HashMap<String, String>>> departmentList = new HashMap<String, ArrayList<HashMap<String, String>>>();
 	HashMap<String, ArrayList<HashMap<String, String>>> levelList = new HashMap<String, ArrayList<HashMap<String, String>>>();
+	ArrayList<HashMap<String, String>> departmentExportList;
+	ArrayList<HashMap<String, String>> levelExportList;
 	DBhelper dbHelper = new DBhelper();
 	Loader loader = new Loader();
 
@@ -63,6 +65,20 @@ public class RecordStatusController implements Initializable {
     void contactButton() {
 		loader.loadWeb();
     }
+	
+	@FXML 
+	void exportDepartmentButton(){
+		String[] fieldlist = {"姓名", "职位", "层级", "得分", "总分"};
+		String[] keylist = {"name", "position", "level", "currentScore", "totalScore"};
+		loader.exportExcel(departmentExportList, fieldlist, keylist);
+	}
+	
+	@FXML 
+	void exportlevelButton(){
+		String[] fieldlist = {"姓名", "科室", "职位", "得分", "总分"};
+		String[] keylist = {"name", "department", "position", "currentScore", "totalScore"};
+		loader.exportExcel(levelExportList, fieldlist, keylist);
+	}
 	
 	void getList(){
 		String tableName = "user_score inner join user_primary_info on user_primary_info.ssn = user_score.ssn "
@@ -188,6 +204,9 @@ public class RecordStatusController implements Initializable {
 			ArrayList<HashMap<String, String>> list = departmentList.get(department);
 			ObservableList<HashMap<String, String>> searchList = loader.search(list, "");
 			departmentTableView.setItems(searchList);
+			//System.out.println("list: " + list);
+			//System.out.println("search list: " + searchList);
+			departmentExportList = list;
 			caculateDepartment(list);
 		}
 	}
@@ -197,6 +216,7 @@ public class RecordStatusController implements Initializable {
 			ArrayList<HashMap<String, String>> list = levelList.get(level);
 			ObservableList<HashMap<String, String>> searchList = loader.search(list, "");
 			levelTableView.setItems(searchList);
+			levelExportList = list;
 			calculateLevel(list);
 		}
 	}
@@ -223,7 +243,7 @@ public class RecordStatusController implements Initializable {
 		departmentLowest.setText(df.format(low*100) + "%");
 	}
 	private void calculateLevel(ArrayList<HashMap<String, String>> list) {
-		System.out.println("list is : "+list);
+		//System.out.println("list is : "+list);
 		Double total = (double) 0;
 		Double low = (double) 1;
 		Double high = (double) 0;

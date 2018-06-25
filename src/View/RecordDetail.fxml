@@ -208,21 +208,10 @@
                                  <children>
                                     <Label id="footer" fx:id="countLabel1" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets left="25.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Heiti SC Light" size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="20.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                  </children>
                               </HBox>
                            </children>
@@ -260,21 +249,10 @@
                                  <children>
                                     <Label id="footer" fx:id="countLabel11" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets left="25.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Heiti SC Light" size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="20.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                  </children>
                               </HBox>
                            </children>
@@ -312,21 +290,10 @@
                                  <children>
                                     <Label id="footer" fx:id="countLabel111" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets left="25.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Heiti SC Light" size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="20.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                  </children>
                               </HBox>
                            </children>
@@ -364,21 +331,10 @@
                                  <children>
                                     <Label id="footer" fx:id="countLabel1112" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets left="25.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Heiti SC Light" size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="20.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                  </children>
                               </HBox>
                            </children>

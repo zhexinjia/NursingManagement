@@ -215,7 +215,15 @@
                                                 <DropShadow />
                                              </effect>
                                              <HBox.margin>
-                                                <Insets bottom="20.0" left="10.0" right="30.0" />
+                                                <Insets bottom="20.0" left="10.0" right="20.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                          <JFXButton buttonType="RAISED" layoutX="443.0" layoutY="12.0" onMouseClicked="#exportDepartmentButton" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" right="30.0" />
                                              </HBox.margin>
                                           </JFXButton>
                                        </children>
@@ -301,7 +309,15 @@
                                                 <DropShadow />
                                              </effect>
                                              <HBox.margin>
-                                                <Insets bottom="20.0" left="10.0" right="30.0" />
+                                                <Insets bottom="20.0" left="10.0" right="20.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                          <JFXButton buttonType="RAISED" layoutX="443.0" layoutY="12.0" onMouseClicked="#exportlevelButton" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" right="30.0" />
                                              </HBox.margin>
                                           </JFXButton>
                                        </children>

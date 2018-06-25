@@ -66,6 +66,7 @@ public class TestListController implements Initializable {
     		searchField.setText("");
     		reload();
     }
+    
 
     @FXML
     void publishButton() {

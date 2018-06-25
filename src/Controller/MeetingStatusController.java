@@ -61,6 +61,13 @@ public class MeetingStatusController implements Initializable{
     }
     
     @FXML
+    void exportButton() {
+    		String[] fieldlist = new String[] {"会议信息", "出勤率", "是否记分"};
+    		String[] keylist = new String[] {"name", "percent","if_count"};
+    		loader.exportExcel(meetingList, fieldlist, keylist);
+    }
+    
+    @FXML
     void detailButton() {
     		HashMap<String, String> selectedMeeting = tableView.getSelectionModel().getSelectedItem();
     		if(selectedMeeting != null) {

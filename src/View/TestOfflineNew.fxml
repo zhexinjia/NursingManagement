@@ -142,17 +142,17 @@
                   </JFXComboBox>
                </children>
             </HBox>
-            <HBox prefHeight="41.0" prefWidth="629.0">
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="629.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="141.0" style="-fx-font-size: 16;" text="考核内容： " textAlignment="RIGHT" textFill="#8c95aa">
+                  <Label prefHeight="16.0" prefWidth="485.0" style="-fx-font-size: 16;" text="考核内容： " textAlignment="RIGHT" textFill="#8c95aa">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin></Label>
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="240.0" prefHeight="100.0" prefWidth="582.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="240.0" prefHeight="100.0" prefWidth="582.0">
                <children>
-                  <JFXTextArea fx:id="contextField1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="536.0" style="-fx-background-color: #dddddd;">
+                  <JFXTextArea fx:id="contextField1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="536.0">
                      <HBox.margin>
                         <Insets bottom="10.0" left="60.0" right="10.0" top="10.0" />
                      </HBox.margin>

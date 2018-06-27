@@ -61,7 +61,7 @@ public class TestOfflineDetailController implements Initializable{
     @FXML void detailButton() {
     		selectedUser = tableView.getSelectionModel().getSelectedItem();
     		if(selectedUser != null) {
-    			loader.loadVBox(box, "/View/UserTestDetail.fxml");
+    			loader.loadVBox(box, "/View/UserTestOfflineDetail.fxml");
     		}else {
     			PopupWindow pop = new PopupWindow();
     			pop.alertWindow("查看失败", "请选中一个用户");

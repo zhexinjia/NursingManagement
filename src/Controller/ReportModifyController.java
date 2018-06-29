@@ -119,10 +119,22 @@ public class ReportModifyController implements Initializable{
 	ArrayList<JFXCheckBox> CauseReasonList = new ArrayList<JFXCheckBox>();
 	@FXML JFXCheckBox CauseReason1;
 	@FXML JFXCheckBox CauseReason2;
+	@FXML JFXCheckBox CauseReason3;
+	@FXML JFXCheckBox CauseReason4;
+	@FXML JFXCheckBox CauseReason5;
+	@FXML JFXCheckBox CauseReason6;
+	@FXML JFXCheckBox CauseReason7;
+	@FXML JFXCheckBox CauseReason8;
+	@FXML JFXCheckBox CauseReason9;
+	@FXML JFXCheckBox CauseReason10;
+	@FXML JFXTextField CauseReason10_text;
+	
 	
 	ArrayList<JFXCheckBox> eventLevelList = new ArrayList<JFXCheckBox>();
 	@FXML JFXCheckBox eventLevel1;
 	@FXML JFXCheckBox eventLevel2;
+	@FXML JFXCheckBox eventLevel3;
+	@FXML JFXCheckBox eventLevel4;
 	
 	@FXML JFXTextArea treatmentMeasure;
 	@FXML JFXTextArea discussion;
@@ -164,7 +176,6 @@ public class ReportModifyController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 
 		report = HospitalReportController.selectedReport;
-		//System.out.println(report);
 		
 		configureCheckBox(male, selected_patientSex, unselected_patientSex, patientSex);
 		configureCheckBox(female, selected_patientSex, unselected_patientSex, patientSex);
@@ -226,9 +237,19 @@ public class ReportModifyController implements Initializable{
 		
 		configureCheckBox(CauseReason1, selected_CauseReason, unselected_CauseReason, CauseReasonList);
 		configureCheckBox(CauseReason2, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason3, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason4, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason5, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason6, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason7, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason8, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason9, selected_CauseReason, unselected_CauseReason, CauseReasonList);
+		configureCheckBox(CauseReason10, selected_CauseReason, unselected_CauseReason, CauseReasonList);
 		
 		configureCheckBox(eventLevel1, selected_eventLevel, unselected_eventLevel, eventLevelList);
 		configureCheckBox(eventLevel2, selected_eventLevel, unselected_eventLevel, eventLevelList);
+		configureCheckBox(eventLevel3, selected_eventLevel, unselected_eventLevel, eventLevelList);
+		configureCheckBox(eventLevel4, selected_eventLevel, unselected_eventLevel, eventLevelList);
 
 		
 		setupPage();
@@ -272,18 +293,24 @@ public class ReportModifyController implements Initializable{
 	}
 	
 	@FXML void uploadButton() {
-		System.out.println(report.get("level"));
+
 		if(!report.get("level").equals("1")) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", report.get("id"));
 			//map.put("comment2", hospitalArea.getText());
 			map.put("level", "3");
-			
 	
 			map.put("reportDepartment", reportDepartment.getText());
+
+			//TODO - note
+			//可以允许更改上面的两个日期吗？？？？？
+			if (eventDate.getValue()!=null) {
+				map.put("eventDate", eventDate.getValue().toString());
+			}
 			
-			map.put("eventDate", eventDate.getValue().toString());
-			map.put("reportDate", reportDate.getValue().toString());
+			if (reportDate.getValue() != null) {
+				map.put("reportDate", reportDate.getValue().toString());
+			}
 			
 			map.put("patientName", patientName.getText());
 			map.put("patientAge", patientAge.getText());
@@ -385,10 +412,13 @@ public class ReportModifyController implements Initializable{
 			
 			//导致事件原因
 			if (!selected_CauseReason.isEmpty()) {
-				for (int i = 0; i <2; i++) {
+				for (int i = 0; i <10; i++) {
 					if (CauseReasonList.get(i).isSelected()) {
 						String temp = Integer.toString(i);
 						map.put("CauseReason", temp);
+						if ((i == 9) && (CauseReason10_text != null)) {
+							map.put("CauseReason10_text", CauseReason10_text.getText());
+						}
 						break;
 					}
 				}
@@ -400,7 +430,7 @@ public class ReportModifyController implements Initializable{
 			
 			//事件级别
 			if (!selected_eventLevel.isEmpty()) {
-				for (int i = 0; i <2; i++) {
+				for (int i = 0; i <4; i++) {
 					if (eventLevelList.get(i).isSelected()) {
 						String temp = Integer.toString(i);
 						map.put("eventLevel", temp);
@@ -419,10 +449,13 @@ public class ReportModifyController implements Initializable{
 			map.put("followUpEvaluation", followUpEvaluation.getText());
 			map.put("signature1", signature1.getText());
 			map.put("signature2", signature2.getText());
-			map.put("signatureDate1", signatureDate1.getValue().toString());
-			map.put("signatureDate2", signatureDate2.getValue().toString());
 			
-			
+			if (signatureDate1.getValue() != null) {
+				map.put("signatureDate1", signatureDate1.getValue().toString());
+			}
+			if (signatureDate2.getValue() != null) {
+				map.put("signatureDate2", signatureDate2.getValue().toString());
+			}
 			
 			if(dbHelper.update(map, "report_list")) {
 				//TODO:???
@@ -476,7 +509,7 @@ public class ReportModifyController implements Initializable{
 		}else {
 			eventLocationNum = Integer.parseInt(report.get("eventLocation"));
 			if (eventLocationNum == 5) {
-				eventLocationList.get(5).setSelected(true);
+				eventLocation6.setSelected(true);
 				eventLocation6_text.setText(report.get("eventLocation6_text"));
 			}else {
 				for (int i =0; i < 5; i++) {	
@@ -547,35 +580,36 @@ public class ReportModifyController implements Initializable{
 			}
 		}
 
-		int CauseReason = -1;
+		int CauseReasonNum = -1;
 		if (report.get("CauseReason") != null) {
-			CauseReason = Integer.parseInt(report.get("CauseReason"));
+			CauseReasonNum = Integer.parseInt(report.get("CauseReason"));
 		}
-		if (CauseReason == -1) {
+		if (CauseReasonNum == -1) {
 			System.out.println("ERROR: Cause Reason is NULL");
-		}else{
-			if (CauseReason == 0) {
-				CauseReason1.setSelected(true);
-			}else if (CauseReason == 1){
-				CauseReason2.setSelected(true);
-			}else {
-				System.out.println("ERROR: CauseReason is out of range");
+		}else if (CauseReasonNum == 9) {
+			CauseReason10.setSelected(true);
+			CauseReason10_text.setText(report.get("CauseReason10_text"));
+		}
+		else{
+			for (int i=0; i < 9; i++) {
+				if (CauseReasonNum == i) {
+					CauseReasonList.get(i).setSelected(true);
+				}
 			}
 		}
 		
-		int eventLevel = -1;
+		
+		int eventLevelNum = -1;
 		if (report.get("eventLevel") != null) {
-			eventLevel = Integer.parseInt(report.get("CauseReason"));
+			eventLevelNum = Integer.parseInt(report.get("eventLevel"));
 		}
-		if (eventLevel == -1) {
+		if (eventLevelNum == -1) {
 			System.out.println("ERROR: eventLevel is NULL");
 		}else{
-			if (eventLevel == 0) {
-				eventLevel1.setSelected(true);
-			}else if (eventLevel == 1){
-				eventLevel2.setSelected(true);
-			}else {
-				System.out.println("ERROR: eventLevel is out of range");
+			for (int i=0; i < 4; i++) {
+				if (eventLevelNum == i) {
+					eventLevelList.get(i).setSelected(true);
+				}
 			}
 		}
 		
@@ -586,6 +620,7 @@ public class ReportModifyController implements Initializable{
 		
 		signature1.setText(report.get("signature1"));
 		signature2.setText(report.get("signature2"));
+		
 		signatureDate1.setPromptText(report.get("signatureDate1"));
 		signatureDate2.setPromptText(report.get("signatureDate2"));
 		

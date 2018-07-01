@@ -378,10 +378,7 @@ public class UserTestDetailController implements Initializable {
 		String tableName = "exam_qa_single";
 		String[] columns = {"question", "answer", "option1", "option2", "option3", "option4"};
  		singleQa = dbHelper.getList(searchColumn, values, tableName, columns);
- 		//System.out.println("singleQa: " + singleQa);
  		singleList.addAll(singleQa);
- 		
- 		//System.out.println("singleList: " + singleList);
  		singleCount = singleList.size();
 	}
 	
@@ -392,8 +389,6 @@ public class UserTestDetailController implements Initializable {
 		String[] columns = {"question", "answer", "option1", "option2", "option3", "option4", "option5"};
  		multiQa = dbHelper.getList(searchColumn, values, tableName, columns);
  		multiList.addAll(multiQa);
- 		
- 		//System.out.println("multiList: " + multiList);
  		multiCount = multiList.size();
 	}
 	
@@ -404,8 +399,6 @@ public class UserTestDetailController implements Initializable {
 		String[] columns = {"question", "answer"};
  		tfQa = dbHelper.getList(searchColumn, values, tableName, columns);
  		tfList.addAll(tfQa);
- 		
- 		//System.out.println("tfList: " + tfList);
  		tfCount = tfList.size();
 	}
 	

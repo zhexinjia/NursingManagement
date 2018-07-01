@@ -64,6 +64,12 @@ public class StudyNewController implements Initializable {
     		loader.loadWeb();
     }
     
+    @FXML 
+    void studyListButton() {
+    	loader.loadVBox(box, "/View/StudyList.fxml");
+    }
+    
+    
     @FXML void createButton() {
     		if(validate()) {
     			if(fileType) {

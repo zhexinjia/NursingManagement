@@ -66,6 +66,11 @@ public class TestOfflinePublishController implements Initializable {
 
 
     @FXML
+    void TestOfflineListButton() {
+    		loader.loadVBox(box, "/View/TestOffline.fxml");
+    }
+    
+    @FXML
     void searchButton() {
     		reload();
     }

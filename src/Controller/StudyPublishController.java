@@ -58,6 +58,11 @@ public class StudyPublishController implements Initializable {
 	@FXML void contact(){
 		loader.loadWeb();
 	}
+	
+    @FXML 
+    void studyListButton() {
+    	loader.loadVBox(box, "/View/StudyList.fxml");
+    }
 
 	@FXML
 	void publishButton() {

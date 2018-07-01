@@ -44,6 +44,10 @@ public class TrainningDetailController implements Initializable {
 		loader.loadWeb();
 	}
 
+	@FXML
+	void TrainningListButton() {
+		loader.loadVBox(box, "/View/TrainningList.fxml");
+	}
 
     @FXML
     void searchButton() {

@@ -292,6 +292,10 @@ public class ReportModifyController implements Initializable{
 		loader.loadVBox(box, "/View/Welcome.fxml"); 
 	}
 	
+	@FXML void loadReportList() {
+		loader.loadVBox(box, "/View/HospitalReport.fxml"); 
+	}
+	
 	@FXML void uploadButton() {
 
 		if(!report.get("level").equals("1")) {

@@ -58,6 +58,11 @@ public class TestOfflineDetailController implements Initializable{
     		loader.loadWeb();
     }
     
+    @FXML
+    void TestOfflineListButton() {
+    		loader.loadVBox(box, "/View/TestOffline.fxml");
+    }
+    
     @FXML void detailButton() {
     		selectedUser = tableView.getSelectionModel().getSelectedItem();
     		if(selectedUser != null) {

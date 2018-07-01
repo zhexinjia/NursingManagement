@@ -49,6 +49,11 @@ public class TestOfflineNewController implements Initializable {
     		loader.loadWeb();
     }
     
+    @FXML
+    void TestOfflineListButton() {
+    		loader.loadVBox(box, "/View/TestOffline.fxml");
+    }
+    
     @FXML void createButton() {
     		if(validate()) {
     			insertDB();

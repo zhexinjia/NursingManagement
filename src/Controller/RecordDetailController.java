@@ -63,6 +63,10 @@ public class RecordDetailController implements Initializable {
 			loader.loadVBox(box, "/View/UserTestDetail.fxml");
 		}
 	}
+	@FXML
+	void RecordListButton(){
+		loader.loadVBox(box, "/View/RecordList.fxml");
+	}
 	
     @FXML
     void searchButton() {

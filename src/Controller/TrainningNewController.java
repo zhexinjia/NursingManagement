@@ -44,6 +44,11 @@ public class TrainningNewController implements Initializable {
     			insertDB();
     		}
     }
+    
+	@FXML
+	void TrainningListButton() {
+		loader.loadVBox(box, "/View/TrainningList.fxml");
+	}
 
 	private boolean validate() {
 		if(nameField.getText().trim().isEmpty()) {

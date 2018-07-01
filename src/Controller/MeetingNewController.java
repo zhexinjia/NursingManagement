@@ -49,6 +49,10 @@ public class MeetingNewController implements Initializable{
     void contactButton() {
     		loader.loadWeb();
     }
+    @FXML 
+    void MeetingListButton(){
+    		loader.loadVBox(box, "/View/MeetingList.fxml");
+    }
 
     @FXML
     void generateLogin() {

@@ -91,6 +91,7 @@ public class TestDetailController implements Initializable{
 		String[] searchValues = {examID};
 		
 		list = dbHelper.getList(searchColumns, searchValues, "exam_history inner join user_primary_info on exam_history.ssn = user_primary_info.ssn", columns);
+		
 	}
 	private void reload() {
 		ObservableList<HashMap<String, String>> searchList = loader.search(list, "");

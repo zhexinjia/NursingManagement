@@ -60,6 +60,10 @@ public class MeetingPublishController implements Initializable {
 		loader.loadWeb();
 	}
 
+	@FXML 
+	void MeetingListButton() {
+		loader.loadVBox(box, "/View/MeetingList.fxml");
+	}
 
     @FXML
     void searchButton() {

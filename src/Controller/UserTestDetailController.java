@@ -55,13 +55,21 @@ public class UserTestDetailController implements Initializable {
 	
 	private HashMap<String, String> selectedUser;
 	private HashMap<String, String> userAnswers;
-	private ArrayList<HashMap<String,String>> singleList;
-	private ArrayList<HashMap<String, String>> multiList;
-	private ArrayList<HashMap<String, String>> tfList;
+	private ArrayList<HashMap<String,String>> singleQa;
+	private ArrayList<HashMap<String, String>> multiQa;
+	private ArrayList<HashMap<String, String>> tfQa;
+	
+	ArrayList<HashMap<String,String>> singleList= new ArrayList<HashMap<String,String>>();
+	ArrayList<HashMap<String,String>> multiList= new ArrayList<HashMap<String,String>>();
+	ArrayList<HashMap<String,String>> tfList= new ArrayList<HashMap<String,String>>();
 	
 	String[] singleAnswers;
 	String[] multiAnswers;
 	String[] tfAnswers;
+	
+	String[] singleQues;
+	String[] multiQues;
+	String[] tfQues;
 	
 	DBhelper dbHelper = new DBhelper();
 	Loader loader = new Loader();
@@ -309,46 +317,95 @@ public class UserTestDetailController implements Initializable {
 		String[] searchColumn= {"id"};
 		String[] values = {selectedUser.get("id")};
 		String tableName = "exam_history";
-		String[] columns = {"single_answer", "multi_answer", "tf_answer"};
+		String[] columns = {"single_ids","multi_ids","tf_ids","single_answer", "multi_answer", "tf_answer"};
  		userAnswers = dbHelper.getList(searchColumn, values, tableName, columns).get(0);
  		String singleAns = userAnswers.get("single_answer");
  		String multiAns = userAnswers.get("multi_answer");
  		String tfAns = userAnswers.get("tf_answer");
+ 		String singleIds = userAnswers.get("single_ids");
+ 		String multiIds = userAnswers.get("multi_ids");
+ 		String tfIds = userAnswers.get("tf_ids");
+ 		
+ 		System.out.println("singleIds: " + singleIds);
  		
  		singleAnswers = singleAns.split(",|，");
  		multiAnswers = multiAns.split(",|，");
  		tfAnswers = tfAns.split(",|，");
  		
+ 		singleQues = singleIds.split(",|，");
+ 		multiQues = multiIds.split(",|，");
+ 		tfQues = tfIds.split(",|，");
  		
- 		getSingleQuestions();
- 		getMultipleQuestions();
- 		getTfQuestions();
+ 		getSingleQues();
+ 		getMultiQues();
+ 		getTfQues();
+	}
+	void getSingleQues() {
+		int i = 0;
+		int length = singleQues.length;
+		
+		System.out.println("singleQues.length: " + singleQues.length);
+		while (i < length) {
+			getSingleQuestions(singleQues[i]);
+			i++;
+		}
 	}
 	
-	void getSingleQuestions(){
-		String[] searchColumn= {"exam_id"};
-		String[] values = {selectedUser.get("exam_id")};
+	void getMultiQues() {
+		int i = 0;
+		int length = multiQues.length;
+		System.out.println("multiQues.length: " + multiQues.length);
+		while (i < length) {
+			getMultipleQuestions(multiQues[i]);
+			i++;
+		}
+	}
+	
+	void getTfQues() {
+		int i = 0;
+		int length = tfQues.length;
+		System.out.println("tfQues.length: " + tfQues.length);
+		while (i < length) {
+			getTfQuestions(tfQues[i]);
+			i++;
+		}
+	}
+	
+	
+	void getSingleQuestions(String exam_id){
+		String[] searchColumn= {"id"};
+		String[] values = {exam_id};
 		String tableName = "exam_qa_single";
 		String[] columns = {"question", "answer", "option1", "option2", "option3", "option4"};
- 		singleList = dbHelper.getList(searchColumn, values, tableName, columns);
+ 		singleQa = dbHelper.getList(searchColumn, values, tableName, columns);
+ 		//System.out.println("singleQa: " + singleQa);
+ 		singleList.addAll(singleQa);
+ 		
+ 		//System.out.println("singleList: " + singleList);
  		singleCount = singleList.size();
 	}
 	
-	void getMultipleQuestions() {
-		String[] searchColumn= {"exam_id"};
-		String[] values = {selectedUser.get("exam_id")};
+	void getMultipleQuestions(String exam_id) {
+		String[] searchColumn= {"id"};
+		String[] values = {exam_id};
 		String tableName = "exam_qa_multiple";
 		String[] columns = {"question", "answer", "option1", "option2", "option3", "option4", "option5"};
- 		multiList = dbHelper.getList(searchColumn, values, tableName, columns);
+ 		multiQa = dbHelper.getList(searchColumn, values, tableName, columns);
+ 		multiList.addAll(multiQa);
+ 		
+ 		//System.out.println("multiList: " + multiList);
  		multiCount = multiList.size();
 	}
 	
-	void getTfQuestions() {
-		String[] searchColumn= {"exam_id"};
-		String[] values = {selectedUser.get("exam_id")};
+	void getTfQuestions(String exam_id) {
+		String[] searchColumn= {"id"};
+		String[] values = {exam_id};
 		String tableName = "exam_qa_tf";
 		String[] columns = {"question", "answer"};
- 		tfList = dbHelper.getList(searchColumn, values, tableName, columns);
+ 		tfQa = dbHelper.getList(searchColumn, values, tableName, columns);
+ 		tfList.addAll(tfQa);
+ 		
+ 		//System.out.println("tfList: " + tfList);
  		tfCount = tfList.size();
 	}
 	

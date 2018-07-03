@@ -79,6 +79,11 @@ public class TestModifyController implements Initializable {
 		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
     
+    @FXML
+    void testListButton() {
+    		loader.loadVBox(box, "/View/TestList.fxml");
+    }
+    
     boolean entryCheck() {
     		if(if_count) {
     			if(singleChoiceBox.getSelectionModel().isEmpty() || multiChoiceBox.getSelectionModel().isEmpty() ||

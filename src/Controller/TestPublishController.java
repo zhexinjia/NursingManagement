@@ -75,6 +75,11 @@ public class TestPublishController implements Initializable {
     		reload();
     }
 
+    @FXML
+    void testListButton() {
+    		loader.loadVBox(box, "/View/TestList.fxml");
+    }
+    
     /*
     @FXML
     void newButton() {

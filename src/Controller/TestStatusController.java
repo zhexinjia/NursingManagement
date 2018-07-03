@@ -66,6 +66,11 @@ public class TestStatusController implements Initializable {
     		searchField.setText("");
     		reload();
     }
+    
+    @FXML
+    void testListButton() {
+    		loader.loadVBox(box, "/View/TestList.fxml");
+    }
 
     @FXML
     void endTestButton() {

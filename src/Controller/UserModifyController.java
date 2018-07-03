@@ -176,6 +176,11 @@ public class UserModifyController implements Initializable {
     void contactButton() {
     		loader.loadWeb();
     }
+    
+    @FXML
+    void userListButton() {
+    		loader.loadVBox(box, "/View/UserList.fxml");
+    }
 
     //navigate to next tabPane page
     @FXML

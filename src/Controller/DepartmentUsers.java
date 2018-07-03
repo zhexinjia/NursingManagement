@@ -49,6 +49,11 @@ public class DepartmentUsers implements Initializable {
 	@FXML void contact(){
 		loader.loadWeb();
 	}
+	
+	@FXML
+	void departmentListButton() {
+		loader.loadVBox(box, "/View/DepartmentList.fxml");
+	}
 
 
     @FXML

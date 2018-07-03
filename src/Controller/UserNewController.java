@@ -167,6 +167,11 @@ public class UserNewController implements Initializable {
     void contactButton() {
     		loader.loadWeb();
     }
+    
+    @FXML
+    void userListButton() {
+    		loader.loadVBox(box, "/View/UserList.fxml");
+    }
 
     @FXML
     void nextPane() {

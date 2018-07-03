@@ -83,6 +83,12 @@ public class BankModifyController implements Initializable {
     @FXML void loadHome() {
 		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
+    
+    @FXML 
+    void bankListButton() {
+    		loader.loadVBox(box, "/View/BankList.fxml");
+    }
+    
     /*
     boolean entryCheck() {
     		if(if_count) {

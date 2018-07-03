@@ -48,6 +48,11 @@ public class TestNewController implements Initializable {
 	@FXML void loadHome() {
 		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
+	
+    @FXML
+    void testListButton() {
+    		loader.loadVBox(box, "/View/TestList.fxml");
+    }
 
     @FXML
     void contactButton() {

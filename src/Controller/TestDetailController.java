@@ -72,6 +72,11 @@ public class TestDetailController implements Initializable{
     }
     
     @FXML
+    void testListButton() {
+    		loader.loadVBox(box, "/View/TestList.fxml");
+    }
+    
+    @FXML
     void exportButton() {
     		String[] fieldlist = fields;
     		String[] keylist = keys;

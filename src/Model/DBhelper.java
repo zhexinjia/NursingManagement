@@ -599,7 +599,7 @@ public class DBhelper {
 		if(sendPost(urlSend, sql)) {
 			return true;
 		}
-		System.out.println(sql);
+		//System.out.println(sql);
 		return false;
 	}
 	

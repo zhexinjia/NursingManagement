@@ -913,6 +913,19 @@ public class DBhelper {
 	
 	}
 	
+	public boolean updateManager(String newManager, String oldManager) {
+		String sql = "sql=";
+		sql += "update user_primary_info set is_manager = '1' where ssn ='" 
+				+ newManager + "'; update user_primary_info set is_manager = '0' "
+				+ "where ssn ='" + oldManager + "';";
+
+		if(sendPost(urlSend, sql)) {
+			System.out.println(sql);
+			return true;
+		}
+		return false;
+	}
+	
 	//given ssn, return list of test score histoys, list of study score history, list of training, list of meeting
 	/*
 	public ArrayList<ArrayList<HashMap<String, String>>> getRecordLists(String ssn){

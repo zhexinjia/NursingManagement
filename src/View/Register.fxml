@@ -106,7 +106,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="155.0" style="-fx-background-color: white;">
                <children>
-                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true">
                      <image>
                         <Image url="@../../Images/hospitalIcon.png" />
                      </image>
@@ -126,7 +126,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="204.0" style="-fx-background-color: white;">
                <children>
-                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true">
                      <image>
                         <Image url="@../../Images/barCodeIcon.png" />
                      </image>

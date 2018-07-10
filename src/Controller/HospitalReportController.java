@@ -26,7 +26,7 @@ public class HospitalReportController implements Initializable {
 	@FXML ChoiceBox<String> levelPicker;
 	Loader loader = new Loader();
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
-	String[] keys = {"name", "department", "date", "title","status"};
+	String[] keys = {"name", "department", "reportDate", "title","status"};
 	String[] fields = {"上报员工", "所属科室", "上报时间", "上报事件", "处理情况"};
 	PopupWindow popUP = new PopupWindow();
 	DBhelper dbHelper = new DBhelper();

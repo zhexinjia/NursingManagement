@@ -29,7 +29,15 @@ public class StudyDetailController implements Initializable {
 	private HashMap<String, String> selectedStudy;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		selectedStudy = StudyStatusController.selectedStudy;
+		selectedStudy = (StudyStatusController.selectedStudy );
+		if (StudyStatusController.selectedStudy != null) {
+			selectedStudy = StudyStatusController.selectedStudy ;
+		}else if (StudyListController.selectedStudy != null) {
+			selectedStudy = StudyListController.selectedStudy;
+		}else {
+			System.out.println("Something wrong here");
+		}
+		
 		setupTable();
 		getList();
 		reload();

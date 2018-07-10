@@ -88,6 +88,7 @@ public class StudyNewController implements Initializable {
     			}else {
     				this.insertDB();
     			}
+    			
     			/*
     			if(typePicker.getValue().toString().equals("网址")) {
     				this.insertDB();
@@ -205,7 +206,6 @@ public class StudyNewController implements Initializable {
     		map.put("point", pointPicker.getValue().toString());
     		//}
     		DBhelper dbHelper = new DBhelper();
-    		dbHelper.insert(map, "study_list");
     		/*
     		if(dbHelper.insert(map, "study_list")) {
     			//TODO: modify confirmButton
@@ -218,6 +218,9 @@ public class StudyNewController implements Initializable {
     			pop.errorWindow();
     		}
     		*/
+    		if (dbHelper.insert(map, "study_list")) {
+    			loader.loadVBox(box, "/View/StudyList.fxml");
+    		}
     }
     
     

@@ -93,10 +93,7 @@ public class MeetingNewController implements Initializable{
     			
     			DBhelper dbHelper = new DBhelper();
     			if (dbHelper.insert(map, "meeting_list")) {
-    				//pop.confirmWindow("新建成功", "会议创建成功！");
-    				//pop.confirmButton.setOnAction(e->{
     					loader.loadVBox(box, "/View/MeetingList.fxml");
-    				//});
     			}
     			/*
     			else {

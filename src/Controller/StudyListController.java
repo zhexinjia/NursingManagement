@@ -27,8 +27,10 @@ public class StudyListController implements Initializable {
 	ArrayList<HashMap<String, String>> list;
 	DBhelper dbHelper = new DBhelper();
 	public static HashMap<String, String> selectedStudy;
+	//public static HashMap<String, String> selected;
 	PopupWindow popUP = new PopupWindow();
 	String branch;
+
 
     @FXML
     void searchButton() {
@@ -61,6 +63,15 @@ public class StudyListController implements Initializable {
 		}else {
 			PopupWindow popUP = new PopupWindow();
 			popUP.alertWindow("发布课件失败", "课件已经发布，无法重复发布。");
+		}
+    }
+    
+    @FXML
+    void studyDetailButton() {
+    		selectedStudy = tableView.getSelectionModel().getSelectedItem();
+    		System.out.println("selectedStudy: "+selectedStudy);
+		if(loader.selectionCheck(selectedStudy)) {
+			loader.loadVBox(box, "/View/StudyDetail.fxml");
 		}
     }
 

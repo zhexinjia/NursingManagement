@@ -1,7 +1,8 @@
 package Controller;
 
 import java.net.URL;
-
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -18,8 +19,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public class ReportModifyController implements Initializable{
 	@FXML Label title;
@@ -52,7 +56,6 @@ public class ReportModifyController implements Initializable{
 	@FXML JFXCheckBox eventLocation5;
 	@FXML JFXCheckBox eventLocation6;
 	@FXML JFXTextField eventLocation6_text;
-	
 	
 	@FXML JFXTextField eventDepartment;
 	@FXML JFXTextField rpName;
@@ -174,9 +177,11 @@ public class ReportModifyController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		report = HospitalReportController.selectedReport;
 		
+		
+		
+		report = HospitalReportController.selectedReport;
+
 		configureCheckBox(male, selected_patientSex, unselected_patientSex, patientSex);
 		configureCheckBox(female, selected_patientSex, unselected_patientSex, patientSex);
 		
@@ -250,14 +255,56 @@ public class ReportModifyController implements Initializable{
 		configureCheckBox(eventLevel2, selected_eventLevel, unselected_eventLevel, eventLevelList);
 		configureCheckBox(eventLevel3, selected_eventLevel, unselected_eventLevel, eventLevelList);
 		configureCheckBox(eventLevel4, selected_eventLevel, unselected_eventLevel, eventLevelList);
-
 		
+		eventLocation6.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+			if (isNowSelected) {
+				eventLocation6_text.setEditable(true);
+			}else {
+				eventLocation6_text.clear();
+				eventLocation6_text.setEditable(false);
+			}
+		});
+		
+		
+		CauseReason10.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+			if (isNowSelected) {
+				CauseReason10_text.setEditable(true);
+			}else {
+				CauseReason10_text.clear();
+				CauseReason10_text.setEditable(false);
+			}
+		});
+		
+		initializeDatePickers();
 		setupPage();
+		
 	}
 	
+	// DatePicker disable to select any future date.
+	private void initializeDatePickers() {
+	    Callback<DatePicker, DateCell> dayCellFactory =
+	        (final DatePicker datePicker) -> new DateCell() {
+	            @Override
+	            public void updateItem(LocalDate item, boolean empty) {
+	                super.updateItem(item, empty);
+
+	                if(item.isAfter(ChronoLocalDate.from(LocalDate.now()))) {
+	                    setDisable(true);
+	                }
+
+	            }
+	        };
+	    
+	    eventDate.setDayCellFactory(dayCellFactory);
+	    reportDate.setDayCellFactory(dayCellFactory);
+	    signatureDate1.setDayCellFactory(dayCellFactory);
+	    signatureDate2.setDayCellFactory(dayCellFactory);
+	  
+	}
+
 	 private void configureCheckBox(JFXCheckBox checkBox, ObservableList<JFXCheckBox> selectedCheckBoxes,
 			 ObservableList<JFXCheckBox> unselectedCheckBoxes, ArrayList<JFXCheckBox> List) {
-		 
+		 	
 		 	List.add(checkBox);
 		 	
 	        if (checkBox.isSelected()) {
@@ -265,9 +312,10 @@ public class ReportModifyController implements Initializable{
 	        } else {
 	            unselectedCheckBoxes.add(checkBox);
 	        }
-
-	 
+	        
+	        
 	        checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+ 		
 	            if (isNowSelected) {
 	            		if (selectedCheckBoxes.isEmpty()) {
 	            			 unselectedCheckBoxes.remove(checkBox);
@@ -342,6 +390,9 @@ public class ReportModifyController implements Initializable{
 			if (!selected_eventLocation.isEmpty()) {
 				for (int i = 0; i <6; i++) {
 					if (eventLocationList.get(i).isSelected()) {
+						if ((i == 5) && (eventLocation6_text != null)) {
+							map.put("eventLocation6_text", eventLocation6_text.getText());
+						}
 						String temp = Integer.toString(i);
 						map.put("eventLocation", temp);
 						break;
@@ -352,8 +403,6 @@ public class ReportModifyController implements Initializable{
 				pop.alertWindow("无法上传", "缺少发生场所选项");
 				return;
 			}
-			
-			map.put("eventLocation6_text", eventLocation6_text.getText());
 			
 			//第三行 - 发生科室
 			map.put("eventDepartment", eventDepartment.getText());
@@ -462,7 +511,7 @@ public class ReportModifyController implements Initializable{
 			}
 			
 			if(dbHelper.update(map, "report_list")) {
-				//TODO:???
+				loader.loadVBox(box, "/View/HospitalReport.fxml");
 			}
 		}else {
 			PopupWindow pop = new PopupWindow();
@@ -480,6 +529,7 @@ public class ReportModifyController implements Initializable{
 	private void setupPage() {
 		reportDepartment.setText(report.get("reportDepartment"));
 		eventDate.setPromptText(report.get("eventDate"));
+		
 		reportDate.setPromptText(report.get("reportDate"));
 		
 		patientName.setText(report.get("patientName"));
@@ -514,6 +564,7 @@ public class ReportModifyController implements Initializable{
 			eventLocationNum = Integer.parseInt(report.get("eventLocation"));
 			if (eventLocationNum == 5) {
 				eventLocation6.setSelected(true);
+				eventLocation6_text.setEditable(true);
 				eventLocation6_text.setText(report.get("eventLocation6_text"));
 			}else {
 				for (int i =0; i < 5; i++) {	
@@ -592,6 +643,7 @@ public class ReportModifyController implements Initializable{
 			System.out.println("ERROR: Cause Reason is NULL");
 		}else if (CauseReasonNum == 9) {
 			CauseReason10.setSelected(true);
+			CauseReason10_text.setEditable(true);
 			CauseReason10_text.setText(report.get("CauseReason10_text"));
 		}
 		else{

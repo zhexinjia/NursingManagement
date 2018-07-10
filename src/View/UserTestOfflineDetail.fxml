@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< HEAD
+=======
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserTestOfflineDetailController">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserTestDetailController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -44,7 +54,11 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="56.0" text="成绩分析" textFill="WHITE">
+<<<<<<< HEAD
+            <Label onMouseClicked="#returnButton" prefHeight="34.0" prefWidth="56.0" text="实操考核" textFill="WHITE">
+=======
+            <Label onMouseClicked="#returnButton" prefHeight="34.0" prefWidth="60.0" text="实操考核" textFill="WHITE">
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -54,6 +68,23 @@
                <HBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </HBox.margin>
+            </Label>
+            <ImageView fitHeight="24.0" fitWidth="17.0" layoutX="92.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/rightArrow.png" />
+               </image>
+            </ImageView>
+<<<<<<< HEAD
+            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="92.0" text="查看考核详情" textFill="WHITE">
+=======
+            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="94.0" text="查看考核详情" textFill="WHITE">
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Heiti SC Medium" size="16.0" />
+               </font>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -74,57 +105,121 @@
       <JFXTabPane VBox.vgrow="ALWAYS">
          <tabs>
             <Tab text="考核详情">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <content>
+                  <VBox nodeOrientation="LEFT_TO_RIGHT">
                      <children>
-                        <HBox prefHeight="61.0" prefWidth="789.0">
+<<<<<<< HEAD
+                        <VBox alignment="CENTER_RIGHT" layoutX="8.0" layoutY="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label fx:id="nameLabel" contentDisplay="CENTER" prefHeight="61.0" prefWidth="75.0" text="姓名：">
-                                 <HBox.margin>
-                                    <Insets left="40.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <JFXTextField fx:id="nameField" editable="false" prefHeight="56.0" prefWidth="205.0" />
-                              <Pane prefHeight="58.0" prefWidth="126.0" />
-                              <Label fx:id="supervisorLabel" prefHeight="61.0" prefWidth="71.0" text="监考人：" />
-                              <JFXTextField fx:id="supervisorField" editable="false" layoutX="125.0" layoutY="10.0" prefHeight="56.0" prefWidth="205.0" />
-                           </children>
-                        </HBox>
-                        <HBox layoutY="66.0" prefHeight="61.0" prefWidth="791.0">
+                              <HBox prefHeight="61.0" prefWidth="789.0">
+                                 <children>
+                                    <Label fx:id="nameLabel" contentDisplay="CENTER" prefHeight="61.0" prefWidth="75.0" text="姓名：">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="nameField" editable="false" prefHeight="56.0" prefWidth="205.0" />
+                                    <Pane prefHeight="61.0" prefWidth="100.0" />
+                                    <Label fx:id="supervisorLabel" prefHeight="61.0" prefWidth="69.0" text="监考人：" />
+                                    <JFXTextField fx:id="supervisorField" editable="false" layoutX="125.0" layoutY="10.0" prefHeight="56.0" prefWidth="205.0" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="61.0" prefWidth="791.0">
+                                 <children>
+                                    <Label fx:id="takenDateLabel" contentDisplay="CENTER" prefHeight="61.0" prefWidth="75.0" text="考核时间：">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="takenDateField" editable="false" prefHeight="56.0" prefWidth="205.0" />
+                                    <Pane prefHeight="57.0" prefWidth="101.0" />
+                                    <Label fx:id="scoreLabel" prefHeight="61.0" prefWidth="71.0" text="考核得分：" />
+                                    <JFXTextField fx:id="scoreField" editable="false" layoutX="125.0" layoutY="10.0" prefHeight="56.0" prefWidth="205.0" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="53.0" prefWidth="778.0">
+                                 <children>
+                                    <Label fx:id="commentLabel" prefHeight="53.0" prefWidth="135.0" text="得分详情：">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+=======
+                        <VBox id="effectPane" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="40.0" top="20.0" />
+                           </VBox.margin>
                            <children>
-                              <Label fx:id="takenDateLabel" contentDisplay="CENTER" prefHeight="61.0" prefWidth="75.0" text="考核时间：">
-                                 <HBox.margin>
-                                    <Insets left="40.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <JFXTextField fx:id="takenDateField" editable="false" prefHeight="56.0" prefWidth="205.0" />
-                              <Pane prefHeight="58.0" prefWidth="126.0" />
-                              <Label fx:id="scoreLabel" prefHeight="61.0" prefWidth="71.0" text="考核得分：" />
-                              <JFXTextField fx:id="scoreField" editable="false" layoutX="125.0" layoutY="10.0" prefHeight="56.0" prefWidth="205.0" />
+                              <HBox layoutX="10.0" layoutY="44.0" prefHeight="70.0" prefWidth="749.0">
+                                 <children>
+                                    <Label prefHeight="14.0" prefWidth="71.0" text="姓名：">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="nameField" prefHeight="30.0" prefWidth="190.0" />
+                                    <Pane prefHeight="64.0" prefWidth="100.0" />
+                                    <Label text="监考人：">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="supervisorField" layoutX="48.0" layoutY="10.0" prefHeight="30.0" prefWidth="190.0" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="70.0" prefWidth="749.0">
+                                 <children>
+                                    <Label text="考核时间：">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="takenDateField" prefHeight="30.0" prefWidth="190.0" />
+                                    <Pane prefHeight="64.0" prefWidth="89.0">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Pane>
+                                    <Label text="考核得分：" />
+                                    <JFXTextField fx:id="scoreField" layoutX="48.0" layoutY="10.0" prefHeight="30.0" prefWidth="190.0" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="176.0" prefHeight="34.0" prefWidth="729.0">
+                                 <children>
+                                    <Label text="得分详情：">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+<<<<<<< HEAD
+                              <HBox prefHeight="228.0" prefWidth="749.0">
+                                 <children>
+                                    <JFXTextArea fx:id="commentField" editable="false" prefHeight="240.0" prefWidth="689.0">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+=======
+                              <HBox layoutX="10.0" layoutY="272.0" prefHeight="212.0" prefWidth="729.0">
+                                 <children>
+                                    <JFXTextArea fx:id="commentField" prefHeight="209.0" prefWidth="687.0">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
+                                       </HBox.margin>
+                                    </JFXTextArea>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
-                        <HBox layoutX="3.0" layoutY="138.0" prefHeight="53.0" prefWidth="778.0">
-                           <children>
-                              <Label fx:id="commentLabel" prefHeight="53.0" prefWidth="135.0" text="得分详情：">
-                                 <HBox.margin>
-                                    <Insets left="40.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox layoutX="2.0" layoutY="197.0" prefHeight="240.0" prefWidth="788.0">
-                           <children>
-                              <JFXTextArea fx:id="commentField" editable="false" prefHeight="240.0" prefWidth="689.0">
-                                 <HBox.margin>
-                                    <Insets left="40.0" />
-                                 </HBox.margin>
-                              </JFXTextArea>
-                           </children>
-                        </HBox>
-                        <JFXButton layoutX="668.0" layoutY="450.0" onMouseClicked="#returnButton" prefHeight="35.0" prefWidth="76.0" style="-fx-background-color: blue;" styleClass="jfxbutton-circle" text="返回" textFill="WHITE" AnchorPane.topAnchor="450.0" />
+<<<<<<< HEAD
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+=======
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
+                        </VBox>
                      </children>
-                  </AnchorPane>
-              </content>
+                  </VBox>
+               </content>
             </Tab>
          </tabs>
       </JFXTabPane>

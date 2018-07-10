@@ -32,11 +32,12 @@ public class DepartmentUsers implements Initializable {
 	PopupWindow popUP = new PopupWindow();
 	DBhelper dbHelper = new DBhelper();
 	private HashMap<String,String> department;
-	private String managerSSN;
+	//private String managerSSN;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		department = DepartmentController.selectedDepartment;
+		System.out.println("department: "+ department);
 		setupTable();
 		getList();
 		reload();
@@ -70,12 +71,21 @@ public class DepartmentUsers implements Initializable {
 
     @FXML
     void managerButton() {
+    		
     		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		String oldManager = department.get("ssn");
+    		String newManager = selected.get("ssn");
     		if(loader.selectionCheck(selected)) {
+    			/*
     			if(dbHelper.setManager(selected, department.get("departmentName"))) {
     				managerSSN = selected.get("ssn");
     				setManager(managerSSN);
     			}
+    			*/
+    			if (dbHelper.updateManager(newManager, oldManager)) {
+    				setManager(newManager);
+    			}
+    			
     		}
     }
 
@@ -85,9 +95,9 @@ public class DepartmentUsers implements Initializable {
 	
 	private void getList() {
 		String[] searchColumn = new String[] {"department"};
-		String[] values = new String[] {department.get("departmentName")};
+		String[] values = new String[] {department.get("department")};
 		list = dbHelper.getList(searchColumn, values, "user_primary_info", keys);
-		setManager(department.get("manager_ssn"));
+		//setManager(department.get("manager_ssn"));
 	}
 	
 	private void reload() {
@@ -102,6 +112,7 @@ public class DepartmentUsers implements Initializable {
 		for(HashMap<String, String> map:list) {
 			if(map.get("ssn").equals(ssn)) {
 				name += map.get("name");
+				
 				break;
 			}
 		}

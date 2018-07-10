@@ -66,25 +66,6 @@ public class TestOfflineNewController implements Initializable {
 
     
     private void setupChoiceBox() {
-    		/*
-    		String[] type = {"随机题目","固定题目"};
-    		typePicker.getItems().setAll(type);
-    		typePicker.setOnAction(e->{
-    			if(typePicker.getSelectionModel().getSelectedItem().equals("随机题目")) {
-    				bankPicker.setDisable(false);
-    				singleCountPicker.setDisable(false);
-    				multiCountPicker.setDisable(false);
-    				tfCountPicker.setDisable(false);
-    				
-    			}
-    			if(typePicker.getSelectionModel().getSelectedItem().equals("固定题目")) {
-    				bankPicker.setDisable(true);
-    				singleCountPicker.setDisable(true);
-    				multiCountPicker.setDisable(true);
-    				tfCountPicker.setDisable(true);
-    			}
-    		});
-    		*/
     		
     		//setup points and question numbers
     		Integer[] array = new Integer[101];
@@ -120,17 +101,7 @@ public class TestOfflineNewController implements Initializable {
     		if(contextField.getText().isEmpty()) {
     			return false;
     		}
-    		/*
-    		if(typePicker.getValue()==null) {
-    			return false;
-    		}else if(typePicker.getValue().equals("随机题目")) {
-    			if(singleCountPicker.getValue()==null||multiCountPicker.getValue()==null||tfCountPicker.getValue()==null||bankPicker.getValue()==null) {
-    				return false;
-    			}
-    		}else { // 固定题库
-    			
-    		}
-    		*/
+
     		return true;
     }
     
@@ -148,7 +119,6 @@ public class TestOfflineNewController implements Initializable {
     		map.put("branch", branch);
     		map.put("publishStatus", "未发布");
     		if(dbHelper.insert(map, "offlineexam_list")) {
-    			System.out.println("Insert is okay");
     			loader.loadVBox(box, "/View/TestOffline.fxml");
     		}
     		

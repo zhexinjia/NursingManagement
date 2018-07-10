@@ -21,7 +21,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="845.0" style="-fx-background-color: #4e5c7e;">
          <children>
-            <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="20.0" onMouseClicked="#loadHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/home.png" />
                </image>
@@ -29,7 +29,7 @@
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
+            <Label onMouseClicked="#loadHome" prefHeight="20.0" prefWidth="46.0" text="主界面" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -45,7 +45,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="115.0" text="不良事件处理" textFill="WHITE">
+            <Label onMouseClicked="#loadReportList" prefHeight="20.0" prefWidth="89.0" text="不良事件处理" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -55,6 +55,19 @@
                <HBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </HBox.margin>
+            </Label>
+            <ImageView fitHeight="24.0" fitWidth="17.0" layoutX="92.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/rightArrow.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="115.0" text="编辑" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Heiti SC Medium" size="16.0" />
+               </font>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -123,7 +136,10 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXCheckBox fx:id="male" accessibleRole="RADIO_BUTTON" text="男" />
+                        <JFXCheckBox fx:id="male" accessibleRole="RADIO_BUTTON" text="男">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></JFXCheckBox>
                         <JFXCheckBox fx:id="female" accessibleRole="RADIO_BUTTON" text="女" />
                         <Label text="年龄：">
                            <HBox.margin>
@@ -162,13 +178,19 @@
                               </Label>
                            </children>
                         </VBox>
-                        <JFXCheckBox fx:id="eventLocation1" accessibleRole="RADIO_MENU_ITEM" text="急诊" />
-                        <JFXCheckBox fx:id="eventLocation2" accessibleRole="RADIO_MENU_ITEM" text="门诊" />
-                        <JFXCheckBox fx:id="eventLocation3" text="病区" />
-                        <JFXCheckBox fx:id="eventLocation4" text="医技部门" />
-                        <JFXCheckBox fx:id="eventLocation5" text="行政后期部门" />
+                        <JFXCheckBox fx:id="eventLocation1" accessibleRole="RADIO_MENU_ITEM" prefHeight="20.0" prefWidth="60.0" text="急诊">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></JFXCheckBox>
+                        <JFXCheckBox fx:id="eventLocation2" accessibleRole="RADIO_MENU_ITEM" prefHeight="20.0" prefWidth="60.0" text="门诊" />
+                        <JFXCheckBox fx:id="eventLocation3" prefHeight="20.0" prefWidth="60.0" text="病区" />
+                        <JFXCheckBox fx:id="eventLocation4" prefHeight="20.0" prefWidth="91.0" text="医技部门" />
+                        <JFXCheckBox fx:id="eventLocation5" prefHeight="20.0" prefWidth="114.0" text="行政后期部门" />
                         <JFXCheckBox fx:id="eventLocation6" text="其他" />
-                        <JFXTextField fx:id="eventLocation6_text" />
+                        <JFXTextField fx:id="eventLocation6_text">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></JFXTextField>
                      </children>
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" />
@@ -817,16 +839,72 @@
                         </VBox>
                         <VBox>
                            <children>
-                              <JFXCheckBox fx:id="CauseReason1" text="信息系统运行故障">
+                              <JFXCheckBox fx:id="CauseReason1" text="患者因素">
                                  <VBox.margin>
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </JFXCheckBox>
-                              <JFXCheckBox fx:id="CauseReason2" text="信息安全事件">
+                              <JFXCheckBox fx:id="CauseReason2" text="员工因素">
                                  <VBox.margin>
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </JFXCheckBox>
+                              <JFXCheckBox fx:id="CauseReason3" layoutX="10.0" layoutY="10.0" text="药物相关">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="CauseReason4" layoutX="10.0" layoutY="33.0" text="工作流程">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="CauseReason5" layoutX="10.0" layoutY="33.0" text="制度执行">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="CauseReason6" layoutX="10.0" layoutY="74.0" text="器材设备">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="CauseReason7" layoutX="10.0" layoutY="74.0" text="沟通因素">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="CauseReason8" layoutX="10.0" layoutY="56.0" text="环境因素">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="CauseReason9" layoutX="10.0" layoutY="110.0" text="教育培训">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+<<<<<<< HEAD
+                              <HBox prefHeight="27.0" prefWidth="284.0">
+=======
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
+                                 <children>
+                                    <JFXCheckBox fx:id="CauseReason10" text="其他">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </HBox.margin>
+                                    </JFXCheckBox>
+<<<<<<< HEAD
+                                    <JFXTextField fx:id="CauseReason10_text" prefHeight="27.0" prefWidth="192.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></JFXTextField>
+=======
+                                    <JFXTextField fx:id="CauseReason10_text" />
+>>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
+                                 </children>
+                              </HBox>
                            </children>
                            <HBox.margin>
                               <Insets bottom="10.0" left="20.0" top="10.0" />
@@ -850,12 +928,22 @@
                         </VBox>
                         <VBox>
                            <children>
-                              <JFXCheckBox fx:id="eventLevel1" text="信息系统运行故障">
+                              <JFXCheckBox fx:id="eventLevel1" text="I级事件（警告事件）">
                                  <VBox.margin>
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </JFXCheckBox>
-                              <JFXCheckBox fx:id="eventLevel2" text="信息安全事件">
+                              <JFXCheckBox fx:id="eventLevel2" text="II级事件（不良后果事件）">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="eventLevel3" layoutX="10.0" layoutY="33.0" text="III级事件（未造成后果事件）">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="eventLevel4" layoutX="10.0" layoutY="56.0" text="IV级事件（隐患事件）">
                                  <VBox.margin>
                                     <Insets bottom="5.0" />
                                  </VBox.margin>

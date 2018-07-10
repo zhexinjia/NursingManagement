@@ -136,7 +136,10 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXCheckBox fx:id="male" accessibleRole="RADIO_BUTTON" text="男" />
+                        <JFXCheckBox fx:id="male" accessibleRole="RADIO_BUTTON" text="男">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></JFXCheckBox>
                         <JFXCheckBox fx:id="female" accessibleRole="RADIO_BUTTON" text="女" />
                         <Label text="年龄：">
                            <HBox.margin>
@@ -175,13 +178,19 @@
                               </Label>
                            </children>
                         </VBox>
-                        <JFXCheckBox fx:id="eventLocation1" accessibleRole="RADIO_MENU_ITEM" text="急诊" />
-                        <JFXCheckBox fx:id="eventLocation2" accessibleRole="RADIO_MENU_ITEM" text="门诊" />
-                        <JFXCheckBox fx:id="eventLocation3" text="病区" />
-                        <JFXCheckBox fx:id="eventLocation4" text="医技部门" />
-                        <JFXCheckBox fx:id="eventLocation5" text="行政后期部门" />
+                        <JFXCheckBox fx:id="eventLocation1" accessibleRole="RADIO_MENU_ITEM" prefHeight="20.0" prefWidth="60.0" text="急诊">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></JFXCheckBox>
+                        <JFXCheckBox fx:id="eventLocation2" accessibleRole="RADIO_MENU_ITEM" prefHeight="20.0" prefWidth="60.0" text="门诊" />
+                        <JFXCheckBox fx:id="eventLocation3" prefHeight="20.0" prefWidth="60.0" text="病区" />
+                        <JFXCheckBox fx:id="eventLocation4" prefHeight="20.0" prefWidth="91.0" text="医技部门" />
+                        <JFXCheckBox fx:id="eventLocation5" prefHeight="20.0" prefWidth="114.0" text="行政后期部门" />
                         <JFXCheckBox fx:id="eventLocation6" text="其他" />
-                        <JFXTextField fx:id="eventLocation6_text" />
+                        <JFXTextField fx:id="eventLocation6_text">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></JFXTextField>
                      </children>
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" />
@@ -875,14 +884,17 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </JFXCheckBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="27.0" prefWidth="284.0">
                                  <children>
                                     <JFXCheckBox fx:id="CauseReason10" text="其他">
                                        <HBox.margin>
                                           <Insets bottom="5.0" />
                                        </HBox.margin>
                                     </JFXCheckBox>
-                                    <JFXTextField fx:id="CauseReason10_text" />
+                                    <JFXTextField fx:id="CauseReason10_text" prefHeight="27.0" prefWidth="192.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></JFXTextField>
                                  </children>
                               </HBox>
                            </children>

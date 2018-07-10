@@ -100,12 +100,18 @@ public class DepartmentController implements Initializable {
 		reload();
 	}
 	private void getList() {
-		String tableName = "hospital_department left join user_primary_info on hospital_department.manager_ssn = user_primary_info.ssn";
-		String[] columns = {"id", "departmentName", "user_primary_info.name", "manager_ssn"};
-		list = dbHelper.getList(tableName, columns);
+		String[] searchColumn = {"is_manager"};
+		String[] values = {"1"};
+		String tableName = "user_primary_info";
+		String[] columns = {"ssn", "department", "name", "is_manager"};
+		
+		list = dbHelper.getList(searchColumn, values, tableName, columns);
+		
+		System.out.println("TESTING: " + list);
 	}
+	
 	private void setupTable() {
-		String[] keys = {"departmentName", "name"};
+		String[] keys = {"department", "name"};
 		String[] fields = {"科室名称", "科室管理"};
 		loader.setupTable(tableView, keys, fields);
 	}

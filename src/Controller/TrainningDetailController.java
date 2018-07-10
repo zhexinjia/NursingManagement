@@ -28,6 +28,10 @@ public class TrainningDetailController implements Initializable {
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();	
 	DBhelper dbHelper = new DBhelper	();
 	private HashMap<String, String> selectedTraining;
+	
+	String[] fields =  {"姓名", "科室", "职位", "职称", "得分", "备注"};
+	String[] keys = {"name", "department", "position", "title", "point", "detail"};
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		selectedTraining = TrainningListController.selectedTrainning;
@@ -62,14 +66,17 @@ public class TrainningDetailController implements Initializable {
 
     @FXML
     void importButton() {
-    		//TODO
+		String[] fieldlist =  fields;
+		String[] keylist = keys;
+		loader.importExcel(keylist, fieldlist);
     }
+    
     @FXML
     void exportButton() {
-    		//TODO
+		String[] fieldlist =  fields;
+		String[] keylist = keys;
+		loader.exportExcel(list, fieldlist, keylist);
     }
-
-
 
     @FXML
     void newButton() {
@@ -130,8 +137,8 @@ public class TrainningDetailController implements Initializable {
     }
 
     private void setupTable() {
-    		String[] keys = {"name", "department", "position", "title", "point", "detail"};
-    		String[] fields = {"姓名", "科室", "职位", "职称", "得分", "备注"}	;
+    		//String[] keys = {"name", "department", "position", "title", "point", "detail"};
+    		//String[] fields = {"姓名", "科室", "职位", "职称", "得分", "备注"};
 		loader.setupTable(tableView, keys, fields);
 	}
 

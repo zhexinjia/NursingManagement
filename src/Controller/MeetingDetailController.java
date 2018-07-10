@@ -23,6 +23,10 @@ public class MeetingDetailController implements Initializable {
 	@FXML Label countLabel;
 	
 	ArrayList<HashMap<String, String>> list;
+	
+	String[] keys = {"name", "department_id", "position", "title", "level", "checkin", "checkout"};
+	String[] fields = {"姓名", "科室", "职位", "职称", "层级", "签到", "签出"};
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		list = MeetingStatusController.passedMeetingHistory;
@@ -49,9 +53,16 @@ public class MeetingDetailController implements Initializable {
     void contactButton() {
     		loader.loadWeb();
     }
+    
+    @FXML
+    void exportButton() {
+    		String[] fieldlist = fields;
+		String[] keylist = keys;
+		loader.exportExcel(list, fieldlist, keylist);
+    }
+    
     private void setupTable() {
-    		String[] keys = {"name", "department_id", "position", "title", "level", "checkin", "checkout"};
-    		String[] fields = {"姓名", "科室", "职位", "职称", "层级", "签到", "签出"};
+    
     		loader.setupTable(tableView, keys, fields);
     }
     

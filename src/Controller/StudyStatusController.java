@@ -152,7 +152,8 @@ public class StudyStatusController implements Initializable {
 			int[] resultList = countMap.get(id);
 			if(resultList != null) {
 				double percent = (double)resultList[1]/(double)resultList[0];
-				study.put("percent", Double.toString(percent*100)+"%");
+				
+				study.put("percent", Double.toString(Math.round(percent*10000)/100.0)+"%");
     			if (percent > highest) {
     				highest = percent;
     			}

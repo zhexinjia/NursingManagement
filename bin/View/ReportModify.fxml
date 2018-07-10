@@ -884,25 +884,17 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </JFXCheckBox>
-<<<<<<< HEAD
                               <HBox prefHeight="27.0" prefWidth="284.0">
-=======
-                              <HBox prefHeight="100.0" prefWidth="200.0">
->>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
                                  <children>
                                     <JFXCheckBox fx:id="CauseReason10" text="其他">
                                        <HBox.margin>
                                           <Insets bottom="5.0" />
                                        </HBox.margin>
                                     </JFXCheckBox>
-<<<<<<< HEAD
                                     <JFXTextField fx:id="CauseReason10_text" prefHeight="27.0" prefWidth="192.0">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin></JFXTextField>
-=======
-                                    <JFXTextField fx:id="CauseReason10_text" />
->>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575
                                  </children>
                               </HBox>
                            </children>

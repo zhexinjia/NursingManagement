@@ -21,7 +21,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
-            <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="20.0" onMouseClicked="#loadHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/home.png" />
                </image>
@@ -45,7 +45,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="62.0" text="积分概览" textFill="WHITE">
+            <Label onMouseClicked="#RecordListButton" prefHeight="34.0" prefWidth="62.0" text="积分概览" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -61,7 +61,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="142.0" text="用户详情" textFill="WHITE">
+            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="142.0" text="详细记录" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -208,21 +208,10 @@
                                  <children>
                                     <Label id="footer" fx:id="countLabel1" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets left="25.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Heiti SC Light" size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="20.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                  </children>
                               </HBox>
                            </children>
@@ -260,21 +249,10 @@
                                  <children>
                                     <Label id="footer" fx:id="countLabel11" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets left="25.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Heiti SC Light" size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="20.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                  </children>
                               </HBox>
                            </children>
@@ -312,21 +290,51 @@
                                  <children>
                                     <Label id="footer" fx:id="countLabel111" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets left="25.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Heiti SC Light" size="14.0" />
-                                       </font>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="实操考核">
+               <content>
+                  <AnchorPane id="tab-background" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="200.0" layoutY="23.0" prefHeight="399.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <TableView fx:id="offLineExamTable" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
+                                 <effect>
+                                    <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />
+                                 </effect>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                                 <columns>
+                                    <TableColumn prefWidth="150.0" text="考卷" />
+                                    <TableColumn prefWidth="260.0" text="得分" />
+                                    <TableColumn prefWidth="260.0" text="总分" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </TableView>
+                              <HBox>
+                                 <children>
+                                    <Label id="footer" fx:id="countLabel1112" text="共5条" textFill="#5e6378">
                                        <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="20.0" />
+                                          <Insets bottom="25.0" left="25.0" />
                                        </HBox.margin>
-                                    </JFXButton>
+                                    </Label>
+                                    <Pane HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                            </children>

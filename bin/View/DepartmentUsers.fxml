@@ -44,7 +44,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="56.0" text="科室列表" textFill="WHITE">
+            <Label onMouseClicked="#departmentListButton" prefHeight="34.0" prefWidth="56.0" text="科室列表" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

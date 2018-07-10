@@ -20,7 +20,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
-            <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="20.0" onMouseClicked="#loadHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/home.png" />
                </image>
@@ -44,7 +44,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="57.0" text="新建会议" textFill="WHITE">
+            <Label onMouseClicked="#MeetingListButton" prefHeight="34.0" prefWidth="57.0" text="会议列表" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -54,6 +54,19 @@
                <HBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </HBox.margin>
+            </Label>
+            <ImageView fitHeight="24.0" fitWidth="17.0" layoutX="92.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/rightArrow.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="57.0" text="新增会议" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Heiti SC Medium" size="16.0" />
+               </font>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">

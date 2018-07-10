@@ -47,7 +47,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="60.0" text="分数统计" textFill="WHITE">
+            <Label onMouseClicked="#testListButton" prefHeight="34.0" prefWidth="60.0" text="线上考核" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -57,6 +57,19 @@
                <HBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </HBox.margin>
+            </Label>
+            <ImageView fitHeight="24.0" fitWidth="17.0" layoutX="92.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/rightArrow.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="60.0" text="得分详情" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Heiti SC Medium" size="16.0" />
+               </font>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -177,6 +190,14 @@
                                        </effect>
                                        <HBox.margin>
                                           <Insets bottom="20.0" left="10.0" right="30.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton buttonType="RAISED" layoutX="693.0" layoutY="10.0" onMouseClicked="#exportButton" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" right="30.0" />
                                        </HBox.margin>
                                     </JFXButton>
                                  </children>

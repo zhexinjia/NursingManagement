@@ -21,7 +21,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
-            <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="20.0" onMouseClicked="#loadHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/home.png" />
                </image>
@@ -29,7 +29,7 @@
                   <Insets bottom="10.0" left="20.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
+            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="42.0" text="主界面" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -45,7 +45,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label onMouseClicked="#loadHome" prefHeight="34.0" prefWidth="91.0" text="不良时间列表" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="91.0" text="不良时间列表" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

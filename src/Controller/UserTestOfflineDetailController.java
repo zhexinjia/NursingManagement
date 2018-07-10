@@ -51,8 +51,8 @@ public class UserTestOfflineDetailController implements Initializable {
 		report = TestOfflineDetailController.selectedUser;
 		System.out.println("report: " + report);
 		getList();
-		
 		setup();
+		disableEdit();
 	}
 	
 	@FXML void loadHome() {
@@ -99,6 +99,16 @@ public class UserTestOfflineDetailController implements Initializable {
 		if (total_score != null) {
 			scoreField.setText(total_score);
 		}
+	}
+	
+	void disableEdit() {
+		//Set all fields disable for any editing. 
+		nameField.setEditable(false);
+		supervisorField.setEditable(false);
+		takenDateField.setEditable(false);
+		scoreField.setEditable(false);
+		commentField.setEditable(false);
+		
 	}
 	
 }

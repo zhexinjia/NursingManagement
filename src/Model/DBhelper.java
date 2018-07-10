@@ -870,7 +870,9 @@ public class DBhelper {
 		}
 	}
 
-	public boolean updateScore(HashMap<String, String> map, String tableName) {
+	public boolean updateScore(HashMap<String, String> map, String tableName, String newScore) {
+		//String newScore = map.get("newScore");
+		String ssn  = map.get("ssn");
 		String sql = "sql=update " + tableName + " set ";
 		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
 		for(int i = 0; i < keyset.size(); i++) {
@@ -880,8 +882,13 @@ public class DBhelper {
 				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
 			}
 		}
-		sql += " where ssn = " + map.get("ssn") + ";";
+		sql += " where id = " + map.get("id") + ";";
+		sql += " update user_score set currentScore = '" + newScore + 
+				"' where ssn = '" + ssn + "';";
+		
+		
 		if(sendPost(urlSend, sql)) {
+			System.out.println("update Score sql: " + sql);
 			//success();
 			return true;
 		}

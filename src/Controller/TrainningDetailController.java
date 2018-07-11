@@ -117,7 +117,7 @@ public class TrainningDetailController implements Initializable {
         					//map.put("newScore", String.valueOf(newScore));
     					}
     					
-    					if(dbHelper.updateScore(map, "training_history", String.valueOf(newScore))) {
+    					if(dbHelper.newUpdateScore(map, "training_history", String.valueOf(newScore))) {
     						popUP.stage.close();
     						getList();
     						reload();

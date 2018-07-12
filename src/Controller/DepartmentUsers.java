@@ -82,10 +82,14 @@ public class DepartmentUsers implements Initializable {
     				setManager(managerSSN);
     			}
     			*/
-    			if (dbHelper.updateManager(newManager, oldManager)) {
-    				setManager(newManager);
+    			if (oldManager == null) {
+    				dbHelper.setManager(newManager);
     			}
-    			
+    			else {
+    				if (dbHelper.updateManager(newManager, oldManager)) {
+    					setManager(newManager);
+    				}
+    			}
     		}
     }
 
@@ -95,7 +99,7 @@ public class DepartmentUsers implements Initializable {
 	
 	private void getList() {
 		String[] searchColumn = new String[] {"department"};
-		String[] values = new String[] {department.get("department")};
+		String[] values = new String[] {department.get("departmentName")};
 		list = dbHelper.getList(searchColumn, values, "user_primary_info", keys);
 		//setManager(department.get("manager_ssn"));
 	}

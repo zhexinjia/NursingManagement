@@ -24,9 +24,12 @@ public class DepartmentController implements Initializable {
 	@FXML VBox box;
 	
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>(); 
+	ArrayList<HashMap<String, String>> userList = new ArrayList<HashMap<String, String>>();
+	ArrayList<HashMap<String, String>> departmentList = new ArrayList<HashMap<String, String>>();
 	Loader loader = new Loader();
 	DBhelper dbHelper;
 	public static HashMap<String, String> selectedDepartment;
+	HashMap<String, String> temp = new HashMap<>();
 	
 	@FXML void loadHome() {
 		loader.loadVBox(box, "/View/Welcome.fxml");
@@ -58,6 +61,7 @@ public class DepartmentController implements Initializable {
     				map.put("departmentName", departmentName);
     				if(dbHelper.insert(map, "hospital_department")) {
     					popUP.stage.close();
+    					list.clear();
     					getList();
         				reload();
     				}
@@ -71,6 +75,7 @@ public class DepartmentController implements Initializable {
     @FXML
     void modifyButton() {
     		selectedDepartment = tableView.getSelectionModel().getSelectedItem();
+    		System.out.println("selectedDepartment: " + selectedDepartment);
     		if(loader.selectionCheck(selectedDepartment)) {
     			loader.loadVBox(box, "/View/DepartmentUsers.fxml");
     		}
@@ -83,6 +88,7 @@ public class DepartmentController implements Initializable {
     			PopupWindow popup = new PopupWindow();
     			popup.confirmButton.setOnAction(e->{
     				if(dbHelper.delete(selected, "hospital_department")) {
+    					list.clear();
     	    				getList();
     	    				reload();
     	    				popup.stage.close();
@@ -99,19 +105,65 @@ public class DepartmentController implements Initializable {
 		getList();
 		reload();
 	}
+
+	
 	private void getList() {
+		//TODO need to modify this code later on, kind of messy here.
 		String[] searchColumn = {"is_manager"};
 		String[] values = {"1"};
 		String tableName = "user_primary_info";
 		String[] columns = {"ssn", "department", "name", "is_manager"};
 		
-		list = dbHelper.getList(searchColumn, values, tableName, columns);
+		userList= dbHelper.getList(searchColumn, values, tableName, columns);
 		
-		System.out.println("TESTING: " + list);
+		String tableName2 = "hospital_department";
+		String[] columns2 = {"departmentName", "id"};
+		
+		departmentList = dbHelper.getList(tableName2, columns2);
+		int count  = 0;
+			
+		if (userList.isEmpty()) {
+			for (int i = 0; i < departmentList.size(); i++) {
+				departmentList.get(i).put("name", null);
+				departmentList.get(i).put("ssn", null);
+				list.add(departmentList.get(i));
+			}
+			
+		}else {
+			for (int i = 0; i < departmentList.size(); i++) {
+
+				String a = departmentList.get(i).get("departmentName");
+				String id = departmentList.get(i).get("id");
+				System.out.println("a: " + a);
+				
+				for (int j = 0; j < userList.size(); j++) {
+					
+					if (userList.get(j).get("department").equals(a)) {
+						
+						userList.get(j).put("departmentName", a);
+						userList.get(j).put("id", id);
+						list.add(userList.get(j));
+					
+						count++;
+						
+					}
+					
+				}
+				if (count == i) {
+					departmentList.get(i).put("name", null);
+					departmentList.get(i).put("ssn", null);
+					list.add(departmentList.get(i));
+					
+					count++;
+				}
+				
+			}
+		}
+
 	}
 	
 	private void setupTable() {
-		String[] keys = {"department", "name"};
+		String[] keys = {"departmentName", "name"};
 		String[] fields = {"科室名称", "科室管理"};
 		loader.setupTable(tableView, keys, fields);
 	}

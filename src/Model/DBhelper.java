@@ -609,6 +609,7 @@ public class DBhelper {
 		String id = map.get("id");
 		String sql = "sql=delete from " + tableName + " where id = " + id + ";";
 		if(sendPost(urlSend, sql)) {
+			
 			//success();
 			return true;
 		}
@@ -692,11 +693,18 @@ public class DBhelper {
 				
 			}
 			else if (table == "training_list") {
-				sql = "insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
+				sql += "insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update training_list set publish_status = '已发布' where id= '" + id + "';";
 			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
 		
 			}
+			else if (table == "meeting_list") {
+				sql += "insert ignore into meeting_history (ssn, meeting_id) VALUES ('" + ssn + "', '" + id + "');";
+				//sql += "update meeting_list set publish_status = '已发布' where id= '" + id + "';";
+			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+		
+			}
+			
 		}
 		System.out.println(sql);
 		if (sendPost(urlSend, sql)) {
@@ -710,7 +718,7 @@ public class DBhelper {
 		String sql = "sql=";
 		for (HashMap<String, String> user:userList) {
 			String ssn = user.get("ssn");
-			sql += "insert ignore into offlineexam_history (ssn, offlineexam_id) VALUES ('" + ssn + "', '" + id + "');";
+			sql += "insert ignore into offlineexam_history (ssn, offlineexam_id, finish_status) VALUES ('" + ssn + "', '" + id + "', '否');";
 			sql += "update offlineexam_list set publishStatus = '已发布' where id= '" + id + "';";
 		}
 		
@@ -849,9 +857,9 @@ public class DBhelper {
 		
 	}
 
-	public boolean setManager(HashMap<String, String> selected, String departmentName) {
+	public boolean setManager(String ssn) {
 		// TODO Auto-generated method stub
-		String sql = "sql=UPDATE hospital_department set manager_ssn = '" + selected.get("ssn")+ "' Where departmentName= '" + departmentName + "';" ;
+		String sql = "sql=UPDATE user_primary_info set is_manager = '1' Where ssn= '" + ssn + "';" ;
 		boolean output = sendPost(urlSend, sql);
 		return output;
 	}

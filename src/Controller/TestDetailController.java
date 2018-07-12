@@ -59,9 +59,15 @@ public class TestDetailController implements Initializable{
     
     @FXML void detailButton() {
     		selectedUser = tableView.getSelectionModel().getSelectedItem();
-    		if(selectedUser != null) {
+    		
+    		if (selectedUser.get("finish").equals("否")) {
+    			PopupWindow pop = new PopupWindow();
+    			pop.alertWindow("查看失败", "用户还没完成考试");
+    		}
+    		else if(selectedUser != null) {
     			loader.loadVBox(box, "/View/UserTestDetail.fxml");
-    		}else {
+    		}
+    		else {
     			PopupWindow pop = new PopupWindow();
     			pop.alertWindow("查看失败", "请选中一个用户");
     		}

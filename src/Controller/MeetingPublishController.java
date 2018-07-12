@@ -53,7 +53,9 @@ public class MeetingPublishController implements Initializable {
 		//FIXME:insert list?
 		//FIXME: change getChecked() function to return insert map list
 		ArrayList<HashMap<String, String>> userList = getChecked();
-		dbHelper.publish(userList, selectedMeeting, "meeting_list");
+		if (dbHelper.publish(userList, selectedMeeting, "meeting_list")) {
+			loader.loadVBox(box, "/View/MeetingList.fxml");
+		};
 	}
 	
 	@FXML void contact(){

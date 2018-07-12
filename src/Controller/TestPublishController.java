@@ -59,6 +59,7 @@ public class TestPublishController implements Initializable {
 		boolean output = dbHelper.publish(getChecked(), selectedTest, "exam_list");
 		if(output) {
 			//TOOD: either back or change to un-publish able
+			loader.loadVBox(box, "/View/TestList.fxml");
 		}
 		
 	}

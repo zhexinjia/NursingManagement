@@ -46,6 +46,7 @@ public class RecordStatusController implements Initializable {
 	ArrayList<HashMap<String, String>> levelExportList;
 	DBhelper dbHelper = new DBhelper();
 	Loader loader = new Loader();
+	String branch = LoginController.branch;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {		
@@ -54,7 +55,11 @@ public class RecordStatusController implements Initializable {
 		getList();
 		caculatePercent();
 		setupDepartmentPicker();
-		setupLevelPicker();
+		System.out.println(branch);
+		if (branch.equals("护理")) {
+			setupLevelPicker();
+		}
+		
 	}
 	
 	@FXML void loadHome() {

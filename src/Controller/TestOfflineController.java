@@ -78,7 +78,7 @@ public class TestOfflineController implements Initializable {
     			loader.loadVBox(box, "/View/TestOfflinePublish.fxml");
     		}else {
     			PopupWindow popUP = new PopupWindow();
-    			popUP.alertWindow("操作失败", "试卷已经截止，无法添加考试人员。");
+    			popUP.alertWindow("操作失败", "试卷已经截止或者已发布，无法添加考试人员。");
     		}
     }
     

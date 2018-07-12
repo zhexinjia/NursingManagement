@@ -90,9 +90,7 @@ public class UserTestDetailController implements Initializable {
 		multiIndex = 0;
 		tfIndex = 0;
 		setupButtons();
-		loadSingle();
-		loadMulti();
-		loadTf();
+
 	}
 	
 	@FXML void loadHome() {
@@ -328,17 +326,28 @@ public class UserTestDetailController implements Initializable {
  		
  		System.out.println("singleIds: " + singleIds);
  		
- 		singleAnswers = singleAns.split(",|，");
- 		multiAnswers = multiAns.split(",|，");
- 		tfAnswers = tfAns.split(",|，");
+ 		if (singleAns != null) {			
+ 			singleAnswers = singleAns.split(",|，");
+ 			singleQues = singleIds.split(",|，");
+ 			getSingleQues();
+ 			loadSingle();
+ 			
+ 		}
  		
- 		singleQues = singleIds.split(",|，");
- 		multiQues = multiIds.split(",|，");
- 		tfQues = tfIds.split(",|，");
+ 		if(multiAns != null) {			
+ 			multiAnswers = multiAns.split(",|，");
+ 			multiQues = multiIds.split(",|，");
+ 			getMultiQues();
+ 			loadMulti();
+ 		}
  		
- 		getSingleQues();
- 		getMultiQues();
- 		getTfQues();
+ 		if (tfAns != null) {			
+ 			tfAnswers = tfAns.split(",|，");
+ 			tfQues = tfIds.split(",|，");
+ 			getTfQues();
+ 			loadTf();
+ 		}
+
 	}
 	void getSingleQues() {
 		int i = 0;

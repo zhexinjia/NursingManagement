@@ -24,7 +24,7 @@ public class MeetingDetailController implements Initializable {
 	
 	ArrayList<HashMap<String, String>> list;
 	
-	String[] keys = {"name", "department_id", "position", "title", "level", "checkin", "checkout"};
+	String[] keys = {"name", "department", "position", "title", "level", "checkin", "checkout"};
 	String[] fields = {"姓名", "科室", "职位", "职称", "层级", "签到", "签出"};
 	
 	@Override

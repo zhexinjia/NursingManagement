@@ -120,7 +120,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </TableView>
-      <JFXTextArea fx:id="commentArea" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="47.0" prefWidth="749.0" promptText="备注" wrapText="true">
+      <JFXTextArea fx:id="commentArea" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="47.0" prefWidth="749.0" wrapText="true">
          <VBox.margin>
             <Insets bottom="30.0" left="20.0" right="20.0" />
          </VBox.margin>

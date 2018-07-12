@@ -67,7 +67,9 @@ public class StudyPublishController implements Initializable {
 	@FXML
 	void publishButton() {
 		//TODO: different publish method?
-		dbHelper.publish(getChecked(), selectedStudy, "study_list");
+		if(dbHelper.publish(getChecked(), selectedStudy, "study_list")) {
+			loader.loadVBox(box, "/View/StudyList.fxml");
+		};
 	}
 
 

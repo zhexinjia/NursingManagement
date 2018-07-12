@@ -418,7 +418,7 @@ public class UserTestDetailController implements Initializable {
 		multiCB1.setDisable(true);
 		multiCB2.setDisable(true);
 		multiCB3.setDisable(true);
-		multiCB4.setDisable(true);
+		multiCB4.setDisable(true); 
 		multiCB5.setDisable(true);
 	}
 	

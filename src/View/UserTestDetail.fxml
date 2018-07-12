@@ -179,25 +179,16 @@
                               </Label>
                               <HBox layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB1" mnemonicParsing="false" prefWidth="649.0" text="答案1" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB1" mnemonicParsing="false" text="答案1" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
                                     </CheckBox>
                                  </children>
                               </HBox>
-                              <HBox layoutX="10.0" layoutY="44.0" prefHeight="60.0" prefWidth="749.0" VBox.vgrow="SOMETIMES">
+                              <HBox layoutX="10.0" layoutY="44.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB2" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案2" wrapText="true">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
-                                       </HBox.margin>
-                                    </CheckBox>
-                                 </children>
-                              </HBox>
-                              <HBox layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="749.0">
-                                 <children>
-                                    <CheckBox fx:id="multiCB3" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案3" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB2" mnemonicParsing="false" text="答案2" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -206,7 +197,16 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB4" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案4" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB3" mnemonicParsing="false" text="答案3" wrapText="true" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="749.0">
+                                 <children>
+                                    <CheckBox fx:id="multiCB4" mnemonicParsing="false" text="答案4" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -215,7 +215,7 @@
                               </HBox>
                               <HBox layoutX="10.0" layoutY="355.0" prefHeight="60.0" prefWidth="749.0">
                                  <children>
-                                    <CheckBox fx:id="multiCB5" mnemonicParsing="false" prefHeight="119.0" prefWidth="649.0" text="答案5" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <CheckBox fx:id="multiCB5" mnemonicParsing="false" text="答案5" wrapText="true" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
                                        </HBox.margin>
@@ -236,7 +236,7 @@
                                     <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton fx:id="multiNextButton" layoutX="669.0" layoutY="10.0" onMouseClicked="#multiNext" prefHeight="41.0" prefWidth="100.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="下一题" textFill="WHITE">
+                              <JFXButton fx:id="multiNextButton" layoutX="669.0" layoutY="10.0" onMouseClicked="#multiNext" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="下一题" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="20.0" left="10.0" right="40.0" top="10.0" />
                                  </HBox.margin>

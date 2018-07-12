@@ -176,23 +176,15 @@
                                        </HBox.margin>
                                     </Label>
                                     <Pane HBox.hgrow="ALWAYS" />
-                                    <JFXButton buttonType="RAISED" onMouseClicked="#modifyButton" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑得分" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="723.0" layoutY="41.0" onMouseClicked="#detailButton" prefHeight="27.0" prefWidth="80.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看详情" textFill="WHITE">
                                        <effect>
                                           <DropShadow />
                                        </effect>
                                        <HBox.margin>
-                                          <Insets bottom="20.0" right="10.0" />
+                                          <Insets bottom="20.0" right="20.0" />
                                        </HBox.margin>
                                     </JFXButton>
-                                    <JFXButton buttonType="RAISED" layoutX="723.0" layoutY="41.0" onMouseClicked="#detailButton" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看详情" textFill="WHITE">
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="10.0" right="30.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                    <JFXButton buttonType="RAISED" layoutX="693.0" layoutY="10.0" onMouseClicked="#exportButton" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="693.0" layoutY="10.0" onMouseClicked="#exportButton" prefHeight="27.0" prefWidth="80.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
                                        <effect>
                                           <DropShadow />
                                        </effect>

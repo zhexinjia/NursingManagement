@@ -114,7 +114,9 @@ public class TestNewController implements Initializable {
     		for(HashMap<String, String> item:list) {
     			banks.add(item.get("name"));
     		}
+    		//bankPicker.getItems().setAll(banks);
     		bankPicker.getItems().setAll(banks);
+    	
     }
     
     private boolean validate() {
@@ -157,7 +159,8 @@ public class TestNewController implements Initializable {
     		map.put("tf_point", tfPointPicker.getValue().toString());
     		
     		//if(typePicker.getValue().equals("随机题目")) {
-    		map.put("question_bank", bankPicker.getValue());
+    		//map.put("question_bank", bankPicker.getValue());
+    		map.put("question_bank", list.get(bankPicker.getSelectionModel().getSelectedIndex()).get("id"));
     		map.put("single_count", singleCountPicker.getValue().toString());
     		map.put("multi_count", multiCountPicker.getValue().toString());
     		map.put("tf_count", tfCountPicker.getValue().toString());

@@ -620,12 +620,14 @@ public class DBhelper {
 	//delete all information about this test, given exam id
 	public boolean deleteExam(HashMap<String, String> map) {
 		String id = map.get("id");
-		String historySql = "delete from exam_history where exam_id=" + "'" + id + "';";
-		String listSql = "delete from exam_list where id=" + "'" + id + "';";
-		String mulSql = "delete from exam_qa_multiple where exam_id=" + "'" + id + "';";
-		String singleSql = "delete from exam_qa_single where exam_id=" + "'" + id + "';";
-		String tfSql = "delete from exam_qa_tf where exam_id=" + "'" + id + "';";
-		String sql = "sql=" + historySql + listSql + mulSql + singleSql + tfSql;
+		//String historySql = "delete from exam_history where bank_id=" + "'" + id + "';";
+		//String listSql = "delete from exam_list where id=" + "'" + id + "';";
+		String mulSql = "delete from exam_qa_multiple where bank_id=" + "'" + id + "';";
+		String singleSql = "delete from exam_qa_single where bank_id=" + "'" + id + "';";
+		String tfSql = "delete from exam_qa_tf where bank_id=" + "'" + id + "';";
+		String quesBank = "delete from question_bank where id = " + "'" + id + "';";
+		 
+		String sql = "sql=" + mulSql + singleSql + tfSql + quesBank;
 		System.out.println(sql);
 		if (sendPost(urlSend, sql)) {
 			//success();

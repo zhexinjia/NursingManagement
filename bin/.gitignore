@@ -1,12 +1,9 @@
-/View/
+/.DS_Store
 /Controller/
 /Model/
-<<<<<<< HEAD
-/barCodeIcon.png
-/hospitalIcon.png
-=======
 /View/
 /apache/
+/barCodeIcon.png
 /blueBG.png
 /contactIcon.png
 /controlsfx-8.40.14.jar
@@ -15,6 +12,7 @@
 /fontawesomefx-8.9.jar
 /greenBG.png
 /home.png
+/hospitalIcon.png
 /jfoenix-8.0.1.jar
 /jsch-0.1.54.jar
 /json-simple-1.1.1.jar
@@ -30,4 +28,3 @@
 /window/
 /yellowBG.png
 /zxing-3.2.1.jar
->>>>>>> a55a00f61b29d9ea80dc61cfa4d200a0595f5575

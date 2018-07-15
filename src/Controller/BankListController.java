@@ -124,6 +124,7 @@ public class BankListController implements Initializable {
     @FXML
     void deleteButton() {
     		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		System.out.println("!!!!!!!!!!!!!!!!!! "+selected);
     		if (selected!=null) {
     			deleteFunction(selected);
     		}else {

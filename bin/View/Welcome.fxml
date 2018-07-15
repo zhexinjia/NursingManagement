@@ -65,7 +65,7 @@
                               <Image url="@../../Images/loginLogo.png" />
                            </image>
                         </ImageView>
-                        <Label text="星月科技">
+                        <Label text="赛讯软件">
                            <HBox.margin>
                               <Insets right="30.0" top="10.0" />
                            </HBox.margin>

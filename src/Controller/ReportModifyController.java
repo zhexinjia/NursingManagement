@@ -540,15 +540,16 @@ public class ReportModifyController implements Initializable{
 		
 		//don't know why it can't use String, might be type different
 		int patientSex = -1;
-		if (!report.get("patientSex").isEmpty()) {
+		
+		if (report.get("patientSex") != null) {
 			patientSex = Integer.parseInt(report.get("patientSex"));
 		}
 		if ( patientSex == -1) {
 			System.out.print("ERROR: patientSex is NULL");
 		}else {
-			if (patientSex == 0) {
+			if (patientSex == 1) {
 				male.setSelected(true);
-			}else if (patientSex == 1) {
+			}else if (patientSex == 2) {
 				female.setSelected(true);
 			}else {
 				System.out.println("ERROR: patientSex is out of range");
@@ -562,12 +563,12 @@ public class ReportModifyController implements Initializable{
 			System.out.print("ERROR: eventLocation is NULL");
 		}else {
 			eventLocationNum = Integer.parseInt(report.get("eventLocation"));
-			if (eventLocationNum == 5) {
+			if (eventLocationNum == 6) {
 				eventLocation6.setSelected(true);
 				eventLocation6_text.setEditable(true);
 				eventLocation6_text.setText(report.get("eventLocation6_text"));
 			}else {
-				for (int i =0; i < 5; i++) {	
+				for (int i =1; i < 6; i++) {	
 					if (eventLocationNum == i) {
 						eventLocationList.get(i).setSelected(true);
 					}
@@ -593,7 +594,7 @@ public class ReportModifyController implements Initializable{
 		if (reporterTitleNum == -1) {
 			System.out.print("ERROR: reporterPosition is NULL");
 		}else {
-			for (int i= 0; i < 5; i++) {
+			for (int i= 1; i < 6; i++) {
 				if (reporterTitleNum == i) {
 					reporterTitleList.get(i).setSelected(true);
 				}
@@ -613,7 +614,7 @@ public class ReportModifyController implements Initializable{
 		if ( eventTypeNum == -1) {
 			System.out.print("ERROR: eventType is NULL");
 		}else {
-			for (int i=0; i < 9; i++) {
+			for (int i=1; i < 10; i++) {
 				if (eventTypeNum == i) {
 					eventTypeList.get(i).setSelected(true);
 				}
@@ -628,7 +629,7 @@ public class ReportModifyController implements Initializable{
 		if (reportTypeNum == -1) {
 			System.out.print("ERROR: reportType is NULL");
 		}else {
-			for (int i=0; i < 30; i++) {
+			for (int i=1; i < 31; i++) {
 				if (reportTypeNum == i) {
 					reportTypeList.get(i).setSelected(true);
 				}
@@ -641,13 +642,13 @@ public class ReportModifyController implements Initializable{
 		}
 		if (CauseReasonNum == -1) {
 			System.out.println("ERROR: Cause Reason is NULL");
-		}else if (CauseReasonNum == 9) {
+		}else if (CauseReasonNum == 10) {
 			CauseReason10.setSelected(true);
 			CauseReason10_text.setEditable(true);
 			CauseReason10_text.setText(report.get("CauseReason10_text"));
 		}
 		else{
-			for (int i=0; i < 9; i++) {
+			for (int i=1; i < 10; i++) {
 				if (CauseReasonNum == i) {
 					CauseReasonList.get(i).setSelected(true);
 				}
@@ -662,7 +663,7 @@ public class ReportModifyController implements Initializable{
 		if (eventLevelNum == -1) {
 			System.out.println("ERROR: eventLevel is NULL");
 		}else{
-			for (int i=0; i < 4; i++) {
+			for (int i=1; i < 5; i++) {
 				if (eventLevelNum == i) {
 					eventLevelList.get(i).setSelected(true);
 				}

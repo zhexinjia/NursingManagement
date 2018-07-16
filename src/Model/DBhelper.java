@@ -606,6 +606,7 @@ public class DBhelper {
 	
 	//simple delete version, delete row by using hashmap.id
 	public boolean delete(HashMap<String, String> map, String tableName) {
+		System.out.printf("map: ", map);
 		String id = map.get("id");
 		String sql = "sql=delete from " + tableName + " where id = " + id + ";";
 		if(sendPost(urlSend, sql)) {
@@ -618,7 +619,7 @@ public class DBhelper {
 	}
 
 	//delete all information about this test, given exam id
-	public boolean deleteExam(HashMap<String, String> map) {
+	public boolean deleteBank(HashMap<String, String> map) {
 		String id = map.get("id");
 		//String historySql = "delete from exam_history where bank_id=" + "'" + id + "';";
 		//String listSql = "delete from exam_list where id=" + "'" + id + "';";
@@ -637,6 +638,24 @@ public class DBhelper {
 		return false;
 	}
 	
+	public boolean deleteExam(HashMap<String, String> map) {
+		String id  = map.get("id");
+		
+		String exam = "delete from exam_list where id = '" + id + "';";
+		String history  = "delete from exam_history where exam_id = '" + id + "';";
+		String sql = "sql=" + exam + history;
+		
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
+		return false;
+		
+	}
+	
+	
+	
 	public boolean deleteOfflineExam(HashMap<String, String> map) {
 		String id = map.get("id");
 		String exam = "delete from offlineexam_list where id=" + "'" + id + "';";
@@ -653,6 +672,91 @@ public class DBhelper {
 		return false;
 	}
 	
+	
+	public String insertHistoryHelper(HashMap<String, String> map, String id, String type) {
+		
+		String sql = "";
+		if (type == "offlineTest") {
+			map.put("offlineexam_id", id);
+			sql += "insert ignore into offlineexam_history" + " (";
+		}else if (type == "training") {
+			map.put("training_id", id);
+			sql += "insert ignore into training_history" + " (";
+		}else {
+			System.out.println("ERROR");
+		}
+		
+		Set<String> keys = map.keySet();
+		ArrayList<String> keyset = new ArrayList<String>(keys);
+		for(int i = 0; i < keyset.size();i++) {
+			if(i == keyset.size()-1) {
+				sql+= keyset.get(i) + ") VALUES (";
+			}else {
+				sql+= keyset.get(i) + ", ";
+			}
+		}
+		for(int i = 0; i < keyset.size();i++) {
+			if(i == keyset.size()-1) {
+				sql+= "'" + map.get(keyset.get(i)) + "');";
+			}else {
+				sql+= "'" + map.get(keyset.get(i)) + "', ";
+			}
+		}
+	
+		return sql;
+	}
+	
+	public boolean insertOfflineTest(ArrayList<HashMap<String, String>> maplist, String exam_id, String totalPoint) {
+		String sql = "sql=";
+		
+		for (HashMap<String, String> user : maplist){
+			int score = Integer.parseInt(user.get("score"));
+			int totalScore = Integer.parseInt(totalPoint);
+			String ssn = user.get("ssn");
+			sql += insertHistoryHelper(user, exam_id, "offlineTest");
+			
+			sql += "update user_score set currentScore = (currentScore %2B " 
+			+ score + "), totalScore = (totalScore %2B " + totalScore + ") where ssn = '" + ssn + "';";
+			
+		}
+		
+		System.out.println(sql);
+		if (sendPost(urlSend, sql)) {
+			System.out.println("Success");
+			return true;
+		}
+		System.out.println("Fail");
+		return false;
+	}
+	
+	/*
+	 *  Training
+	 */
+	
+	public boolean insertTrainning(ArrayList<HashMap<String, String>> maplist, String training_id, String totalPoint) {
+		
+		String sql = "sql=";
+		
+		for (HashMap<String, String> user : maplist){
+			int score = Integer.parseInt(user.get("point"));
+			int totalScore = Integer.parseInt(totalPoint);
+			String ssn = user.get("ssn");
+			sql += insertHistoryHelper(user, training_id, "training");
+			
+			sql += "update user_score set currentScore = (currentScore %2B " 
+			+ score + "), totalScore = (totalScore %2B " + totalScore + ") where ssn = '" + ssn + "';";
+			
+		}
+		System.out.println("SQL: "+sql);
+		if (sendPost(urlSend, sql)) {
+			System.out.println("Success");
+			return true;
+		}
+		System.out.println("Fail");
+		return false;
+	}
+	
+	
 	//simply insert entire HashMap List into table
 
 	public boolean insertList(ArrayList<HashMap<String, String>> list, String tableName) {
@@ -668,42 +772,39 @@ public class DBhelper {
 	}
 
 
-	//publishing Exam/Study/Training
+	//publishing Exam/Study/Training/Meeting
 	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
-		String temp = null;
-		boolean res = false;
-		//id -> exam_id, study_id, training_id
+
+		//id -> exam_id, study_id, training_id, meeting_id
 		String id = item.get("id");
-		//int totalPoint = Integer.parseInt(item.get("totalPoint"));
+		String totalPoint = item.get("totalPoint");
 		String sql = "sql=";
 		
 		for (HashMap<String, String> user:userList) {
 			String ssn = user.get("ssn");
-		//	int userTotalPoint = Integer.parseInt(user.get("totalScore"));
-		//	userTotalPoint += totalPoint;
 			
 			if (table == "exam_list") {
 				sql += "insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
-			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+				sql += "update user_score set totalScore = (totalScore %2B" + totalPoint + ") where ssn = '" + ssn + "';";
 								
 			}
 			else if (table == "study_list") {
 				sql += "insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update study_list set publish_status = '已发布' where id= '" + id + "';";
-			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+				sql += "update user_score set totalScore = (totalScore %2B" + totalPoint + ") where ssn = '" + ssn + "';";
 				
 			}
 			else if (table == "training_list") {
 				sql += "insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update training_list set publish_status = '已发布' where id= '" + id + "';";
-			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+				sql += "update user_score set totalScore = (totalScore %2B" + totalPoint + ") where ssn = '" + ssn + "';";
 		
 			}
 			else if (table == "meeting_list") {
 				sql += "insert ignore into meeting_history (ssn, meeting_id) VALUES ('" + ssn + "', '" + id + "');";
 				//sql += "update meeting_list set publish_status = '已发布' where id= '" + id + "';";
-			//	temp += "update user_score set totalScore = '" + userTotalPoint + "' where ssn= '" + ssn + "';";
+				sql += "update user_score set totalScore = (totalScore %2B" + totalPoint + ") where ssn = '" + ssn + "';";
 		
 			}
 			

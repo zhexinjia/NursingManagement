@@ -117,8 +117,8 @@ public class StudyListController implements Initializable {
 	}
 	
 	private void setupTable() {
-		String[] keys = {"name", "type", "publish_status", "if_count", "point"};
-		String[] fields = {"课件名称","类型", "发布状态", "是否记分", "分值"};
+		String[] keys = {"name", "type", "publish_status", "point"};
+		String[] fields = {"课件名称","类型", "发布状态", "分值"};
 		loader.setupTable(tableView, keys, fields);
 	}
 	private void getList() {

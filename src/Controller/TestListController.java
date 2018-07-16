@@ -160,7 +160,7 @@ public class TestListController implements Initializable {
 	private void deleteFunction(HashMap<String, String> map) {		
 		PopupWindow popUP = new PopupWindow();
 		popUP.confirmButton.setOnAction(e->{
-			//TODO: fix me, delete exam also delete exam-question relation table
+			//delete from exam_list, exam_history
 			if(dbHelper.deleteExam(map)) {
 				popUP.stage.close();
 				getList();

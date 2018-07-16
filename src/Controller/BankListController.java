@@ -155,7 +155,7 @@ public class BankListController implements Initializable {
 	private void deleteFunction(HashMap<String, String> map) {		
 		PopupWindow popUP = new PopupWindow();
 		popUP.confirmButton.setOnAction(e->{
-			if(dbHelper.deleteExam(map)) {
+			if(dbHelper.deleteBank(map)) {
 				popUP.stage.close();
 				getList();
 				reload();

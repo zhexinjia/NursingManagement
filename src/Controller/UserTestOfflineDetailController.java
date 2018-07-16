@@ -73,7 +73,7 @@ public class UserTestOfflineDetailController implements Initializable {
 	void getList(){
 		String tableName = "offlineexam_history inner join user_primary_info on user_primary_info.ssn = offlineexam_history.ssn "
 				+ "where user_primary_info.branch = '" + LoginController.branch + "'" + "and offlineexam_history.id = '" + report.get("id") + "';";
-		String[] columns = {"offlineexam_history.total_score", "offlineexam_history.taken_date", "offlineexam_history.supervisor",
+		String[] columns = {"offlineexam_history.score", "offlineexam_history.taken_date", "offlineexam_history.supervisor",
 				"offlineexam_history.comment"};
 		scoreList = dbHelper.getList(tableName, columns);
 		System.out.println("scoreList: " + scoreList);
@@ -85,7 +85,7 @@ public class UserTestOfflineDetailController implements Initializable {
 		String comment = scoreList.get(0).get("comment");
 		String supervisor = scoreList.get(0).get("supervisor");
 		String taken_date = scoreList.get(0).get("taken_date");
-		String total_score = scoreList.get(0).get("total_score");
+		String score = scoreList.get(0).get("score");
 		
 		if(comment != null) {
 			commentField.setText(comment);
@@ -96,8 +96,8 @@ public class UserTestOfflineDetailController implements Initializable {
 		if (taken_date != null) {
 			takenDateField.setText(taken_date);
 		}
-		if (total_score != null) {
-			scoreField.setText(total_score);
+		if (score != null) {
+			scoreField.setText(score);
 		}
 	}
 	

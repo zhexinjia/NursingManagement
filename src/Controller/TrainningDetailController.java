@@ -29,13 +29,17 @@ public class TrainningDetailController implements Initializable {
 	DBhelper dbHelper = new DBhelper	();
 	private HashMap<String, String> selectedTraining;
 	
-	String[] fields =  {"姓名", "科室", "职位", "职称", "得分", "备注"};
-	String[] keys = {"name", "department", "position", "title", "point", "detail"};
+	String[] fields =  { "姓名", "工号", "得分", "是否完成","备注"};
+	String[] keys = { "name", "ssn", "point", "finish_status", "detail"};
 	int oldPoint, newPoint;
 	int newScore;
+	String trainning_id;
+	String totalPoint;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		selectedTraining = TrainningListController.selectedTrainning;
+		trainning_id = selectedTraining.get("id");
+		totalPoint = selectedTraining.get("totalPoint");
 		setupTable();
 		getList();
 		reload();
@@ -67,16 +71,18 @@ public class TrainningDetailController implements Initializable {
 
     @FXML
     void importButton() {
-		String[] fieldlist =  fields;
-		String[] keylist = keys;
-		loader.importExcel(keylist, fieldlist);
+		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
+		if(importlist!=null) {
+			if (dbHelper.insertTrainning(importlist, trainning_id, totalPoint)) {
+				getList();
+				reload();
+			}
+		}
     }
     
     @FXML
     void exportButton() {
-		String[] fieldlist =  fields;
-		String[] keylist = keys;
-		loader.exportExcel(list, fieldlist, keylist);
+		loader.exportExcel(list, fields, keys);
     }
 
     @FXML
@@ -135,6 +141,7 @@ public class TrainningDetailController implements Initializable {
     @FXML
     void deleteButton() {
     		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+    		
     		PopupWindow pop = new PopupWindow();
     		if(selected == null) {
     			pop.alertWindow("操作失败", "请选中一个用户");
@@ -144,15 +151,17 @@ public class TrainningDetailController implements Initializable {
     					pop.errorWindow();
     				}else {
     					pop.stage.close();
+    					getList();
+    					reload();
     				}
     			});
-    			pop.confirmWindow("确认要删除用户吗？", "点击确认删除用户记录");
+    			pop.confirmWindow("确认要删除培训吗？", "点击确认删除培训记录");
     		}
     }
 
     private void setupTable() {
-    		//String[] keys = {"name", "department", "position", "title", "point", "detail"};
-    		//String[] fields = {"姓名", "科室", "职位", "职称", "得分", "备注"};
+    		String[] keys = {"name", "department", "position", "title", "point", "detail"};
+    		String[] fields = {"姓名", "科室", "职位", "职称", "得分", "备注"};
 		loader.setupTable(tableView, keys, fields);
 	}
 

@@ -29,19 +29,21 @@ public class TestOfflineDetailController implements Initializable{
 	Loader loader = new Loader();
 	private HashMap<String, String> selectedTest;
 	private String examID;
+	String totalPoint;
 	DBhelper dbHelper = new DBhelper();
 	ArrayList<HashMap<String, String>> list;
 	public static HashMap<String, String> selectedUser;
 	
-	String[] keys = {"name", "department", "position", "title", "level", "finish", "score"};
-    String[] fields = {"姓名", "科室", "职位","职称","层级", "完成", "成绩"};
+	String[] keys = {"name", "ssn", "taken_date", "supervisor", "finish_status", "score", "comment"};
+    String[] fields = {"名字", "工号", "考核时间", "监考人","是否完成","得分", "备注"};
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//FXIME: get total score of the test??????????? selected count of single, multi and tf, then add?
 		selectedTest = TestOfflineController.selectedTest;
 		//System.out.println("selectedTest: "+selectedTest);
 		examID = selectedTest.get("id");
+		//拿到这份卷子的总分
+		totalPoint = selectedTest.get("totalPoint");
 		setupTable();
 		getList();
 		setupLabelandChart();
@@ -77,6 +79,40 @@ public class TestOfflineDetailController implements Initializable{
     	
     }
     
+    @FXML 
+    void deleteButton() {
+		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
+		
+		PopupWindow pop = new PopupWindow();
+		if(selected == null) {
+			pop.alertWindow("操作失败", "请选中一个用户");
+		}else {
+			pop.confirmButton.setOnAction(e->{
+				if(!dbHelper.delete(selected, "offlineexam_history")) {
+					pop.errorWindow();
+				}else {
+					pop.stage.close();
+					getList();
+					reload();
+				}
+			});
+			pop.confirmWindow("确认要删除该考核吗？", "点击确认删除考核记录");
+		}
+    }
+    
+    @FXML
+    void importButton() {
+    		String exam_id = selectedTest.get("id");
+		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
+		if(importlist!=null) {
+			if (dbHelper.insertOfflineTest(importlist, exam_id, totalPoint)) {
+				getList();
+				reload();
+			}
+		}
+		
+    }
+    
     @FXML
     void exportButton() {
     		String[] fieldlist = fields;
@@ -86,17 +122,22 @@ public class TestOfflineDetailController implements Initializable{
     
     
     private void setupTable() {
-		loader.setupTable(tableView, keys, fields);
+    		String[] tableKeys = {"name", "department", "position", "title", "level", "finish", "score"};
+        String[] tableFields = {"姓名", "科室", "职位","职称","层级", "完成", "成绩"};
+		loader.setupTable(tableView, tableKeys, tableFields);
 	}
     
 	private void getList() {
-		//TODO: how to count total point??? should we remove it?
-		String[] columns = {"offlineexam_history.offlineexam_id", "offlineexam_history.id as id", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
-				"user_primary_info.title", "user_primary_info.level", "offlineexam_history.finish_status as finish", "offlineexam_history.total_score as score"};
+		
+		String[] columns = {"offlineexam_history.offlineexam_id", "offlineexam_history.id as id", "user_primary_info.department", "user_primary_info.name", 
+				"user_primary_info.position", "user_primary_info.title", "user_primary_info.level", "offlineexam_history.finish_status as finish", 
+				"offlineexam_history.score as score", "offlineexam_list.totalPoint", };
 		String[] searchColumns = {"offlineexam_history.offlineexam_id"};
 		String[] searchValues = {examID};
+		String table = "offlineexam_history inner join user_primary_info on offlineexam_history.ssn = user_primary_info.ssn "
+				+ "inner join offlineexam_list on offlineexam_history.offlineexam_id  = offlineexam_list.id";
 		
-		list = dbHelper.getList(searchColumns, searchValues, "offlineexam_history inner join user_primary_info on offlineexam_history.ssn = user_primary_info.ssn", columns);
+		list = dbHelper.getList(searchColumns, searchValues, table, columns);
 		System.out.println("list:" +list);
 	}
 	private void reload() {

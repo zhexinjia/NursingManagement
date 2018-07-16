@@ -34,8 +34,8 @@ public class TestOfflineController implements Initializable {
     Loader loader = new Loader();
     DBhelper dbHelper;
     private ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-    String[] keys = {"exam_name", "totalPoint", "publishStatus", "time"};
-    String[] fields = {"考核名称", "考核积分", "当前状态", "考核时间"};
+    String[] keys = {"exam_name", "totalPoint", "time"};
+    String[] fields = {"考核名称", "考核积分", "考核时间"};
     public static HashMap<String, String> selectedTest;
     private String branch;
     
@@ -66,7 +66,7 @@ public class TestOfflineController implements Initializable {
     		searchField.setText("");
     		reload();
     }
-
+    /*
     @FXML
     void publishButton() {
     		//未发布，已发布，已截止
@@ -99,7 +99,7 @@ public class TestOfflineController implements Initializable {
         		}
     		}
     }
-
+*/
 
     @FXML
     void newButton() {

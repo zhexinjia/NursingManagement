@@ -408,6 +408,10 @@ public class DBhelper {
 	*/
 	
 	
+	/**********************************************************************
+	/ * INSERT Methods   
+	/**********************************************************************/
+	
 
 	public String insertUserHelper(HashMap<String, String> map) {
 		//insert ignore into exam_history (ssn, exam_id) VALUES
@@ -480,76 +484,6 @@ public class DBhelper {
 		return false;
 	}
 	
-	public String updateUserHelper(HashMap<String, String> map) {
-		
-		String sqlPrim = "UPDATE user_primary_info set " ;
-		String sqlSub= "UPDATE user_sub_info set ";
-		
-		Set<String> keys = map.keySet();
-		ArrayList<String> keyset = new ArrayList<String>(keys);	
-		
-		for(int i = 0; i < keyset.size();i++) {
-			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
-					keyset.get(i) == "position" || keyset.get(i) == "title" ||
-					keyset.get(i) == "level" || keyset.get(i) == "password" || keyset.get(i) == "branch") {
-				
-				if(map.get(keyset.get(i))!=null) {
-					sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
-				}
-				//sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
-			}else {
-				if(map.get(keyset.get(i))!=null) {
-					sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
-				}
-				//sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
-			}		
-		}
-		
-		sqlPrim = sqlPrim.substring(0, sqlPrim.length()-2);
-		sqlPrim += " WHERE ssn=" + "'" + map.get("ssn") + "';";
-		
-		sqlSub = sqlSub.substring(0, sqlSub.length()-2);
-		sqlSub += " WHERE ssn=" + "'" + map.get("ssn") + "';";
-		
-		String res = sqlPrim + sqlSub;
-		
-		return res;
-		
-	}
-	
-	//used in UserModifyController, one HashMap as @Param, update two tables: primary, sub
-	public boolean updateUser(HashMap<String, String> map) {
-		String sql = "sql=" + updateUserHelper(map);
-		System.out.println(sql);
-		if(sendPost(urlSend, sql)) {
-			return true;
-		}
-		return false;
-	}
-	
-	//used in UserListController, delete user info from the 3-user tables and all other history tables
-	public boolean deleteUser(HashMap<String, String> selectedUser) {
-		String ssn = selectedUser.get("ssn");
-		//Delete user from the 3-user tables
-		String primSql = "delete from user_primary_info where ssn = " + ssn + ";";
-		String subSql = "delete from user_sub_info where ssn = " + ssn + ";";
-		String scoreSql = "delete from user_score_info where ssn = " + ssn + ";";
-		
-		//Delete user from all history tables
-		String examSql = "delete from exam_history where ssn=" + "'" + ssn + "';";
-		String meetingSql = "delete from meeting_history where ssn=" + "'" + ssn + "';";
-		String reportSql = "delete from report_list where ssn=" + "'" + ssn + "';";
-		String studySql = "delete from study_history where ssn=" + "'" + ssn + "';";
-		String trainingSql = "delete from training_history where ssn=" + "'" + ssn + "';";
-		
-		String sql = "sql=" + primSql + subSql + scoreSql + examSql + meetingSql + reportSql + studySql + trainingSql ;
-		if (sendPost(urlSend, sql)) {
-			//success();
-			return true;
-		}
-		//fail();
-		return false;
-	}
 	
 	public String mapInsert(HashMap<String, String> map, String tableName) {
 		String sql = "insert into " + tableName + " (";
@@ -584,95 +518,8 @@ public class DBhelper {
 		return false;
 	}
 	
-	
-	public boolean update(HashMap<String, String> map, String tableName) {
-		String sql = "sql=update " + tableName + " set ";
-		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
-		for(int i = 0; i < keyset.size(); i++) {
-			if(i == keyset.size()-1) {
-				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
-			}else {
-				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
-			}
-		}
-		sql += " where id = " + map.get("id") + ";";
-		if(sendPost(urlSend, sql)) {
-			return true;
-		}
-		//System.out.println(sql);
-		return false;
-	}
-	
-	
-	//simple delete version, delete row by using hashmap.id
-	public boolean delete(HashMap<String, String> map, String tableName) {
-		System.out.printf("map: ", map);
-		String id = map.get("id");
-		String sql = "sql=delete from " + tableName + " where id = " + id + ";";
-		if(sendPost(urlSend, sql)) {
-			
-			//success();
-			return true;
-		}
-		//fail();
-		return false;
-	}
 
-	//delete all information about this test, given exam id
-	public boolean deleteBank(HashMap<String, String> map) {
-		String id = map.get("id");
-		//String historySql = "delete from exam_history where bank_id=" + "'" + id + "';";
-		//String listSql = "delete from exam_list where id=" + "'" + id + "';";
-		String mulSql = "delete from exam_qa_multiple where bank_id=" + "'" + id + "';";
-		String singleSql = "delete from exam_qa_single where bank_id=" + "'" + id + "';";
-		String tfSql = "delete from exam_qa_tf where bank_id=" + "'" + id + "';";
-		String quesBank = "delete from question_bank where id = " + "'" + id + "';";
-		 
-		String sql = "sql=" + mulSql + singleSql + tfSql + quesBank;
-		System.out.println(sql);
-		if (sendPost(urlSend, sql)) {
-			//success();
-			return true;
-		}
-		//fail();
-		return false;
-	}
-	
-	public boolean deleteExam(HashMap<String, String> map) {
-		String id  = map.get("id");
-		
-		String exam = "delete from exam_list where id = '" + id + "';";
-		String history  = "delete from exam_history where exam_id = '" + id + "';";
-		String sql = "sql=" + exam + history;
-		
-		if (sendPost(urlSend, sql)) {
-			//success();
-			return true;
-		}
-		//fail();
-		return false;
-		
-	}
-	
-	
-	
-	public boolean deleteOfflineExam(HashMap<String, String> map) {
-		String id = map.get("id");
-		String exam = "delete from offlineexam_list where id=" + "'" + id + "';";
-		String history = "delete from offlineexam_history where offlineexam_id=" + "'" + id + "';";
-		String sql = "sql=" + exam + history;
-		System.out.println(sql);
-		if (sendPost(urlSend, sql)) {
-			System.out.println("Delete Offline Exam Success");
-			//success();
-			return true;
-		}
-		//fail();
-		System.out.println("Fail to Delete Offline Exam");
-		return false;
-	}
-	
-	
+
 	public String insertHistoryHelper(HashMap<String, String> map, String id, String type) {
 		
 		String sql = "";
@@ -728,10 +575,7 @@ public class DBhelper {
 		System.out.println("Fail");
 		return false;
 	}
-	
-	/*
-	 *  Training
-	 */
+
 	
 	public boolean insertTrainning(ArrayList<HashMap<String, String>> maplist, String training_id, String totalPoint) {
 		
@@ -770,7 +614,160 @@ public class DBhelper {
 		}
 		return false;
 	}
+	
+	public boolean inserExam(ArrayList<HashMap <String, String>> map) {
+		//Default each question worth 10-point
+		
+		String examId = null;
+		String sql = "sql=";
+		for (HashMap<String, String> exam:map) {
+			sql += mapInsert(exam, "exam_qa");
+			examId = exam.get("exam_id");
+		}
+		
+		sql += "select count(*) into @num from exam_qa where exam_id ='" + examId 
+				+ "'; select single_point into @point from exam_list where id ='" + examId + 
+				"'; update exam_list set totalPoint = (@num*@point) where id = '" + examId + "';";
+		
+		if (sendPost(urlSend, sql)) {
+			//System.out.println(sql);
+			return true;
+		}
+		//System.out.println(sql);
+		return false;
+	
+	}
+	
+	/****************************************************************************/
+	
+	
+	
+	/**********************************************************************
+	/ * UPDATE Methods   
+	/**********************************************************************/
+	
+	public String updateUserHelper(HashMap<String, String> map) {
+		
+		String sqlPrim = "UPDATE user_primary_info set " ;
+		String sqlSub= "UPDATE user_sub_info set ";
+		
+		Set<String> keys = map.keySet();
+		ArrayList<String> keyset = new ArrayList<String>(keys);	
+		
+		for(int i = 0; i < keyset.size();i++) {
+			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
+					keyset.get(i) == "position" || keyset.get(i) == "title" ||
+					keyset.get(i) == "level" || keyset.get(i) == "password" || keyset.get(i) == "branch") {
+				
+				if(map.get(keyset.get(i))!=null) {
+					sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+				}
+				//sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}else {
+				if(map.get(keyset.get(i))!=null) {
+					sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+				}
+				//sqlSub+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}		
+		}
+		
+		sqlPrim = sqlPrim.substring(0, sqlPrim.length()-2);
+		sqlPrim += " WHERE ssn=" + "'" + map.get("ssn") + "';";
+		
+		sqlSub = sqlSub.substring(0, sqlSub.length()-2);
+		sqlSub += " WHERE ssn=" + "'" + map.get("ssn") + "';";
+		
+		String res = sqlPrim + sqlSub;
+		
+		return res;
+		
+	}
+	
+	//used in UserModifyController, one HashMap as @Param, update two tables: primary, sub
+	public boolean updateUser(HashMap<String, String> map) {
+		String sql = "sql=" + updateUserHelper(map);
+		System.out.println(sql);
+		if(sendPost(urlSend, sql)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean update(HashMap<String, String> map, String tableName) {
+		String sql = "sql=update " + tableName + " set ";
+		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
+		for(int i = 0; i < keyset.size(); i++) {
+			if(i == keyset.size()-1) {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
+			}else {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}
+		}
+		sql += " where id = " + map.get("id") + ";";
+		if(sendPost(urlSend, sql)) {
+			return true;
+		}
+		//System.out.println(sql);
+		return false;
+	}
+	
+	public boolean updateScore(HashMap<String, String> map, String tableName) {
 
+		String sql = "sql=update " + tableName + " set ";
+		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
+		for(int i = 0; i < keyset.size(); i++) {
+			if(i == keyset.size()-1) {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
+			}else {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}
+		}
+		sql += " where id = " + map.get("id") + ";";
+		
+		if(sendPost(urlSend, sql)) {
+			
+			//success();
+			return true;
+		}
+		System.out.println(sql);
+		//fail();
+		return false;
+	}
+	
+	public boolean newUpdateScore(HashMap<String, String> map, String tableName, String newScore) {
+		//String newScore = map.get("newScore");
+		String ssn  = map.get("ssn");
+		String sql = "sql=update " + tableName + " set ";
+		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
+		for(int i = 0; i < keyset.size(); i++) {
+			if(i == keyset.size()-1) {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
+			}else {
+				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
+			}
+		}
+		sql += " where id = " + map.get("id") + ";";
+		sql += " update user_score set currentScore = '" + newScore + 
+				"' where ssn = '" + ssn + "';";
+		
+		
+		if(sendPost(urlSend, sql)) {
+			System.out.println("update Score sql: " + sql);
+			//success();
+			return true;
+		}
+		System.out.println(sql);
+		//fail();
+		return false;
+	}
+	
+	
+	/****************************************************************************/
+
+	
+	/**********************************************************************
+	/ * PUBLISH Methods   
+	/**********************************************************************/
 
 	//publishing Exam/Study/Training/Meeting
 	public boolean publish(ArrayList<HashMap<String, String>> userList, HashMap<String, String> item, String table) {
@@ -835,6 +832,69 @@ public class DBhelper {
 		return false;
 	}
 
+	public boolean publishTraining(ArrayList<HashMap<String, String>> maplist, String tableName) {
+		String sql = "sql=";
+		for(HashMap<String, String> map:maplist) {
+			sql+=preventDupSQL(map, tableName);
+		}
+		System.out.println(sql);
+		if(sendPost(urlSend, sql)) {
+			//success();
+			
+			return true;
+		}
+		fail();
+		return false;
+		
+	}
+	/****************************************************************************/
+	
+	
+	
+	/**********************************************************************
+	/ * DELETE Methods   
+	/**********************************************************************/
+	
+	//simple delete version, delete row by using hashmap.id
+	public boolean delete(HashMap<String, String> map, String tableName) {
+		System.out.printf("map: ", map);
+		String id = map.get("id");
+		String sql = "sql=delete from " + tableName + " where id = " + id + ";";
+		if(sendPost(urlSend, sql)) {
+			
+			//success();
+			return true;
+		}
+		//fail();
+		return false;
+	}
+	
+	
+	//used in UserListController, delete user info from the 3-user tables and all other history tables
+	public boolean deleteUser(HashMap<String, String> selectedUser) {
+		String ssn = selectedUser.get("ssn");
+		//Delete user from the 3-user tables
+		String primSql = "delete from user_primary_info where ssn = " + ssn + ";";
+		String subSql = "delete from user_sub_info where ssn = " + ssn + ";";
+		String scoreSql = "delete from user_score_info where ssn = " + ssn + ";";
+		
+		//Delete user from all history tables
+		String examSql = "delete from exam_history where ssn=" + "'" + ssn + "';";
+		String meetingSql = "delete from meeting_history where ssn=" + "'" + ssn + "';";
+		String reportSql = "delete from report_list where ssn=" + "'" + ssn + "';";
+		String studySql = "delete from study_history where ssn=" + "'" + ssn + "';";
+		String trainingSql = "delete from training_history where ssn=" + "'" + ssn + "';";
+		
+		String sql = "sql=" + primSql + subSql + scoreSql + examSql + meetingSql + reportSql + studySql + trainingSql ;
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
+		return false;
+	}
+	
+	
 	//delete meeting and all meeting history related to this meeting
 	public boolean deleteMeeting(HashMap<String, String> selectedMeeting) {
 		String id = selectedMeeting.get("id");
@@ -878,6 +938,89 @@ public class DBhelper {
 		return false;
 	}
 	
+	public boolean deleteExam(HashMap<String, String> map) {
+		String id  = map.get("id");
+		
+		String exam = "delete from exam_list where id = '" + id + "';";
+		String history  = "delete from exam_history where exam_id = '" + id + "';";
+		String sql = "sql=" + exam + history;
+		
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
+		return false;
+		
+	}
+	
+	public boolean deleteOfflineExam(HashMap<String, String> map) {
+		String id = map.get("id");
+		String exam = "delete from offlineexam_list where id=" + "'" + id + "';";
+		String history = "delete from offlineexam_history where offlineexam_id=" + "'" + id + "';";
+		String sql = "sql=" + exam + history;
+		System.out.println(sql);
+		if (sendPost(urlSend, sql)) {
+			System.out.println("Delete Offline Exam Success");
+			//success();
+			return true;
+		}
+		//fail();
+		System.out.println("Fail to Delete Offline Exam");
+		return false;
+	}
+	
+	
+
+	//delete all information about this test, given exam id
+	public boolean deleteBank(HashMap<String, String> map) {
+		String id = map.get("id");
+		//String historySql = "delete from exam_history where bank_id=" + "'" + id + "';";
+		//String listSql = "delete from exam_list where id=" + "'" + id + "';";
+		String mulSql = "delete from exam_qa_multiple where bank_id=" + "'" + id + "';";
+		String singleSql = "delete from exam_qa_single where bank_id=" + "'" + id + "';";
+		String tfSql = "delete from exam_qa_tf where bank_id=" + "'" + id + "';";
+		String quesBank = "delete from question_bank where id = " + "'" + id + "';";
+		 
+		String sql = "sql=" + mulSql + singleSql + tfSql + quesBank;
+		System.out.println(sql);
+		if (sendPost(urlSend, sql)) {
+			//success();
+			return true;
+		}
+		//fail();
+		return false;
+	}
+	
+	/*****************************************************************************/
+	
+	
+	/*********************************************************************** 
+	/ * Methods on 'Manager' 
+	/************************************************************************/
+
+	public boolean setManager(String ssn) {
+		// TODO Auto-generated method stub
+		String sql = "sql=UPDATE user_primary_info set is_manager = '1' Where ssn= '" + ssn + "';" ;
+		boolean output = sendPost(urlSend, sql);
+		return output;
+	}
+	
+	public boolean updateManager(String newManager, String oldManager) {
+		String sql = "sql=";
+		sql += "update user_primary_info set is_manager = '1' where ssn ='" 
+				+ newManager + "'; update user_primary_info set is_manager = '0' "
+				+ "where ssn ='" + oldManager + "';";
+
+		if(sendPost(urlSend, sql)) {
+			System.out.println(sql);
+			return true;
+		}
+		return false;
+	}
+	
+	/***********************************************************************************/
+	
 	public boolean emptyScore() {
 		String totalScoreSql = "UPDATE user_score SET totalScore = 0;";
 		String currentScoreSql = "UPDATE user_score SET currentScore = 0;";
@@ -891,34 +1034,7 @@ public class DBhelper {
 		return false;
 	}
 
-	/*
-	private boolean popSelection() {
-		PopupWindow pop = new PopupWindow();
-		pop.alertWindow("操作失败", "没有选中目标。");
-		return false;
-	}
-	*/
-	private void success() {
-		PopupWindow pop = new PopupWindow();
-		pop.confirmButton.setOnAction(e->{
-			pop.stage.close();
-		});
-		pop.confirmWindow("操作成功", "点击确定返回");
-	}
-	private void fail() {
-		/*
-		PopupWindow pop = new PopupWindow();
-		pop.errorWindow();
-		*/
-	}
-	
-	 /* 
-	 * INSERT INTO user_primary_info (ssn)
-	 * SELECT * FROM (SELECT '2') AS tmp
-	 * WHERE NOT EXISTS (
-	 * SELECT ssn FROM training_history WHERE ssn = '2'
-	 * ) LIMIT 1;
-	 */
+
 	private String preventDupSQL(HashMap<String, String> map, String tableName) {
 		String sql = "INSERT INTO " + tableName + " ";
 		ArrayList<String> keys = new ArrayList<String>();
@@ -944,28 +1060,7 @@ public class DBhelper {
 		return sql;
 	}
 	
-	public boolean publishTraining(ArrayList<HashMap<String, String>> maplist, String tableName) {
-		String sql = "sql=";
-		for(HashMap<String, String> map:maplist) {
-			sql+=preventDupSQL(map, tableName);
-		}
-		System.out.println(sql);
-		if(sendPost(urlSend, sql)) {
-			//success();
-			
-			return true;
-		}
-		fail();
-		return false;
-		
-	}
 
-	public boolean setManager(String ssn) {
-		// TODO Auto-generated method stub
-		String sql = "sql=UPDATE user_primary_info set is_manager = '1' Where ssn= '" + ssn + "';" ;
-		boolean output = sendPost(urlSend, sql);
-		return output;
-	}
 
 	public boolean register(String userName, String passWord, String hospitalName, String code) {
 		String param = "userName=" + userName + "&password=" + passWord + "&hospitalName="+hospitalName+"&code="+code;
@@ -980,93 +1075,32 @@ public class DBhelper {
 			return false;
 		}
 	}
+	
+	private void success() {
+		PopupWindow pop = new PopupWindow();
+		pop.confirmButton.setOnAction(e->{
+			pop.stage.close();
+		});
+		pop.confirmWindow("操作成功", "点击确定返回");
+	}
+	
+	
+	private void fail() {
+		/*
+		PopupWindow pop = new PopupWindow();
+		pop.errorWindow();
+		*/
+	}
 
-	public boolean updateScore(HashMap<String, String> map, String tableName) {
+	/*
+	private boolean popSelection() {
+		PopupWindow pop = new PopupWindow();
+		pop.alertWindow("操作失败", "没有选中目标。");
+		return false;
+	}
+	*/
+	
 
-		String sql = "sql=update " + tableName + " set ";
-		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
-		for(int i = 0; i < keyset.size(); i++) {
-			if(i == keyset.size()-1) {
-				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
-			}else {
-				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
-			}
-		}
-		sql += " where id = " + map.get("id") + ";";
-		
-		if(sendPost(urlSend, sql)) {
-			
-			//success();
-			return true;
-		}
-		System.out.println(sql);
-		//fail();
-		return false;
-	}
-	
-	public boolean newUpdateScore(HashMap<String, String> map, String tableName, String newScore) {
-		//String newScore = map.get("newScore");
-		String ssn  = map.get("ssn");
-		String sql = "sql=update " + tableName + " set ";
-		ArrayList<String> keyset = new ArrayList<String>(map.keySet());
-		for(int i = 0; i < keyset.size(); i++) {
-			if(i == keyset.size()-1) {
-				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "'";
-			}else {
-				sql+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";
-			}
-		}
-		sql += " where id = " + map.get("id") + ";";
-		sql += " update user_score set currentScore = '" + newScore + 
-				"' where ssn = '" + ssn + "';";
-		
-		
-		if(sendPost(urlSend, sql)) {
-			System.out.println("update Score sql: " + sql);
-			//success();
-			return true;
-		}
-		System.out.println(sql);
-		//fail();
-		return false;
-	}
-	
-	public boolean inserExam(ArrayList<HashMap <String, String>> map) {
-		//Default each question worth 10-point
-		
-		String examId = null;
-		String sql = "sql=";
-		for (HashMap<String, String> exam:map) {
-			sql += mapInsert(exam, "exam_qa");
-			examId = exam.get("exam_id");
-		}
-		
-		sql += "select count(*) into @num from exam_qa where exam_id ='" + examId 
-				+ "'; select single_point into @point from exam_list where id ='" + examId + 
-				"'; update exam_list set totalPoint = (@num*@point) where id = '" + examId + "';";
-		
-		if (sendPost(urlSend, sql)) {
-			//System.out.println(sql);
-			return true;
-		}
-		//System.out.println(sql);
-		return false;
-	
-	}
-	
-	public boolean updateManager(String newManager, String oldManager) {
-		String sql = "sql=";
-		sql += "update user_primary_info set is_manager = '1' where ssn ='" 
-				+ newManager + "'; update user_primary_info set is_manager = '0' "
-				+ "where ssn ='" + oldManager + "';";
-
-		if(sendPost(urlSend, sql)) {
-			System.out.println(sql);
-			return true;
-		}
-		return false;
-	}
-	
 	//given ssn, return list of test score histoys, list of study score history, list of training, list of meeting
 	/*
 	public ArrayList<ArrayList<HashMap<String, String>>> getRecordLists(String ssn){

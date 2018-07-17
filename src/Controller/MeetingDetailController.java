@@ -39,6 +39,11 @@ public class MeetingDetailController implements Initializable {
 	}
 
 	@FXML
+	void loadMeetingList() {
+		loader.loadVBox(box, "/View/MeetingStatus.fxml");
+	}
+	
+	@FXML
 	void searchButton() {
 		reload();
 	}

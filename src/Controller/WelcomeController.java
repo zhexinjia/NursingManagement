@@ -61,6 +61,10 @@ public class WelcomeController implements Initializable {
     void downloadUserTemplate() {
 
     }
-	
+    
+    @FXML
+    void downloadOfflineTestTemplate() {
+    	
+    }
 
 }

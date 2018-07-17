@@ -97,7 +97,7 @@ public class TestDetailController implements Initializable{
 	private void getList() {
 		//TODO: how to count total point??? should we remove it?
 		String[] columns = {"exam_history.exam_id", "exam_history.id as id", "user_primary_info.department", "user_primary_info.name", "user_primary_info.position", 
-				"user_primary_info.title", "user_primary_info.level", "exam_history.finish as finish", "exam_history.score as score"};
+				"user_primary_info.title", "user_primary_info.level", "exam_history.finish as finish", "exam_history.score as score", "exam_history.totalScore as totalScore"};
 		String[] searchColumns = {"exam_history.exam_id"};
 		String[] searchValues = {examID};
 		
@@ -115,6 +115,12 @@ public class TestDetailController implements Initializable{
 		int finished = 0;
 		int passed = 0;
 		Double sum = 0.0;
+		double totalScore = 0.0;
+		if (size != 0) {
+			String ts = list.get(0).get("totalScore");
+			totalScore = Double.parseDouble(ts);
+		}
+		
 		ArrayList<Double> scores = new ArrayList<Double>();
 		for(HashMap<String, String> map:list) {
 			if(map.get("finish").equals("是")) {
@@ -126,10 +132,10 @@ public class TestDetailController implements Initializable{
 				scores.add(0.0);
 			}
 		}
-		double totalPoint = Double.parseDouble(selectedTest.get("totalPoint"));
+		//double totalPoint = Double.parseDouble(selectedTest.get("totalPoint"));
 		for(Double score:scores) {
 			sum+=score;
-			if(score/totalPoint >= 0.6) {
+			if(score/totalScore >= 0.6) {
 				passed++;
 			}
 		}
@@ -139,7 +145,7 @@ public class TestDetailController implements Initializable{
 		passPercent.setText(pass.toString()+"%");
 		finishPercent.setText(fin.toString()+"%");
 		average.setText(ave.toString());
-		setupChart(scores, totalPoint);
+		setupChart(scores, totalScore);
 	}	
 	
 	private void setupChart(ArrayList<Double> scores, Double totalScore) {

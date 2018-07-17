@@ -413,7 +413,7 @@ public class DBhelper {
 		//insert ignore into exam_history (ssn, exam_id) VALUES
 		String sqlPrim = "insert ignore into user_primary_info" + " (";
 		String sqlSub= "insert ignore into user_sub_info" + " (";
-		String sqlScore = "insert into user_score" + " (ssn) VALUES (";
+		String sqlScore = "insert ignore into user_score" + " (ssn) VALUES (";
 		Set<String> keys = map.keySet();
 		ArrayList<String> keyset = new ArrayList<String>(keys);
 		

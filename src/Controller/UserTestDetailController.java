@@ -320,34 +320,52 @@ public class UserTestDetailController implements Initializable {
  		String singleAns = userAnswers.get("single_answer");
  		String multiAns = userAnswers.get("multi_answer");
  		String tfAns = userAnswers.get("tf_answer");
+ 		System.out.println("tfAns: "+ tfAns);
+ 		System.out.println("tfAns111: " + tfAns == null);
+ 		System.out.println("tfAns111: " + tfAns == "");
+ 		System.out.println("tfAns111: " + tfAns == " ");
+ 		System.out.println("tfAns111: " + tfAns.isEmpty());
+ 		System.out.println("tfAns111: " + !tfAns.isEmpty());
  		String singleIds = userAnswers.get("single_ids");
  		String multiIds = userAnswers.get("multi_ids");
  		String tfIds = userAnswers.get("tf_ids");
  		
  		System.out.println("singleIds: " + singleIds);
  		
- 		if (singleAns != null) {			
- 			singleAnswers = singleAns.split(",|，");
+ 		if (singleAns == null || singleAns.isEmpty()) {			
+ 			System.out.println("NO SINGLE QUESTION");
+ 			singleBackButton.setDisable(true);
+			singleNextButton.setDisable(true);
+ 		}else {
+			singleAnswers = singleAns.split(",|，");
  			singleQues = singleIds.split(",|，");
  			getSingleQues();
  			loadSingle();
- 			
  		}
  		
- 		if(multiAns != null) {			
+ 		if(multiAns == null || multiAns.isEmpty()) {			
+ 			System.out.println("NO MULTI QUESTION");
+ 			multiBackButton.setDisable(true);
+			multiNextButton.setDisable(true);
+ 		}else {
  			multiAnswers = multiAns.split(",|，");
  			multiQues = multiIds.split(",|，");
  			getMultiQues();
  			loadMulti();
  		}
- 		
- 		if (tfAns != null) {			
+ 			
+ 		if (tfAns == null || tfAns.isEmpty()) {			
+ 			System.out.println("NO TF QUESTION");
+ 			tfBackButton.setDisable(true);
+			tfNextButton.setDisable(true);
+ 		}else {
  			tfAnswers = tfAns.split(",|，");
  			tfQues = tfIds.split(",|，");
  			getTfQues();
  			loadTf();
  		}
 
+ 		
 	}
 	void getSingleQues() {
 		int i = 0;

@@ -77,7 +77,7 @@
                   </HBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label style="-fx-font-size: 35;" text="欢迎使用护理宝" textFill="#5a6378" />
+                        <Label style="-fx-font-size: 35;" text="欢迎使用百宝盒" textFill="#5a6378" />
                         <Hyperlink onMouseClicked="#downloadUserGuide" style="-fx-text-fill: #5a6378;" text="点此下载使用说明">
                            <VBox.margin>
                               <Insets top="40.0" />
@@ -121,6 +121,11 @@
                      </VBox.margin>
                   </Hyperlink>
                   <Hyperlink layoutX="41.0" layoutY="246.0" onMouseClicked="#downloadTrainingTemplate" text="培训导入模版">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Hyperlink layoutX="36.0" layoutY="299.0" onMouseClicked="#downloadOfflineTestTemplate" text="实操考核导入模版">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>

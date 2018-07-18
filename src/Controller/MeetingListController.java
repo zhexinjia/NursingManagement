@@ -80,7 +80,10 @@ public class MeetingListController implements Initializable {
     void deleteButton() {
     		HashMap<String, String> selectedMeeting = tableView.getSelectionModel().getSelectedItem();
     		if (selectedMeeting != null) {
-    			dbHelper.deleteMeeting(selectedMeeting);
+    			if (dbHelper.deleteMeeting(selectedMeeting)) {
+    				getList();
+    				reload();
+    			}
     		}else {
     			PopupWindow pop = new PopupWindow();
     			pop.alertWindow("删除失败！", "请选中一个会议。");

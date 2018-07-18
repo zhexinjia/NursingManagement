@@ -173,8 +173,8 @@ public class RecordStatusController implements Initializable {
 		Double ave = sum/scoreList.size();
 		DecimalFormat df = new DecimalFormat("#.##");
 		averageField.setText(df.format(ave*100));
-		lowestField.setText(df.format(lowest*100));
-		highestField.setText(df.format(highest*100));
+		lowestField.setText(df.format(lowest*100) + "%");
+		highestField.setText(df.format(highest*100) + "%");
 		setupChart(countArray);
 	}
 	
@@ -243,7 +243,7 @@ public class RecordStatusController implements Initializable {
 		}
 		Double average = total/list.size();
 		DecimalFormat df = new DecimalFormat("#.##");
-		departmentAverage.setText(df.format(average*100) + "%");
+		departmentAverage.setText(df.format(average*100));
 		departmentHighest.setText(df.format(high*100) + "%");
 		departmentLowest.setText(df.format(low*100) + "%");
 	}
@@ -265,7 +265,7 @@ public class RecordStatusController implements Initializable {
 		}
 		Double average = total/list.size();
 		DecimalFormat df = new DecimalFormat("#.##");
-		levelAvg.setText(df.format(average*100) + "%");
+		levelAvg.setText(df.format(average*100));
 		levelHighest.setText(df.format(high*100) + "%");
 		levelLowest.setText(df.format(low*100) + "%");
 	}

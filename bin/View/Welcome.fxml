@@ -125,6 +125,11 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Hyperlink>
+                  <Hyperlink layoutX="36.0" layoutY="299.0" onMouseClicked="#downloadOfflineTestTemplate" text="实操考核导入模版">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Hyperlink>
                   <Hyperlink layoutX="41.0" layoutY="271.0" text="其他">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />

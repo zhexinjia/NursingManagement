@@ -97,7 +97,7 @@
                                     </Pane>
                                     <Pane id="raisedPane-two" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最高分" textFill="WHITE" />
+                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最高得分率" textFill="WHITE" />
                                           <Label fx:id="highestField" layoutX="93.0" layoutY="78.0" prefHeight="34.0" prefWidth="85.0" style="-fx-font-size: 22;" text="100" textFill="WHITE" />
                                           <Separator layoutX="35.0" layoutY="67.0" prefHeight="3.0" prefWidth="140.0" />
                                        </children>
@@ -107,8 +107,8 @@
                                     </Pane>
                                     <Pane id="raisedPane-three" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最低分" textFill="WHITE" />
-                                          <Label fx:id="lowestField" layoutX="92.0" layoutY="78.0" prefHeight="34.0" prefWidth="89.0" style="-fx-font-size: 22;" text="30" textFill="WHITE" />
+                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最低得分率" textFill="WHITE" />
+                                          <Label fx:id="lowestField" layoutX="92.0" layoutY="78.0" prefHeight="34.0" prefWidth="89.0" style="-fx-font-size: 22;" text="100" textFill="WHITE" />
                                           <Separator layoutX="35.0" layoutY="67.0" prefHeight="3.0" prefWidth="140.0" />
                                        </children>
                                        <VBox.margin>
@@ -162,7 +162,7 @@
                                     </Pane>
                                     <Pane id="raisedPane-two" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最高分" textFill="WHITE" />
+                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最高得分率" textFill="WHITE" />
                                           <Label fx:id="departmentHighest" layoutX="57.0" layoutY="78.0" prefHeight="34.0" prefWidth="111.0" style="-fx-font-size: 22;" text="87.5" textFill="WHITE" />
                                           <Separator layoutX="35.0" layoutY="67.0" prefHeight="3.0" prefWidth="140.0" />
                                        </children>
@@ -172,7 +172,7 @@
                                     </Pane>
                                     <Pane id="raisedPane-three" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最低分" textFill="WHITE" />
+                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最低得分率" textFill="WHITE" />
                                           <Label fx:id="departmentLowest" layoutX="57.0" layoutY="78.0" prefHeight="34.0" prefWidth="92.0" style="-fx-font-size: 22;" text="66" textFill="WHITE" />
                                           <Separator layoutX="35.0" layoutY="67.0" prefHeight="3.0" prefWidth="140.0" />
                                        </children>
@@ -256,7 +256,7 @@
                                     </Pane>
                                     <Pane id="raisedPane-two" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最高分" textFill="WHITE" />
+                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最高得分率" textFill="WHITE" />
                                           <Label fx:id="levelHighest" layoutX="57.0" layoutY="78.0" prefHeight="34.0" prefWidth="111.0" style="-fx-font-size: 22;" text="87.5" textFill="WHITE" />
                                           <Separator layoutX="35.0" layoutY="67.0" prefHeight="3.0" prefWidth="140.0" />
                                        </children>
@@ -266,7 +266,7 @@
                                     </Pane>
                                     <Pane id="raisedPane-three" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最低分" textFill="WHITE" />
+                                          <Label layoutX="40.0" layoutY="41.0" prefHeight="26.0" prefWidth="131.0" style="-fx-font-size: 16;" text="最低得分率" textFill="WHITE" />
                                           <Label fx:id="levelLowest" layoutX="57.0" layoutY="78.0" prefHeight="34.0" prefWidth="92.0" style="-fx-font-size: 22;" text="66" textFill="WHITE" />
                                           <Separator layoutX="35.0" layoutY="67.0" prefHeight="3.0" prefWidth="140.0" />
                                        </children>

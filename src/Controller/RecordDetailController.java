@@ -110,7 +110,7 @@ public class RecordDetailController implements Initializable {
 		loader.setupTable(studyTable, new String[] {"name", "finish_status"}, new String[] {"课件名称","是否完成"});
 		loader.setupTable(trainingTable, new String[] {"name", "point"}, new String[] {"培训名称", "得分"});
 		loader.setupTable(meetingTable, new String[] {"name", "checkin", "checkout"}, new String[] {"会议", "签到", "签出"});
-		loader.setupTable(offLineExamTable, new String[] {"exam_name", "total_score"}, new String[] {"考核","得分"});
+		loader.setupTable(offLineExamTable, new String[] {"exam_name", "score"}, new String[] {"考核","得分"});
 	}
 	
 	private void setupSumTable() {
@@ -192,7 +192,7 @@ public class RecordDetailController implements Initializable {
 		String[] searchColumn = {"offlineexam_history.ssn"};
 		String[] values = {ssn};
 		String tableName = "offlineexam_history inner join offlineexam_list on offlineexam_history.offlineexam_id = offlineexam_list.id";
-		String[] columns = {"offlineexam_history.offlineexam_id", "offlineexam_history.id", "offlineexam_list.exam_name", "offlineexam_history.total_score"};
+		String[] columns = {"offlineexam_history.offlineexam_id", "offlineexam_history.id", "offlineexam_list.exam_name", "offlineexam_history.score"};
 		offLineExamList =dbHelper.getList(searchColumn, values, tableName, columns);
 	}
 

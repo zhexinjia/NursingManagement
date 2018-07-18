@@ -29,16 +29,16 @@ public class TrainningDetailController implements Initializable {
 	DBhelper dbHelper = new DBhelper	();
 	private HashMap<String, String> selectedTraining;
 	
-	String[] fields =  { "姓名", "工号", "得分", "是否完成","备注"};
-	String[] keys = { "name", "ssn", "point", "finish_status", "detail"};
 	int oldPoint, newPoint;
 	int newScore;
 	String trainning_id;
 	String totalPoint;
+	String name;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		selectedTraining = TrainningListController.selectedTrainning;
 		trainning_id = selectedTraining.get("id");
+		name = selectedTraining.get("name");
 		totalPoint = selectedTraining.get("totalPoint");
 		setupTable();
 		getList();
@@ -71,9 +71,11 @@ public class TrainningDetailController implements Initializable {
 
     @FXML
     void importButton() {
+	    	String[] fields =  { "姓名", "工号", "得分", "是否完成","备注"};
+	    	String[] keys = { "name", "ssn", "point", "finish_status", "detail"};
 		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
 		if(importlist!=null) {
-			if (dbHelper.insertTrainning(importlist, trainning_id, totalPoint)) {
+			if (dbHelper.insertTrainning(importlist, trainning_id, name, totalPoint)) {
 				getList();
 				reload();
 			}
@@ -82,6 +84,8 @@ public class TrainningDetailController implements Initializable {
     
     @FXML
     void exportButton() {
+		String[] keys = {"name", "department", "position", "title", "point", "detail"};
+		String[] fields = {"姓名", "科室", "职位", "职称", "得分", "备注"};
 		loader.exportExcel(list, fields, keys);
     }
 

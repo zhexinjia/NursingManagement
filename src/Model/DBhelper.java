@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -553,11 +555,17 @@ public class DBhelper {
 		return sql;
 	}
 	
-	public boolean insertOfflineTest(ArrayList<HashMap<String, String>> maplist, String exam_id, String totalPoint) {
+	public boolean insertOfflineTest(ArrayList<HashMap<String, String>> maplist, String exam_id, String name, String totalPoint) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate localDate = LocalDate.now();
 		String sql = "sql=";
 		
 		for (HashMap<String, String> user : maplist){
-			int score = Integer.parseInt(user.get("score"));
+			System.out.println(user);
+			String scoreTemp = user.get("score");
+			//System.out.println("socre "+ scoreTemp);
+			
+			int score = Integer.parseInt(scoreTemp);
 			int totalScore = Integer.parseInt(totalPoint);
 			String ssn = user.get("ssn");
 			sql += insertHistoryHelper(user, exam_id, "offlineTest");
@@ -565,6 +573,8 @@ public class DBhelper {
 			sql += "update user_score set currentScore = (currentScore %2B " 
 			+ score + "), totalScore = (totalScore %2B " + totalScore + ") where ssn = '" + ssn + "';";
 			
+			sql += "update user_score set comment = concat(comment, '" 
+			+ dtf.format(localDate)+ ":" + name + " 实操考核得 " + score + " 分,') where ssn = '" + ssn + "';";
 		}
 		
 		System.out.println(sql);
@@ -577,10 +587,11 @@ public class DBhelper {
 	}
 
 	
-	public boolean insertTrainning(ArrayList<HashMap<String, String>> maplist, String training_id, String totalPoint) {
+	public boolean insertTrainning(ArrayList<HashMap<String, String>> maplist, String training_id, String name, String totalPoint) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate localDate = LocalDate.now();
 		
 		String sql = "sql=";
-		
 		for (HashMap<String, String> user : maplist){
 			int score = Integer.parseInt(user.get("point"));
 			int totalScore = Integer.parseInt(totalPoint);
@@ -589,7 +600,9 @@ public class DBhelper {
 			
 			sql += "update user_score set currentScore = (currentScore %2B " 
 			+ score + "), totalScore = (totalScore %2B " + totalScore + ") where ssn = '" + ssn + "';";
-			
+			sql += "update user_score set comment = concat(comment, '" 
+			+ dtf.format(localDate) + ":" + name + " 培训考核得 " + score + " 分,') where ssn = '" + ssn + "';";
+		
 		}
 		System.out.println("SQL: "+sql);
 		if (sendPost(urlSend, sql)) {
@@ -774,12 +787,23 @@ public class DBhelper {
 
 		//id -> exam_id, study_id, training_id, meeting_id
 		String id = item.get("id");
-		String totalPoint = item.get("totalPoint");
+		int totalPoint = 0;
 		String sql = "sql=";
+		
+		if (table == "exam_list") {
+			totalPoint = Integer.parseInt(item.get("totalPoint"));
+		}else if (table == "study_list") {
+			totalPoint = Integer.parseInt(item.get("point"));
+		}else if (table == "training_list") {
+			totalPoint = Integer.parseInt(item.get("totalPoint"));
+		}else if  (table == "meeting_list") {
+			totalPoint = Integer.parseInt(item.get("totalPoint"));
+		}else {
+			System.out.println("ERROR");
+		}
 		
 		for (HashMap<String, String> user:userList) {
 			String ssn = user.get("ssn");
-			
 			if (table == "exam_list") {
 				sql += "insert ignore into exam_history (ssn, exam_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update exam_list set publish_status = '已发布' where id= '" + id + "';";
@@ -1083,7 +1107,6 @@ public class DBhelper {
 		});
 		pop.confirmWindow("操作成功", "点击确定返回");
 	}
-	
 	
 	private void fail() {
 		/*

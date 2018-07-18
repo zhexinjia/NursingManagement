@@ -35,15 +35,16 @@ public class TestOfflineDetailController implements Initializable{
 	public static HashMap<String, String> selectedUser;
 	
 	String[] keys = {"name", "ssn", "taken_date", "supervisor", "finish_status", "score", "comment"};
-    String[] fields = {"名字", "工号", "考核时间", "监考人","是否完成","得分", "备注"};
+    String[] fields = {"名字", "工号", "考核时间", "监考人", "是否完成", "得分", "备注"};
 
+    String name;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		selectedTest = TestOfflineController.selectedTest;
-		//System.out.println("selectedTest: "+selectedTest);
 		examID = selectedTest.get("id");
-		//拿到这份卷子的总分
+		//拿到这份卷子的总分, 名字
 		totalPoint = selectedTest.get("totalPoint");
+		name = selectedTest.get("exam_name");
 		setupTable();
 		getList();
 		setupLabelandChart();
@@ -102,10 +103,10 @@ public class TestOfflineDetailController implements Initializable{
     
     @FXML
     void importButton() {
-    		String exam_id = selectedTest.get("id");
+    		//String exam_id = selectedTest.get("id");
 		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
 		if(importlist!=null) {
-			if (dbHelper.insertOfflineTest(importlist, exam_id, totalPoint)) {
+			if (dbHelper.insertOfflineTest(importlist, examID, name, totalPoint)) {
 				getList();
 				reload();
 			}
@@ -115,8 +116,8 @@ public class TestOfflineDetailController implements Initializable{
     
     @FXML
     void exportButton() {
-    		String[] fieldlist = fields;
-    		String[] keylist = keys;
+    		String[] fieldlist = {"姓名", "科室", "职位","职称","层级", "完成", "成绩"};
+    		String[] keylist = {"name", "department", "position", "title", "level", "finish", "score"};
     		loader.exportExcel(list, fieldlist, keylist);
     }
     

@@ -68,10 +68,10 @@ public class StudyStatusController implements Initializable {
     }
     
     void setupTable(){
-    		String[] keys = {"name", "percent","if_count"};
-		String[] fields = {"课件信息", "出勤率","是否记分"};
+    		String[] keys = {"name", "percent"};
+		String[] fields = {"课件信息", "出勤率"};
 		loader.setupTable(studyTableView, keys, fields);
-		String[] fields1 = {"培训信息", "出勤率", "是否积分"};
+		String[] fields1 = {"培训信息", "出勤率"};
 		loader.setupTable(trainingTableView, keys, fields1);
     }
     

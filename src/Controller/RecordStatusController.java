@@ -252,7 +252,7 @@ public class RecordStatusController implements Initializable {
 	private void calculateLevel(ArrayList<HashMap<String, String>> list) {
 		//System.out.println("list is : "+list);
 		Double total = (double) 0;
-		Double low = (double) 1;
+		Double low = (double) 0;
 		Double high = (double) 0;
 		for(HashMap<String, String> map:list) {
 			//Double current = map.get("percent").equals("NaN")?100:Double.parseDouble(map.get("percent"));

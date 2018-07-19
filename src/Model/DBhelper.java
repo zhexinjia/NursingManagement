@@ -556,7 +556,7 @@ public class DBhelper {
 	}
 	
 	public boolean insertOfflineTest(ArrayList<HashMap<String, String>> maplist, String exam_id, String name, String totalPoint) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.now();
 		String sql = "sql=";
 		
@@ -588,7 +588,7 @@ public class DBhelper {
 
 	
 	public boolean insertTrainning(ArrayList<HashMap<String, String>> maplist, String training_id, String name, String totalPoint) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.now();
 		
 		String sql = "sql=";

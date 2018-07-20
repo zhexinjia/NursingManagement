@@ -93,6 +93,16 @@ public class UserTestDetailController implements Initializable {
 
 	}
 	
+	@FXML
+	void testDetailButton() {
+		loader.loadVBox(box, "/View/TestDetail.fxml");
+	}
+	
+	@FXML
+	void testListButton() {
+		loader.loadVBox(box, "/View/TestList.fxml");
+	}
+	
 	@FXML void loadHome() {
 		loader.loadVBox(box, "/View/Welcome.fxml");
 	}
@@ -332,7 +342,7 @@ public class UserTestDetailController implements Initializable {
  		
  		System.out.println("singleIds: " + singleIds);
  		
- 		if (singleAns == null || singleAns.isEmpty()) {			
+ 		if (singleIds == null || singleIds.isEmpty()) {			
  			System.out.println("NO SINGLE QUESTION");
  			singleBackButton.setDisable(true);
 			singleNextButton.setDisable(true);
@@ -343,7 +353,7 @@ public class UserTestDetailController implements Initializable {
  			loadSingle();
  		}
  		
- 		if(multiAns == null || multiAns.isEmpty()) {			
+ 		if(multiIds == null || multiIds.isEmpty()) {			
  			System.out.println("NO MULTI QUESTION");
  			multiBackButton.setDisable(true);
 			multiNextButton.setDisable(true);
@@ -354,7 +364,7 @@ public class UserTestDetailController implements Initializable {
  			loadMulti();
  		}
  			
- 		if (tfAns == null || tfAns.isEmpty()) {			
+ 		if (tfIds == null || tfIds.isEmpty()) {			
  			System.out.println("NO TF QUESTION");
  			tfBackButton.setDisable(true);
 			tfNextButton.setDisable(true);

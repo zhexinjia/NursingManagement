@@ -60,9 +60,15 @@ public class TestDetailController implements Initializable{
     @FXML void detailButton() {
     		selectedUser = tableView.getSelectionModel().getSelectedItem();
     		
+    		String id = selectedTest.get("question_bank");
+    		boolean bankCheck = dbHelper.checkbankID(id);
+    		
     		if (selectedUser.get("finish").equals("否")) {
     			PopupWindow pop = new PopupWindow();
     			pop.alertWindow("查看失败", "用户还没完成考试");
+    		}else if (bankCheck == false) {
+    			PopupWindow pop = new PopupWindow();
+    			pop.alertWindow("查看失败", "考试题库已删除");
     		}
     		else if(selectedUser != null) {
     			loader.loadVBox(box, "/View/UserTestDetail.fxml");

@@ -563,9 +563,20 @@ public class DBhelper {
 		for (HashMap<String, String> user : maplist){
 			System.out.println(user);
 			String scoreTemp = user.get("score");
-			//System.out.println("socre "+ scoreTemp);
-			
-			int score = Integer.parseInt(scoreTemp);
+			int score = 0;
+			try {
+				score = Integer.parseInt(scoreTemp);
+			}catch(Exception e) {
+				System.out.println("ERROR: "+e);
+			}
+			/*
+			int score;
+			if (scoreTemp == null || scoreTemp.isEmpty()) {
+				score = 0;
+			}else {
+				score = Integer.parseInt(scoreTemp);
+			}
+*/
 			int totalScore = Integer.parseInt(totalPoint);
 			String ssn = user.get("ssn");
 			sql += insertHistoryHelper(user, exam_id, "offlineTest");
@@ -573,7 +584,7 @@ public class DBhelper {
 			sql += "update user_score set currentScore = (currentScore %2B " 
 			+ score + "), totalScore = (totalScore %2B " + totalScore + ") where ssn = '" + ssn + "';";
 			
-			sql += "update user_score set comment = concat(comment, '" 
+			sql += "update user_score set comment = concat(ifnull(comment,''), '" 
 			+ dtf.format(localDate)+ ":" + name + " 实操考核得 " + score + " 分,') where ssn = '" + ssn + "';";
 		}
 		
@@ -605,7 +616,7 @@ public class DBhelper {
 			
 			sql += "update user_score set currentScore = (currentScore %2B " 
 			+ score + "), totalScore = (totalScore %2B " + totalScore + ") where ssn = '" + ssn + "';";
-			sql += "update user_score set comment = concat(comment, '" 
+			sql += "update user_score set comment = concat(ifnull(comment,''), '" 
 			+ dtf.format(localDate) + ":" + name + " 培训考核得 " + score + " 分,') where ssn = '" + ssn + "';";
 		
 		}
@@ -1118,6 +1129,24 @@ public class DBhelper {
 		PopupWindow pop = new PopupWindow();
 		pop.errorWindow();
 		*/
+	}
+	
+	public boolean checkbankID(String bank_id) {
+		
+		String sql = "sql= SELECT * FROM question_bank" + " where id = '" + bank_id + "';";
+
+		String ans = sendGet(urlGet, sql);
+		ArrayList<HashMap<String, String>> list = jsonToList(ans);
+		
+		System.out.println(sql);
+		System.out.println("list: "+list);
+		
+		if (list.isEmpty()) {
+
+			return false;
+		}
+		return true;
+		
 	}
 
 	/*

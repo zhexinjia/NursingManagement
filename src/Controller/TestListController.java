@@ -120,7 +120,7 @@ public class TestListController implements Initializable {
     }
     */
     @FXML void detailButton() {
-    		selectedTest = tableView.getSelectionModel().getSelectedItem();
+    		selectedTest = tableView.getSelectionModel().getSelectedItem();	
     		if(loader.selectionCheck(selectedTest)) {
     			loader.loadVBox(box, "/View/TestDetail.fxml");
     		}

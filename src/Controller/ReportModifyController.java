@@ -291,7 +291,6 @@ public class ReportModifyController implements Initializable{
 	                if(item.isAfter(ChronoLocalDate.from(LocalDate.now()))) {
 	                    setDisable(true);
 	                }
-
 	            }
 	        };
 	    

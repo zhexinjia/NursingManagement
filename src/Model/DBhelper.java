@@ -593,7 +593,12 @@ public class DBhelper {
 		
 		String sql = "sql=";
 		for (HashMap<String, String> user : maplist){
-			int score = Integer.parseInt(user.get("point"));
+			int score = 0;
+			try{
+				score = Integer.parseInt(user.get("point"));
+			}catch(Exception e){
+				System.out.println(e);
+			}
 			int totalScore = Integer.parseInt(totalPoint);
 			String ssn = user.get("ssn");
 			sql += insertHistoryHelper(user, training_id, "training");

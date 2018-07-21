@@ -417,9 +417,9 @@ public class DBhelper {
 
 	public String insertUserHelper(HashMap<String, String> map) {
 		//insert ignore into exam_history (ssn, exam_id) VALUES
-		String sqlPrim = "insert ignore into user_primary_info" + " (";
-		String sqlSub= "insert ignore into user_sub_info" + " (";
-		String sqlScore = "insert ignore into user_score" + " (ssn) VALUES (";
+		String sqlPrim = "insert into user_primary_info" + " (";
+		String sqlSub= "insert into user_sub_info" + " (";
+		String sqlScore = "insert into user_score" + " (ssn) VALUES (";
 		Set<String> keys = map.keySet();
 		ArrayList<String> keyset = new ArrayList<String>(keys);
 		
@@ -527,10 +527,10 @@ public class DBhelper {
 		String sql = "";
 		if (type == "offlineTest") {
 			map.put("offlineexam_id", id);
-			sql += "insert ignore into offlineexam_history" + " (";
+			sql += "insert into offlineexam_history" + " (";
 		}else if (type == "training") {
 			map.put("training_id", id);
-			sql += "insert ignore into training_history" + " (";
+			sql += "insert into training_history" + " (";
 		}else {
 			System.out.println("ERROR");
 		}
@@ -569,14 +569,7 @@ public class DBhelper {
 			}catch(Exception e) {
 				System.out.println("ERROR: "+e);
 			}
-			/*
-			int score;
-			if (scoreTemp == null || scoreTemp.isEmpty()) {
-				score = 0;
-			}else {
-				score = Integer.parseInt(scoreTemp);
-			}
-*/
+
 			int totalScore = Integer.parseInt(totalPoint);
 			String ssn = user.get("ssn");
 			sql += insertHistoryHelper(user, exam_id, "offlineTest");
@@ -916,7 +909,7 @@ public class DBhelper {
 		//Delete user from the 3-user tables
 		String primSql = "delete from user_primary_info where ssn = " + ssn + ";";
 		String subSql = "delete from user_sub_info where ssn = " + ssn + ";";
-		String scoreSql = "delete from user_score_info where ssn = " + ssn + ";";
+		String scoreSql = "delete from user_score where ssn = " + ssn + ";";
 		
 		//Delete user from all history tables
 		String examSql = "delete from exam_history where ssn=" + "'" + ssn + "';";

@@ -164,7 +164,10 @@ public class UserModifyController implements Initializable {
     void addButton() {
     		if(validate()) {
     			HashMap<String, String> map = getHashMap();
-    			dbHelper.updateUser(map);
+    			if (dbHelper.updateUser(map)) {
+    				loader.loadVBox(box, "/View/UserList.fxml");
+    			}
+    			
     		}else {
     			PopupWindow popUP = new PopupWindow();
     			popUP.alertWindow("出错啦。。。", "姓名和工号不能为空");
@@ -395,12 +398,13 @@ public class UserModifyController implements Initializable {
     		specialitiesBox.getSelectionModel().select(selectedUser.get("branch"));
     		
     		//sub
+    		try {
     		sexChoiceBox.getSelectionModel().select(selectedUser.get("sex"));
     		birthPicker.setValue(date(selectedUser.get("birth")));
     		regionField.setText(selectedUser.get("region"));
     		dateJoinPartyPicker.setValue(date(selectedUser.get("dateJoinParty")));
     		timeStartWorkPicker.setValue(date(selectedUser.get("timeStartWork")));
-    		certifactionDatePicker.setValue(date(selectedUser.get("certifactionDate")));
+    		certifactionDatePicker.setValue(date(selectedUser.get("certifactionDate"))); 		
     		certifactionNumField.setText(selectedUser.get("certifactionNum"));
     		//technicalPositionField.setText(selectedUser.get("technicalPosition"));
     		dateReceivedTPPicker.setValue(date(selectedUser.get("dateReceivedTP")));
@@ -417,14 +421,21 @@ public class UserModifyController implements Initializable {
     		highestEdField.setText(selectedUser.get("highestEd"));
     		highestEdTimePicker.setValue(date(selectedUser.get("highestEdTime")));
     		highestEdSchoolField.setText(selectedUser.get("highestEdSchool"));
+    		}catch(Exception e) {
+    			System.out.println(e);
+    		}
+    		
     }
     private LocalDate date(String dateString) {
-    		if (dateString!=null) {
+    		
+    		if (dateString != null) {
     			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         		LocalDate localDate = LocalDate.parse(dateString, formatter);
         		return localDate;
     		}
+    		
     		return null;
+    		
     }
     
     

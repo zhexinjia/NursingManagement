@@ -156,6 +156,9 @@ public class UserNewController implements Initializable {
     			HashMap<String, String> map = this.getHashMap();
     			if(dbHelper.insertUser(map)) {
     				loader.loadVBox(box, "/View/UserList.fxml");
+    			}else {
+    				PopupWindow popUP = new PopupWindow();
+        			popUP.alertWindow("添加新用户失败", "此工号已被使用");
     			}
     		}else {
     			PopupWindow popUP = new PopupWindow();

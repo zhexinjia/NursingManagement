@@ -156,10 +156,13 @@ public class UserNewController implements Initializable {
     			HashMap<String, String> map = this.getHashMap();
     			if(dbHelper.insertUser(map)) {
     				loader.loadVBox(box, "/View/UserList.fxml");
+    			}else {
+    				PopupWindow popUP = new PopupWindow();
+        			popUP.alertWindow("添加新用户失败", "此工号已被使用");
     			}
     		}else {
     			PopupWindow popUP = new PopupWindow();
-    			popUP.alertWindow("出错啦。。。", "姓名和工号不能为空");
+    			popUP.alertWindow("出错啦。。。", "姓名,工号,专业不能为空");
     		}
     }
 
@@ -300,7 +303,9 @@ public class UserNewController implements Initializable {
     }
     
     private boolean validate() {
-    		if(nameField.getText().trim().isEmpty() || ssnField.getText().trim().isEmpty()) {
+    		
+    		if(nameField.getText().trim().isEmpty() || ssnField.getText().trim().isEmpty() || 
+    				specialitiesBox.getSelectionModel().getSelectedItem() == null) {
     			return false;
     		}
     		return true;

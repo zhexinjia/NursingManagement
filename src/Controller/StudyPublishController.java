@@ -40,11 +40,14 @@ public class StudyPublishController implements Initializable {
 	String[] fields = {"姓名", "科室", "职称", "职务", "层级"};
 	private HashMap<String, String> selectedStudy;
 	private String branch;
+	String totalPoint;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		branch = LoginController.branch;
 		selectedStudy = StudyListController.selectedStudy;
+		totalPoint = selectedStudy.get("point");
+		System.out.println("totalPoint "+ totalPoint);
 		setupTable();
 		setupCheckBox();
 		getList();
@@ -67,6 +70,7 @@ public class StudyPublishController implements Initializable {
 	@FXML
 	void publishButton() {
 		//TODO: different publish method?
+		System.out.println("get list: " + getChecked());
 		if(dbHelper.publish(getChecked(), selectedStudy, "study_list")) {
 			loader.loadVBox(box, "/View/StudyList.fxml");
 		};
@@ -130,6 +134,7 @@ public class StudyPublishController implements Initializable {
 		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 		for(CheckMap checkMap:checklist) {
 			if (checkMap.cb.isSelected()) {
+				//checkMap.map.put("totalPoint", totalPoint);
 				list.add(checkMap.map);
 			}
 		}

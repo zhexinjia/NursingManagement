@@ -40,8 +40,8 @@ public class RecordListController implements Initializable {
 	private ArrayList<HashMap<String, String>> list;
 	public static HashMap<String, String> selectedUser;
 	
-	String[] keys = {"name", "department", "position", "title", "level", "currentScore", "totalScore", "percent"};
-	String[] fields = {"姓名", "科室", "职务", "职称", "层级", "得分", "总分", "百分比"};
+	String[] keys = {"name", "department", "position", "title", "level", "currentScore"};
+	String[] fields = {"姓名", "科室", "职务", "职称", "层级", "得分"};
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

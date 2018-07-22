@@ -60,12 +60,14 @@ public class StudyDetailController implements Initializable {
 
     @FXML
     void importButton() {
-
+    		
     }
 
     @FXML
     void exportButton() {
-
+    		String[] keys = {"name", "department", "position", "title", "finish_status"};
+		String[] fields = {"姓名", "科室", "职位", "职称", "完成情况"};
+		loader.exportExcel(list, fields, keys);
     }
 
 

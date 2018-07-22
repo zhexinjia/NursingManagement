@@ -124,17 +124,6 @@
                </HBox.margin>
             </JFXButton>
             <Pane prefHeight="50.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <JFXButton onMouseClicked="#importButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导入" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Light" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </JFXButton>
             <JFXButton layoutX="656.0" layoutY="20.0" onMouseClicked="#exportButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />

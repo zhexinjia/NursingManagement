@@ -65,8 +65,35 @@ public class UserlistController implements Initializable {
     @FXML
     void importButton() {
     		ArrayList<HashMap<String, String>> importlist = loader.importExcel(keys, fields);
+    		int importLength = importlist.size();
+    		int oldLength = list.size();
+    		int newLength;
+    		System.out.println("importLength" + importLength);
     		if(importlist!=null) {
-    			dbHelper.insertUserList(importlist);
+    			if (dbHelper.insertUserList(importlist)) {
+    				getList();
+    				reload();
+    				newLength = list.size();
+    				if((importLength + oldLength) != newLength) {
+    					int diff = newLength - oldLength;
+    					System.out.println("diff" + diff);
+    					
+    					PopupWindow pop = new PopupWindow();
+    	    				pop.alertWindow("部分导入失败", "总导入行数：" + importLength +
+    	    						",  实际导入行数："+ diff + ",\n              报错行数：第"+ (diff+1) + "行");
+    				}
+    			}else {
+    				getList();
+    				reload();
+    				newLength = list.size();
+    				int diff = newLength - oldLength;
+    				System.out.println("diff" + diff);
+    				
+    				PopupWindow pop = new PopupWindow();
+        				pop.alertWindow("部分导入失败", "总导入行数：" + importLength +
+        						",  实际导入行数："+ diff + ", \n              报错行数：第"+ (diff+1) + "行");
+    			}
+    		
     		}
     		
     }

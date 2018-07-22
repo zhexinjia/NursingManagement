@@ -228,46 +228,49 @@ public class RecordStatusController implements Initializable {
 	
 	private void caculateDepartment(ArrayList<HashMap<String, String>> list) {
 		Double total = (double) 0;
-		Double low = (double) 1;
+		Double low = (double) 0;
 		Double high = (double) 0;
 		for(HashMap<String, String> map:list) {
 			//Double current = map.get("percent").equals("NaN")?100:Double.parseDouble(map.get("percent"));
-			Double current = Double.parseDouble(map.get("percent"));
+			Double current = Double.parseDouble(map.get("currentScore"));
 			total+=current;
-			if(current>high) {
+			if(current > high) {
 				high =current;
 			}
-			if(current<low) {
+			if(current < low) {
 				low=current;
 			}
 		}
 		Double average = total/list.size();
 		DecimalFormat df = new DecimalFormat("#.##");
-		departmentAverage.setText(df.format(average*100));
-		departmentHighest.setText(df.format(high*100) + "%");
-		departmentLowest.setText(df.format(low*100) + "%");
+		departmentAverage.setText(df.format(average));
+		departmentHighest.setText(df.format(high));
+		departmentLowest.setText(df.format(low));
 	}
+	
+	
 	private void calculateLevel(ArrayList<HashMap<String, String>> list) {
 		//System.out.println("list is : "+list);
 		Double total = (double) 0;
-		Double low = (double) 1;
+		Double low = (double) 0;
 		Double high = (double) 0;
 		for(HashMap<String, String> map:list) {
 			//Double current = map.get("percent").equals("NaN")?100:Double.parseDouble(map.get("percent"));
-			Double current = Double.parseDouble(map.get("percent"));
+			Double current = Double.parseDouble(map.get("currentScore"));
+			System.out.println("map: "+map);
 			total+=current;
-			if(current>high) {
-				high =current;
+			if(current > high) {
+				 high = current;
 			}
-			if(current<low) {
-				low=current;
+			if(current < low) {
+				low = current;
 			}
 		}
 		Double average = total/list.size();
 		DecimalFormat df = new DecimalFormat("#.##");
-		levelAvg.setText(df.format(average*100));
-		levelHighest.setText(df.format(high*100) + "%");
-		levelLowest.setText(df.format(low*100) + "%");
+		levelAvg.setText(df.format(average));
+		levelHighest.setText(df.format(high));
+		levelLowest.setText(df.format(low));
 	}
 	
 	private void setupDepartmentTable() {

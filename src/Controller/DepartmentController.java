@@ -65,6 +65,9 @@ public class DepartmentController implements Initializable {
     					getList();
         				reload();
     				}
+    				else {
+    					popUP.alertWindow("新建科室出错", "科室已存在");
+    				}
     			}else {
     				popUP.alertWindow("新建科室出错", "科室名称不能为空！");
     			}

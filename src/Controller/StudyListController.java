@@ -58,11 +58,12 @@ public class StudyListController implements Initializable {
 		if(selectedStudy==null) {
 			PopupWindow pop = new PopupWindow();
 			pop.alertWindow("发布失败", "请选中需要发布的考试。");
-		}else if (selectedStudy.get("publish_status").equals("未发布")) {
-			loader.loadVBox(box, "/View/StudyPublish.fxml");
 		}else {
+			loader.loadVBox(box, "/View/StudyPublish.fxml");
+			/*
 			PopupWindow popUP = new PopupWindow();
 			popUP.alertWindow("发布课件失败", "课件已经发布，无法重复发布。");
+			*/
 		}
     }
     

@@ -148,7 +148,7 @@
                </HBox.margin>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
-            <JFXButton layoutX="609.0" layoutY="10.0" onMouseClicked="#studyDetailButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看" textFill="WHITE">
+            <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -159,7 +159,7 @@
                   <Insets bottom="20.0" right="15.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton onMouseClicked="#newButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="新增" textFill="WHITE">
+            <JFXButton layoutX="609.0" layoutY="10.0" onMouseClicked="#studyDetailButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -92,8 +92,8 @@ public class MeetingStatusController implements Initializable{
     }
     
     private void setupTable() {
-    		String[] keys = {"name", "percent","if_count"};
-    		String[] fields = {"会议信息", "出勤率","是否记分"};
+    		String[] keys = {"name", "percent"};
+    		String[] fields = {"会议信息", "出勤率"};
     		loader.setupTable(tableView, keys, fields);
     }
     

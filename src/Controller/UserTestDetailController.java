@@ -162,7 +162,7 @@ public class UserTestDetailController implements Initializable {
 		singleRB3.setText("C. " + question.get("option3"));
 		singleRB4.setText("D. " + question.get("option4"));
 		String answer = question.get("answer");
-		String userAnswer = singleAnswers[singleIndex];
+		String userAnswer = singleAnswers.length>singleIndex?singleAnswers[singleIndex]:"";
 		System.out.println("answer: " + answer);
 		System.out.println("userAnswer: " + userAnswer);
 		if(answer.equals(userAnswer)) {
@@ -230,7 +230,7 @@ public class UserTestDetailController implements Initializable {
 		multiCB5.setText("E. " + question.get("option5"));
 		
 		String answer = question.get("answer");
-		String userAnswer = multiAnswers[multiIndex];
+		String userAnswer = multiAnswers.length>multiIndex?multiAnswers[multiIndex]:"";
 		
 		//compare answers and modify checkbox
 		String[] correctAnswerList = answer.split("");
@@ -298,7 +298,7 @@ public class UserTestDetailController implements Initializable {
 		tfRB1.setText("A. 对。");
 		tfRB2.setText("B. 错。");
 		String answer = question.get("answer");
-		String userAnswer = tfAnswers[tfIndex];
+		String userAnswer = tfAnswers.length>tfIndex?tfAnswers[tfIndex]:"";
 		if(answer.equals(userAnswer)) {
 			tfCorrect.setText("回答正确。");
 			tfCorrect.setTextFill(Color.GREEN);

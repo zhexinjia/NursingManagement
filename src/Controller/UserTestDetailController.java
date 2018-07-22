@@ -163,6 +163,8 @@ public class UserTestDetailController implements Initializable {
 		singleRB4.setText("D. " + question.get("option4"));
 		String answer = question.get("answer");
 		String userAnswer = singleAnswers[singleIndex];
+		System.out.println("answer: " + answer);
+		System.out.println("userAnswer: " + userAnswer);
 		if(answer.equals(userAnswer)) {
 			singleCorrect.setText("回答正确。");
 			singleCorrect.setTextFill(Color.GREEN);

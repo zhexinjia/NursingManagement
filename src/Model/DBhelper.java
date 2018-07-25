@@ -822,19 +822,19 @@ public class DBhelper {
 			else if (table == "study_list") {
 				sql += "insert ignore into study_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update study_list set publish_status = '已发布' where id= '" + id + "';";
-				sql += "update user_score set totalScore = (totalScore %2B" + totalPoint + ") where ssn = '" + ssn + "';";
+				sql += "update user_score set totalScore = (totalScore %2B " + totalPoint + ") where ssn = '" + ssn + "';";
 				
 			}
 			else if (table == "training_list") {
 				sql += "insert ignore into training_history (ssn, study_id) VALUES ('" + ssn + "', '" + id + "');";
 				sql += "update training_list set publish_status = '已发布' where id= '" + id + "';";
-				sql += "update user_score set totalScore = (totalScore %2B" + totalPoint + ") where ssn = '" + ssn + "';";
+				sql += "update user_score set totalScore = (totalScore %2B " + totalPoint + ") where ssn = '" + ssn + "';";
 		
 			}
 			else if (table == "meeting_list") {
 				sql += "insert ignore into meeting_history (ssn, meeting_id) VALUES ('" + ssn + "', '" + id + "');";
 				//sql += "update meeting_list set publish_status = '已发布' where id= '" + id + "';";
-				sql += "update user_score set totalScore = (totalScore %2B" + totalPoint + ") where ssn = '" + ssn + "';";
+				sql += "update user_score set totalScore = (totalScore %2B " + totalPoint + ") where ssn = '" + ssn + "';";
 		
 			}
 			

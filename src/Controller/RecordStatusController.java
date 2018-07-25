@@ -157,6 +157,7 @@ public class RecordStatusController implements Initializable {
 				departmentList.put(department, list);
 			}
 			//TESTING
+			/*
 			String level = score.get("level");
 			if(level!=null) {
 				ArrayList<HashMap<String, String>> list;
@@ -168,6 +169,7 @@ public class RecordStatusController implements Initializable {
 				list.add(score);
 				levelList.put(level, list);
 			}
+			*/
 			//END TESTING
 		}
 		Double ave = sum/scoreList.size();
@@ -228,8 +230,8 @@ public class RecordStatusController implements Initializable {
 	
 	private void caculateDepartment(ArrayList<HashMap<String, String>> list) {
 		Double total = (double) 0;
-		Double low = (double) 0;
-		Double high = (double) 0;
+		Double low = list.size()!=0?(double)Double.parseDouble(list.get(0).get("currentScore")):0;
+		Double high = list.size()!=0?(double)Double.parseDouble(list.get(0).get("currentScore")):0;
 		for(HashMap<String, String> map:list) {
 			//Double current = map.get("percent").equals("NaN")?100:Double.parseDouble(map.get("percent"));
 			Double current = Double.parseDouble(map.get("currentScore"));
@@ -252,8 +254,8 @@ public class RecordStatusController implements Initializable {
 	private void calculateLevel(ArrayList<HashMap<String, String>> list) {
 		//System.out.println("list is : "+list);
 		Double total = (double) 0;
-		Double low = (double) 0;
-		Double high = (double) 0;
+		Double low = list.size()!=0?(double)Double.parseDouble(list.get(0).get("currentScore")):0;
+		Double high = list.size()!=0?(double)Double.parseDouble(list.get(0).get("currentScore")):0;
 		for(HashMap<String, String> map:list) {
 			//Double current = map.get("percent").equals("NaN")?100:Double.parseDouble(map.get("percent"));
 			Double current = Double.parseDouble(map.get("currentScore"));

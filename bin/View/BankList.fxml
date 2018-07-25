@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StudyListController">
+<VBox fx:id="box" alignment="TOP_CENTER" prefHeight="593.0" prefWidth="789.0" style="-fx-background-color: #f8f9fa;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BankListController">
    <children>
       <HBox alignment="CENTER_LEFT" style="-fx-background-color: #4e5c7e;">
          <children>
@@ -44,7 +44,7 @@
                   <Image url="@../../Images/rightArrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="34.0" prefWidth="91.0" text="学习课件列表" textFill="WHITE">
+            <Label prefHeight="34.0" prefWidth="61.0" text="题库列表" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -62,12 +62,12 @@
                </image>
             </ImageView>
             <Label onMouseClicked="#contact" text="联系我们" textFill="WHITE">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="25.0" top="10.0" />
-               </HBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="25.0" top="10.0" />
+               </HBox.margin>
             </Label>
          </children>
       </HBox>
@@ -108,17 +108,6 @@
                </HBox.margin>
             </JFXButton>
             <Pane prefHeight="50.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <JFXButton layoutX="656.0" layoutY="20.0" onMouseClicked="#publishButton" prefHeight="27.0" prefWidth="82.0" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="发布课件" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Heiti SC Light" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="10.0" right="20.0" top="10.0" />
-               </HBox.margin>
-            </JFXButton>
          </children>
       </HBox>
       <TableView fx:id="tableView" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="419.0" VBox.vgrow="ALWAYS">
@@ -126,9 +115,9 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <columns>
-            <TableColumn prefWidth="75.0" text="课件名" />
-            <TableColumn prefWidth="75.0" text="发布状态" />
-            <TableColumn prefWidth="75.0" text="记分情况" />
+            <TableColumn prefWidth="75.0" text="试卷名称" />
+            <TableColumn prefWidth="75.0" text="题目总数" />
+            <TableColumn prefWidth="75.0" text="总分" />
          </columns>
          <effect>
             <DropShadow blurType="GAUSSIAN" color="#c1c6d3" height="16.0" radius="7.5" spread="0.6" width="16.0" />
@@ -156,10 +145,10 @@
                   <Font name="Heiti SC Light" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets bottom="20.0" right="15.0" />
+                  <Insets right="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton layoutX="609.0" layoutY="10.0" onMouseClicked="#studyDetailButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看" textFill="WHITE">
+            <JFXButton onMouseClicked="#modifyButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="编辑" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -167,7 +156,7 @@
                   <Font name="Heiti SC Light" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets bottom="20.0" right="15.0" />
+                  <Insets bottom="20.0" left="10.0" right="10.0" />
                </HBox.margin>
             </JFXButton>
             <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#deleteButton" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="删除" textFill="WHITE">
@@ -178,7 +167,7 @@
                   <Font name="Heiti SC Light" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets bottom="20.0" right="20.0" />
+                  <Insets bottom="20.0" left="10.0" right="50.0" />
                </HBox.margin>
             </JFXButton>
          </children>

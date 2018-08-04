@@ -32,12 +32,16 @@ public class DepartmentUsers implements Initializable {
 	PopupWindow popUP = new PopupWindow();
 	DBhelper dbHelper = new DBhelper();
 	private HashMap<String,String> department;
-	//private String managerSSN;
+	private String managerName;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		department = DepartmentController.selectedDepartment;
 		System.out.println("department: "+ department);
+		managerName = department.get("name");
+		if(managerName != null) {
+			managerLabel.setText("管理： " + managerName);
+		}
 		setupTable();
 		getList();
 		reload();
@@ -84,10 +88,11 @@ public class DepartmentUsers implements Initializable {
     			*/
     			if (oldManager == null) {
     				dbHelper.setManager(newManager);
+    				managerLabel.setText("管理： " + selected.get("name")); 
     			}
     			else {
     				if (dbHelper.updateManager(newManager, oldManager)) {
-    					setManager(newManager);
+    					managerLabel.setText("管理： " + selected.get("name"));
     				}
     			}
     		}
@@ -110,6 +115,7 @@ public class DepartmentUsers implements Initializable {
 		countLabel.setText("共 " +searchList.size()+ " 条");
 	}
 	
+	/*
 	private void setManager(String ssn) {
 		System.out.println(ssn + "ssN");
 		String name = "管理： ";
@@ -122,5 +128,6 @@ public class DepartmentUsers implements Initializable {
 		}
 		managerLabel.setText(name);
 	}
+	*/
 
 }

@@ -26,7 +26,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/home.png" />
+                  <Image url="/home.png" />
                </image>
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" top="10.0" />
@@ -45,7 +45,7 @@
             </Label>
             <ImageView fitHeight="24.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/rightArrow.png" />
+                  <Image url="/rightArrow.png" />
                </image>
             </ImageView>
             <Label prefHeight="34.0" prefWidth="56.0" text="数据分析" textFill="WHITE">
@@ -62,7 +62,7 @@
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/contactIcon.png" />
+                  <Image url="/contactIcon.png" />
                </image>
             </ImageView>
             <Label onMouseClicked="#contactButton" text="联系我们" textFill="WHITE">
@@ -127,7 +127,7 @@
                                           <Insets bottom="10.0" top="10.0" />
                                        </padding>
                                     </PieChart>
-                                    <JFXButton buttonType="RAISED" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看详情" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" onMouseClicked="#detailButton" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看详情" textFill="WHITE">
                                        <VBox.margin>
                                           <Insets bottom="20.0" right="20.0" />
                                        </VBox.margin>
@@ -207,17 +207,9 @@
                                        <children>
                                           <JFXComboBox fx:id="departmentPicker" prefHeight="27.0" prefWidth="178.0">
                                              <HBox.margin>
-                                                <Insets bottom="20.0" left="10.0" right="10.0" />
+                                                <Insets bottom="20.0" left="10.0" right="40.0" />
                                              </HBox.margin>
                                           </JFXComboBox>
-                                          <JFXButton buttonType="RAISED" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看科室" textFill="WHITE">
-                                             <effect>
-                                                <DropShadow />
-                                             </effect>
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="10.0" right="20.0" />
-                                             </HBox.margin>
-                                          </JFXButton>
                                           <JFXButton buttonType="RAISED" layoutX="443.0" layoutY="12.0" onMouseClicked="#exportDepartmentButton" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
                                              <effect>
                                                 <DropShadow />
@@ -301,17 +293,9 @@
                                        <children>
                                           <JFXComboBox fx:id="levelPicker" prefHeight="27.0" prefWidth="178.0">
                                              <HBox.margin>
-                                                <Insets bottom="20.0" left="10.0" right="10.0" />
+                                                <Insets bottom="20.0" left="10.0" right="40.0" />
                                              </HBox.margin>
                                           </JFXComboBox>
-                                          <JFXButton buttonType="RAISED" style="-fx-background-color: #5a6378;" styleClass="jfxbutton-circle" text="查看层级" textFill="WHITE">
-                                             <effect>
-                                                <DropShadow />
-                                             </effect>
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="10.0" right="20.0" />
-                                             </HBox.margin>
-                                          </JFXButton>
                                           <JFXButton buttonType="RAISED" layoutX="443.0" layoutY="12.0" onMouseClicked="#exportlevelButton" style="-fx-background-color: #62baf0;" styleClass="jfxbutton-circle" text="导出" textFill="WHITE">
                                              <effect>
                                                 <DropShadow />

@@ -90,7 +90,7 @@ public class StudyStatusController implements Initializable {
     }
     
     private void getStudyList() {
-		String[] columns = {"id", "name", "if_count"};
+		String[] columns = {"id", "name"};
 		String tableName = "study_list";
 		//studyList = dbHelper.getList(tableName, columns);
 		String[] searchColumn = {"branch"};

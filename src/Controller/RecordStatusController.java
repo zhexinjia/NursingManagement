@@ -58,8 +58,10 @@ public class RecordStatusController implements Initializable {
 		System.out.println(branch);
 		if (branch.equals("护理")) {
 			setupLevelPicker();
-		}
-		
+		}	
+	}
+	@FXML void detailButton() {
+		loader.loadVBox(box, "/View/RecordList.fxml");
 	}
 	
 	@FXML void loadHome() {
@@ -73,15 +75,15 @@ public class RecordStatusController implements Initializable {
 	
 	@FXML 
 	void exportDepartmentButton(){
-		String[] fieldlist = {"姓名", "职位", "层级", "得分", "总分"};
-		String[] keylist = {"name", "position", "level", "currentScore", "totalScore"};
+		String[] fieldlist = {"姓名", "职位", "层级", "得分"};
+		String[] keylist = {"name", "position", "level", "currentScore"};
 		loader.exportExcel(departmentExportList, fieldlist, keylist);
 	}
 	
 	@FXML 
 	void exportlevelButton(){
-		String[] fieldlist = {"姓名", "科室", "职位", "得分", "总分"};
-		String[] keylist = {"name", "department", "position", "currentScore", "totalScore"};
+		String[] fieldlist = {"姓名", "科室", "职位", "得分"};
+		String[] keylist = {"name", "department", "position", "currentScore"};
 		loader.exportExcel(levelExportList, fieldlist, keylist);
 	}
 	
@@ -157,7 +159,7 @@ public class RecordStatusController implements Initializable {
 				departmentList.put(department, list);
 			}
 			//TESTING
-			/*
+			
 			String level = score.get("level");
 			if(level!=null) {
 				ArrayList<HashMap<String, String>> list;
@@ -169,7 +171,7 @@ public class RecordStatusController implements Initializable {
 				list.add(score);
 				levelList.put(level, list);
 			}
-			*/
+			
 			//END TESTING
 		}
 		Double ave = sum/scoreList.size();
@@ -276,16 +278,16 @@ public class RecordStatusController implements Initializable {
 	}
 	
 	private void setupDepartmentTable() {
-		String[] keys = {"name", "position", "level", "currentScore", "totalScore"};
-		String[] fields = {"姓名", "职位", "层级", "得分", "总分"};
+		String[] keys = {"name", "position", "level", "currentScore"};
+		String[] fields = {"姓名", "职位", "层级", "得分"};
 		//System.out.println("dTV: "+ departmentTableView);
 		loader.setupTable(departmentTableView, keys, fields);
 
 	}
 	
 	private void setupLevelTable() {
-		String[] keys = {"name", "department", "position", "currentScore", "totalScore"};
-		String[] fields = {"姓名", "科室", "职位", "得分", "总分"};
+		String[] keys = {"name", "department", "position", "currentScore"};
+		String[] fields = {"姓名", "科室", "职位", "得分"};
 		loader.setupTable(levelTableView, keys, fields);
 	}
 	

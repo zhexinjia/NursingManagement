@@ -12,6 +12,17 @@ class Test {
 	DBhelper dbHelper = new DBhelper();
 	@org.junit.jupiter.api.Test
 	
+	void testDel() {
+		sftpDelete sftp = new sftpDelete();
+		try {
+			sftp.sftpDel("files/testHospital", "111.png");
+			System.out.println("dele");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/*
 	void test() {
 		
@@ -122,7 +133,7 @@ class Test {
 	}
 	*/
 	
-	
+	/*
 	void publishTest() {
 		HashMap<String, String> map = new HashMap<String, String>();
 		HashMap<String, String> map2 = new HashMap<String, String>();
@@ -156,6 +167,7 @@ class Test {
 		System.out.println(output);
 		
 	}
+	*/
 	
 	
 	

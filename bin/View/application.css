@@ -20,7 +20,7 @@
 }
 #registerPane{
 	/*-fx-background-image:url("../../Images/registerBG.jpg");*/
-	-fx-background-image:url("../../Images/loginBG.png");
+	-fx-background-image:url("/loginBG.png");
 }
 .label{
 	-fx-font-family: "Heiti SC Medium";
@@ -32,15 +32,15 @@
 	-fx-text-fill:#5e6378;
 }
 #leftPane{
-	-fx-background-image: url("../../Images/main/leftBackground.png");
+	-fx-background-image: url("/main/leftBackground.png");
 }
 
 #raisedPane{
-	-fx-background-image:url("../../Images/main/raisedBG.png");
+	-fx-background-image:url("/main/raisedBG.png");
 }
 
 #tab{
-	-fx-background-image: url("../../Images/main/clickedLabel.png");
+	-fx-background-image: url("/main/clickedLabel.png");
 }
 
 /*main page */
@@ -73,17 +73,17 @@
 }
 #raisedPane-one{
 	-fx-effect:dropshadow(gaussian, #c1c6d3, 10, 0.6, 5, 5) ;
-	-fx-background-image: url(../../Images/blueBG.png);
+	-fx-background-image: url(/blueBG.png);
 	-fx-background-size:cover;
 }
 #raisedPane-two{
 	-fx-effect:dropshadow(gaussian, #c1c6d3, 10, 0.6, 5, 5) ;
-	-fx-background-image: url(../../Images/greenBG.png);
+	-fx-background-image: url(/greenBG.png);
 	-fx-background-size:cover;
 }
 #raisedPane-three{
 	-fx-effect:dropshadow(gaussian, #c1c6d3, 10, 0.6, 5, 5) ;
-	-fx-background-image: url(../../Images/yellowBG.png);
+	-fx-background-image: url(/yellowBG.png);
 	-fx-background-size:cover;
 }
 
@@ -182,59 +182,59 @@
 }
 
 #titledPane1 .title{
-	-fx-background-image:url(../../Images/main/fileBG.png) ;
+	-fx-background-image:url(/main/fileBG.png) ;
 	-fx-background-size:contain;
 }
 #titledPane2 .title{
-	-fx-background-image:url(../../Images/main/testBG.png) ;
+	-fx-background-image:url(/main/testBG.png) ;
 	-fx-background-size:contain;
 }
 #titledPane3 .title{
-	-fx-background-image:url(../../Images/main/studyBG.png) ;
+	-fx-background-image:url(/main/studyBG.png) ;
 	-fx-background-size:contain;
 }
 #titledPane4 .title{
-	-fx-background-image:url(../../Images/main/meetingBG.png) ;
+	-fx-background-image:url(/main/meetingBG.png) ;
 	-fx-background-size:contain;
 }
 #titledPane5 .title{
-	-fx-background-image:url(../../Images/main/recordBG.png) ;
+	-fx-background-image:url(/main/recordBG.png) ;
 	-fx-background-size:contain;
 }
 #titledPane6 .title{
-	-fx-background-image:url(../../Images/main/scheduleBG.png) ;
+	-fx-background-image:url(/main/scheduleBG.png) ;
 	-fx-background-size:contain;
 }
 #titledPane7 .title{
-	-fx-background-image:url(../../Images/main/reportBG.png) ;
+	-fx-background-image:url(/main/reportBG.png) ;
 	-fx-background-size:contain;
 }
 #titledPane1 .title:hover{
-	-fx-background-image:url(../../Images/main/fileBG1.png) ;
+	-fx-background-image:url(/main/fileBG1.png) ;
 	-fx-background-size:contain;
 }
 #titledPane2 .title:hover{
-	-fx-background-image:url(../../Images/main/testBG1.png) ;
+	-fx-background-image:url(/main/testBG1.png) ;
 	-fx-background-size:contain;
 }
 #titledPane3 .title:hover{
-	-fx-background-image:url(../../Images/main/studyBG1.png) ;
+	-fx-background-image:url(/main/studyBG1.png) ;
 	-fx-background-size:contain;
 }
 #titledPane4 .title:hover{
-	-fx-background-image:url(../../Images/main/meetingBG1.png) ;
+	-fx-background-image:url(/main/meetingBG1.png) ;
 	-fx-background-size:contain;
 }
 #titledPane5 .title:hover{
-	-fx-background-image:url(../../Images/main/recordBG1.png) ;
+	-fx-background-image:url(/main/recordBG1.png) ;
 	-fx-background-size:contain;
 }
 #titledPane6 .title:hover{
-	-fx-background-image:url(../../Images/main/scheduleBG1.png) ;
+	-fx-background-image:url(/main/scheduleBG1.png) ;
 	-fx-background-size:contain;
 }
 #titledPane7 .title:hover{
-	-fx-background-image:url(../../Images/main/reportBG1.png) ;
+	-fx-background-image:url(/main/reportBG1.png) ;
 	-fx-background-size:contain;
 }
 .titled-pane > .content{

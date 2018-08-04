@@ -22,7 +22,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/home.png" />
+                  <Image url="/home.png" />
                </image>
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" top="10.0" />
@@ -41,7 +41,7 @@
             </Label>
             <ImageView fitHeight="24.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/rightArrow.png" />
+                  <Image url="/rightArrow.png" />
                </image>
             </ImageView>
             <Label prefHeight="34.0" prefWidth="91.0" text="积分概览" textFill="WHITE">
@@ -58,7 +58,7 @@
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/contactIcon.png" />
+                  <Image url="/contactIcon.png" />
                </image>
             </ImageView>
             <Label onMouseClicked="#contact" text="联系我们" textFill="WHITE">

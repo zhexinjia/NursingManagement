@@ -174,12 +174,17 @@ public class ReportModifyController implements Initializable{
 	Loader loader = new Loader();
 	DBhelper dbHelper = new DBhelper();
 	
+	public void setupDatePickers() {
+		loader.setupDatePicker(eventDate);
+		loader.setupDatePicker(reportDate);
+		loader.setupDatePicker(signatureDate1);
+		loader.setupDatePicker(signatureDate2);
+	}
+	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		
-		
+		setupDatePickers();
 		report = HospitalReportController.selectedReport;
 
 		configureCheckBox(male, selected_patientSex, unselected_patientSex, patientSex);
@@ -378,12 +383,7 @@ public class ReportModifyController implements Initializable{
 						break;
 					}
 				}
-			}else {
-				PopupWindow pop = new PopupWindow();
-				pop.alertWindow("无法上传", "缺少患者性别选项");
-				return;
 			}
-			
 			
 			//第二行 - 发生场所 - 6
 			if (!selected_eventLocation.isEmpty()) {
@@ -397,10 +397,6 @@ public class ReportModifyController implements Initializable{
 						break;
 					}
 				}
-			}else {
-				PopupWindow pop = new PopupWindow();
-				pop.alertWindow("无法上传", "缺少发生场所选项");
-				return;
 			}
 			
 			//第三行 - 发生科室
@@ -421,10 +417,6 @@ public class ReportModifyController implements Initializable{
 						break;
 					}
 				}
-			}else {
-				PopupWindow pop = new PopupWindow();
-				pop.alertWindow("无法上传", "缺少报告人选项");
-				return;
 			}
 			
 			map.put("reporterPhoneNum", reporterPhoneNum.getText());
@@ -441,10 +433,6 @@ public class ReportModifyController implements Initializable{
 						break;
 					}
 				}
-			}else {
-				PopupWindow pop = new PopupWindow();
-				pop.alertWindow("无法上传", "缺少事件类型选项");
-				return;
 			}
 			
 			//不良事件类别
@@ -456,10 +444,6 @@ public class ReportModifyController implements Initializable{
 						break;
 					}
 				}
-			}else {
-				PopupWindow pop = new PopupWindow();
-				pop.alertWindow("无法上传", "缺少不良事件类别选项");
-				return;
 			}
 			
 			//导致事件原因
@@ -474,10 +458,6 @@ public class ReportModifyController implements Initializable{
 						break;
 					}
 				}
-			}else {
-				PopupWindow pop = new PopupWindow();
-				pop.alertWindow("无法上传", "缺少导致事件原因选项");
-				return;
 			}
 			
 			//事件级别
@@ -489,10 +469,6 @@ public class ReportModifyController implements Initializable{
 						break;
 					}
 				}
-			}else {
-				PopupWindow pop = new PopupWindow();
-				pop.alertWindow("无法上传", "缺少事件级别选项");                   
-				return;
 			}
 			
 			// 事件处理措施：：

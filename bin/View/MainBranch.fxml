@@ -20,7 +20,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/home.png" />
+                  <Image url="/home.png" />
                </image>
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" top="10.0" />
@@ -40,7 +40,7 @@
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/contactIcon.png" />
+                  <Image url="/contactIcon.png" />
                </image>
             </ImageView>
             <Label text="联系我们" textFill="WHITE">
@@ -64,7 +64,7 @@
                      <children>
                         <ImageView fitHeight="53.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../Images/loginLogo.png" />
+                              <Image url="/loginLogo.png" />
                            </image>
                         </ImageView>
                         <Label text="星月科技">

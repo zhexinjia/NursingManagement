@@ -23,7 +23,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="20.0" onMouseClicked="#loadHome" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/home.png" />
+                  <Image url="/home.png" />
                </image>
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" top="10.0" />
@@ -42,7 +42,7 @@
             </Label>
             <ImageView fitHeight="24.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/rightArrow.png" />
+                  <Image url="/rightArrow.png" />
                </image>
             </ImageView>
             <Label onMouseClicked="#loadReportList" prefHeight="20.0" prefWidth="89.0" text="不良事件处理" textFill="WHITE">
@@ -58,7 +58,7 @@
             </Label>
             <ImageView fitHeight="24.0" fitWidth="17.0" layoutX="92.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/rightArrow.png" />
+                  <Image url="/rightArrow.png" />
                </image>
             </ImageView>
             <Label layoutX="109.0" layoutY="20.0" prefHeight="34.0" prefWidth="115.0" text="编辑" textFill="WHITE">
@@ -72,7 +72,7 @@
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/contactIcon.png" />
+                  <Image url="/contactIcon.png" />
                </image>
             </ImageView>
             <Label onMouseClicked="#contactButton" text="联系我们" textFill="WHITE">

@@ -18,7 +18,7 @@
          <children>
             <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/home.png" />
+                  <Image url="home.png" />
                </image>
             </ImageView>
             <Label layoutX="48.0" layoutY="18.0" prefHeight="34.0" prefWidth="53.0" text="主界面" textFill="WHITE">
@@ -28,7 +28,7 @@
             </Label>
             <ImageView fitHeight="24.0" fitWidth="17.0" layoutX="101.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/rightArrow.png" />
+                  <Image url="rightArrow.png" />
                </image>
             </ImageView>
             <Label layoutX="125.0" layoutY="18.0" prefHeight="34.0" prefWidth="70.0" text="考核管理" textFill="WHITE">
@@ -38,7 +38,7 @@
             </Label>
             <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="195.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/rightArrow.png" />
+                  <Image url="rightArrow.png" />
                </image>
             </ImageView>
             <Label layoutX="219.0" layoutY="18.0" prefHeight="34.0" prefWidth="70.0" text="考核统计" textFill="WHITE">

@@ -30,6 +30,7 @@ public class HospitalReportController implements Initializable {
 	String[] fields = {"上报员工", "所属科室", "上报时间", "上报事件", "处理情况"};
 	PopupWindow popUP = new PopupWindow();
 	DBhelper dbHelper = new DBhelper();
+	String choiceBoxString = "";
 	public static HashMap<String, String> selectedReport;
 	
 	@Override
@@ -37,7 +38,7 @@ public class HospitalReportController implements Initializable {
 		setupChoiceBox();
 		setupTable();
 		getList();
-		reload("");
+		reload();
 	}
 	
 	@FXML void loadHome() {
@@ -51,13 +52,13 @@ public class HospitalReportController implements Initializable {
 
     @FXML
     void searchButton() {
-    		reload("");
+    		reload();
     }
 
     @FXML
     void resetButton() {
     		searchField.setText("");
-    		reload("");
+    		reload();
     }
 
     @FXML
@@ -76,7 +77,7 @@ public class HospitalReportController implements Initializable {
     		}else {
     			if (dbHelper.delete(selected, "report_list")) {
     				getList();
-    				reload("");
+    				reload();
     			}else {
     				popUP.alertWindow("操作失败", "删除用户失败");
     			}
@@ -91,13 +92,17 @@ public class HospitalReportController implements Initializable {
 		levelPicker.getItems().addAll(list);
 		levelPicker.setOnAction(e->{
 			if (levelPicker.getSelectionModel().getSelectedIndex()==0) {
-				reload("");
+				choiceBoxString = "";
+				reload();
 			}else if (levelPicker.getSelectionModel().getSelectedIndex()==1) {
-				reload("上报至科室");
+				choiceBoxString = "上报至科室";
+				reload();
 			}else if (levelPicker.getSelectionModel().getSelectedIndex()==2) {
-				reload("科室已讨论/上报医院");
+				choiceBoxString = "科室已讨论/上报医院";
+				reload();
 			}else if (levelPicker.getSelectionModel().getSelectedIndex()==3) {
-				reload("医院已处理");
+				choiceBoxString = "医院已处理";
+				reload();
 			}
 		});
 	}
@@ -120,8 +125,9 @@ public class HospitalReportController implements Initializable {
 		}
 	}
 	
-	private void reload(String field) {
-		ObservableList<HashMap<String, String>> searchList = loader.search(list, searchField.getText() + " " + field);
+	private void reload() {
+		ObservableList<HashMap<String, String>> searchList = loader.search(list, choiceBoxString + " " + searchField.getText());
+		//System.out.println(searchField.getText() + " " + field);
 		tableView.setItems(searchList);
 		countLabel.setText("共 " +searchList.size()+ " 条");
 	}

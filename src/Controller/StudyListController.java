@@ -10,6 +10,7 @@ import org.controlsfx.control.textfield.CustomTextField;
 import Model.DBhelper;
 import Model.Loader;
 import Model.PopupWindow;
+import Model.sftpDelete;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -94,7 +95,7 @@ public class StudyListController implements Initializable {
     }
 
     @FXML
-    void deleteButton() {
+    void deleteButton() throws Exception {
     		System.out.println("del");
     		HashMap<String, String> selected = tableView.getSelectionModel().getSelectedItem();
 		if(selected == null) {
@@ -102,6 +103,8 @@ public class StudyListController implements Initializable {
 		}else {
 			//FIXME:delete all informations from different tables using one SQL statement
 			if (dbHelper.deleteStudy(selected)) {
+				sftpDelete sftpDel = new sftpDelete();
+				sftpDel.sftpDel(LoginController.path, selected.get("file_name"));
 				getList();
 				reload();
 			}
@@ -123,7 +126,7 @@ public class StudyListController implements Initializable {
 		loader.setupTable(tableView, keys, fields);
 	}
 	private void getList() {
-		String[] columns = {"id", "name", "type", "publish_status", "if_count", "point"};
+		String[] columns = {"id", "name", "type", "publish_status", "file_name", "point"};
 		list = dbHelper.getList(new String[] {"branch"}, new String[] {branch}, "study_list", columns);
 		//list = dbHelper.getList("study_list", columns);
 	}

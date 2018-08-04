@@ -18,7 +18,7 @@
          <children>
             <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/home.png" />
+                  <Image url="/home.png" />
                </image>
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" top="10.0" />
@@ -38,7 +38,7 @@
             <Pane HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Images/contactIcon.png" />
+                  <Image url="/contactIcon.png" />
                </image>
             </ImageView>
             <Label text="联系我们" textFill="WHITE">
@@ -53,7 +53,7 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox id="effectPane" alignment="TOP_CENTER" prefHeight="539.0" prefWidth="669.0" HBox.hgrow="ALWAYS">
+            <VBox id="effectPane" alignment="TOP_CENTER" prefHeight="539.0" prefWidth="669.0" style="-fx-background-image:url('/02.jpg');-fx-background-size:cover" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
@@ -62,14 +62,12 @@
                      <children>
                         <ImageView fitHeight="53.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../Images/loginLogo.png" />
+                              <Image url="/logo1.png" />
                            </image>
-                        </ImageView>
-                        <Label text="赛讯软件">
                            <HBox.margin>
-                              <Insets right="30.0" top="10.0" />
+                              <Insets right="50.0" top="10.0" />
                            </HBox.margin>
-                        </Label>
+                        </ImageView>
                      </children>
                      <VBox.margin>
                         <Insets top="30.0" />
@@ -77,8 +75,8 @@
                   </HBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label style="-fx-font-size: 35;" text="欢迎使用百宝盒" textFill="#5a6378" />
-                        <Hyperlink onMouseClicked="#downloadUserGuide" style="-fx-text-fill: #5a6378;" text="点此下载使用说明">
+                        <Label style="-fx-font-size: 35;" text="欢迎使用医效通" textFill="WHITE" />
+                        <Hyperlink onMouseClicked="#downloadUserGuide" text="点此下载使用说明">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>

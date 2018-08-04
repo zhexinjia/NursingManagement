@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="90.0" fitWidth="107.0" layoutX="28.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/error.png" />
+            <Image url="error.png" />
          </image>
       </ImageView>
       <Label layoutX="136.0" layoutY="84.0" prefHeight="32.0" prefWidth="227.0" text="抱歉！出错啦，请联系技术人员。" textFill="WHITE">
@@ -27,7 +27,7 @@
       </JFXButton>
       <ImageView fitHeight="27.0" fitWidth="16.0" layoutX="274.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/contactIcon.png" />
+            <Image url="contactIcon.png" />
          </image>
       </ImageView>
       <Label layoutX="299.0" layoutY="21.0" onMouseClicked="#contactButton" text="联系我们" textFill="WHITE">

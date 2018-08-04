@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="34.0" fitWidth="59.0" layoutX="416.0" layoutY="14.0" onMouseClicked="#closeButton" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/window/Close.png" />
+            <Image url="window/Close.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -41,7 +41,7 @@ public class Loader {
 	//navigate to web
 	public void loadWeb() {
 		try {
-			Desktop.getDesktop().browse(new URL("http://zhexinj.cn").toURI());
+			Desktop.getDesktop().browse(new URL("http://saixuntech.cn").toURI());
 		}catch(Exception e) {
 			
 		}
@@ -210,7 +210,7 @@ public class Loader {
 	//setup the format of date picker to match yyyy/MM/dd
 	public void setupDatePicker(JFXDatePicker datePicker) {
 		datePicker.setConverter(new StringConverter<LocalDate>() {
-			private DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			private DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		    @Override
 		    public String toString(LocalDate localDate)
 		    {

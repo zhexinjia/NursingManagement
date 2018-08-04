@@ -17,9 +17,9 @@
 
 <AnchorPane id="registerPane" fx:id="box" prefHeight="551.0" prefWidth="665.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="152.0" layoutX="79.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="152.0" layoutX="81.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/loginLogo.png" />
+            <Image url="/loginLogo.png" />
          </image>
       </ImageView>
       <Line endX="564.0" layoutX="115.0" layoutY="50.0" opacity="0.32" startX="-100.0" stroke="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
@@ -33,7 +33,7 @@
       </Label>
       <VBox alignment="TOP_CENTER" layoutX="348.0" layoutY="88.0" prefWidth="258.0" style="-fx-background-color: #ced4e0;">
          <children>
-            <Label prefHeight="17.0" prefWidth="188.0" text="欢迎注册护理宝后台管理系统" textFill="#6e7b8a">
+            <Label prefHeight="17.0" prefWidth="188.0" text="欢迎注册医效通后台管理系统" textFill="#6e7b8a">
                <font>
                   <Font name="Heiti SC Medium" size="14.0" />
                </font>
@@ -45,7 +45,7 @@
                <children>
                   <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Images/usernameIcon.png" />
+                        <Image url="/usernameIcon.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="10.0" left="20.0" top="20.0" />
@@ -68,7 +68,7 @@
                <children>
                   <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Images/passwordIcon.png" />
+                        <Image url="/passwordIcon.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="10.0" left="20.0" top="10.0" />
@@ -88,7 +88,7 @@
                <children>
                   <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Images/passwordIcon.png" />
+                        <Image url="/passwordIcon.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="20.0" />
@@ -108,7 +108,7 @@
                <children>
                   <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../../Images/hospitalIcon.png" />
+                        <Image url="/hospitalIcon.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="20.0" />
@@ -128,7 +128,7 @@
                <children>
                   <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../../Images/barCodeIcon.png" />
+                        <Image url="/barCodeIcon.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="20.0" />
@@ -163,7 +163,7 @@
                <children>
                   <ImageView fitHeight="17.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Images/registerIcon.png" />
+                        <Image url="/registerIcon.png" />
                      </image>
                   </ImageView>
                   <Button id="loginButton" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="24.0" prefWidth="82.0" style="-fx-background-color: transparent;" text="返回登陆" textFill="#6e7b8a">
@@ -184,5 +184,6 @@
             <DropShadow blurType="GAUSSIAN" color="#d7bcbc" />
          </effect>
       </VBox>
+      <Label layoutX="111.0" layoutY="321.0" prefHeight="38.0" prefWidth="114.0" style="-fx-font-size: 26;" text="赛讯软件" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

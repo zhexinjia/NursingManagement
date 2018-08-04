@@ -193,6 +193,7 @@ public class StudyNewController implements Initializable {
     		String type = typePicker.getValue().toString();
     		map.put("type", type);
     		map.put("url", url+file.getName());
+    		map.put("file_name", file.getName());
     		map.put("branch", branch);
     		/*
     		if(fileType) {

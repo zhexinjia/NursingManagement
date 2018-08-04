@@ -112,8 +112,8 @@ public class DepartmentController implements Initializable {
 	
 	private void getList() {
 		//TODO need to modify this code later on, kind of messy here.
-		String[] searchColumn = {"is_manager"};
-		String[] values = {"1"};
+		String[] searchColumn = {"is_manager", "branch"};
+		String[] values = {"1", LoginController.branch};
 		String tableName = "user_primary_info";
 		String[] columns = {"ssn", "department", "name", "is_manager"};
 		
@@ -121,7 +121,18 @@ public class DepartmentController implements Initializable {
 		
 		String tableName2 = "hospital_department";
 		String[] columns2 = {"departmentName", "id"};
+		list = dbHelper.getList(tableName2, columns2);
 		
+		for(int i = 0; i < list.size(); i++) {
+			String department = list.get(i).get("departmentName");
+			for(int j = 0; j < userList.size(); j++) {
+				if(userList.get(j).get("department").equals(department)) {
+					list.get(i).put("name", userList.get(j).get("name"));
+				}
+			}
+		}
+		
+		/*
 		departmentList = dbHelper.getList(tableName2, columns2);
 		int count  = 0;
 			
@@ -162,6 +173,7 @@ public class DepartmentController implements Initializable {
 				
 			}
 		}
+		*/
 
 	}
 	

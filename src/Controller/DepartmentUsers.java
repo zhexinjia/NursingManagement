@@ -103,8 +103,8 @@ public class DepartmentUsers implements Initializable {
 	}
 	
 	private void getList() {
-		String[] searchColumn = new String[] {"department"};
-		String[] values = new String[] {department.get("departmentName")};
+		String[] searchColumn = new String[] {"department", "branch"};
+		String[] values = new String[] {department.get("departmentName"), LoginController.branch};
 		list = dbHelper.getList(searchColumn, values, "user_primary_info", keys);
 		//setManager(department.get("manager_ssn"));
 	}

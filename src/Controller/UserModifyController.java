@@ -121,19 +121,15 @@ public class UserModifyController implements Initializable {
     ArrayList<HashMap<String, String>> departmentHashMaplist;
     //String ssn;
     Loader loader = new Loader();
+    String department; //用以检查department是否改变
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
     		ssnField.setDisable(true);
     		dbHelper = new DBhelper();
 		setupChoiceBox();
-		//userPrimary = UserlistController.selectedUser;
 		selectedUser = UserlistController.selectedUser;
-		//ssn = userPrimary.get("ssn");
-		//ssn = selectedUser.get("ssn");
-		//String[] searchColumn = {"ssn"};
-		//String[] values = {ssn};
-		//userSub = dbHelper.getEntireList(searchColumn, values, "user_sub_info").get(0);
+		department = selectedUser.get("department");
 		loadPage();
 		setupDatePicker();	
 	}
@@ -287,7 +283,11 @@ public class UserModifyController implements Initializable {
 		output.put("ssn", ssnField.getText());
 		output.put("name", nameField.getText());
 		if(departmentChoiceBox.getSelectionModel().getSelectedItem()!=null) {
-			output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
+			String departmentText = departmentChoiceBox.getSelectionModel().getSelectedItem();
+			output.put("department", departmentText);
+			if(!departmentText.equals(department)) {
+				output.put("is_manager", "0");
+			}
 		}
 		//output.put("department", departmentChoiceBox.getSelectionModel().getSelectedItem());
 		if(positionChoiceBox.getSelectionModel().getSelectedItem() != null) {

@@ -128,6 +128,7 @@ public class DepartmentController implements Initializable {
 			for(int j = 0; j < userList.size(); j++) {
 				if(userList.get(j).get("department").equals(department)) {
 					list.get(i).put("name", userList.get(j).get("name"));
+					list.get(i).put("ssn", userList.get(j).get("ssn"));
 				}
 			}
 		}

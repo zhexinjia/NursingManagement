@@ -95,6 +95,7 @@ public class DepartmentUsers implements Initializable {
     					managerLabel.setText("管理： " + selected.get("name"));
     				}
     			}
+    			loader.loadVBox(box, "/View/DepartmentList.fxml");	
     		}
     }
 

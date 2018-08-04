@@ -679,7 +679,7 @@ public class DBhelper {
 		for(int i = 0; i < keyset.size();i++) {
 			if (keyset.get(i) == "name" || keyset.get(i) == "department" || 
 					keyset.get(i) == "position" || keyset.get(i) == "title" ||
-					keyset.get(i) == "level" || keyset.get(i) == "password" || keyset.get(i) == "branch") {
+					keyset.get(i) == "level" || keyset.get(i) == "password" || keyset.get(i) == "branch" || keyset.get(i) == "is_manager") {
 				
 				if(map.get(keyset.get(i))!=null) {
 					sqlPrim+= keyset.get(i) + " = '" + map.get(keyset.get(i)) + "', ";

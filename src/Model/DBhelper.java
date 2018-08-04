@@ -1041,9 +1041,10 @@ public class DBhelper {
 	
 	public boolean updateManager(String newManager, String oldManager) {
 		String sql = "sql=";
+		sql += "update user_primary_info set is_manager = '0' " + 
+				"where ssn = '" + oldManager + "';";
 		sql += "update user_primary_info set is_manager = '1' where ssn ='" 
-				+ newManager + "'; update user_primary_info set is_manager = '0' "
-				+ "where ssn ='" + oldManager + "';";
+				+ newManager + "'; ";
 
 		if(sendPost(urlSend, sql)) {
 			System.out.println(sql);

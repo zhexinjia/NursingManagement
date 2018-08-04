@@ -353,7 +353,6 @@ public class ReportModifyController implements Initializable{
 		if(!report.get("level").equals("1")) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", report.get("id"));
-			//map.put("comment2", hospitalArea.getText());
 			map.put("level", "3");
 	
 			map.put("reportDepartment", reportDepartment.getText());

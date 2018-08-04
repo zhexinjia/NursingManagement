@@ -378,7 +378,7 @@ public class ReportModifyController implements Initializable{
 			if (!selected_patientSex.isEmpty()) {
 				for (int i = 0; i <2; i++) {
 					if (patientSex.get(i).isSelected()) {
-						String temp = Integer.toString(i);
+						String temp = Integer.toString(i+1);
 						map.put("patientSex", temp);
 						break;
 					}
@@ -392,7 +392,7 @@ public class ReportModifyController implements Initializable{
 						if ((i == 5) && (eventLocation6_text != null)) {
 							map.put("eventLocation6_text", eventLocation6_text.getText());
 						}
-						String temp = Integer.toString(i);
+						String temp = Integer.toString(i+1);
 						map.put("eventLocation", temp);
 						break;
 					}
@@ -412,7 +412,7 @@ public class ReportModifyController implements Initializable{
 			if (!selected_reporterTitle.isEmpty()) {
 				for (int i = 0; i <5; i++) {
 					if (reporterTitleList.get(i).isSelected()) {
-						String temp = Integer.toString(i);
+						String temp = Integer.toString(i+1);
 						map.put("reporterPosition", temp);
 						break;
 					}
@@ -428,7 +428,7 @@ public class ReportModifyController implements Initializable{
 			if (!selected_eventType.isEmpty()) {
 				for (int i = 0; i <9; i++) {
 					if (eventTypeList.get(i).isSelected()) {
-						String temp = Integer.toString(i);
+						String temp = Integer.toString(i+1);
 						map.put("eventType", temp);
 						break;
 					}
@@ -439,7 +439,7 @@ public class ReportModifyController implements Initializable{
 			if (!selected_reportType.isEmpty()) {
 				for (int i = 0; i <30; i++) {
 					if (reportTypeList.get(i).isSelected()) {
-						String temp = Integer.toString(i);
+						String temp = Integer.toString(i+1);
 						map.put("reportType", temp);
 						break;
 					}
@@ -450,7 +450,7 @@ public class ReportModifyController implements Initializable{
 			if (!selected_CauseReason.isEmpty()) {
 				for (int i = 0; i <10; i++) {
 					if (CauseReasonList.get(i).isSelected()) {
-						String temp = Integer.toString(i);
+						String temp = Integer.toString(i+1);
 						map.put("CauseReason", temp);
 						if ((i == 9) && (CauseReason10_text != null)) {
 							map.put("CauseReason10_text", CauseReason10_text.getText());
@@ -464,7 +464,7 @@ public class ReportModifyController implements Initializable{
 			if (!selected_eventLevel.isEmpty()) {
 				for (int i = 0; i <4; i++) {
 					if (eventLevelList.get(i).isSelected()) {
-						String temp = Integer.toString(i);
+						String temp = Integer.toString(i+1);
 						map.put("eventLevel", temp);
 						break;
 					}
@@ -545,7 +545,7 @@ public class ReportModifyController implements Initializable{
 			}else {
 				for (int i =1; i < 6; i++) {	
 					if (eventLocationNum == i) {
-						eventLocationList.get(i).setSelected(true);
+						eventLocationList.get(i-1).setSelected(true);
 					}
 				}	
 			}
@@ -571,7 +571,7 @@ public class ReportModifyController implements Initializable{
 		}else {
 			for (int i= 1; i < 6; i++) {
 				if (reporterTitleNum == i) {
-					reporterTitleList.get(i).setSelected(true);
+					reporterTitleList.get(i-1).setSelected(true);
 				}
 			}
 		}
@@ -591,7 +591,7 @@ public class ReportModifyController implements Initializable{
 		}else {
 			for (int i=1; i < 10; i++) {
 				if (eventTypeNum == i) {
-					eventTypeList.get(i).setSelected(true);
+					eventTypeList.get(i-1).setSelected(true);
 				}
 			}
 		}
@@ -606,7 +606,7 @@ public class ReportModifyController implements Initializable{
 		}else {
 			for (int i=1; i < 31; i++) {
 				if (reportTypeNum == i) {
-					reportTypeList.get(i).setSelected(true);
+					reportTypeList.get(i-1).setSelected(true);
 				}
 			}
 		}
@@ -625,7 +625,7 @@ public class ReportModifyController implements Initializable{
 		else{
 			for (int i=1; i < 10; i++) {
 				if (CauseReasonNum == i) {
-					CauseReasonList.get(i).setSelected(true);
+					CauseReasonList.get(i-1).setSelected(true);
 				}
 			}
 		}
@@ -640,7 +640,7 @@ public class ReportModifyController implements Initializable{
 		}else{
 			for (int i=1; i < 5; i++) {
 				if (eventLevelNum == i) {
-					eventLevelList.get(i).setSelected(true);
+					eventLevelList.get(i-1).setSelected(true);
 				}
 			}
 		}
